@@ -302,8 +302,8 @@ bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
 
-bindsym XF86MonBrightnessUp exec brightnessctl 10%+
-bindsym XF86MonBrightnessDown exec brightnessctl 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl s 10%+
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
 #pactl set-source-mute alsa_input.usb-Logitech_Logitech_USB_Microphone-00.mono-fallback
 #bindcode 66 exec --no-startup-id pactl set-source-mute alsa_input.usb-Logitech_Logitech_USB_Microphone-00.mono-fallback 0
