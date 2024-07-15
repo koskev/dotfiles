@@ -61,8 +61,8 @@ mouse_warping none
 
 workspace_auto_back_and_forth yes
 
-set $m1 DP-1
-set $m2 DVI-D-0
+set $m1 DP-5
+set $m2 HDMI-A-5
 
 workspace 1 output $m1
 #workspace 2 output $m1
@@ -103,6 +103,8 @@ for_window [instance="origin.exe"] floating enable
 bindsym $mod+Shift+y move workspace to output left
 bindsym $mod+Shift+x move workspace to output right # redundant with "only" 2 monitors
 
+# screenshot
+bindsym $mod+Shift+s exec slurp | grim -g - "/tmp/screenshot.png"
 
 #bindsym $mod+t exec --no-startup-id i3-msg 'workspace 2; exec firefox'
 # Use Mouse+$mod to drag floating windows to their wanted position

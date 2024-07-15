@@ -15,7 +15,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 " Multi-entry selection UI. FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 " Python complete
 Plug 'deoplete-plugins/deoplete-jedi'
 " Display signature bottom
