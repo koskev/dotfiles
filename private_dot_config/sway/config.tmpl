@@ -290,9 +290,8 @@ bindsym $mod+t exec /home/kevin/.config/sway/toggle_monitor toggle
 
 ################ AUTOSTART ####################
 
-#exec --no-startup-id "tmux new-session -d ~/Dokumente/Projekte/Github/push_to_talk/venv/bin/python ~/Dokumente/Projekte/Github/push_to_talk/push_to_talk.py"
 exec --no-startup-id "tmux new-session -d ~/bin/push_to_talk_rs"
-#exec --no-startup-id "tmux new-session -d rufaco"
+exec --no-startup-id "swayautonames"
 #exec "xinput set-prop 11 291 -1"
 
 #exec "setxkbmap -layout de -variant nodeadkeys -option caps:none -option numpad:mac"
@@ -321,31 +320,19 @@ input 1133:49291:Logitech_G502_HERO_Gaming_Mouse {
 exec --no-startup-id bash -c "[ ! -s ~/.config/mpd/pid ] && mpd"
 exec --no-startup-id seahorse --no-window
 
-# for gw2 overlay
-#exec --no-startup-id picom --config /dev/null
-
-#exec /usr/libexec/mate-settings-daemon
-#exec --no-startup-id gnome-keyring-daemon -r -f
-#exec --no-startup-id gnome-keyring-daemon -s
-
-#exec --no-startup-id pidgin
 exec --no-startup-id element-desktop
 exec --no-startup-id env QT_AUTO_SCREEN_SCALE_FACTOR=0 keepassxc --keyfile /home/kevin/ssd/Bak/normal/KeepassX.old/keyfile /home/kevin/ssd/Bak/normal/KeepassX.old/datenbank_2.kdbx
 #exec --no-startup-id thunderbird
 exec firefox
-#exec --no-startup-id startSteam
 #exec --no-startup-id nm-applet
 exec --no-startup-id syncthing --no-browser
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id gammastep-indicator
-#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id cantata
 exec --no-startup-id numlockx on
 {{ if (eq .pc_type "desktop") }}
 exec --no-startup-id "tmux new-session -d rufaco"
 {{ end }}
-
-exec_always --no-startup-id exec /home/kevin/.local/bin/i3-workspace-names-daemon -config-path ~/.config/i3/app-icons.json -l 6
 
 output DP-5 mode 1920x1080@144Hz adaptive_sync on pos 1680 0
 output HDMI-A-5 mode 1680x1050 pos 0 0

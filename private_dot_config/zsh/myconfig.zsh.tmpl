@@ -103,12 +103,14 @@ export ESPHOME_DASHBOARD_USE_PING=true
 #}
 
 alias dmesgj='journalctl --dmesg -o short-monotonic --no-hostname --no-pager'
+alias sway="sway > /tmp/sway.log 2>&1"
 
 chezmoi-cd() {
     cd $(chezmoi source-path)
 }
 
 {{ if (eq .pc_type "desktop" "laptop") }}
+
 export MOZ_ENABLE_WAYLAND=1
 
 export WLR_DRM_NO_ATOMIC=1
@@ -123,6 +125,7 @@ export XDG_CURRENT_DESKTOP=sway
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	sway
 fi
+
 {{end}}
 
 # Auto chezmoi config
