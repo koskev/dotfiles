@@ -1,0 +1,32 @@
+{
+    "firefox": "firefox",
+    "chromium-browser": "chrome",
+    "chrome": "chrome",
+    "google-chrome": "chrome",
+    "x-terminal-emulator": "terminal",
+    "thunderbird": "envelope",
+    "jetbrains-idea-ce": "edit",
+    "geany": "edit",
+    "nautilus": "folder-open",
+    "clementine": "music",
+    "vlc": "play",
+    "signal": "comment",
+
+    "mate-terminal": "terminal",
+    "caja": "folder-open",
+    "dolphin": "folder-open",
+    "element": "rocketchat",
+    "cantata": "headphones",
+    "keepassxc": "key",
+    "kile": "list",
+    "element": "comments",
+    "mpv": "play-circle",
+    "smplayer": "play-circle",
+    "lutris": "gamepad",
+    "okular": "file-pdf",
+    "atril": "file-pdf",
+    "arcdps Log Manager": "clipboard-list",
+
+
+    "_no_match": "question"
+}
