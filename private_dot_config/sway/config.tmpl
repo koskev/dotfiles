@@ -349,6 +349,6 @@ exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 exec swayidle -w before-sleep 'swaylock'
 exec --no-startup-id etesync-dav
 
-# overclock
-#exec --no-startup-id nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[3]=50'
-#exec --no-startup-id nvidia-settings -a '[gpu:0]/GPUGraphicsClockOffset[3]=40'
+# Start socket for gnome ssh agent (I like this more than enabling the service. Better documentation this way)
+# Requires "export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh" in shell
+exec --no-startup-id systemctl --user start gcr-ssh-agent.socket

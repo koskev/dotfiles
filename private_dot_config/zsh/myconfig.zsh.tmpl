@@ -120,7 +120,8 @@ export WLR_NO_HARDWARE_CURSORS=1
 # fix java stuff in wayland
 export _JAVA_AWT_WM_NONREPARENTING=1
 export GSETTINGS_SCHEMA_DIR=/usr/share/glib-2.0/schemas
-export $(gnome-keyring-daemon -s)
+#export $(gnome-keyring-daemon -s)
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
 export XDG_CURRENT_DESKTOP=sway
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
