@@ -147,3 +147,9 @@ function nvim() {
 
 # Allow autocomplete for aliases
 setopt complete_aliases
+
+{{ if (eq .pc_type "desktop") }}
+# VDPAU
+export VDPAU_DRIVER=radeonsi
+export LIBVA_DRIVER_NAME=radeonsi
+{{ end }}
