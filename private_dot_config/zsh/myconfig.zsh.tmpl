@@ -107,6 +107,7 @@ chezmoi-cd() {
     cd $(chezmoi source-path)
 }
 
+{{ if (eq .pc_type "desktop" "laptop") }}
 export MOZ_ENABLE_WAYLAND=1
 
 export WLR_DRM_NO_ATOMIC=1
@@ -121,3 +122,4 @@ export XDG_CURRENT_DESKTOP=sway
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	sway
 fi
+{{end}}

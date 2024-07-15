@@ -18,3 +18,4 @@ antidote bundle zsh-users/zsh-syntax-highlighting
 antidote bundle zsh-users/zsh-autosuggestions
 
 antidote bundle qwelyt/endless-dog
+antidote bundle junegunn/fzf path:shell
