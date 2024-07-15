@@ -375,7 +375,7 @@ animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = {{ if (eq .chezmoi.hostname "kevin-svs") }} 4 {{ else }} 9 {{ end }}
+hwmon-path = {{ .cpu_temp_path }}
 warn-temperature = 60
 
 format = <ramp> <label>
