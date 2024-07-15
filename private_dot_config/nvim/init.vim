@@ -45,7 +45,7 @@ nnoremap <up>    <nop>
 nnoremap <down>  <nop>
 nnoremap <left>  <nop>
 nnoremap <right> <nop>
-colorscheme torte
+colorscheme mytorte
 " Cquery
 "let g:LanguageClient_serverCommands = {
 "    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
@@ -104,3 +104,5 @@ let g:yoinkSavePersistently = 1
 " Save undo history
 set undofile
 set undodir=/tmp
+" Enable middle mouse pasting
+set mouse=""
