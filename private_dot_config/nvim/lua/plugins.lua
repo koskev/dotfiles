@@ -74,6 +74,12 @@ return require('packer').startup(function(use)
   end,
 }
 
+	-- Helm yaml
+	use 'towolf/vim-helm'
+
+	-- Show error messages fully
+	use 'folke/trouble.nvim'
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if packer_bootstrap then
