@@ -339,6 +339,9 @@ exec --no-startup-id redshift-gtk
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id cantata
 exec --no-startup-id numlockx on
+#{{ if (eq .pc_type "desktop") }}
+#exec --no-startup-id fan2go -c ~/.config/fan2go/fan2go.yaml
+#{{ end }}
 
 exec_always --no-startup-id exec /home/kevin/.local/bin/i3-workspace-names-daemon -config-path ~/.config/i3/app-icons.json -l 6
 

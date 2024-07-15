@@ -1,5 +1,6 @@
 {{- $pc_type := "desktop" -}}
 {{- $cpu_temp_path := "" -}}
+{{- $water_temp_path := "" -}}
 {{- if (eq .chezmoi.hostname "kevin-svs" "kevin-laptop" "kevin-elite") -}}
 {{-    $pc_type = "laptop" -}}
 {{- end -}}
@@ -7,11 +8,13 @@
 {{-    $cpu_temp_path = "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon4/temp1_input" -}}
 {{- else if (eq .chezmoi.hostname "kevin-arch") -}}
 {{-    $cpu_temp_path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input" -}}
+{{-    $water_temp_path = "/dev/openfanhub/temp1_input" -}}
 {{- end -}}
 
 [data]
     pc_type = {{ $pc_type | quote }}
     cpu_temp_path = {{ $cpu_temp_path | quote }}
+    water_temp_path = {{ $water_temp_path | quote }}
 
 [diff]
     command = "meld"
