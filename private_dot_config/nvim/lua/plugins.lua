@@ -58,6 +58,7 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-sleuth'
 	-- Show git changes
 	use 'airblade/vim-gitgutter'
+	use 'ethanholz/nvim-lastplace'
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

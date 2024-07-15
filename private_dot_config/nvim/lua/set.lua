@@ -17,3 +17,4 @@ vim.opt.list = true
 vim.opt.mouse = ""
 
 vim.cmd("au BufWrite *.rs :Autoformat")
+-- vim.cmd("au BufWrite *.tsx :Autoformat")
