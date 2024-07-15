@@ -230,7 +230,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -258,38 +258,12 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#	id bar-py3
-#        status_command py3status -c ~/.config/i3/i3status.conf
-
-#	tray_output primary
-
-#}
-
-#bar {
-#	id bar-conky
-#        status_command $HOME/.config/i3/conkyWrapper
-#	tray_output primary
-#	font pango:DejaVu Sans Mono, FontAwesome 12
-#}
-#
 bar {
     swaybar_command waybar
 }
 
 
 # Pulse Audio controls
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && killall -s USR1 py3status #increase sound volume
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && killall -s USR1 py3status #decrease sound volume
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && killall -s USR1 py3status # mute sound
-
-# using amixer for upper limit
-#bindsym XF86AudioRaiseVolume  exec amixer -q sset Master 5%+ unmute && killall -s USR1 conky
-#bindsym XF86AudioLowerVolume  exec amixer -q sset Master 5%- unmute && killall -s USR1 conky
-#bindsym XF86AudioMute         exec amixer -q sset Master toggle && killall -s USR1 conky
-
 bindsym $mod+XF86AudioLowerVolume exec ~/bin/volume_curr_window "-5%"
 bindsym $mod+XF86AudioRaiseVolume exec ~/bin/volume_curr_window "+5%"
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume "@DEFAULT_SINK@" "-5%"
@@ -298,10 +272,6 @@ bindsym XF86AudioMute exec pactl set-sink-mute "@DEFAULT_SINK@" toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute "@DEFAULT_SOURCE@" toggle
 
 
-# pause / play / next / previous
-#bindsym XF86AudioPlay exec playerctl play-pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
 # mpd controls
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
@@ -310,11 +280,6 @@ bindsym XF86AudioPrev exec mpc prev
 bindsym XF86MonBrightnessUp exec brightnessctl s 10%+
 bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
-#pactl set-source-mute alsa_input.usb-Logitech_Logitech_USB_Microphone-00.mono-fallback
-#bindcode 66 exec --no-startup-id pactl set-source-mute alsa_input.usb-Logitech_Logitech_USB_Microphone-00.mono-fallback 0
-#bindcode --release 66 exec --no-startup-id pactl set-source-mute alsa_input.usb-Logitech_Logitech_USB_Microphone-00.mono-fallback 1
-
- 
 ################ AUTOSTART ####################
 
 exec --no-startup-id "tmux new-session -d ~/Dokumente/Projekte/Github/push_to_talk/venv/bin/python ~/Dokumente/Projekte/Github/push_to_talk/push_to_talk.py"
@@ -337,7 +302,6 @@ input 1133:49242:Logitech_USB_Optical_Mouse {
     pointer_accel 0.5 # set mouse sensitivity (between -1 and 1)
 	}
 
-#exec "xsetroot -solid '#000000'"
 exec --no-startup-id bash -c "[ ! -s ~/.config/mpd/pid ] && mpd"
 exec --no-startup-id seahorse --no-window
 
@@ -354,7 +318,7 @@ exec --no-startup-id env QT_AUTO_SCREEN_SCALE_FACTOR=0 keepassxc --keyfile /home
 #exec --no-startup-id thunderbird
 exec firefox
 #exec --no-startup-id startSteam
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 exec --no-startup-id syncthing --no-browser
 exec --no-startup-id gammastep-indicator
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -366,6 +330,7 @@ exec --no-startup-id numlockx on
 
 exec_always --no-startup-id exec /home/kevin/.local/bin/i3-workspace-names-daemon -config-path ~/.config/i3/app-icons.json -l 6
 
+output * bg '#000000' solid_color
 output * adaptive_sync on
 output DP-1 mode 1920x1080@144Hz
 
