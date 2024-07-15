@@ -13,6 +13,7 @@
     "signal": "comment",
 
     "mate-terminal": "terminal",
+    "alacritty": "terminal", 
     "caja": "folder-open",
     "dolphin": "folder-open",
     "element": "rocketchat",
