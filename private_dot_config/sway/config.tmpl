@@ -289,7 +289,7 @@ bindsym $mod+t exec /home/kevin/.config/sway/toggle_monitor toggle
 ################ AUTOSTART ####################
 
 exec --no-startup-id "tmux new-session -d ~/Dokumente/Projekte/Github/push_to_talk/venv/bin/python ~/Dokumente/Projekte/Github/push_to_talk/push_to_talk.py"
-exec --no-startup-id "tmux new-session -d fan2go"
+#exec --no-startup-id "tmux new-session -d fan2go"
 #exec "xinput set-prop 11 291 -1"
 
 #exec "setxkbmap -layout de -variant nodeadkeys -option caps:none -option numpad:mac"
@@ -338,9 +338,9 @@ exec --no-startup-id gammastep-indicator
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id cantata
 exec --no-startup-id numlockx on
-#{{ if (eq .pc_type "desktop") }}
-#exec --no-startup-id fan2go -c ~/.config/fan2go/fan2go.yaml
-#{{ end }}
+{{ if (eq .pc_type "desktop") }}
+exec --no-startup-id "tmux new-session -d fan2go"
+{{ end }}
 
 exec_always --no-startup-id exec /home/kevin/.local/bin/i3-workspace-names-daemon -config-path ~/.config/i3/app-icons.json -l 6
 
