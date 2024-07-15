@@ -18,7 +18,7 @@ set $mod Mod4
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 10
-font pango:DejaVu Sans Regular, FontAwesome 12
+font pango:DejaVu Sans Regular, FontAwesome 12, Siji 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -103,7 +103,6 @@ for_window [instance="origin.exe"] floating enable
 bindsym $mod+Shift+y move workspace to output left
 bindsym $mod+Shift+x move workspace to output right # redundant with "only" 2 monitors
 
-bindsym --release $mod+Shift+s exec --no-startup-id maim -s /tmp/screenshot.png
 
 #bindsym $mod+t exec --no-startup-id i3-msg 'workspace 2; exec firefox'
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -330,9 +329,16 @@ exec --no-startup-id numlockx on
 
 exec_always --no-startup-id exec /home/kevin/.local/bin/i3-workspace-names-daemon -config-path ~/.config/i3/app-icons.json -l 6
 
-output * bg '#000000' solid_color
-output * adaptive_sync on
-output DP-1 mode 1920x1080@144Hz
+output DP-5 mode 1920x1080@144Hz adaptive_sync on pos 1680 0
+output HDMI-A-5 mode 1680x1050 pos 0 0
+exec xrandr --output XWAYLAND0 --primary
+
+
+# Screenshare etc.
+exec --no-startup-id /usr/lib/xdg-desktop-portal -r
+exec --no-startup-id /usr/lib/xdg-desktop-portal-wlr
+exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 # overclock
 #exec --no-startup-id nvidia-settings -a '[gpu:0]/GPUMemoryTransferRateOffset[3]=50'

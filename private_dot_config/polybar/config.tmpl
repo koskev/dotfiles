@@ -63,7 +63,7 @@ font-7 = "Font Awesome 6 Free Solid:style=Solid"
 
 modules-left = i3
 modules-center = 
-modules-right = {{ if (eq .chezmoi.hostname "kevin-arch") }}octoprint{{ end }} mpd filesystem xbacklight pulseaudio memory cpu temperature wlan eth battery date
+modules-right = octoprint mpd filesystem xbacklight pulseaudio memory cpu temperature  water_temperature  wlan eth battery date
 
 tray-position = right
 tray-padding = 2
@@ -375,7 +375,7 @@ animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
-hwmon-path = {{ .cpu_temp_path }}
+hwmon-path = /dev/internal_coretemp/temp1_input
 warn-temperature = 60
 
 format = <ramp> <label>
@@ -395,7 +395,7 @@ ramp-foreground = ${colors.foreground-alt}
 
 [module/water_temperature]
 type = internal/temperature
-hwmon-path = {{ .water_temp_path }}
+hwmon-path = /dev/openfanhub/temp1_input
 warn-temperature = 40
 
 format = <ramp> <label>
