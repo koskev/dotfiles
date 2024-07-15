@@ -6,7 +6,7 @@
 {{- if (eq .chezmoi.hostname "kevin-elite") -}}
 {{-    $cpu_temp_path = "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon4/temp1_input" -}}
 {{- else if (eq .chezmoi.hostname "kevin-arch") -}}
-{{-    $cpu_temp_path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input" -}}
+{{-    $cpu_temp_path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input" -}}
 {{- end -}}
 
 [data]
