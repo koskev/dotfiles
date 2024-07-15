@@ -1,16 +1,16 @@
 " Automatic load vim-plug
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 " Plugins
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+			\ 'branch': 'next',
+			\ 'do': 'bash install.sh',
+			\ }
 
 " Multi-entry selection UI. FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -29,10 +29,17 @@ Plug 'dense-analysis/ale'
 Plug 'tikhomirov/vim-glsl'
 " Yank history
 Plug 'svermeulen/vim-yoink'
+" Autoformat plugin for all languages
+Plug 'vim-autoformat/vim-autoformat'
+Plug 'mhinz/vim-crates'
 call plug#end()
 " Plugins end
+" Auto cargo versions stuff
+autocmd BufRead Cargo.toml call crates#toggle()
+" Autoformat on Save
+au BufWrite * :Autoformat
 " My config
-set number 
+set number
 set relativenumber
 syntax on
 set showcmd
@@ -54,10 +61,10 @@ colorscheme mytorte
 
 
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['clangd'],
-    \ 'c': ['clangd'],
-    \ 'rust': ['rust-analyzer'],
-    \ }
+			\ 'cpp': ['clangd'],
+			\ 'c': ['clangd'],
+			\ 'rust': ['rust-analyzer'],
+			\ }
 
 let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
 let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
@@ -72,12 +79,12 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 let g:deoplete#enable_at_startup = 1
 " Deoplete tab
 inoremap <silent><expr> <TAB>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ deoplete#mappings#manual_complete()
-		function! s:check_back_space() abort "{{{
-		let col = col('.') - 1
-		return !col || getline('.')[col - 1]  =~ '\s'
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort "{{{
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~ '\s'
 endfunction"}}}
 "echodoc
 set cmdheight=2

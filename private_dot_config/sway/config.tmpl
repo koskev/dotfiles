@@ -345,7 +345,8 @@ exec --no-startup-id "tmux new-session -d fan2go"
 
 exec_always --no-startup-id exec /home/kevin/.local/bin/i3-workspace-names-daemon -config-path ~/.config/i3/app-icons.json -l 6
 
-output DP-5 mode --custom 1920x1080@165Hz adaptive_sync on pos 1680 0
+# TODO: Use --custom 1920x1080@165Hz and increase freesync range
+output DP-5 mode 1920x1080@144Hz adaptive_sync on pos 1680 0
 output HDMI-A-5 mode 1680x1050 pos 0 0
 exec /home/kevin/.config/sway/toggle_monitor enable
 exec swayidle timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
