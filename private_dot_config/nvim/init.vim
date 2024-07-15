@@ -1,43 +1,11 @@
 " Automatic load vim-plug
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-	silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-" Plugins
-call plug#begin('~/.local/share/nvim/plugged')
-Plug 'airblade/vim-gitgutter'
-Plug 'autozimu/LanguageClient-neovim', {
-			\ 'branch': 'next',
-			\ 'do': 'bash install.sh',
-			\ }
-
-" Multi-entry selection UI. FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
-" Python complete
-Plug 'deoplete-plugins/deoplete-jedi'
-" Display signature bottom
-Plug 'Shougo/echodoc.vim'
-Plug 'rhysd/vim-clang-format'
-Plug 'farmergreg/vim-lastplace'
-Plug 'editorconfig/editorconfig-vim'
-" Shell syntax check
-Plug 'dense-analysis/ale'
-" GLSL
-Plug 'tikhomirov/vim-glsl'
-" Yank history
-Plug 'svermeulen/vim-yoink'
-" Autoformat plugin for all languages
-Plug 'vim-autoformat/vim-autoformat'
-Plug 'mhinz/vim-crates'
-call plug#end()
-" Plugins end
+lua require('plugins')
+lua require('lsp')
+lua require('rt')
 " Auto cargo versions stuff
 autocmd BufRead Cargo.toml call crates#toggle()
 " Autoformat on Save
-"au BufWrite * :Autoformat
+au BufWrite *.rs :Autoformat
 " My config
 set number
 set relativenumber
