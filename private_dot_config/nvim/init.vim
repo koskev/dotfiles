@@ -27,6 +27,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'dense-analysis/ale'
 " GLSL
 Plug 'tikhomirov/vim-glsl'
+" Yank history
+Plug 'svermeulen/vim-yoink'
 call plug#end()
 " Plugins end
 " My config
@@ -95,3 +97,10 @@ au BufNewFile,BufRead *.py
 
 " Disable auto format if no .clang-format is found
 let g:clang_format#enable_fallback_style = 0
+
+" Yoink settings
+let g:yoinkIncludeDeleteOperations = 1
+let g:yoinkSavePersistently = 1
+" Save undo history
+set undofile
+set undodir=/tmp
