@@ -1,4 +1,4 @@
-{{- $pc_type := "desktop" -}}
+{{- $pc_type := "unspecified" -}}
 {{- $cpu_temp_path := "" -}}
 {{- $water_temp_path := "" -}}
 {{- if (eq .chezmoi.hostname "kevin-svs" "kevin-laptop" "kevin-elite") -}}
@@ -7,6 +7,7 @@
 {{- if (eq .chezmoi.hostname "kevin-elite") -}}
 {{-    $cpu_temp_path = "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon4/temp1_input" -}}
 {{- else if (eq .chezmoi.hostname "kevin-arch") -}}
+{{-    $pc_type = "desktop" -}}
 {{-    $cpu_temp_path = "/dev/internal_coretemp/temp1_input" -}}
 {{-    $water_temp_path = "/dev/openfanhub/temp1_input" -}}
 {{- end -}}
