@@ -285,8 +285,8 @@ bindsym $mod+r mode "resize"
 #bindsym XF86AudioLowerVolume  exec amixer -q sset Master 5%- unmute && killall -s USR1 conky
 #bindsym XF86AudioMute         exec amixer -q sset Master toggle && killall -s USR1 conky
 
-bindsym $mod+XF86AudioLowerVolume exec pactl set-sink-volume "@DEFAULT_SINK@" "-1%"
-bindsym $mod+XF86AudioRaiseVolume exec pactl set-sink-volume "@DEFAULT_SINK@" "+1%"
+bindsym $mod+XF86AudioLowerVolume exec ~/bin/volume_curr_window "-5%"
+bindsym $mod+XF86AudioRaiseVolume exec ~/bin/volume_curr_window "+5%"
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume "@DEFAULT_SINK@" "-5%"
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume "@DEFAULT_SINK@" "+5%"
 bindsym XF86AudioMute exec pactl set-sink-mute "@DEFAULT_SINK@" toggle
