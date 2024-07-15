@@ -161,6 +161,11 @@ local opts = {
     -- standalone file support
     -- setting it to false may improve startup time
     standalone = true,
+    settings = {
+      ["rust-analyzer"] = {
+        inlayHints = { locationLinks = false },
+      },
+    },
   }, -- rust-analyzer options
 
   -- debugging stuff

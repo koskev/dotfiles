@@ -1,3 +1,13 @@
+let mapleader = "\<Space>"
+
+nnoremap <leader>p :NvimTreeToggle<CR>
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fc <cmd>Telescope commands<cr>
+
 " Automatic load vim-plug
 lua require('plugins')
 lua require('lsp')
@@ -82,3 +92,5 @@ set undofile
 set undodir=/tmp
 " Enable middle mouse pasting
 set mouse=""
+noremap <F7> :'<,'>! prettier --parser html --stdin-filepath<cr>
+
