@@ -1,0 +1,14 @@
+{{- $pc_type := "desktop" -}}
+{{- if (eq .chezmoi.hostname "kevin-svs" "kevin-laptop") -}}
+{{-    $pc_type = "laptop" -}}
+{{- end -}}
+[data]
+    pc_type = {{ $pc_type | quote }}
+
+[diff]
+    command = "meld"
+    args = ["--diff", '{{ "{{ .Destination }}" }}', '{{ "{{ .Target }}" }}']
+[merge]
+    command = "meld"
+    args = ['{{ "{{ .Destination }}" }}', '{{ "{{ .Source }}" }}', '{{ "{{ .Target }}" }}']
+
