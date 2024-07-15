@@ -37,7 +37,7 @@ call plug#end()
 " Auto cargo versions stuff
 autocmd BufRead Cargo.toml call crates#toggle()
 " Autoformat on Save
-au BufWrite * :Autoformat
+"au BufWrite * :Autoformat
 " My config
 set number
 set relativenumber
