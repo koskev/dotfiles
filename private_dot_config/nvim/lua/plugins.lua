@@ -60,6 +60,20 @@ return require('packer').startup(function(use)
 	use 'airblade/vim-gitgutter'
 	use 'ethanholz/nvim-lastplace'
 
+	use 'redhat-developer/yaml-language-server'
+
+	use {
+  "someone-stole-my-name/yaml-companion.nvim",
+  requires = {
+      { "neovim/nvim-lspconfig" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+  },
+  config = function()
+    require("telescope").load_extension("yaml_schema")
+  end,
+}
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if packer_bootstrap then
