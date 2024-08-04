@@ -318,6 +318,7 @@ input 1133:49291:Logitech_G502_HERO_Gaming_Mouse {
 	}
 
 exec --no-startup-id bash -c "[ ! -s ~/.config/mpd/pid ] && mpd"
+#exec --no-startup-id mopidy
 exec --no-startup-id seahorse --no-window
 
 exec --no-startup-id element-desktop
@@ -332,10 +333,11 @@ exec --no-startup-id cantata
 exec --no-startup-id numlockx on
 {{ if (eq .pc_type "desktop") }}
 exec --no-startup-id "tmux new-session -d rufaco"
-{{ end }}
 
 output DP-5 mode 1920x1080@144Hz adaptive_sync on pos 1680 0
 output HDMI-A-5 mode 1680x1050 pos 0 0
+{{ end }}
+
 exec /home/kevin/.config/sway/toggle_monitor enable
 exec swayidle \
     timeout 300 'swaymsg "output * dpms off"; swaylock' \
@@ -349,7 +351,6 @@ exec --no-startup-id /usr/lib/xdg-desktop-portal-wlr
 exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
-exec swayidle -w before-sleep 'swaylock'
 exec --no-startup-id etesync-dav
 
 # Start socket for gnome ssh agent (I like this more than enabling the service. Better documentation this way)
