@@ -50,7 +50,6 @@ return require('packer').startup(function(use)
 		}
 	}
 	use 'simrat39/rust-tools.nvim'
-	use 'lvimuser/lsp-inlayhints.nvim'
 
 	-- use('simrat39/inlay-hints.nvim')
 	use 'vim-autoformat/vim-autoformat'
@@ -61,6 +60,8 @@ return require('packer').startup(function(use)
 	use 'ethanholz/nvim-lastplace'
 
 	use 'redhat-developer/yaml-language-server'
+	-- For easy inlay hints (uses the native ones)
+	use 'MysticalDevil/inlay-hints.nvim'
 
 	use {
   "someone-stole-my-name/yaml-companion.nvim",
