@@ -73,6 +73,7 @@ return require('packer').startup(function(use)
     require("telescope").load_extension("yaml_schema")
   end,
 }
+	use "b0o/schemastore.nvim"
 
 	-- Helm yaml
 	use 'towolf/vim-helm'
