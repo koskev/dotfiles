@@ -115,6 +115,9 @@ require("lspconfig").lua_ls.setup({
     Lua = {
       hint = {
         enable = true, -- necessary
+      },
+      diagnostics = {
+        globals = {'vim'}
       }
     }
   }

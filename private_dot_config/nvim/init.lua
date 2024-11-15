@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 
-require("plugins")
+
+require('config.lazy')
 require("remaps")
 require("set")
 
