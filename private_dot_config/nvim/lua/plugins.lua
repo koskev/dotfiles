@@ -1,43 +1,46 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-		vim.cmd [[packadd packer.nvim]]
-		return true
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
 	end
-	return false
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
-return require('packer').startup(function(use)
-	use 'wbthomason/packer.nvim'
+require('lazy').setup({
+	'wbthomason/packer.nvim',
 	-- My plugins here
-	use {
+	{
 		'nvim-telescope/telescope.nvim', branch = '0.1.x',
-		requires = { {'nvim-lua/plenary.nvim'} }
-	}
-	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-
-	use({
+		dependencies = { {'nvim-lua/plenary.nvim'} }
+	},
+	{'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+	{
 		'rose-pine/neovim',
 		as = 'rose-pine',
 		config = function()
 			vim.cmd('colorscheme rose-pine')
 		end
-	})
-	use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
-	use("mbbill/undotree")
-	use {
+	},
+	{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+	"mbbill/undotree",
+	{
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
-		requires = {
+		dependencies = {
 			-- LSP Support
 			{'neovim/nvim-lspconfig'},             -- Required
 			{                                      -- Optional
 				'williamboman/mason.nvim',
-				run = function()
+				build = function()
 					pcall(vim.cmd, 'MasonUpdate')
 				end,
 			},
@@ -48,43 +51,42 @@ return require('packer').startup(function(use)
 			{'hrsh7th/cmp-nvim-lsp'}, -- Required
 			{'L3MON4D3/LuaSnip'},     -- Required
 		}
-	}
-	use 'simrat39/rust-tools.nvim'
+	},
+	'simrat39/rust-tools.nvim',
 
 	-- use('simrat39/inlay-hints.nvim')
-	use 'vim-autoformat/vim-autoformat'
+	'vim-autoformat/vim-autoformat',
 	-- Adjust indent based on used
-	use 'tpope/vim-sleuth'
+	'tpope/vim-sleuth',
 	-- Show git changes
-	use 'airblade/vim-gitgutter'
-	use 'ethanholz/nvim-lastplace'
+	'airblade/vim-gitgutter',
+	'ethanholz/nvim-lastplace',
 
-	use 'redhat-developer/yaml-language-server'
+	'redhat-developer/yaml-language-server',
 	-- For easy inlay hints (uses the native ones)
-	use 'MysticalDevil/inlay-hints.nvim'
+	'MysticalDevil/inlay-hints.nvim',
 
-	use {
-  "someone-stole-my-name/yaml-companion.nvim",
-  requires = {
-      { "neovim/nvim-lspconfig" },
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim" },
-  },
-  config = function()
-    require("telescope").load_extension("yaml_schema")
-  end,
-}
-	use "b0o/schemastore.nvim"
+	-- Kubernetes completion
+	{
+		-- "someone-stole-my-name/yaml-companion.nvim",
+		-- Fix until merged in main
+		"agorgl/yaml-companion.nvim",
+		branch = "patch-1",
+		dependencies = {
+			{ "neovim/nvim-lspconfig" },
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = function()
+			require("telescope").load_extension("yaml_schema")
+		end,
+	},
+	"b0o/schemastore.nvim",
 
 	-- Helm yaml
-	use 'towolf/vim-helm'
+	'towolf/vim-helm',
 
 	-- Show error messages fully
-	use 'folke/trouble.nvim'
+	'folke/trouble.nvim',
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if packer_bootstrap then
-		require('packer').sync()
-	end
-end)
+})
