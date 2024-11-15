@@ -1,5 +1,4 @@
 return {
-	'wbthomason/packer.nvim',
 	-- My plugins here
 	{
 		'nvim-telescope/telescope.nvim', branch = '0.1.x',
