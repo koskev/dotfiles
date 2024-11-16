@@ -18,8 +18,7 @@ vim.opt.mouse = ""
 
 -- vim.cmd("set notimeout")
 
-vim.cmd("au BufWrite *.rs :Autoformat")
-vim.cmd("au BufWrite *.tsx :Autoformat")
-vim.cmd("au BufWrite *.ts :Autoformat")
-vim.cmd("au BufWrite *.go :Autoformat")
 vim.cmd("au BufWrite *.go :silent !goimports -w %")
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv'")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv'")
