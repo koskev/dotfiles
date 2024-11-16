@@ -1,7 +1,7 @@
 -- Shows all possible key combinations
-return {{
+return { {
 	"folke/which-key.nvim",
-	dependencies = {"echasnovski/mini.icons", "nvim-tree/nvim-web-devicons"},
+	dependencies = { "echasnovski/mini.icons", "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy",
 	opts = {
 		-- your configuration comes here
@@ -18,4 +18,4 @@ return {{
 		},
 	},
 },
-{"echasnovski/mini.icons", opts = {}}, {"nvim-tree/nvim-web-devicons", opts = {}}}
+	{ "echasnovski/mini.icons", opts = {} }, { "nvim-tree/nvim-web-devicons", opts = {} } }
