@@ -1,18 +1,6 @@
 return {
 	-- My plugins here
-	{
-		'nvim-telescope/telescope.nvim', branch = '0.1.x',
-		dependencies = { {'nvim-lua/plenary.nvim'} }
-	},
 	{'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-	{
-		'rose-pine/neovim',
-		as = 'rose-pine',
-		config = function()
-			vim.cmd('colorscheme rose-pine')
-		end
-	},
-	{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
 	"mbbill/undotree",
 	{
 		'VonHeikemen/lsp-zero.nvim',
@@ -34,15 +22,13 @@ return {
 			{'L3MON4D3/LuaSnip'},     -- Required
 		}
 	},
-	'simrat39/rust-tools.nvim',
+	-- Might want to use mrcjkb/rustaceanvim in the future
 
-	-- use('simrat39/inlay-hints.nvim')
 	'vim-autoformat/vim-autoformat',
 	-- Adjust indent based on used
 	'tpope/vim-sleuth',
 	-- Show git changes
 	'airblade/vim-gitgutter',
-	'ethanholz/nvim-lastplace',
 
 	'redhat-developer/yaml-language-server',
 	-- For easy inlay hints (uses the native ones)
@@ -70,6 +56,5 @@ return {
 
 	-- Show error messages fully
 	'folke/trouble.nvim',
-	'nvim-lualine/lualine.nvim',
 
 }

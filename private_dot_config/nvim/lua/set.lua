@@ -16,6 +16,8 @@ vim.opt.list = true
 -- Enable middle mouse paste
 vim.opt.mouse = ""
 
+-- vim.cmd("set notimeout")
+
 vim.cmd("au BufWrite *.rs :Autoformat")
 vim.cmd("au BufWrite *.tsx :Autoformat")
 vim.cmd("au BufWrite *.ts :Autoformat")

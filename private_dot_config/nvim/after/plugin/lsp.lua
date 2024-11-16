@@ -23,47 +23,6 @@ lsp.setup_nvim_cmp({
 
 lsp.setup()
 
---vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
---vim.api.nvim_create_autocmd("LspAttach", {
---  group = "LspAttach_inlayhints",
---  callback = function(args)
---    if not (args.data and args.data.client_id) then
---      return
---    end
---
---    local bufnr = args.buf
---    local client = vim.lsp.get_client_by_id(args.data.client_id)
---    require("lsp-inlayhints").on_attach(client, bufnr)
---  end,
---})
-
-
---lspconfig.tsserver.setup({
---  settings = {
---    typescript = {
---      inlayHints = {
---        includeInlayParameterNameHints = 'all',
---        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
---        includeInlayFunctionParameterTypeHints = true,
---        includeInlayVariableTypeHints = true,
---        includeInlayPropertyDeclarationTypeHints = true,
---        includeInlayFunctionLikeReturnTypeHints = true,
---        includeInlayEnumMemberValueHints = true,
---      }
---    },
---    javascript = {
---      inlayHints = {
---        includeInlayParameterNameHints = 'all',
---        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
---        includeInlayFunctionParameterTypeHints = true,
---        includeInlayVariableTypeHints = true,
---        includeInlayPropertyDeclarationTypeHints = true,
---        includeInlayFunctionLikeReturnTypeHints = true,
---        includeInlayEnumMemberValueHints = true,
---      }
---    }
---  }
---})
 
 local cfg = require("yaml-companion").setup({
   -- Add any options here, or leave empty to use the default settings
@@ -94,21 +53,6 @@ require("lspconfig").gopls.setup({
     },
   },
 })
-
-
---require("lspconfig").gopls.setup({
---  settings = {
---    hints = {
---      rangeVariableTypes = true,
---      parameterNames = true,
---      constantValues = true,
---      assignVariableTypes = true,
---      compositeLiteralFields = true,
---      compositeLiteralTypes = true,
---      functionTypeParameters = true,
---    },
---  }
---})
 
 require("lspconfig").lua_ls.setup({
   settings = {
