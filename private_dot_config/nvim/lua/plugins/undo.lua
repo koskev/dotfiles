@@ -1,6 +1,10 @@
 return {
-	"mbbill/undotree",
+	"debugloop/telescope-undo.nvim",
+	dependencies = {
+		"nvim-telescope/telescope.nvim",
+	},
 	config = function()
-		vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undo tree" })
-	end
+		require("telescope").load_extension("undo")
+		vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+	end,
 }
