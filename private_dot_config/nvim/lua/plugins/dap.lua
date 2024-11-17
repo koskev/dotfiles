@@ -41,7 +41,8 @@ return {
 		"koskev/dap-jsonnet.nvim",
 		opts = {
 			debugger_args = { "--dap", "-s" }
-		}
+		},
+		dependencies = { 'mfussenegger/nvim-dap' }
 	},
 	{
 		-- Shows the current values of variables inside code
