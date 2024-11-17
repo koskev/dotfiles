@@ -6,7 +6,6 @@ return {
 	-- Adjust indent based on used
 	'tpope/vim-sleuth',
 	-- Show git changes
-	'airblade/vim-gitgutter',
 
 	-- Kubernetes completion
 	{
