@@ -22,3 +22,6 @@ vim.cmd("au BufWrite *.go :silent !goimports -w %")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true

@@ -5,10 +5,15 @@ return {
 		"MysticalDevil/inlay-hints.nvim",
 		event = "LspAttach",
 		dependencies = { "neovim/nvim-lspconfig" },
-		opts = {
-			commands = { enable = true }, -- Enable InlayHints commands, include `InlayHintsToggle`, `InlayHintsEnable` and `InlayHintsDisable`
-			autocmd = { enable = true } -- Enable the inlay hints on `LspAttach` event
-		}
+		config = function()
+			local lsp = require('lspconfig')
+			local inlay = require("inlay-hints")
+			inlay.setup({
+				commands = { enable = true }, -- Enable InlayHints commands, include `InlayHintsToggle`, `InlayHintsEnable` and `InlayHintsDisable`
+				autocmd = { enable = true } -- Enable the inlay hints on `LspAttach` event
+			})
+			vim.keymap.set("n", "ti", ":InlayHintsToggle<CR>", { desc = "Toggle inlay hints" })
+		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
