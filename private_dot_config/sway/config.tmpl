@@ -287,6 +287,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 1%-
 # monitor toggle
 bindsym $mod+t exec /home/kevin/.config/sway/toggle_monitor toggle
 
+bindsym $mod+Escape exec swaylock
 
 ################ AUTOSTART ####################
 
@@ -341,7 +342,8 @@ output HDMI-A-5 mode 1680x1050 pos 0 0
 
 exec /home/kevin/.config/sway/toggle_monitor enable
 exec swayidle \
-    timeout 300 'swaymsg "output * dpms off"; swaylock' \
+    timeout 300 'swaymsg "output * dpms off"' \
+    timeout 400 'swaylock' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock'
 

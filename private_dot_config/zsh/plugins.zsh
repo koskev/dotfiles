@@ -19,3 +19,7 @@ antidote bundle zsh-users/zsh-autosuggestions
 
 antidote bundle qwelyt/endless-dog
 antidote bundle junegunn/fzf path:shell
+
+antidote bundle zsh-users/zsh-completions
+
+antidote bundle superbrothers/zsh-kubectl-prompt
