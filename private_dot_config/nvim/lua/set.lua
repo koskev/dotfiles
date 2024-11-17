@@ -25,3 +25,11 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
+
+vim.lsp.inlay_hint.enable(true, nil)
+
+local function toggle_inlay()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end
+
+vim.keymap.set("n", "ti", toggle_inlay, { desc = "Toggle inlay hints" })

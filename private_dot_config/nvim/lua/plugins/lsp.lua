@@ -2,20 +2,6 @@
 -- See https://lsp-zero.netlify.app/docs/tutorial.html
 return {
 	{
-		"MysticalDevil/inlay-hints.nvim",
-		event = "LspAttach",
-		dependencies = { "neovim/nvim-lspconfig" },
-		config = function()
-			local lsp = require('lspconfig')
-			local inlay = require("inlay-hints")
-			inlay.setup({
-				commands = { enable = true }, -- Enable InlayHints commands, include `InlayHintsToggle`, `InlayHintsEnable` and `InlayHintsDisable`
-				autocmd = { enable = true } -- Enable the inlay hints on `LspAttach` event
-			})
-			vim.keymap.set("n", "ti", ":InlayHintsToggle<CR>", { desc = "Toggle inlay hints" })
-		end,
-	},
-	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
 		config = function()

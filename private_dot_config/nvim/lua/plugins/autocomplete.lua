@@ -3,6 +3,8 @@ return {
 	{ 'hrsh7th/cmp-buffer' },
 	{ 'hrsh7th/cmp-path' },
 	{ 'hrsh7th/cmp-cmdline' },
+	-- For lua stuff (including vim stuff)
+	{ 'hrsh7th/cmp-nvim-lua' },
 	{
 		'hrsh7th/nvim-cmp',
 		dependencies = { "L3MON4D3/LuaSnip" },
@@ -12,7 +14,14 @@ return {
 			cmp.setup({
 				sources = {
 					{ name = 'nvim_lsp' },
+					{ name = 'nvim_lua' },
+					{ name = 'path' },
 					{ name = 'luasnip' },
+					{ name = 'buffer',  keyword_length = 5 },
+				},
+				-- Might want to add onsails/lspkind.nvim
+				experimental = {
+					ghost_text = true
 				},
 				mapping = cmp.mapping.preset.insert({
 					-- `Enter` key to confirm completion

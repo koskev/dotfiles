@@ -2,7 +2,7 @@
 return {
 	{
 		'mfussenegger/nvim-dap',
-		config = function ()
+		config = function()
 			local dap = require("dap")
 
 			vim.keymap.set('n', '<Leader>dc', function() dap.continue() end, { desc = "Continue" })
@@ -10,13 +10,12 @@ return {
 			vim.keymap.set('n', '<Leader>dsi', function() dap.step_into() end, { desc = "Step into" })
 			vim.keymap.set('n', '<Leader>dsb', function() dap.step_out() end, { desc = "Step out" })
 			vim.keymap.set('n', '<Leader>db', function() dap.toggle_breakpoint() end, { desc = "Toogle breakpoint" })
-
 		end
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
-		config = function ()
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		config = function()
 			local dap, dapui = require("dap"), require("dapui")
 			dapui.setup()
 			dap.listeners.before.attach.dapui_config = function()
@@ -40,14 +39,9 @@ return {
 		opts = {}
 	},
 	{
-		"nvim-telescope/telescope-dap.nvim",
-		config = function ()
-			require("telescope").load_extension("dap")
-		end
-	},
-	{
 		-- Shows the current values of variables inside code
 		"theHamsta/nvim-dap-virtual-text",
+		dependencies = { 'mfussenegger/nvim-dap' },
 		opts = {}
 	}
 }
