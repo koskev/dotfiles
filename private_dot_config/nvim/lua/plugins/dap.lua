@@ -4,7 +4,6 @@ return {
 		'mfussenegger/nvim-dap',
 		config = function()
 			local dap = require("dap")
-
 			vim.keymap.set('n', '<Leader>dc', function() dap.continue() end, { desc = "Continue" })
 			vim.keymap.set('n', '<Leader>dso', function() dap.step_over() end, { desc = "Step over" })
 			vim.keymap.set('n', '<Leader>dsi', function() dap.step_into() end, { desc = "Step into" })
@@ -37,6 +36,12 @@ return {
 	{
 		"leoluz/nvim-dap-go",
 		opts = {}
+	},
+	{
+		"koskev/dap-jsonnet.nvim",
+		opts = {
+			debugger_args = { "--dap", "-s" }
+		}
 	},
 	{
 		-- Shows the current values of variables inside code
