@@ -7,9 +7,10 @@ return {
 	{ 'hrsh7th/cmp-nvim-lua' },
 	{
 		'hrsh7th/nvim-cmp',
-		dependencies = { "L3MON4D3/LuaSnip" },
+		dependencies = { "L3MON4D3/LuaSnip", "onsails/lspkind.nvim" },
 		config = function()
 			local cmp = require('cmp')
+			local lspkind = require('lspkind')
 
 			cmp.setup({
 				sources = {
@@ -19,7 +20,19 @@ return {
 					{ name = 'luasnip' },
 					{ name = 'buffer',  keyword_length = 5 },
 				},
-				-- Might want to add onsails/lspkind.nvim
+
+				formatting = {
+					format = lspkind.cmp_format {
+						with_text = true,
+						menu = {
+							buffer = "[buf]",
+							nvim_lsp = "[lsp]",
+							nvim_lua = "[api]",
+							luasnip = "[snip]",
+							path = "[path]"
+						}
+					}
+				},
 				experimental = {
 					ghost_text = true
 				},
