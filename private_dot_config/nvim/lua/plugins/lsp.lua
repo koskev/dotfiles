@@ -26,10 +26,6 @@ return {
 
 			require('mason').setup({})
 			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"rust_analyzer",
-					"gopls"
-				},
 				handlers = {
 					-- this first function is the "default handler"
 					-- it applies to every language server without a "custom handler"
@@ -94,5 +90,25 @@ return {
 				}
 			})
 		end,
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		opts = {
+			ensure_installed = {
+				-- LSPs
+				"rust_analyzer",
+				"gopls",
+				"helm_ls",
+				"yamlls",
+				"jsonnet_ls",
+				"jedi_language_server",
+				-- Debugger
+				"delve",
+				-- Formatter
+				"goimports",
+				"jsonnetfmt",
+			}
+		}
 	}
 }
