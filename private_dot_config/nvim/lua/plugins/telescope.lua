@@ -13,7 +13,7 @@ return {
 		vim.keymap.set('n', '<leader>lr', builtin.lsp_references, { desc = "LSP references" })
 		vim.keymap.set('n', '<leader>li', builtin.lsp_references, { desc = "LSP implementations" })
 
-		vim.keymap.set('n', '<leader>ss', builtin.spell_suggest, { dec = "Spelling suggestions" })
+		vim.keymap.set('n', '<leader>ss', builtin.spell_suggest, { desc = "Spelling suggestions" })
 
 		vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undo tree" })
 	end
