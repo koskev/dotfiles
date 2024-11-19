@@ -21,7 +21,7 @@ return {
 		vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = "Commands" })
 
 		vim.keymap.set('n', '<leader>lr', builtin.lsp_references, { desc = "LSP references" })
-		vim.keymap.set('n', '<leader>li', builtin.lsp_references, { desc = "LSP implementations" })
+		vim.keymap.set('n', '<leader>li', builtin.lsp_implementations, { desc = "LSP implementations" })
 
 		vim.keymap.set('n', '<leader>ss', builtin.spell_suggest, { desc = "Spelling suggestions" })
 	end
