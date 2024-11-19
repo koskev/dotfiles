@@ -98,6 +98,7 @@ return {
 				"delve",
 				-- Formatter
 				"goimports",
+				"gomodifytags",
 				"jsonnetfmt",
 			}
 		}
