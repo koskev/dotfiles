@@ -33,5 +33,3 @@ local function toggle_inlay()
 end
 
 vim.keymap.set("n", "ti", toggle_inlay, { desc = "Toggle inlay hints" })
-
-vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
