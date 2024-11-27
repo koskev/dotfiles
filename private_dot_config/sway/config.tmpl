@@ -296,11 +296,12 @@ exec --no-startup-id "swayautonames"
 
 #exec "setxkbmap -layout de -variant nodeadkeys -option caps:none -option numpad:mac"
 input type:keyboard {
-	xkb_layout de
-	xkb_variant nodeadkeys
+	xkb_layout "de,us"
+	xkb_variant "nodeadkeys,colemak_dh"
 	xkb_options caps:none
 	xkb_numlock enable
 }
+bindsym $mod+BackSpace input "type:keyboard" xkb_switch_layout next
 
 input 2:10:TPPS/2_Elan_TrackPoint {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
