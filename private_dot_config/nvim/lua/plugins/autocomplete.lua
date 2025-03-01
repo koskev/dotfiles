@@ -5,6 +5,7 @@ return {
 	{ 'hrsh7th/cmp-cmdline' },
 	-- For lua stuff (including vim stuff)
 	{ 'hrsh7th/cmp-nvim-lua' },
+	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{
 		'hrsh7th/nvim-cmp',
 		dependencies = { "L3MON4D3/LuaSnip", "onsails/lspkind.nvim" },
@@ -19,7 +20,8 @@ return {
 					{ name = 'nvim_lua' },
 					{ name = 'path' },
 					{ name = 'luasnip' },
-					{ name = 'buffer',  keyword_length = 5 },
+					{ name = 'buffer',                 keyword_length = 5 },
+					{ name = 'nvim_lsp_signature_help' }
 				},
 
 				formatting = {
