@@ -122,7 +122,7 @@ return {
 					single_file_support = false,
 					root_dir = function(fname)
 						return util.root_pattern 'jsonnetfile.json' (fname)
-							or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+							or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]) or "~"
 					end,
 					before_init = function(initialize_params)
 						initialize_params['initializationOptions'] = {
