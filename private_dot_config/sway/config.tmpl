@@ -296,8 +296,8 @@ exec --no-startup-id "swayautonames"
 
 #exec "setxkbmap -layout de -variant nodeadkeys -option caps:none -option numpad:mac"
 input type:keyboard {
-	xkb_layout "de,us"
-	xkb_variant "nodeadkeys,colemak_dh"
+	xkb_layout "de"
+	xkb_variant "nodeadkeys"
 	xkb_options caps:none
 	xkb_numlock enable
 }
@@ -357,3 +357,6 @@ exec --no-startup-id etesync-dav
 # Start socket for gnome ssh agent (I like this more than enabling the service. Better documentation this way)
 # Requires "export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh" in shell
 exec --no-startup-id systemctl --user start gcr-ssh-agent.socket
+
+# For unicode input everywhere (needed for QMK unicode input)
+#exec --no-startup-id fcitx5 -d
