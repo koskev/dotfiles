@@ -53,6 +53,7 @@ return {
 
 			-- https://old.reddit.com/r/neovim/comments/172v2pn/how_to_activate_inlay_hints_for_gopls/
 			lspconfig.gopls.setup({
+				--cmd = vim.lsp.rpc.connect("127.0.0.1", "1789"),
 				settings = {
 					gopls = {
 						["ui.inlayhint.hints"] = {
@@ -111,12 +112,49 @@ return {
 				},
 			})
 
+			local function getJson(filename)
+				local foundFile = vim.fs.find(filename, { path = vim.loop.cwd(), upward = true, type = "file" })[1]
+				if foundFile == nil then
+					return nil
+				end
+				local f = io.open(foundFile, "r")
+				if f == nil then
+					return nil
+				end
+				local data = f:read("*all")
+				return vim.json.decode(data)
+			end
+
+			local function getExtcodeFile()
+				local foundFile = vim.fs.find("extcode.libsonnet",
+					{ path = vim.loop.cwd(), upward = true, type = "file" })[1]
+				if foundFile == nil then
+					return nil
+				end
+				local filename = vim.fs.basename(foundFile)
+				local retVal = {}
+				retVal[vim.fn.fnamemodify(filename, ":r")] = foundFile
+				return retVal
+			end
+
+			lspconfig.jsonnet_ls.setup({
+				settings = {
+					enable_lint_diagnostics = true,
+					show_docstring_in_completion = true,
+					enable_eval_diagnostics = true,
+					--ext_vars = getJson("extvars.json"),
+					ext_code = getJson("extcode.json"),
+					ext_code_files = getExtcodeFile(),
+					enable_debug_ast_inlay = true
+				}
+			})
+
 			local util = require 'lspconfig.util'
 
 			local root_dirs = {}
 			require('lspconfig.configs').rjsonnet = {
 				default_config = {
-					cmd = { 'rjsonnet' },
+					cmd = { 'env', 'RUST_LOG=debug', 'rjsonnet' },
 					--cmd = vim.lsp.rpc.connect("127.0.0.1", "4874"),
 					filetypes = { 'jsonnet', 'libsonnet' },
 					single_file_support = false,
@@ -158,7 +196,7 @@ return {
 				"gopls",
 				"helm_ls",
 				"yamlls",
-				"jsonnet_ls",
+				--				"jsonnet_ls",
 				"jedi_language_server",
 				-- Debugger
 				"delve",
@@ -166,6 +204,7 @@ return {
 				"goimports",
 				"gomodifytags",
 				"jsonnetfmt",
+				-- Other tools
 			}
 		}
 	},
