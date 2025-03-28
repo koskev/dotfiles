@@ -33,3 +33,12 @@ local function toggle_inlay()
 end
 
 vim.keymap.set("n", "ti", toggle_inlay, { desc = "Toggle inlay hints" })
+if vim.version().minor == 11 then
+	vim.diagnostic.config({
+		virtual_lines = true
+	})
+else
+	vim.diagnostic.config({
+		virtual_text = true,
+	})
+end
