@@ -169,7 +169,11 @@ return {
 					--ext_vars = getJson("extvars.json"),
 					ext_code = getJson("extcode.json"),
 					ext_code_files = getExtcodeFile(),
-					enable_debug_ast_inlay = true
+					inlay_config = {
+						enable_debug_ast = false,
+						enable_index_value = true,
+						enable_function_args = true,
+					}
 				}
 			})
 
