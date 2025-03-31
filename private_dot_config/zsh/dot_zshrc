@@ -5,3 +5,4 @@ for file in ${ZDOTDIR}/*.zsh; do
 done
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(direnv hook zsh)"

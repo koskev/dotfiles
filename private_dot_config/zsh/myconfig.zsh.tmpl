@@ -1,8 +1,11 @@
+export SHELL=/bin/zsh
 alias emerge='emerge --ask'
 alias sudo='sudo '
 alias ls='lsd'
 alias k="kubectl"
 export PATH=$PATH:~/bin:/home/kevin/Dokumente/Projekte/esp32/crosstool-NG/builds/xtensa-esp32-elf/bin:~/.local/bin:~/.cargo/bin
+# Kubectl cluster
+RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 #source /etc/X11/xinit/xinitrc.d/52load-gtk-vector-screenshot-gtk-module
 #source /usr/share/terminix/scripts/terminix_int.sh
 export EDITOR=nvim
