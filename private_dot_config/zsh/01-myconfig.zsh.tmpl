@@ -1,7 +1,6 @@
 export SHELL=/bin/zsh
 alias emerge='emerge --ask'
 alias sudo='sudo '
-alias ls='lsd'
 alias k="kubectl"
 export PATH=$PATH:~/bin:/home/kevin/Dokumente/Projekte/esp32/crosstool-NG/builds/xtensa-esp32-elf/bin:~/.local/bin:~/.cargo/bin
 # Kubectl cluster
@@ -14,17 +13,6 @@ export RADV_PERFTEST=gpl
 #source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 #export TERM="xterm-256color"
 #export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=252,bold"
-
-# Switch dev
-export DEVKITPRO=/var/chroot/archlinux/opt/devkitpro
-export DEVKITARM=${DEVKITPRO}/devkitARM
-
-# ESP32 dev
-export IDF_PATH=/home/kevin/Dokumente/Projekte/esp32/esp-idf
-
-#ekos data for ccd sim
-export GSCDAT=/usr/local/share/GSC
-### for i3
 
 #if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
 #    export $(gnome-keyring-daemon -s)
@@ -114,6 +102,7 @@ chezmoi-cd() {
     cd $(chezmoi source-path)
 }
 
+
 {{ if (eq .pc_type "desktop" "laptop") }}
 
 export MOZ_ENABLE_WAYLAND=1
@@ -127,6 +116,7 @@ export GSETTINGS_SCHEMA_DIR=/usr/share/glib-2.0/schemas
 #export $(gnome-keyring-daemon -s)
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
+
 export XDG_CURRENT_DESKTOP=sway
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	sway
@@ -134,19 +124,22 @@ fi
 
 {{end}}
 
+
+
 # Auto chezmoi config
 # "vi FILE_NAME" automatically runs "chemoi edit FILE_NAME" command if the file is under management by chemoi.
 # otherwise just give the all arguments to neovim
-function nvim() {
-  if [ $# -eq 0 ]; then
-    command nvim
-    return
-  fi
+#function nvim() {
+#  if [ $# -eq 0 ]; then
+#    command nvim
+#    return
+#  fi
+#
+#  # Added "--hardlink=false" option to get neovim undo available.
+#  chezmoi verify $1 > /dev/null 2>&1\
+#    && chezmoi edit --watch --hardlink=false $1 || command nvim $@
+#}
 
-  # Added "--hardlink=false" option to get neovim undo available.
-  chezmoi verify $1 > /dev/null 2>&1\
-    && chezmoi edit --watch --hardlink=false $1 || command nvim $@
-}
 
 
 {{ if (eq .pc_type "desktop") }}
@@ -154,3 +147,5 @@ function nvim() {
 export VDPAU_DRIVER=radeonsi
 export LIBVA_DRIVER_NAME=radeonsi
 {{ end }}
+
+alias ls='lsd'
