@@ -14,17 +14,10 @@ return {
 				lspconfig_defaults.capabilities,
 				require('cmp_nvim_lsp').default_capabilities()
 			)
-
 			require('mason').setup({})
-			require("mason-lspconfig").setup({
-				handlers = {
-					-- this first function is the "default handler"
-					-- it applies to every language server without a "custom handler"
-					function(server_name)
-						require('lspconfig')[server_name].setup({})
-					end
-				}
-			})
+
+			local manual_ls_config = {}
+
 			vim.api.nvim_create_autocmd('LspAttach', {
 				desc = 'LSP actions',
 				callback = function(event)
@@ -43,19 +36,15 @@ return {
 				end,
 			})
 
-			local cfg = require("yaml-companion").setup({
-				-- Add any options here, or leave empty to use the default settings
-				-- lspconfig = {
-				--   cmd = {"yaml-language-server"}
-				-- },
-			})
-			lspconfig["yamlls"].setup(cfg)
+			table.insert(manual_ls_config, "gopls")
 
 			-- https://old.reddit.com/r/neovim/comments/172v2pn/how_to_activate_inlay_hints_for_gopls/
 			lspconfig.gopls.setup({
 				--cmd = vim.lsp.rpc.connect("127.0.0.1", "1789"),
+				-- cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "gopls" },
 				settings = {
 					gopls = {
+						["ui.semanticTokens"] = true,
 						["ui.inlayhint.hints"] = {
 							rangeVariableTypes = true,
 							parameterNames = true,
@@ -93,6 +82,7 @@ return {
 				end
 			})
 
+			table.insert(manual_ls_config, "lua_ls")
 			lspconfig.lua_ls.setup({
 				settings = {
 					Lua = {
@@ -106,6 +96,7 @@ return {
 				}
 			})
 
+			table.insert(manual_ls_config, "ts_ls")
 			lspconfig.ts_ls.setup({
 				settings = {
 					typescript = {
@@ -161,18 +152,30 @@ return {
 				return retVal
 			end
 
+			table.insert(manual_ls_config, "jsonnet_ls")
 			lspconfig.jsonnet_ls.setup({
+				--cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "jsonnet-language-server" },
 				settings = {
 					enable_lint_diagnostics = true,
 					show_docstring_in_completion = true,
 					enable_eval_diagnostics = true,
 					--ext_vars = getJson("extvars.json"),
-					ext_code = getJson("extcode.json"),
-					ext_code_files = getExtcodeFile(),
+					--ext_code = getJson("extcode.json"),
+					ext_code_config = {
+						find_upwards = true,
+					},
+					use_type_in_detail = true,
+					enable_semantic_tokens = true,
 					inlay_config = {
 						enable_debug_ast = false,
 						enable_index_value = true,
 						enable_function_args = true,
+					},
+					workarounds = {
+						assume_true_condition_on_error = true,
+					},
+					completion = {
+						enable_snippets = true
 					}
 				}
 			})
@@ -213,6 +216,7 @@ return {
 			}
 			--lspconfig.rjsonnet.setup({})
 			--
+			table.insert(manual_ls_config, "golangci_lint_ls")
 			lspconfig.golangci_lint_ls.setup({
 				init_options = {
 					command = {
@@ -225,6 +229,11 @@ return {
 					},
 				}
 
+			})
+			require("mason-lspconfig").setup({
+				automatic_enable = {
+					exclude = manual_ls_config
+				}
 			})
 		end,
 	},
@@ -262,6 +271,7 @@ return {
 					-- Go
 					-- Add tags like json to structs
 					null_ls.builtins.code_actions.gomodifytags,
+					null_ls.builtins.formatting.packer,
 
 
 				}
