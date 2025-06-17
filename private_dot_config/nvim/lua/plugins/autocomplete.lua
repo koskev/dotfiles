@@ -13,8 +13,7 @@ return {
 			local cmp = require('cmp')
 			local lspkind = require('lspkind')
 			local luasnip = require("luasnip")
-
-			cmp.setup({
+			local config = {
 				sources = {
 					{ name = 'nvim_lsp' },
 					{ name = 'nvim_lua' },
@@ -83,7 +82,8 @@ return {
 						-- vim.snippet.expand(args.body)
 					end,
 				},
-			})
+			}
+			--cmp.setup(config)
 		end
 	},
 }

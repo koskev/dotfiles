@@ -9,11 +9,18 @@ return {
 			-- This should be executed before you configure any language server
 			local lspconfig = require("lspconfig")
 			local lspconfig_defaults = require('lspconfig').util.default_config
-			lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-				'force',
-				lspconfig_defaults.capabilities,
-				require('cmp_nvim_lsp').default_capabilities()
-			)
+			local status, blink_cmp = pcall(require, "blink.cmp")
+
+			if status then
+				lspconfig_defaults.capabilities = blink_cmp.get_lsp_capabilities(lspconfig_defaults
+					.capabilities)
+			else
+				lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+					'force',
+					lspconfig_defaults.capabilities,
+					require('cmp_nvim_lsp').default_capabilities()
+				)
+			end
 			require('mason').setup({})
 
 			local manual_ls_config = {}
