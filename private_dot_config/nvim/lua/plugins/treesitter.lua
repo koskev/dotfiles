@@ -1,5 +1,6 @@
 -- Better syntax highlights
 return {
+	{ "nvim-treesitter/nvim-treesitter-context", opts = {} },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
