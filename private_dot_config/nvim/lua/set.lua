@@ -33,7 +33,7 @@ local function toggle_inlay()
 end
 
 vim.keymap.set("n", "ti", toggle_inlay, { desc = "Toggle inlay hints" })
-if vim.version().minor == 11 then
+if vim.version().minor >= 11 then
 	vim.diagnostic.config({
 		virtual_lines = true
 	})
@@ -42,3 +42,44 @@ else
 		virtual_text = true,
 	})
 end
+
+vim.filetype.add({
+	extension = {
+		vrl = "vrl",
+	}
+})
+
+-- vim.highlight.priorities.semantic_tokens = 95
+
+--local autocmd = vim.api.nvim_create_autocmd
+--autocmd("FileType", {
+--	pattern = "jsonnet",
+--	callback = function()
+--		local root_dir = vim.fs.dirname(
+--			vim.fs.find({ 'go.mod', 'go.work', '.git' }, { upward = true })[1]
+--		)
+--		local client = vim.lsp.start({
+--			name = 'rjsonnet',
+--			cmd = { 'env', 'RUST_BACKTRACE=full', 'jsonnet-ls' },
+--			root_dir = root_dir,
+--		})
+--		vim.lsp.buf_attach_client(0, client)
+--	end
+--})
+
+-- local autocmd = vim.api.nvim_create_autocmd
+-- autocmd("FileType", {
+-- 	pattern = "jsonnet",
+-- 	callback = function()
+-- 		local root_dir = vim.fs.dirname(
+-- 			vim.fs.find({ 'go.mod', 'go.work', '.git' }, { upward = true })[1]
+-- 		)
+-- 		local rpc_client = vim.lsp.rpc.connect("127.0.0.1", "4874")
+-- 		local client = vim.lsp.start({
+-- 			name = 'rjsonnet',
+-- 			cmd = rpc_client,
+-- 			root_dir = root_dir,
+-- 		})
+-- 		vim.lsp.buf_attach_client(0, client)
+-- 	end
+-- })

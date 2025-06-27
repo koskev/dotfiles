@@ -1,3 +1,11 @@
+local function setup_lsp(name, config)
+	if vim.version().minor >= 11 then
+		vim.lsp.enable(name)
+		vim.lsp.config(name, config)
+	else
+		require('lspconfig')[name].setup(config)
+	end
+end
 -- All lsp related config. mason-lspconfig initializes all lsps.
 -- See https://lsp-zero.netlify.app/docs/tutorial.html
 return {
@@ -7,7 +15,6 @@ return {
 		config = function()
 			-- Add cmp_nvim_lsp capabilities settings to lspconfig
 			-- This should be executed before you configure any language server
-			local lspconfig = require("lspconfig")
 			local lspconfig_defaults = require('lspconfig').util.default_config
 			local status, blink_cmp = pcall(require, "blink.cmp")
 
@@ -46,7 +53,7 @@ return {
 			table.insert(manual_ls_config, "gopls")
 
 			-- https://old.reddit.com/r/neovim/comments/172v2pn/how_to_activate_inlay_hints_for_gopls/
-			lspconfig.gopls.setup({
+			setup_lsp("gopls", {
 				--cmd = vim.lsp.rpc.connect("127.0.0.1", "1789"),
 				-- cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "gopls" },
 				settings = {
@@ -90,7 +97,7 @@ return {
 			})
 
 			table.insert(manual_ls_config, "lua_ls")
-			lspconfig.lua_ls.setup({
+			setup_lsp("lua_ls", {
 				settings = {
 					Lua = {
 						hint = {
@@ -104,7 +111,7 @@ return {
 			})
 
 			table.insert(manual_ls_config, "ts_ls")
-			lspconfig.ts_ls.setup({
+			setup_lsp("ts_ls", {
 				settings = {
 					typescript = {
 						inlayHints = {
@@ -159,19 +166,35 @@ return {
 				return retVal
 			end
 
+			--table.insert(manual_ls_config, "rust_analyzer")
+			--setup_lsp("rust_analyzer", {
+			--	settings = {
+			--		--semanticHighlighting = {
+			--		--	punctuation = {
+			--		--		separate = {
+			--		--			macro = {
+			--		--				bang = true
+			--		--			}
+			--		--		},
+			--		--		specialization = {
+			--		--			enable = true
+			--		--		}
+			--		--	},
+			--		--	strings = {
+			--		--		enable = true
+			--		--	}
+			--		--}
+			--	}
+			--})
+
 			table.insert(manual_ls_config, "jsonnet_ls")
-			lspconfig.jsonnet_ls.setup({
+			setup_lsp("jsonnet_ls", {
 				--cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "jsonnet-language-server" },
+				cmd = vim.lsp.rpc.connect("127.0.0.1", 4874),
+				--cmd = { "lsp-devtools", "agent", "--", "/home/kevin/Dokumente/Projekte/Github/koskev/jsonnet-ls-rs/target/debug/grustonnet-ls" },
 				settings = {
-					enable_lint_diagnostics = true,
-					show_docstring_in_completion = true,
-					enable_eval_diagnostics = true,
 					--ext_vars = getJson("extvars.json"),
 					--ext_code = getJson("extcode.json"),
-					ext_code_config = {
-						find_upwards = true,
-					},
-					use_type_in_detail = true,
 					enable_semantic_tokens = true,
 					inlay_config = {
 						enable_debug_ast = false,
@@ -182,7 +205,23 @@ return {
 						assume_true_condition_on_error = true,
 					},
 					completion = {
-						enable_snippets = true
+						enable_snippets = true,
+						use_type_in_detail = true,
+						show_docstring = false,
+					},
+					diagnostics = {
+						enable_lint_diagnostics = true,
+						enable_eval_diagnostics = true,
+					},
+					paths = {
+						ext_code = {
+							find_upwards = true,
+						},
+						relative_jpaths = {
+							"vendor",
+							"lib",
+							".",
+						},
 					}
 				}
 			})
@@ -223,8 +262,15 @@ return {
 			}
 			--lspconfig.rjsonnet.setup({})
 			--
+			setup_lsp("vrl_ls", {
+				--cmd = vim.lsp.rpc.connect("127.0.0.1", 4874),
+				cmd = { "vrl-lsp" },
+				filetypes = { 'vrl' },
+				single_file_support = true,
+			})
+
 			table.insert(manual_ls_config, "golangci_lint_ls")
-			lspconfig.golangci_lint_ls.setup({
+			setup_lsp("golangci_lint_ls", {
 				init_options = {
 					command = {
 						"golangci-lint",
@@ -240,6 +286,13 @@ return {
 			require("mason-lspconfig").setup({
 				automatic_enable = {
 					exclude = manual_ls_config
+				},
+				handlers = {
+					-- this first function is the "default handler"
+					-- it applies to every language server without a "custom handler"
+					function(server_name)
+						setup_lsp(server_name, {})
+					end
 				}
 			})
 		end,
