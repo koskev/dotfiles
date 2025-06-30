@@ -50,27 +50,7 @@ return {
 				end,
 			})
 
-			table.insert(manual_ls_config, "gopls")
 
-			-- https://old.reddit.com/r/neovim/comments/172v2pn/how_to_activate_inlay_hints_for_gopls/
-			setup_lsp("gopls", {
-				--cmd = vim.lsp.rpc.connect("127.0.0.1", "1789"),
-				-- cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "gopls" },
-				settings = {
-					gopls = {
-						["ui.semanticTokens"] = true,
-						["ui.inlayhint.hints"] = {
-							rangeVariableTypes = true,
-							parameterNames = true,
-							constantValues = true,
-							assignVariableTypes = true,
-							compositeLiteralFields = true,
-							compositeLiteralTypes = true,
-							functionTypeParameters = true,
-						},
-					},
-				},
-			})
 			-- Goimports on save
 			-- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-imports
 			vim.api.nvim_create_autocmd("BufWritePre", {
@@ -96,135 +76,6 @@ return {
 				end
 			})
 
-			table.insert(manual_ls_config, "lua_ls")
-			setup_lsp("lua_ls", {
-				settings = {
-					Lua = {
-						hint = {
-							enable = true, -- necessary
-						},
-						diagnostics = {
-							globals = { 'vim' }
-						}
-					}
-				}
-			})
-
-			table.insert(manual_ls_config, "ts_ls")
-			setup_lsp("ts_ls", {
-				settings = {
-					typescript = {
-						inlayHints = {
-							includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-					},
-					javascript = {
-						inlayHints = {
-							includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-							includeInlayVariableTypeHints = true,
-
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-					},
-				},
-			})
-
-			local function getJson(filename)
-				local foundFile = vim.fs.find(filename, { path = vim.loop.cwd(), upward = true, type = "file" })[1]
-				if foundFile == nil then
-					return nil
-				end
-				local f = io.open(foundFile, "r")
-				if f == nil then
-					return nil
-				end
-				local data = f:read("*all")
-				return vim.json.decode(data)
-			end
-
-			local function getExtcodeFile()
-				local foundFile = vim.fs.find("extcode.libsonnet",
-					{ path = vim.loop.cwd(), upward = true, type = "file" })[1]
-				if foundFile == nil then
-					return nil
-				end
-				local filename = vim.fs.basename(foundFile)
-				local retVal = {}
-				retVal[vim.fn.fnamemodify(filename, ":r")] = foundFile
-				return retVal
-			end
-
-			--table.insert(manual_ls_config, "rust_analyzer")
-			--setup_lsp("rust_analyzer", {
-			--	settings = {
-			--		--semanticHighlighting = {
-			--		--	punctuation = {
-			--		--		separate = {
-			--		--			macro = {
-			--		--				bang = true
-			--		--			}
-			--		--		},
-			--		--		specialization = {
-			--		--			enable = true
-			--		--		}
-			--		--	},
-			--		--	strings = {
-			--		--		enable = true
-			--		--	}
-			--		--}
-			--	}
-			--})
-
-			table.insert(manual_ls_config, "jsonnet_ls")
-			setup_lsp("jsonnet_ls", {
-				--cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "jsonnet-language-server" },
-				cmd = vim.lsp.rpc.connect("127.0.0.1", 4874),
-				--cmd = { "lsp-devtools", "agent", "--", "/home/kevin/Dokumente/Projekte/Github/koskev/jsonnet-ls-rs/target/debug/grustonnet-ls" },
-				settings = {
-					--ext_vars = getJson("extvars.json"),
-					--ext_code = getJson("extcode.json"),
-					enable_semantic_tokens = true,
-					inlay_config = {
-						enable_debug_ast = false,
-						enable_index_value = true,
-						enable_function_args = true,
-					},
-					workarounds = {
-						assume_true_condition_on_error = true,
-					},
-					completion = {
-						enable_snippets = true,
-						use_type_in_detail = true,
-						show_docstring = false,
-					},
-					diagnostics = {
-						enable_lint_diagnostics = true,
-						enable_eval_diagnostics = true,
-					},
-					paths = {
-						ext_code = {
-							find_upwards = true,
-						},
-						relative_jpaths = {
-							"vendor",
-							"lib",
-							".",
-						},
-					}
-				}
-			})
 
 			local util = require 'lspconfig.util'
 
@@ -261,29 +112,9 @@ return {
 				},
 			}
 			--lspconfig.rjsonnet.setup({})
-			--
-			setup_lsp("vrl_ls", {
-				--cmd = vim.lsp.rpc.connect("127.0.0.1", 4874),
-				cmd = { "vrl-lsp" },
-				filetypes = { 'vrl' },
-				single_file_support = true,
-			})
 
-			table.insert(manual_ls_config, "golangci_lint_ls")
-			setup_lsp("golangci_lint_ls", {
-				init_options = {
-					command = {
-						"golangci-lint",
-						"run",
-						"--output.json.path",
-						"stdout",
-						"--show-stats=false",
-						"--issues-exit-code=1",
-					},
-				}
-
-			})
 			require("mason-lspconfig").setup({
+				ensure_installed = {},
 				automatic_enable = {
 					exclude = manual_ls_config
 				},
