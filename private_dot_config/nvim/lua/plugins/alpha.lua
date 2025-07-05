@@ -1,5 +1,6 @@
 return {
 	{
+		enabled = false,
 		"goolord/alpha-nvim",
 		-- dependencies = { 'echasnovski/mini.icons' },
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -9,7 +10,7 @@ return {
 			-- if provider not loaded and enabled is true, it will try to use another provider
 			startify.file_icons.provider = "devicons"
 			require("alpha").setup(
-			startify.config
+				startify.config
 			)
 		end,
 	},
