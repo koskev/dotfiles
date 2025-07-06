@@ -11,6 +11,7 @@ end
 return {
 	{
 		"williamboman/mason-lspconfig.nvim",
+		event = "VeryLazy",
 		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
 		config = function()
 			-- Add cmp_nvim_lsp capabilities settings to lspconfig

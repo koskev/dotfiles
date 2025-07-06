@@ -2,6 +2,7 @@
 return {
 	{
 		'mfussenegger/nvim-dap',
+		event = "VeryLazy",
 		config = function()
 			local dap = require("dap")
 			vim.keymap.set('n', '<Leader>dc', function() dap.continue() end, { desc = "Continue" })
@@ -13,6 +14,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
+		event = "VeryLazy",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
@@ -35,18 +37,26 @@ return {
 	},
 	{
 		"leoluz/nvim-dap-go",
+		event = "VeryLazy",
 		opts = {}
 	},
-	{
-		"koskev/dap-jsonnet.nvim",
-		opts = {
-			debugger_args = { "--dap", "-s" }
-		},
-		dependencies = { 'mfussenegger/nvim-dap' }
-	},
+	--{
+	--	dir = "/home/kevin/Dokumente/Projekte/Github/koskev/dap-jsonnet.nvim",
+	--	config = function()
+	--		require("dap-jsonnet").setup()
+	--	end
+	--},
+	--{
+	--	"koskev/dap-jsonnet.nvim",
+	--	opts = {
+	--		debugger_args = { "--dap", "-s" }
+	--	},
+	--	dependencies = { 'mfussenegger/nvim-dap' }
+	--},
 	{
 		-- Shows the current values of variables inside code
 		"theHamsta/nvim-dap-virtual-text",
+		event = "VeryLazy",
 		dependencies = { 'mfussenegger/nvim-dap' },
 		opts = {}
 	}

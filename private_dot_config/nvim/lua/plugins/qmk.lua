@@ -1,5 +1,6 @@
 return {
 	'codethread/qmk.nvim',
+	ft = "c",
 	config = function()
 		local german_overrides = {
 			MOD_LALT = "lalt",

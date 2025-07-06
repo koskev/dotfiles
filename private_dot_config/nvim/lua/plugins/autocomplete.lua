@@ -8,6 +8,7 @@ return {
 	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{
 		'hrsh7th/nvim-cmp',
+		event = "VeryLazy",
 		dependencies = { "L3MON4D3/LuaSnip", "onsails/lspkind.nvim" },
 		config = function()
 			local cmp = require('cmp')
