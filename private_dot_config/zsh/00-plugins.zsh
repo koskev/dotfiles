@@ -14,10 +14,9 @@ antidote bundle ohmyzsh/ohmyzsh path:lib
 antidote bundle ohmyzsh/ohmyzsh path:plugins/git
 antidote bundle ohmyzsh/ohmyzsh path:plugins/svn
 
-
 antidote bundle qwelyt/endless-dog
 
-antidote bundle superbrothers/zsh-kubectl-prompt
+zsh-defer antidote bundle superbrothers/zsh-kubectl-prompt
 
 zsh-defer antidote bundle zsh-users/zsh-autosuggestions
 zsh-defer antidote bundle junegunn/fzf path:shell
