@@ -22,12 +22,6 @@ return {
 			if status then
 				lspconfig_defaults.capabilities = blink_cmp.get_lsp_capabilities(lspconfig_defaults
 					.capabilities)
-			else
-				lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-					'force',
-					lspconfig_defaults.capabilities,
-					require('cmp_nvim_lsp').default_capabilities()
-				)
 			end
 			require('mason').setup({})
 
