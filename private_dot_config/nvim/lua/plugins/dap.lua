@@ -40,12 +40,12 @@ return {
 		event = "VeryLazy",
 		opts = {}
 	},
-	--{
-	--	dir = "/home/kevin/Dokumente/Projekte/Github/koskev/dap-jsonnet.nvim",
-	--	config = function()
-	--		require("dap-jsonnet").setup()
-	--	end
-	--},
+	{
+		"koskev/jsonnet-tools.nvim",
+		config = function()
+			require("jsonnet-tools").setup({})
+		end
+	},
 	--{
 	--	"koskev/dap-jsonnet.nvim",
 	--	opts = {
