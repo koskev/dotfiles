@@ -23,40 +23,43 @@ local function getExtcodeFile()
 	return retVal
 end
 
+local grustonnet_settings = getJson("./grustonnet.json");
+local go_settings = {
+	--ext_vars = getJson("extvars.json"),
+	--ext_code = getJson("extcode.json"),
+	enable_semantic_tokens = true,
+	inlay_config = {
+		enable_debug_ast = false,
+		enable_index_value = true,
+		enable_function_args = true,
+	},
+	workarounds = {
+		assume_true_condition_on_error = true,
+	},
+	completion = {
+		enable_snippets = true,
+		use_type_in_detail = true,
+		show_docstring = false,
+	},
+	diagnostics = {
+		enable_lint_diagnostics = true,
+		enable_eval_diagnostics = true,
+	},
+	paths = {
+		ext_code = {
+			find_upwards = true,
+		},
+		relative_jpaths = {
+			"vendor",
+			"lib",
+			".",
+		},
+	}
+};
+
 return {
 	--cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "jsonnet-language-server" },
 	cmd = vim.lsp.rpc.connect("127.0.0.1", 4874),
 	--cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "/home/kevin/Dokumente/Projekte/Github/koskev/koskev-rs-lsps/jsonnet-ls-rs/target/debug/grustonnet-bin" },
-	settings = {
-		--ext_vars = getJson("extvars.json"),
-		--ext_code = getJson("extcode.json"),
-		enable_semantic_tokens = true,
-		inlay_config = {
-			enable_debug_ast = false,
-			enable_index_value = true,
-			enable_function_args = true,
-		},
-		workarounds = {
-			assume_true_condition_on_error = true,
-		},
-		completion = {
-			enable_snippets = true,
-			use_type_in_detail = true,
-			show_docstring = false,
-		},
-		diagnostics = {
-			enable_lint_diagnostics = true,
-			enable_eval_diagnostics = true,
-		},
-		paths = {
-			ext_code = {
-				find_upwards = true,
-			},
-			relative_jpaths = {
-				"vendor",
-				"lib",
-				".",
-			},
-		}
-	}
+	settings = go_settings,
 }

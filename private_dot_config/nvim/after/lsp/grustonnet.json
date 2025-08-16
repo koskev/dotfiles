@@ -1,0 +1,44 @@
+{
+  "$schema": "./grustonnet_schema.json",
+  "completion": {
+    "enable_global": true,
+    "enable_keywords": true,
+    "enable_local": true,
+    "hide_docsonnet_members": true
+  },
+  "diagnostics": {
+    "enable_eval": true,
+    "enable_go_lint": false,
+    "enable_lint": true
+  },
+  "format": {
+    "comment_style": 1,
+    "indent": 2,
+    "max_blank_lines": 2,
+    "pad_arrays": false,
+    "pad_objects": true,
+    "pretty_field_names": true,
+    "sort_imports": true,
+    "string_style": 1,
+    "strip_all_but_comments": false,
+    "strip_comments": false,
+    "strip_everything": false,
+    "use_implicit_plus": true
+  },
+  "inlay": {
+    "enable_debug": false,
+    "enable_function_parameters": true
+  },
+  "jsonnet": {
+    "default_root_jpaths": [
+      "lib",
+      "vendor",
+      "."
+    ],
+    "ext_code": {},
+    "ext_vars": {},
+    "find_upwards": true,
+    "jpaths": [],
+    "preload_files": true
+  }
+}

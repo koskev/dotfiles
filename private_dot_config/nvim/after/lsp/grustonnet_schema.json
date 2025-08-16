@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Configuration",
+  "type": "object",
+  "properties": {
+    "completion": {
+      "$ref": "#/$defs/CompletionConfig",
+      "default": {
+        "enable_global": true,
+        "enable_keywords": true,
+        "enable_local": true,
+        "hide_docsonnet_members": true
+      }
+    },
+    "diagnostics": {
+      "$ref": "#/$defs/DiagnosticConfig",
+      "default": {
+        "enable_eval": true,
+        "enable_go_lint": false,
+        "enable_lint": true
+      }
+    },
+    "format": {
+      "$ref": "#/$defs/FormatOptions",
+      "default": {
+        "comment_style": 1,
+        "indent": 2,
+        "max_blank_lines": 2,
+        "pad_arrays": false,
+        "pad_objects": true,
+        "pretty_field_names": true,
+        "sort_imports": true,
+        "string_style": 1,
+        "strip_all_but_comments": false,
+        "strip_comments": false,
+        "strip_everything": false,
+        "use_implicit_plus": true
+      }
+    },
+    "inlay": {
+      "$ref": "#/$defs/InlayConfig",
+      "default": {
+        "enable_debug": true,
+        "enable_function_parameters": true
+      }
+    },
+    "jsonnet": {
+      "$ref": "#/$defs/JsonnetConfig",
+      "default": {
+        "default_root_jpaths": [
+          "lib",
+          "vendor",
+          "."
+        ],
+        "ext_code": {},
+        "ext_vars": {},
+        "find_upwards": true,
+        "jpaths": [],
+        "preload_files": true
+      }
+    }
+  },
+  "$defs": {
+    "CompletionConfig": {
+      "type": "object",
+      "properties": {
+        "enable_global": {
+          "description": "Enable global completion. E.g. variables etc.",
+          "type": "boolean",
+          "default": true
+        },
+        "enable_keywords": {
+          "description": "Enable completion of keywords. E.g. import, local, etc.",
+          "type": "boolean",
+          "default": true
+        },
+        "enable_local": {
+          "description": "Enables the local completion. E.g. foo._bar_",
+          "type": "boolean",
+          "default": true
+        },
+        "hide_docsonnet_members": {
+          "description": "Hides the docsonnet member in objects",
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "DiagnosticConfig": {
+      "type": "object",
+      "properties": {
+        "enable_eval": {
+          "description": "Enable diagnostics by evaluating the jsonnet file",
+          "type": "boolean",
+          "default": true
+        },
+        "enable_go_lint": {
+          "description": "Enable diagnostics by using jsonnet-lint (mainly gives unused variables but may fail in\nsome cases)",
+          "type": "boolean",
+          "default": false
+        },
+        "enable_lint": {
+          "description": "Enable linting checks (currently limited to unused variables)",
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "FormatOptions": {
+      "type": "object",
+      "properties": {
+        "comment_style": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "indent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max_blank_lines": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pad_arrays": {
+          "type": "boolean"
+        },
+        "pad_objects": {
+          "type": "boolean"
+        },
+        "pretty_field_names": {
+          "type": "boolean"
+        },
+        "sort_imports": {
+          "type": "boolean"
+        },
+        "string_style": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "strip_all_but_comments": {
+          "type": "boolean"
+        },
+        "strip_comments": {
+          "type": "boolean"
+        },
+        "strip_everything": {
+          "type": "boolean"
+        },
+        "use_implicit_plus": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "indent",
+        "max_blank_lines",
+        "string_style",
+        "comment_style",
+        "pretty_field_names",
+        "pad_arrays",
+        "pad_objects",
+        "sort_imports",
+        "use_implicit_plus",
+        "strip_everything",
+        "strip_comments",
+        "strip_all_but_comments"
+      ]
+    },
+    "InlayConfig": {
+      "type": "object",
+      "properties": {
+        "enable_debug": {
+          "description": "Enable debug inlay hints to show the ast types",
+          "type": "boolean",
+          "default": true
+        },
+        "enable_function_parameters": {
+          "description": "Enable function parameter inlay hints (might cause some delays)",
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "JsonnetConfig": {
+      "type": "object",
+      "properties": {
+        "default_root_jpaths": {
+          "description": "Paths relative to the root dir to add to the jpath",
+          "type": "array",
+          "default": [
+            "lib",
+            "vendor",
+            "."
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "ext_code": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {}
+        },
+        "ext_vars": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {}
+        },
+        "find_upwards": {
+          "description": "Searches from the root directory upwards for\n<name>.extcode.libsonnet and\n<name>.extvars.libsonnet",
+          "type": "boolean",
+          "default": true
+        },
+        "jpaths": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "preload_files": {
+          "description": "Preload all jsonnet files in all jpaths to allow for faster cross file search",
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
+  }
+}
