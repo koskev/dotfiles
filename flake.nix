@@ -29,14 +29,33 @@
     in
     {
       homeConfigurations = {
-        "${settings.username}" = home-manager.lib.homeManagerConfiguration {
+        "desktop" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            ./home/home.nix
+            ./home/profiles/desktop.nix
+            ./home/profiles/common.nix
             inputs.zen-browser.homeModules.twilight
           ];
           extraSpecialArgs = {
-            inherit settings;
+            settings = settings // {
+              # Pass in the profile name to properly add the hms alias
+              # TODO: fix this. Maybe use hostnames?
+              profile = "desktop";
+            };
+          };
+        };
+        "work" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home/profiles/work.nix
+            ./home/profiles/desktop.nix
+            ./home/profiles/common.nix
+            inputs.zen-browser.homeModules.twilight
+          ];
+          extraSpecialArgs = {
+            settings = settings // {
+              profile = "work";
+            };
           };
         };
       };
