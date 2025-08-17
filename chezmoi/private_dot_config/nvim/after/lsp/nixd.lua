@@ -1,3 +1,4 @@
+local flakePath = "~/.local/share/chezmoi"
 return {
 	settings = {
 		nixd = {
@@ -9,7 +10,10 @@ return {
 			},
 			options = {
 				home_manager = {
-					expr = '(builtins.getFlake (builtins.toString ./.)).homeConfigurations.kevin.options',
+					expr = '(builtins.getFlake (builtins.toString ' .. flakePath .. ')).homeConfigurations."kevin@kevin-nix".options',
+				},
+				nixos = {
+					expr = '(builtins.getFlake (builtins.toString ' .. flakePath .. ')).nixosConfigurations."kevin".options',
 				},
 			},
 		},
