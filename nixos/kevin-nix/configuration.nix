@@ -25,7 +25,6 @@
       efiSupport = true;
       enable = true;
       device = "nodev";
-      useOSProber = true;
     };
   };
 
@@ -71,11 +70,26 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  users.groups.plugdev = { };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kevin = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "plugdev"
+    ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
+  };
+
+  services.udev = {
+    extraRules = ''
+      ACTION=="add", SUBSYSTEM=="hwmon", RUN+="/bin/sh -c 'chgrp -R plugdev /sys/$devpath && chmod -R g+w /sys/$devpath'"
+      ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{idVendor}=="1b1c", ATTRS{idProduct}=="0c10", ATTRS{manufacturer}=="OpenFanHub",  RUN+="/bin/sh -c 'ln -s /sys$devpath /dev/openfanhub'"
+      ACTION=="remove", SUBSYSTEM=="hwmon", ATTRS{idVendor}=="1b1c", ATTRS{idProduct}=="0c10", ATTRS{manufacturer}=="OpenFanHub",  RUN+="/bin/sh -c 'rm /dev/openfanhub'"
+
+      # internal coretemp stable path
+      ACTION=="change", SUBSYSTEM=="hwmon", ATTRS{temp13_label}=="Core 39",  RUN+="/bin/sh -c 'ln -s /sys$devpath /dev/internal_coretemp'"
+    '';
   };
 
   # programs.firefox.enable = true;

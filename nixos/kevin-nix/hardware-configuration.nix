@@ -32,13 +32,13 @@
   # TODO: snapshot mounts
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/1c379ae5-2988-4fa5-bdb7-a5ef31654656";
+    device = "/dev/mapper/nvme_crypt";
     fsType = "btrfs";
     options = [ "subvol=@home" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/20fa87a6-78c0-4aea-b2a6-8e70f3238a60";
+    device = "/dev/disk/by-uuid/a3326aac-19f0-4e83-ad6f-a03c7c3af4b2";
     fsType = "btrfs";
   };
 
@@ -75,6 +75,14 @@
 
   boot.initrd.luks.devices."nvme_crypt".device =
     "/dev/disk/by-uuid/20fa87a6-78c0-4aea-b2a6-8e70f3238a60";
+
+  environment.etc.crypttab = {
+    mode = "0600";
+    text = ''
+      # <volume-name> <encrypted-device> [key-file] [options]
+      nvme1-crypt UUID=3351d105-c483-47f7-b63b-888e637754d4 /root/nvme-key nofail
+    '';
+  };
 
   swapDevices = [ ];
 

@@ -1,0 +1,11 @@
+{
+  ...
+}:
+
+{
+
+  imports = [
+    ../packages/desktop.nix
+  ];
+
+}

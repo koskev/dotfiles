@@ -24,31 +24,44 @@
       ...
     }@inputs:
     let
-    lib = nixpkgs.lib;
+      lib = nixpkgs.lib;
       settings = import ./settings.nix { };
       pkgs = import nixpkgs { system = settings.system; };
-      nixOSHosts = lib.filterAttrs(n: v: (v.nixos or false)) settings.hosts;
+      nixOSHosts = lib.filterAttrs (n: v: (v.nixos or false)) settings.hosts;
       #nonNixOSHosts = lib.filterAttrs(n: v: (!v.nixos or false)) settings.hosts;
       nonNixOSHosts = settings.hosts;
     in
     {
-      nixosConfigurations = builtins.mapAttrs (
-        key: val:
-        nixpkgs.lib.nixosSystem {
-          modules = [
-            ./nixos/${key}/configuration.nix
-            ./nixos/common.nix
-            # TODO: use "native" home manager?
-          ];
-          specialArgs = {
-            inherit settings;
-          };
-        }
+      nixosConfigurations = nixpkgs.lib.concatMapAttrs (
+        hostname: hostSettings:
+        let
+          userSettings = nixpkgs.lib.concatMapAttrs (username: userSettings: {
+            "${hostname}" = nixpkgs.lib.nixosSystem {
+              modules = [
+                ./nixos/${hostname}/configuration.nix
+                ./nixos/profiles/${userSettings.profile}.nix
+                ./nixos/common.nix
+              ];
+              specialArgs = {
+                settings = settings // {
+                  # Pass in the profile name to properly add the hms alias
+                  profile = userSettings.profile;
+                  hostname = hostname;
+                  username = username;
+                  homedir = "/home/${username}";
+                };
+              };
+            };
+          }) hostSettings.users;
+        in
+        userSettings
       ) nixOSHosts;
+      userSettings = nixpkgs.lib.concatMapAttrs (username: userSettings: {
+      }) nixOSHosts;
       homeConfigurations = nixpkgs.lib.concatMapAttrs (
         hostname: hostSettings:
         let
-          userSettings = nixpkgs.lib.concatMapAttrs(username: userSettings: {
+          userSettings = nixpkgs.lib.concatMapAttrs (username: userSettings: {
             "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               modules = [
@@ -63,14 +76,13 @@
                   hostname = hostname;
                   username = username;
                   homedir = "/home/${username}";
+                  nixos = userSettings.nixos;
                 };
               };
             };
-          })
-          hostSettings.users;
+          }) hostSettings.users;
         in
-          userSettings
-      )
-      nonNixOSHosts;
+        userSettings
+      ) nonNixOSHosts;
     };
 }
