@@ -5,11 +5,8 @@
 
 {
 
-  # Add /bin/bash symlink. Yes it should not be used, but this is not feasible in practice
-  system.activationScripts.binbash = ''
-    mkdir -p /bin
-    ln -sfn /run/current-system/sw/bin/bash /bin/bash
-  '';
+  # Magic fuse filesystem basically replaces calls to "/bin/<program>" with "/usr/bin/env <program>"
+  services.envfs.enable = true;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -37,6 +34,4 @@
     # Add any missing dynamic libraries for unpackaged programs
     # here, NOT in environment.systemPackages
   ];
-
-  programs.sway.enable = true;
 }
