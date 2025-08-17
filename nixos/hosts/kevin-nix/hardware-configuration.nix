@@ -14,6 +14,10 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  environment.systemPackages = with pkgs; [
+    linuxKernel.packages.linux_zen.nct6687d
+  ];
+
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -21,8 +25,14 @@
     "usbhid"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "nct6687"
+  ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    # Required for fan control
+    nct6687d
+  ];
 
   fileSystems."/" = {
     device = "/dev/mapper/nvme_crypt";
