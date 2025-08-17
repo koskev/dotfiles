@@ -4,7 +4,10 @@
 }:
 
 {
-  programs.gnupg.agent.enable = true;
+  programs = {
+    gnupg.agent.enable = true;
+    sway.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     sway
@@ -15,6 +18,10 @@
     wl-clipboard-rs
     mate.caja
     syncthing
+    wdisplays
+    xorg.xrandr
+    libnotify
+    dunst
 
     alacritty
     xterm
@@ -38,7 +45,6 @@
     element-desktop
     thunderbird
     meld
-
   ];
   fonts.packages = with pkgs; [
     nerd-fonts._0xproto
@@ -46,8 +52,6 @@
     font-awesome_6
     siji
   ];
-
-  programs.sway.enable = true;
 
   xdg.portal.wlr.enable = true;
 }

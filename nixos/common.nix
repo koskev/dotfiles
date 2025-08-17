@@ -16,6 +16,7 @@
     ripgrep
     unzip
     lm_sensors
+    jq
 
     go
     cargo
