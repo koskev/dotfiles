@@ -14,10 +14,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  environment.systemPackages = with pkgs; [
-    linuxKernel.packages.linux_zen.nct6687d
-  ];
-
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -25,13 +21,18 @@
     "usbhid"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [
-    "kvm-intel"
-    "nct6687"
-  ];
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.extraModulePackages = with config.boot.kernelPackages; [
     # Required for fan control
     nct6687d
+
+    # FIXME: we need at least two modules here for nix to actually copy the modules ??
+    v4l2loopback
+  ];
+
+  boot.kernelModules = [
+    "kvm-intel"
+    "nct6687"
   ];
 
   fileSystems."/" = {

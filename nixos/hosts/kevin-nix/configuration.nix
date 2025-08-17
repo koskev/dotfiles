@@ -27,16 +27,6 @@
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    # Required for fan control
-    nct6687d
-    v4l2loopback
-  ];
-  environment.systemPackages = with pkgs; [
-    linuxKernel.packages.linux_zen.nct6687d
-  ];
-
   networking.hostName = settings.hostname;
 
   # Configure network connections interactively with nmcli or nmtui.
