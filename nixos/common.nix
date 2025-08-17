@@ -7,6 +7,14 @@
 
   # Magic fuse filesystem basically replaces calls to "/bin/<program>" with "/usr/bin/env <program>"
   services.envfs.enable = true;
+  nix = {
+    optimise.automatic = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+  };
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
