@@ -28,6 +28,16 @@
       pkgs = import nixpkgs { system = settings.system; };
     in
     {
+      nixosConfigurations = {
+        "kevin-nix" = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./nixos/kevin-nix/configuration.nix
+          ];
+          specialArgs = {
+            inherit settings;
+          };
+        };
+      };
       homeConfigurations = {
         "desktop" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
