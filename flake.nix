@@ -24,8 +24,12 @@
       ...
     }@inputs:
     let
+    lib = nixpkgs.lib;
       settings = import ./settings.nix { };
       pkgs = import nixpkgs { system = settings.system; };
+      nixOSHosts = lib.filterAttrs(n: v: (v.nixos or false)) settings.hosts;
+      #nonNixOSHosts = lib.filterAttrs(n: v: (!v.nixos or false)) settings.hosts;
+      nonNixOSHosts = settings.hosts;
     in
     {
       nixosConfigurations = builtins.mapAttrs (
@@ -34,12 +38,13 @@
           modules = [
             ./nixos/${key}/configuration.nix
             ./nixos/common.nix
+            # TODO: use "native" home manager?
           ];
           specialArgs = {
             inherit settings;
           };
         }
-      );
+      ) nixOSHosts;
       homeConfigurations = nixpkgs.lib.concatMapAttrs (
         hostname: hostSettings:
         let
@@ -66,6 +71,6 @@
         in
           userSettings
       )
-      settings.hosts;
+      nonNixOSHosts;
     };
 }

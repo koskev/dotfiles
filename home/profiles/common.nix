@@ -15,7 +15,6 @@
 
     ../packages/base.nix
     ../packages/kubernetes.nix
-    ../packages/browser.nix
     ../packages/misc.nix
   ];
 

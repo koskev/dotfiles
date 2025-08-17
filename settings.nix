@@ -11,7 +11,7 @@
       users.kevin.profile = "desktop";
     };
     "liag0005" = {
-      nixos = true;
+      nixos = false;
       users.kko.profile = "work";
     };
   };
