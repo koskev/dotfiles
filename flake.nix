@@ -40,30 +40,32 @@
           };
         }
       );
-      homeConfigurations = builtins.mapAttrs (
-        key: val:
+      homeConfigurations = nixpkgs.lib.concatMapAttrs (
+        hostname: hostSettings:
         let
-          username = builtins.head (builtins.split "@" key);
-          hostname = builtins.elemAt (builtins.split "@" key) 2;
-        in
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./home/profiles/common.nix
-            ./home/profiles/${val.profile}.nix
-          ];
-          extraSpecialArgs = {
-            inherit inputs;
-            settings = settings // {
-              # Pass in the profile name to properly add the hms alias
-              profile = val.profile;
-              hostname = hostname;
-              username = username;
-              homedir = "/home/${username}";
+          userSettings = nixpkgs.lib.concatMapAttrs(username: userSettings: {
+            "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              modules = [
+                ./home/profiles/common.nix
+                ./home/profiles/${userSettings.profile}.nix
+              ];
+              extraSpecialArgs = {
+                inherit inputs;
+                settings = settings // {
+                  # Pass in the profile name to properly add the hms alias
+                  profile = userSettings.profile;
+                  hostname = hostname;
+                  username = username;
+                  homedir = "/home/${username}";
+                };
+              };
             };
-          };
-
-        }
-      ) settings.users;
+          })
+          hostSettings.users;
+        in
+          userSettings
+      )
+      settings.hosts;
     };
 }
