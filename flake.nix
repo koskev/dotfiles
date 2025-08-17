@@ -14,19 +14,26 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
-
+    };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
     {
       nixpkgs,
       home-manager,
+      nur,
       ...
     }@inputs:
     let
       lib = nixpkgs.lib;
       settings = import ./settings.nix { };
-      pkgs = import nixpkgs { system = settings.system; };
+      pkgs = import nixpkgs {
+        system = settings.system;
+        overlays = [ nur.overlays.default ];
+      };
       nixOSHosts = lib.filterAttrs (n: v: (v.nixos or false)) settings.hosts;
       #nonNixOSHosts = lib.filterAttrs(n: v: (!v.nixos or false)) settings.hosts;
       nonNixOSHosts = settings.hosts;

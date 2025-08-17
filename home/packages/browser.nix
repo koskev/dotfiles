@@ -6,7 +6,32 @@
 
   programs.zen-browser = {
     enable = true;
+
+    languagePacks = [
+      "de"
+      "en-US"
+    ];
     profiles.default = {
+      extensions = {
+        packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+          dearrow
+          clearurls
+          sponsorblock
+          augmented-steam
+          decentraleyes
+          istilldontcareaboutcookies
+          keepassxc-browser
+          mal-sync
+          violentmonkey
+          videospeed
+          temporary-containers
+          return-youtube-dislikes
+          privacy-redirect
+          offline-qr-code-generator
+        ];
+      };
+
       settings = {
         # Remove border
         "zen.theme.content-element-separation" = 0;
