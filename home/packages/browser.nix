@@ -7,6 +7,7 @@
   programs.zen-browser = {
     enable = true;
 
+    nativeMessagingHosts = [ pkgs.keepassxc ];
     languagePacks = [
       "de"
       "en-US"
