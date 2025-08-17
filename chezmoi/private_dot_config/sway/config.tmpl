@@ -9,6 +9,8 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+include /etc/sway/config.d/*
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -351,8 +353,6 @@ exec swayidle \
 # Screenshare etc.
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r
 exec --no-startup-id /usr/lib/xdg-desktop-portal-wlr
-exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 exec --no-startup-id etesync-dav
 

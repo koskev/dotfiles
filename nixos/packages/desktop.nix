@@ -37,6 +37,7 @@
 
     element-desktop
     thunderbird
+    meld
 
   ];
   fonts.packages = with pkgs; [
@@ -48,8 +49,5 @@
 
   programs.sway.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-  };
+  xdg.portal.wlr.enable = true;
 }
