@@ -29,6 +29,49 @@
     fsType = "btrfs";
     options = [ "subvol=@root_nix" ];
   };
+  # TODO: snapshot mounts
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/1c379ae5-2988-4fa5-bdb7-a5ef31654656";
+    fsType = "btrfs";
+    options = [ "subvol=@home" ];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/20fa87a6-78c0-4aea-b2a6-8e70f3238a60";
+    fsType = "btrfs";
+  };
+
+  fileSystems."/boot/efi" = {
+    device = "/dev/disk/by-uuid/A7C9-5013";
+  };
+
+  fileSystems."/mnt/nvme_storage" = {
+    device = "/dev/disk/by-uuid/60cabdaa-549f-410b-9110-7de8563dc9bd";
+    fsType = "btrfs";
+    options = [ "subvol=@data" ];
+  };
+
+  fileSystems."/home/kevin/Bilder" = {
+    device = "/mnt/nvme_storage/home/Bilder";
+    options = [ "bind" ];
+  };
+  fileSystems."/home/kevin/syncthing" = {
+    device = "/mnt/nvme_storage/home/syncthing";
+    options = [ "bind" ];
+  };
+  fileSystems."/home/kevin/Videos" = {
+    device = "/mnt/nvme_storage/home/Videos";
+    options = [ "bind" ];
+  };
+  fileSystems."/home/kevin/Dokumente" = {
+    device = "/mnt/nvme_storage/home/Dokumente";
+    options = [ "bind" ];
+  };
+  fileSystems."/home/kevin/Games" = {
+    device = "/mnt/nvme_storage/home/Games";
+    options = [ "bind" ];
+  };
 
   boot.initrd.luks.devices."nvme_crypt".device =
     "/dev/disk/by-uuid/20fa87a6-78c0-4aea-b2a6-8e70f3238a60";

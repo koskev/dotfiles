@@ -28,46 +28,42 @@
       pkgs = import nixpkgs { system = settings.system; };
     in
     {
-      nixosConfigurations = {
-        "kevin-nix" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations = builtins.mapAttrs (
+        key: val:
+        nixpkgs.lib.nixosSystem {
           modules = [
-            ./nixos/kevin-nix/configuration.nix
+            ./nixos/${key}/configuration.nix
+            ./nixos/common.nix
           ];
           specialArgs = {
             inherit settings;
           };
-        };
-      };
-      homeConfigurations = {
-        "desktop" = home-manager.lib.homeManagerConfiguration {
+        }
+      );
+      homeConfigurations = builtins.mapAttrs (
+        key: val:
+        let
+          username = builtins.head (builtins.split "@" key);
+          hostname = builtins.elemAt (builtins.split "@" key) 2;
+        in
+        home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            ./home/profiles/desktop.nix
             ./home/profiles/common.nix
-            inputs.zen-browser.homeModules.twilight
+            ./home/profiles/${val.profile}.nix
           ];
           extraSpecialArgs = {
+            inherit inputs;
             settings = settings // {
               # Pass in the profile name to properly add the hms alias
-              # TODO: fix this. Maybe use hostnames?
-              profile = "desktop";
+              profile = val.profile;
+              hostname = hostname;
+              username = username;
+              homedir = "/home/${username}";
             };
           };
-        };
-        "work" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./home/profiles/work.nix
-            ./home/profiles/desktop.nix
-            ./home/profiles/common.nix
-            inputs.zen-browser.homeModules.twilight
-          ];
-          extraSpecialArgs = {
-            settings = settings // {
-              profile = "work";
-            };
-          };
-        };
-      };
+
+        }
+      ) settings.users;
     };
 }

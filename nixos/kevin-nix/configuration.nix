@@ -16,9 +16,18 @@
     ./hardware-configuration.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi = {
+      efiSysMountPoint = "/boot/efi";
+      canTouchEfiVariables = true;
+    };
+    grub = {
+      efiSupport = true;
+      enable = true;
+      device = "nodev";
+      useOSProber = true;
+    };
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
@@ -35,12 +44,11 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  i18n.defaultLocale = "en_DK.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "de";
+  };
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -64,7 +72,7 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${settings.username} = {
+  users.users.kevin = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
