@@ -17,6 +17,7 @@
     unzip
     lm_sensors
     jq
+    ncdu
 
     go
     cargo
