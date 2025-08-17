@@ -9,7 +9,6 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-include /etc/sway/config.d/*
 
 set $mod Mod4
 
@@ -72,14 +71,12 @@ workspace 3 output $m2
 workspace 4 output $m2
 workspace 5 output $m2
 
-assign [class="^Pidgin$"] number 5
 assign [class="^Element$"] number 5
 assign [class="^cantata$"] number 10
 #assign [class="^keepassxc$" title="\(?!Auto-Type - KeePassX\)"] $w9
 assign [class="^keepassxc$"] number 9
 assign [class="^Steam$"] number 6
 assign [class="^steam_app_221680$"] number 6
-assign [class="^Thunderbird$"] number 8
 
 ## Steam
 for_window [class="^Steam$" title="^Friends$"] floating enable
@@ -92,12 +89,6 @@ for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
-
-## fix unreal crashes?
-for_window [class="^UE4Editor$"] floating enable
-
-# fix origin
-for_window [instance="origin.exe"] floating enable
 
 ################ KEYBINDS ################
 
@@ -362,3 +353,5 @@ exec --no-startup-id systemctl --user start gcr-ssh-agent.socket
 
 # For unicode input everywhere (needed for QMK unicode input)
 #exec --no-startup-id fcitx5 -d
+
+include /etc/sway/config.d/*
