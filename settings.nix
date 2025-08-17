@@ -1,6 +1,7 @@
 { ... }:
 {
   system = "x86_64-linux";
+  stateVersion = "25.11"; # Did you read the comment?
   hosts = {
     "kevin-arch" = {
       nixos = false;

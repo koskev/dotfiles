@@ -7,7 +7,7 @@
 {
   home.username = "${settings.username}";
   home.homeDirectory = "${settings.homedir}";
-  home.stateVersion = "24.05";
+  home.stateVersion = settings.stateVersion;
 
   imports = [
     ../packages/chezmoi.nix
