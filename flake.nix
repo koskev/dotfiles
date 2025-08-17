@@ -38,7 +38,7 @@
           userSettings = nixpkgs.lib.concatMapAttrs (username: userSettings: {
             "${hostname}" = nixpkgs.lib.nixosSystem {
               modules = [
-                ./nixos/${hostname}/configuration.nix
+                ./nixos/hosts/${hostname}/configuration.nix
                 ./nixos/profiles/${userSettings.profile}.nix
                 ./nixos/common.nix
               ];

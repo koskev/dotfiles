@@ -10,21 +10,34 @@
     sway
     rofi
     waybar
+    slurp
+    grim
+    wl-clipboard-rs
+    mate.caja
+    syncthing
+
     alacritty
     xterm
+    unzip
+    tmux
+    htop
+
     helvum
     pavucontrol
-    unzip
+
     lazygit
     gnupg
 
-    tmux
     keepassxc
 
     # Music
     mpd
     mpc
     cantata
+
+    element-desktop
+    thunderbird
+
   ];
   fonts.packages = with pkgs; [
     nerd-fonts._0xproto
@@ -34,4 +47,9 @@
   ];
 
   programs.sway.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+  };
 }
