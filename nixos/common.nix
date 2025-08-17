@@ -5,6 +5,11 @@
 
 {
 
+  # Add /bin/bash symlink. Yes it should not be used, but this is not feasible in practice
+  system.activationScripts.binbash = ''
+    mkdir -p /bin
+    ln -sfn /run/current-system/sw/bin/bash /bin/bash
+  '';
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
