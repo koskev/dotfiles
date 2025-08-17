@@ -10,7 +10,7 @@
     gtk.enable = true;
     package = pkgs.adwaita-icon-theme;
     name = "Adwaita";
-    size = 48;
+    size = 0;
   };
   imports = [
     ../packages/browser.nix
