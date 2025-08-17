@@ -19,7 +19,6 @@
     "nix-command"
     "flakes"
   ];
-  programs.zsh.enable = true;
   environment.systemPackages = with pkgs; [
     ripgrep
     unzip
@@ -39,10 +38,14 @@
     siji
   ];
 
-  programs.nix-ld.enable = true;
+  programs = {
+    zsh.enable = true;
 
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  ];
+    nix-ld.enable = true;
+
+    nix-ld.libraries = with pkgs; [
+      # Add any missing dynamic libraries for unpackaged programs
+      # here, NOT in environment.systemPackages
+    ];
+  };
 }

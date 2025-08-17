@@ -5,9 +5,11 @@
 }:
 
 {
-  home.username = "${settings.username}";
-  home.homeDirectory = "${settings.homedir}";
-  home.stateVersion = settings.stateVersion;
+  home = {
+    username = "${settings.username}";
+    homeDirectory = "${settings.homedir}";
+    inherit (settings) stateVersion;
+  };
 
   imports = [
     ../packages/chezmoi.nix

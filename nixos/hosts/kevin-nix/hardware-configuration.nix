@@ -22,79 +22,83 @@ in
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "ahci"
-    "nvme"
-    "usbhid"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    # Required for fan control
-    nct6687d
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usbhid"
+      ];
+      kernelModules = [ ];
+      luks.devices."nvme_crypt".device = "/dev/disk/by-uuid/20fa87a6-78c0-4aea-b2a6-8e70f3238a60";
+    };
+    kernelPackages = pkgs.linuxPackages_zen;
+    extraModulePackages = with config.boot.kernelPackages; [
+      # Required for fan control
+      nct6687d
 
-    # FIXME: we need at least two modules here for nix to actually copy the modules ??
-    v4l2loopback
-  ];
+      # FIXME: we need at least two modules here for nix to actually copy the modules ??
+      v4l2loopback
+    ];
 
-  boot.kernelModules = [
-    "kvm-intel"
-    "nct6687"
-  ];
-
-  fileSystems."/" = {
-    device = "/dev/mapper/nvme_crypt";
-    fsType = "btrfs";
-    options = [ "subvol=@root_nix" ] ++ btrfsOptions;
-  };
-  # TODO: snapshot mounts
-
-  fileSystems."/home" = {
-    device = "/dev/mapper/nvme_crypt";
-    fsType = "btrfs";
-    options = [ "subvol=@home" ] ++ btrfsOptions;
+    kernelModules = [
+      "kvm-intel"
+      "nct6687"
+    ];
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/a3326aac-19f0-4e83-ad6f-a03c7c3af4b2";
-    fsType = "btrfs";
-    options = btrfsOptions;
-  };
+  fileSystems = {
+    "/" = {
+      device = "/dev/mapper/nvme_crypt";
+      fsType = "btrfs";
+      options = [ "subvol=@root_nix" ] ++ btrfsOptions;
+    };
+    # TODO: snapshot mounts
 
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/A7C9-5013";
-  };
+    "/home" = {
+      device = "/dev/mapper/nvme_crypt";
+      fsType = "btrfs";
+      options = [ "subvol=@home" ] ++ btrfsOptions;
+    };
 
-  fileSystems."/mnt/nvme_storage" = {
-    device = "/dev/disk/by-uuid/60cabdaa-549f-410b-9110-7de8563dc9bd";
-    fsType = "btrfs";
-    options = [ "subvol=@data" ] ++ btrfsOptions;
-  };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/a3326aac-19f0-4e83-ad6f-a03c7c3af4b2";
+      fsType = "btrfs";
+      options = btrfsOptions;
+    };
 
-  fileSystems."/home/kevin/Bilder" = {
-    device = "/mnt/nvme_storage/home/Bilder";
-    options = [ "bind" ];
-  };
-  fileSystems."/home/kevin/syncthing" = {
-    device = "/mnt/nvme_storage/home/syncthing";
-    options = [ "bind" ];
-  };
-  fileSystems."/home/kevin/Videos" = {
-    device = "/mnt/nvme_storage/home/Videos";
-    options = [ "bind" ];
-  };
-  fileSystems."/home/kevin/Dokumente" = {
-    device = "/mnt/nvme_storage/home/Dokumente";
-    options = [ "bind" ];
-  };
-  fileSystems."/home/kevin/Games" = {
-    device = "/mnt/nvme_storage/home/Games";
-    options = [ "bind" ];
-  };
+    "/boot/efi" = {
+      device = "/dev/disk/by-uuid/A7C9-5013";
+    };
 
-  boot.initrd.luks.devices."nvme_crypt".device =
-    "/dev/disk/by-uuid/20fa87a6-78c0-4aea-b2a6-8e70f3238a60";
+    "/mnt/nvme_storage" = {
+      device = "/dev/disk/by-uuid/60cabdaa-549f-410b-9110-7de8563dc9bd";
+      fsType = "btrfs";
+      options = [ "subvol=@data" ] ++ btrfsOptions;
+    };
+
+    "/home/kevin/Bilder" = {
+      device = "/mnt/nvme_storage/home/Bilder";
+      options = [ "bind" ];
+    };
+    "/home/kevin/syncthing" = {
+      device = "/mnt/nvme_storage/home/syncthing";
+      options = [ "bind" ];
+    };
+    "/home/kevin/Videos" = {
+      device = "/mnt/nvme_storage/home/Videos";
+      options = [ "bind" ];
+    };
+    "/home/kevin/Dokumente" = {
+      device = "/mnt/nvme_storage/home/Dokumente";
+      options = [ "bind" ];
+    };
+    "/home/kevin/Games" = {
+      device = "/mnt/nvme_storage/home/Games";
+      options = [ "bind" ];
+    };
+  };
 
   environment.etc.crypttab = {
     mode = "0600";

@@ -28,10 +28,10 @@
       ...
     }@inputs:
     let
-      lib = nixpkgs.lib;
+      inherit (nixpkgs) lib;
       settings = import ./settings.nix { };
       pkgs = import nixpkgs {
-        system = settings.system;
+        inherit (settings) system;
         overlays = [ nur.overlays.default ];
       };
       nixOSHosts = lib.filterAttrs (n: v: (v.nixos or false)) settings.hosts;
@@ -52,9 +52,9 @@
               specialArgs = {
                 settings = settings // {
                   # Pass in the profile name to properly add the hms alias
-                  profile = userSettings.profile;
-                  hostname = hostname;
-                  username = username;
+                  inherit (userSettings) profile;
+                  inherit hostname;
+                  inherit username;
                   homedir = "/home/${username}";
                 };
               };
@@ -79,11 +79,10 @@
                 inherit inputs;
                 settings = settings // {
                   # Pass in the profile name to properly add the hms alias
-                  profile = userSettings.profile;
-                  hostname = hostname;
-                  username = username;
+                  inherit (userSettings) profile nixos;
+                  inherit hostname;
+                  inherit username;
                   homedir = "/home/${username}";
-                  nixos = userSettings.nixos;
                 };
               };
             };
