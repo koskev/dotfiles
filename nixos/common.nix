@@ -18,6 +18,7 @@
     lm_sensors
     jq
     ncdu
+    compsize
 
     go
     cargo

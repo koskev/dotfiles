@@ -8,6 +8,14 @@
   modulesPath,
   ...
 }:
+let
+  btrfsOptions = [
+    "noatime"
+    "compress-force=zstd:3"
+    "ssd"
+    "space_cache=v2"
+  ];
+in
 
 {
   imports = [
@@ -38,19 +46,20 @@
   fileSystems."/" = {
     device = "/dev/mapper/nvme_crypt";
     fsType = "btrfs";
-    options = [ "subvol=@root_nix" ];
+    options = [ "subvol=@root_nix" ] ++ btrfsOptions;
   };
   # TODO: snapshot mounts
 
   fileSystems."/home" = {
     device = "/dev/mapper/nvme_crypt";
     fsType = "btrfs";
-    options = [ "subvol=@home" ];
+    options = [ "subvol=@home" ] ++ btrfsOptions;
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/a3326aac-19f0-4e83-ad6f-a03c7c3af4b2";
     fsType = "btrfs";
+    options = btrfsOptions;
   };
 
   fileSystems."/boot/efi" = {
@@ -60,7 +69,7 @@
   fileSystems."/mnt/nvme_storage" = {
     device = "/dev/disk/by-uuid/60cabdaa-549f-410b-9110-7de8563dc9bd";
     fsType = "btrfs";
-    options = [ "subvol=@data" ];
+    options = [ "subvol=@data" ] ++ btrfsOptions;
   };
 
   fileSystems."/home/kevin/Bilder" = {
