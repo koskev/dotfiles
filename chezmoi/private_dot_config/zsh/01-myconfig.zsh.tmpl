@@ -1,7 +1,4 @@
-export SHELL=/bin/zsh
-alias emerge='emerge --ask'
-alias sudo='sudo '
-alias k="kubectl"
+#export SHELL=/bin/zsh
 export PATH=$PATH:~/bin:/home/kevin/Dokumente/Projekte/esp32/crosstool-NG/builds/xtensa-esp32-elf/bin:~/.local/bin:~/.cargo/bin
 # Kubectl cluster
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
@@ -95,9 +92,6 @@ export ESPHOME_DASHBOARD_USE_PING=true
 #  command cp --reflink=auto "$@"
 #}
 
-alias dmesgj='journalctl --dmesg -o short-monotonic --no-hostname --no-pager'
-alias sway="sway > /tmp/sway.log 2>&1"
-
 chezmoi-cd() {
     cd $(chezmoi source-path)
 }
@@ -147,5 +141,3 @@ fi
 export VDPAU_DRIVER=radeonsi
 export LIBVA_DRIVER_NAME=radeonsi
 {{ end }}
-
-alias ls='lsd'
