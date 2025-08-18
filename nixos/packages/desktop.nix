@@ -44,6 +44,7 @@
     element-desktop
     thunderbird
     meld
+    joplin-desktop
   ];
   fonts.packages = with pkgs; [
     nerd-fonts._0xproto
