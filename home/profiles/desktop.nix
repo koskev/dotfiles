@@ -71,5 +71,6 @@
   };
   imports = [
     ../packages/browser.nix
+    ../packages/waybar.nix
   ];
 }

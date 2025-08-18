@@ -3,15 +3,25 @@ _: {
   stateVersion = "25.11"; # Did you read the comment?
   hosts = {
     "kevin-arch" = {
-      nixos = false;
+      system = {
+        nixos = false;
+      };
       users.kevin.profile = "desktop";
     };
     "kevin-nix" = {
-      nixos = true;
+      system = {
+        nixos = true;
+        sensors = {
+          cpu = "/dev/internal_coretemp/temp1_input";
+          water = "/dev/openfanhub/temp1_input";
+        };
+      };
       users.kevin.profile = "desktop";
     };
     "liag0005" = {
-      nixos = false;
+      system = {
+        nixos = false;
+      };
       users.kko.profile = "work";
     };
   };
