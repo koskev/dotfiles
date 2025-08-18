@@ -89,6 +89,11 @@
     '';
   };
 
+  environment.sessionVariables = {
+    VDPAU_DRIVER = "radeonsi";
+    LIBVA_DRIVER_NAME = "radeonsi";
+  };
+
   # programs.firefox.enable = true;
 
   # List packages installed in system profile.

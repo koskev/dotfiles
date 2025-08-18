@@ -50,6 +50,8 @@
 
         # Not compatible with append only histfile
         unsetopt HIST_FCNTL_LOCK
+        # Kubernetes cluster on side
+        RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
       '')
     ];
     shellAliases =
@@ -62,7 +64,19 @@
         ls = "lsd";
         dmesgj = "journalctl --dmesg -o short-monotonic --no-hostname --no-pager";
         sway = "WRL_RENDERER=vulkan WLR_SCENE_DISABLE_DIRECT_SCANOUT=1 WLR_RENDER_NO_EXPLICIT_SYNC=1 sway > /tmp/sway.log 2>&";
+        chezmoi-cd = "$(chezmoi source-path)";
       };
+    localVariables = {
+    };
+    envExtra = ''
+      EDITOR=nvim
+      RADV_PERFTEST=gpl
+      # for docker buildx
+      DOCKER_BUILD_KIT=1
+      DOCKER_CLI_EXPERIMENTAL=enabled
+      # For weird work shell (no problem on nix due to envfs)
+      SHELL=/bin/zsh
+    '';
   };
 
 }
