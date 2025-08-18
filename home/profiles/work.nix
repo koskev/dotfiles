@@ -11,5 +11,6 @@
 
   home.packages = with pkgs; [
     teams-for-linux
+    gotestsum
   ];
 }
