@@ -1,8 +1,33 @@
 {
   pkgs,
+  inputs,
   ...
 }:
+let
+  zen_version = "twilight";
+in
 {
+  imports = [
+    inputs.zen-browser.homeModules.${zen_version}
+  ];
+
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications =
+        let
+          browser = "zen-${zen_version}.desktop";
+        in
+        {
+          "default-web-browser" = [ browser ];
+          "text/html" = [ browser ];
+          "x-scheme-handler/http" = [ browser ];
+          "x-scheme-handler/https" = [ browser ];
+          "x-scheme-handler/about" = [ browser ];
+          "x-scheme-handler/unknown" = [ browser ];
+        };
+    };
+  };
 
   programs.zen-browser = {
     enable = true;
@@ -36,6 +61,8 @@
       settings = {
         # Remove border
         "zen.theme.content-element-separation" = 0;
+        # Fix broken search bar theme (ctrl+f): https://togithub.com/zen-browser/desktop/issues/9600
+        "ui.systemUsesDarkTheme" = 1;
       };
       search = {
         default = "searx";
@@ -67,6 +94,11 @@
             urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
             iconMapObj."16" = "https://wiki.nixos.org/favicon.ico";
             definedAliases = [ "@nw" ];
+          };
+          home-manager = {
+            name = "Home Manager";
+            urls = [ { template = "https://home-manager-options.extranix.com/?query={searchTerms}"; } ];
+            definedAliases = [ "@hm" ];
           };
 
           searx = {
