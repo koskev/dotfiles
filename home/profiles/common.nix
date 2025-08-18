@@ -18,6 +18,7 @@
     ../packages/kubernetes.nix
     ../packages/misc.nix
     ../packages/zsh.nix
+    ../packages/lsp.nix
   ];
 
   nix = {
