@@ -5,5 +5,6 @@
     feishin
     xsane
     statix
+    tokei
   ];
 }
