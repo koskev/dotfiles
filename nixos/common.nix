@@ -26,6 +26,9 @@
     jq
     ncdu
     compsize
+    # Killall etc.
+    psmisc
+    file
 
     go
     cargo
