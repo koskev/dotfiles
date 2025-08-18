@@ -33,5 +33,12 @@
       enable = true;
       enableZshIntegration = true;
     };
+    lazygit = {
+      enable = true;
+      settings = {
+        promptToReturnFromSubprocess = false;
+        git.overrideGpg = true;
+      };
+    };
   };
 }

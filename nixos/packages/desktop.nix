@@ -32,7 +32,6 @@
     helvum
     pavucontrol
 
-    lazygit
     gnupg
 
     keepassxc
