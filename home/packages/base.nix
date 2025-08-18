@@ -9,7 +9,6 @@
     wget
     nixd
     nixfmt
-    chezmoi
     gawk
     gcc
     zsh

@@ -1,32 +1,57 @@
 {
   settings,
+  lib,
   config,
   ...
 }:
 {
   programs.zsh = {
+
     enable = true;
+    antidote = {
+      enable = true;
+      plugins = [
+        "ohmyzsh/ohmyzsh path:lib"
+        "ohmyzsh/ohmyzsh path:plugins/git"
+        "ohmyzsh/ohmyzsh path:plugins/svn"
+        "qwelyt/endless-dog"
+        "superbrothers/zsh-kubectl-prompt kind:defer"
+
+        "zsh-users/zsh-autosuggestions kind:defer"
+        "junegunn/fzf path:shell kind:defer"
+        "zsh-users/zsh-completions kind:defer"
+
+        # Syntax highlighting bundle. Should be the last plugin
+        "zsh-users/zsh-syntax-highlighting kind:defer"
+      ];
+    };
 
     dotDir = "${config.xdg.configHome}/zsh";
     history = {
       size = 10000000;
     };
-    initContent = ''
-      for file in ''${ZDOTDIR}/*.zsh; do
-          source "$file"
-      done
+    # XXX: Move compinit to the beginning, since it slows down sourcing antidote by about 500ms (no idea why)
+    completionInit = "";
+    initContent = lib.mkMerge [
+      (lib.mkOrder 500 "autoload -U compinit && compinit")
+      # Before alias
+      (lib.mkOrder 1000 ''
+        for file in ''${ZDOTDIR}/*.zsh; do
+            source "$file"
+        done
 
-      eval "$(direnv hook zsh)"
+        eval "$(direnv hook zsh)"
 
-      # For non-nix browser due to read only profiles.ini
-      export MOZ_LEGACY_PROFILES=1
+        # For non-nix browser due to read only profiles.ini
+        export MOZ_LEGACY_PROFILES=1
 
-      # Use the old histfile for now
-      export HISTFILE=/home/kevin/.zsh_history
+        # Use the old histfile for now
+        export HISTFILE=/home/kevin/.zsh_history
 
-      # Not compatible with append only histfile
-      unsetopt HIST_FCNTL_LOCK
-    '';
+        # Not compatible with append only histfile
+        unsetopt HIST_FCNTL_LOCK
+      '')
+    ];
     shellAliases =
       let
         flake_dir = builtins.getEnv "FLAKE_PATH";
