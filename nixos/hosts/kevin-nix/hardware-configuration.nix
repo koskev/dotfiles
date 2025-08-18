@@ -54,12 +54,22 @@ in
       fsType = "btrfs";
       options = [ "subvol=@root_nix" ] ++ btrfsOptions;
     };
-    # TODO: snapshot mounts
+    "/.snapshots" = {
+      device = "/dev/mapper/nvme_crypt";
+      fsType = "btrfs";
+      options = [ "subvol=@snapshots_root_nix" ] ++ btrfsOptions;
+
+    };
 
     "/home" = {
       device = "/dev/mapper/nvme_crypt";
       fsType = "btrfs";
       options = [ "subvol=@home" ] ++ btrfsOptions;
+    };
+    "/home/.snapshots" = {
+      device = "/dev/mapper/nvme_crypt";
+      fsType = "btrfs";
+      options = [ "subvol=@snapshots_home" ] ++ btrfsOptions;
     };
 
     "/boot" = {
@@ -76,6 +86,11 @@ in
       device = "/dev/disk/by-uuid/60cabdaa-549f-410b-9110-7de8563dc9bd";
       fsType = "btrfs";
       options = [ "subvol=@data" ] ++ btrfsOptions;
+    };
+    "/mnt/nvme_storage/.snapshots" = {
+      device = "/dev/disk/by-uuid/60cabdaa-549f-410b-9110-7de8563dc9bd";
+      fsType = "btrfs";
+      options = [ "subvol=@snapshots_data" ] ++ btrfsOptions;
     };
 
     "/home/kevin/Bilder" = {

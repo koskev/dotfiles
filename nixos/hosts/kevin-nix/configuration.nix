@@ -3,7 +3,6 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  config,
   pkgs,
   settings,
   ...
@@ -16,6 +15,29 @@
 
     ../../packages/gaming.nix
   ];
+  services = {
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
+    snapper = {
+      configs =
+        let
+          defaultConfig = path: {
+            SUBVOLUME = path;
+            TIMELINE_CREATE = true;
+            TIMELINE_CLEANUP = true;
+          };
+
+        in
+        {
+          root = defaultConfig "/";
+          home = defaultConfig "/home";
+          nvme_storage = defaultConfig "/mnt/nvme_storage";
+        };
+
+    };
+  };
 
   boot.loader = {
     efi = {
@@ -61,10 +83,6 @@
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
