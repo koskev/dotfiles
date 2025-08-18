@@ -1,10 +1,23 @@
 {
+  config,
   pkgs,
   ...
 }:
 {
 
   gtk.enable = true;
+  xdg = {
+    userDirs = {
+      enable = true;
+      music = "${config.home.homeDirectory}/Musik";
+      pictures = "${config.home.homeDirectory}/Bilder";
+    };
+  };
+  services.mpd = {
+    enable = true;
+    playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
+    dataDir = "${config.home.homeDirectory}/.config/mpd/playlists";
+  };
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.adwaita-icon-theme;
