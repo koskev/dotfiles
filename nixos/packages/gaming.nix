@@ -22,16 +22,16 @@
 
   programs.firejail = {
     enable = true;
-    wrappedBinaries = {
-      steam = {
-        executable = "${lib.getBin pkgs.steam}/bin/steam";
-        profile = "${pkgs.firejail}/etc/firejail/steam.profile";
-      };
-      lutris = {
-        executable = "${lib.getBin pkgs.lutris}/bin/lutris";
-        profile = "${pkgs.firejail}/etc/firejail/lutris.profile";
-      };
-    };
+    wrappedBinaries =
+      let
+        addBinary = name: {
+          ${name} = {
+            executable = "${lib.getBin pkgs.${name}}/bin/${name}";
+            profile = "${pkgs.firejail}/etc/firejail/${name}.profile";
+          };
+        };
+      in
+      addBinary "steam" // addBinary "lutris";
   };
 
   environment.etc = {
