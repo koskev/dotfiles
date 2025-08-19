@@ -63,6 +63,8 @@ in
         "zen.theme.content-element-separation" = 0;
         # Fix broken search bar theme (ctrl+f): https://togithub.com/zen-browser/desktop/issues/9600
         "ui.systemUsesDarkTheme" = 1;
+        # Remove window controls as they are useless on sway
+        "zen.view.experimental-no-window-controls" = true;
       };
       search = {
         default = "searx";
