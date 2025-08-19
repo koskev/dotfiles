@@ -1,5 +1,6 @@
 local flakePath = "~/.local/share/chezmoi"
 return {
+	cmd = { "nixd", "--semantic-tokens=true" },
 	settings = {
 		nixd = {
 			nixpkgs = {
