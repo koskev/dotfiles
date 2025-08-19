@@ -46,7 +46,7 @@
         export MOZ_LEGACY_PROFILES=1
 
         # Use the old histfile for now
-        export HISTFILE=/home/kevin/.zsh_history
+        export HISTFILE=${settings.homedir}/.zsh_history
 
         # Not compatible with append only histfile
         unsetopt HIST_FCNTL_LOCK
