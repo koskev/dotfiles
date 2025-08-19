@@ -43,6 +43,18 @@
       nixOSHosts = lib.filterAttrs (n: v: (v.system.nixos or false)) settings.hosts;
       #nonNixOSHosts = lib.filterAttrs(n: v: (!v.system.nixos or false)) settings.hosts;
       nonNixOSHosts = settings.hosts;
+
+      settingsUser =
+        userSettings: hostSettings: username: hostname:
+        settings
+        // {
+          # Pass in the profile name to properly add the hms alias
+          inherit (userSettings) profile;
+          inherit (hostSettings) system;
+          inherit hostname;
+          inherit username;
+          homedir = "/home/${username}";
+        };
     in
     {
       nixosConfigurations = nixpkgs.lib.concatMapAttrs (
@@ -56,14 +68,7 @@
                 ./nixos/common.nix
               ];
               specialArgs = {
-                settings = settings // {
-                  # Pass in the profile name to properly add the hms alias
-                  inherit (userSettings) profile;
-                  inherit (hostSettings) system;
-                  inherit hostname;
-                  inherit username;
-                  homedir = "/home/${username}";
-                };
+                settings = settingsUser userSettings hostSettings username hostname;
               };
             };
           }) hostSettings.users;
@@ -84,14 +89,7 @@
               ];
               extraSpecialArgs = {
                 inherit inputs;
-                settings = settings // {
-                  # Pass in the profile name to properly add the hms alias
-                  inherit (userSettings) profile;
-                  inherit (hostSettings) system;
-                  inherit hostname;
-                  inherit username;
-                  homedir = "/home/${username}";
-                };
+                settings = settingsUser userSettings hostSettings username hostname;
               };
             };
           }) hostSettings.users;
