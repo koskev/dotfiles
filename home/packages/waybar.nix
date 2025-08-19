@@ -369,9 +369,9 @@
           # "format-critical"= "{temperatureC}°C {icon}";
           "format" = "{temperatureC}°C {icon}";
           "format-icons" = [
-            ""
+            ""
             ""
-            ""
+            ""
           ];
           "tooltip-format" = "CPU: {temperatureC}°C";
         };
@@ -382,9 +382,9 @@
           # "format-critical"= "{temperatureC}°C {icon}";
           "format" = "{temperatureC}°C {icon}";
           "format-icons" = [
-            ""
+            ""
             ""
-            ""
+            ""
           ];
           "tooltip-format" = "Water: {temperatureC}°C";
         };
