@@ -17,7 +17,7 @@
   ];
 
   # To fix neoclip
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     export LD_LIBRARY_PATH=${pkgs.sqlite.out}/lib:$LD_LIBRARY_PATH
   '';
 
