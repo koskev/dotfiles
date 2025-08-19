@@ -19,12 +19,15 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl.url = "github:nix-community/nixGL";
+
   };
   outputs =
     {
       nixpkgs,
       home-manager,
       nur,
+      nixgl,
       ...
     }@inputs:
     let
@@ -32,7 +35,10 @@
       settings = import ./settings.nix { };
       pkgs = import nixpkgs {
         inherit (settings) system;
-        overlays = [ nur.overlays.default ];
+        overlays = [
+          nur.overlays.default
+          nixgl.overlay
+        ];
       };
       nixOSHosts = lib.filterAttrs (n: v: (v.system.nixos or false)) settings.hosts;
       #nonNixOSHosts = lib.filterAttrs(n: v: (!v.system.nixos or false)) settings.hosts;
