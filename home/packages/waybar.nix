@@ -347,8 +347,8 @@
         };
         "clock" = {
           # "timezone"= "America/New_York";
-          "tooltip-format" = "<big>{=%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-          "format-alt" = "{=%Y-%m-%d}";
+          "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          "format-alt" = "{:%Y-%m-%d}";
           "calendar" = {
             "format" = {
               "today" = "<span color='#ffffff'><b><u>{}</u></b></span>";
@@ -426,7 +426,7 @@
           "tooltip-format" = "{ifname} via {gwaddr} ";
           "format-linked" = "{ifname} (No IP) ";
           "format-disconnected" = "Disconnected ⚠";
-          "format-alt" = "{ifname}= {ipaddr}/{cidr}";
+          "format-alt" = "{ifname}: {ipaddr}/{cidr}";
         };
         "pulseaudio" = {
           # "scroll-step"= 1; # %; can be a float
