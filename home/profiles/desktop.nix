@@ -16,7 +16,7 @@
   services.mpd = {
     enable = true;
     playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
-    dataDir = "${config.home.homeDirectory}/.config/mpd/playlists";
+    dataDir = "${config.home.homeDirectory}/.config/mpd";
   };
   home.pointerCursor = {
     gtk.enable = true;
