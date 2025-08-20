@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  nixgl,
   ...
 }:
 
@@ -15,4 +16,9 @@
     (config.lib.nixGL.wrap teams-for-linux)
     gotestsum
   ];
+
+  nixGL = {
+    vulkan.enable = true;
+    inherit (nixgl) packages;
+  };
 }

@@ -3,11 +3,12 @@
   inputs,
   lib,
   settings,
+  config,
   ...
 }:
 let
   zen_version = "twilight";
-  zen_package = inputs.zen-browser.packages."${settings.architecture}".${zen_version};
+  zen_package = inputs.zen-browser.packages."${pkgs.system}".${zen_version};
 in
 {
   imports = [
@@ -120,9 +121,7 @@ in
     };
   }
   // lib.optionalAttrs (!settings.system.nixos) {
-    package = pkgs.writeShellScriptBin "zen" ''
-      exec nixGL ${zen_package}/bin/zen "$@"
-    '';
+    package = lib.mkForce (config.lib.nixGL.wrap zen_package);
   };
 
 }

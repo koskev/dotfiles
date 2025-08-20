@@ -80,9 +80,11 @@
     };
   }
   // lib.optionalAttrs (!settings.system.nixos) {
-    package = pkgs.writeShellScriptBin "alacritty" ''
-      exec nixGL ${pkgs.alacritty}/bin/alacritty "$@"
-    '';
+    package = lib.mkForce (
+      pkgs.writeShellScriptBin "alacritty" ''
+        exec nixGL ${pkgs.alacritty}/bin/alacritty "$@"
+      ''
+    );
   };
   imports = [
     ../packages/browser.nix
