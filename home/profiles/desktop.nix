@@ -15,10 +15,18 @@
       pictures = "${config.home.homeDirectory}/Bilder";
     };
   };
-  services.mpd = {
-    enable = true;
-    playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
-    dataDir = "${config.home.homeDirectory}/.config/mpd";
+  services = {
+    gammastep = {
+      enable = true;
+      provider = "manual";
+      latitude = 53.0;
+      longitude = 10.0;
+    };
+    mpd = {
+      enable = true;
+      playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
+      dataDir = "${config.home.homeDirectory}/.config/mpd";
+    };
   };
   home.pointerCursor = {
     gtk.enable = true;
