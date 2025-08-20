@@ -18,20 +18,22 @@
       "steam"
       "steam-unwrapped"
     ];
-  programs.steam.enable = true;
 
-  programs.firejail = {
-    enable = true;
-    wrappedBinaries =
-      let
-        addBinary = name: {
-          ${name} = {
-            executable = "${lib.getBin pkgs.${name}}/bin/${name}";
-            profile = "${pkgs.firejail}/etc/firejail/${name}.profile";
+  programs = {
+    steam.enable = true;
+    firejail = {
+      enable = true;
+      wrappedBinaries =
+        let
+          addBinary = name: {
+            ${name} = {
+              executable = "${lib.getBin pkgs.${name}}/bin/${name}";
+              profile = "${pkgs.firejail}/etc/firejail/${name}.profile";
+            };
           };
-        };
-      in
-      addBinary "steam" // addBinary "lutris";
+        in
+        addBinary "steam"; # // addBinary "lutris";
+    };
   };
 
   environment.etc = {
