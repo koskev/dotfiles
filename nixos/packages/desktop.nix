@@ -23,7 +23,6 @@
     libnotify
     dunst
 
-    alacritty
     xterm
     unzip
     tmux

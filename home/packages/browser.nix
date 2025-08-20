@@ -1,7 +1,6 @@
 {
   pkgs,
   inputs,
-  config,
   lib,
   settings,
   ...
@@ -121,7 +120,9 @@ in
     };
   }
   // lib.optionalAttrs (!settings.system.nixos) {
-    package = lib.mkForce (config.lib.nixGL.wrap zen_package);
+    package = pkgs.writeShellScriptBin "zen" ''
+      exec nixGL ${zen_package}/bin/zen "$@"
+    '';
   };
 
 }

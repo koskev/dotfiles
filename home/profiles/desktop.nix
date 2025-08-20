@@ -71,8 +71,10 @@
       scrolling.history = 100000;
     };
   }
-  // lib.optionalAttrs settings.system.nixos {
-    package = config.lib.nixGL.wrap pkgs.alacritty;
+  // lib.optionalAttrs (!settings.system.nixos) {
+    package = pkgs.writeShellScriptBin "alacritty" ''
+      exec nixGL ${pkgs.alacritty}/bin/alacritty "$@"
+    '';
   };
   imports = [
     ../packages/browser.nix
