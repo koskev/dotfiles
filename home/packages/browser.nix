@@ -1,10 +1,14 @@
 {
   pkgs,
   inputs,
+  config,
+  lib,
+  settings,
   ...
 }:
 let
   zen_version = "twilight";
+  zen_package = inputs.zen-browser.packages."${settings.architecture}".${zen_version};
 in
 {
   imports = [
@@ -115,6 +119,9 @@ in
 
       };
     };
+  }
+  // lib.optionalAttrs (!settings.system.nixos) {
+    package = lib.mkForce (config.lib.nixGL.wrap zen_package);
   };
 
 }

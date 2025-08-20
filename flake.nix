@@ -34,7 +34,7 @@
       inherit (nixpkgs) lib;
       settings = import ./settings.nix { };
       pkgs = import nixpkgs {
-        inherit (settings) system;
+        system = settings.architecture;
         overlays = [
           nur.overlays.default
           nixgl.overlay

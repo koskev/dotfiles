@@ -1,6 +1,8 @@
 {
   config,
   pkgs,
+  settings,
+  lib,
   ...
 }:
 {
@@ -68,6 +70,9 @@
       ];
       scrolling.history = 100000;
     };
+  }
+  // lib.optionalAttrs settings.system.nixos {
+    package = config.lib.nixGL.wrap pkgs.alacritty;
   };
   imports = [
     ../packages/browser.nix
