@@ -10,7 +10,7 @@
   ];
 
   home.packages = with pkgs; [
-    teams-for-linux
+    (config.lib.nixGL.wrap teams-for-linux)
     gotestsum
   ];
 }
