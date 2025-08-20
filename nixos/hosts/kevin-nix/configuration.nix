@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
 
     ../../packages/gaming.nix
+    ../../packages/waydroid.nix
   ];
   services = {
     pipewire = {
