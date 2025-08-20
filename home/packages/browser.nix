@@ -110,7 +110,13 @@ in
           searx = {
             name = "searx";
             urls = [
-              { template = "https://searx.tiekoetter.com/?preferences=${./searx_preferences}&q={searchTerms}"; }
+              {
+                template =
+                  let
+                    preferences = builtins.readFile ./searx_preferences;
+                  in
+                  "https://searx.tiekoetter.com/?preferences=${preferences}&q={searchTerms}";
+              }
             ];
 
           };
