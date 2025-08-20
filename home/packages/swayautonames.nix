@@ -21,6 +21,8 @@
         "Steam" = "";
         "steamwebhelper" = "";
         "org.openscad.openscad" = "";
+
+        "teams-for-linux" = "󰊻";
       };
     };
   };
