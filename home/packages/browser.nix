@@ -123,5 +123,4 @@ in
   // lib.optionalAttrs (!settings.system.nixos) {
     package = lib.mkForce (config.lib.nixGL.wrap zen_package);
   };
-
 }

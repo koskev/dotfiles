@@ -19,7 +19,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixgl.url = "github:nix-community/nixGL";
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
   outputs =
@@ -89,6 +92,7 @@
               ];
               extraSpecialArgs = {
                 inherit inputs;
+                inherit nixgl;
                 settings = settingsUser userSettings hostSettings username hostname;
               };
             };
