@@ -15,6 +15,7 @@
 
     ../../packages/gaming.nix
     ../../packages/waydroid.nix
+    ../../packages/virt.nix
   ];
   services = {
     pipewire = {
