@@ -80,7 +80,7 @@
     };
   }
   // lib.optionalAttrs (!settings.system.nixos) {
-    package = lib.mkForce (config.lib.nixGL.wrap pkgs.zen_package);
+    package = lib.mkForce (config.lib.nixGL.wrap pkgs.alacritty);
   };
   imports = [
     ../packages/browser.nix
