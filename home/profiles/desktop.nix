@@ -84,6 +84,7 @@
   };
   imports = [
     ../packages/browser.nix
+    ../packages/sway.nix
     ../packages/waybar.nix
     ../packages/swayautonames.nix
   ];
