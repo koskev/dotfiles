@@ -35,11 +35,6 @@
 
     keepassxc
 
-    # Music
-    mpd
-    mpc
-    cantata
-
     element-desktop
     thunderbird
     meld
