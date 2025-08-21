@@ -12,8 +12,6 @@
   };
 
   imports = [
-    ../packages/chezmoi.nix
-
     ../packages/base.nix
     ../packages/kubernetes.nix
     ../packages/misc.nix
