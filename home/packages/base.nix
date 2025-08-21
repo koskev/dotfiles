@@ -33,4 +33,8 @@
     ];
   };
 
+  xdg.configFile.cantata = {
+    source = ../../configs/cantata;
+  };
+
 }

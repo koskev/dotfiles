@@ -87,6 +87,7 @@
     ../packages/sway.nix
     ../packages/kanshi.nix
     ../packages/neovim.nix
+    ../packages/music.nix
     ../packages/waybar.nix
     ../packages/swayautonames.nix
   ];
