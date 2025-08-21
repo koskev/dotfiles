@@ -9,7 +9,6 @@
 
   imports = [
     ./desktop.nix
-    ../packages/kanshi_work.nix
   ];
 
   home.packages = with pkgs; [

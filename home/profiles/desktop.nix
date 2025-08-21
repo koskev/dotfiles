@@ -85,6 +85,7 @@
   imports = [
     ../packages/browser.nix
     ../packages/sway.nix
+    ../packages/kanshi.nix
     ../packages/waybar.nix
     ../packages/swayautonames.nix
   ];
