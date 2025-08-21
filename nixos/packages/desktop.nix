@@ -53,4 +53,5 @@
   ];
 
   xdg.portal.wlr.enable = true;
+  security.polkit.enable = true;
 }
