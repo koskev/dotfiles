@@ -52,6 +52,25 @@
         unsetopt HIST_FCNTL_LOCK
         # Kubernetes cluster on side
         RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+
+        export PATH=$PATH:~/bin:~/.local/bin:~/.cargo/bin
+
+        export MOZ_ENABLE_WAYLAND=1
+
+        export WLR_DRM_NO_ATOMIC=1
+        export WLR_NO_HARDWARE_CURSORS=1
+        #export QT_QPA_PLATFORM=wayland
+        # fix java stuff in wayland
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export GSETTINGS_SCHEMA_DIR=/usr/share/glib-2.0/schemas
+        export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
+
+
+        export XDG_CURRENT_DESKTOP=sway
+        if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+        	sway
+        fi
+
       '')
     ];
     shellAliases =
