@@ -1,9 +1,13 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 {
+  home.packages = [
+    (builtins.getFlake "github:koskev/swayautonames").defaultPackage.${pkgs.system}
+  ];
   home.file = {
     "${config.xdg.configHome}/swayautonames/config.json".text = lib.generators.toJSON { } {
       "app_symbols" = {
