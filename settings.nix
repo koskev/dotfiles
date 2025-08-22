@@ -16,7 +16,10 @@ _: {
           water = "/dev/openfanhub/temp1_input";
         };
       };
-      users.kevin.profile = "desktop";
+      users.kevin = {
+        profile = "desktop";
+        defaultDesktop = "sway";
+      };
     };
     "liag0005" = {
       system = {

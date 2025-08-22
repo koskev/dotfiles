@@ -66,9 +66,8 @@
         export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
 
-        export XDG_CURRENT_DESKTOP=sway
         if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-        	sway
+        	${settings.userSettings.defaultDesktop}
         fi
 
       '')

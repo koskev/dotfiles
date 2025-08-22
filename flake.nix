@@ -52,7 +52,7 @@
         settings
         // {
           # Pass in the profile name to properly add the hms alias
-          inherit (userSettings) profile;
+          inherit userSettings;
           inherit (hostSettings) system;
           inherit hostname;
           inherit username;

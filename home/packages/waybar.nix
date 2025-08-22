@@ -272,6 +272,7 @@
         spacing = 2; # Gaps between modules (4px)
         # Choose the order of the modules
         modules-left = [
+          "hyprland/workspaces"
           "sway/workspaces"
           "sway/mode"
           "custom/media"
