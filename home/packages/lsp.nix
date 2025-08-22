@@ -11,7 +11,8 @@
     helm-ls
     marksman
     openscad-lsp
-    rust-analyzer
+    rustup
+    bacon
     terraform-ls
     tflint
     yaml-language-server

@@ -32,7 +32,10 @@
 
     go
     cargo
+    rustc
+    clippy
     direnv
+    python3
   ];
   fonts.packages = with pkgs; [
     nerd-fonts._0xproto
