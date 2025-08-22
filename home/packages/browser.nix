@@ -72,6 +72,8 @@ in
       };
       search = {
         default = "searx";
+        # Needed since zen/firefox writes the file :/
+        force = true;
         engines = {
           nix-packages = {
             name = "Nix Packages";
