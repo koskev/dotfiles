@@ -81,6 +81,7 @@
     ../packages/browser.nix
     ../packages/windowManager/sway.nix
     ../packages/windowManager/hyprland.nix
+    ../packages/rufaco.nix
     ../packages/kanshi.nix
     ../packages/neovim.nix
     ../packages/music.nix

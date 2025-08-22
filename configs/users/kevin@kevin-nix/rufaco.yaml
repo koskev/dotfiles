@@ -1,0 +1,188 @@
+sensors:
+- id: cpu_package_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Package id 0
+- id: cpu_core_0_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 0
+- id: cpu_core_1_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 4
+- id: cpu_core_2_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 8
+- id: cpu_core_3_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 12
+- id: cpu_core_4_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 16
+- id: cpu_core_5_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 20
+- id: cpu_core_6_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 24
+- id: cpu_core_7_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 28
+- id: cpu_eff_0_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 36
+- id: cpu_eff_1_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 37
+- id: cpu_eff_2_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 38
+- id: cpu_eff_3_temp
+  sensor:
+    type: hwmon
+    chip: coretemp
+    name: Core 39
+- id: gpu_temp
+  sensor:
+    type: hwmon
+    chip: amdgpu
+    name: junction
+- id: water_temp
+  sensor:
+    type: hwmon
+    chip: corsaircpro
+    name: temp1
+fans:
+- id: radiator_in
+  startpwm: 49
+  minpwm: 39
+  sensor:
+    type: hwmon
+    chip: nct6687
+    name: CPU Fan
+  curve: main_curve
+- id: top_in_1
+  startpwm: 67
+  minpwm: 65
+  sensor:
+    type: hwmon
+    chip: nct6687
+    name: 'System Fan #1'
+  curve: main_curve
+- id: top_in_2
+  startpwm: 72
+  minpwm: 69
+  sensor:
+    type: hwmon
+    chip: nct6687
+    name: 'System Fan #4'
+  curve: main_curve
+- id: top_in_3
+  startpwm: 71
+  minpwm: 66
+  sensor:
+    type: hwmon
+    chip: nct6687
+    name: 'System Fan #5'
+  curve: main_curve
+- id: side_out_1
+  startpwm: 71
+  minpwm: 66
+  sensor:
+    type: hwmon
+    chip: nct6687
+    name: 'System Fan #2'
+  curve: main_curve
+- id: side_out_2
+  startpwm: 70
+  minpwm: 68
+  sensor:
+    type: hwmon
+    chip: nct6687
+    name: 'System Fan #3'
+  curve: main_curve
+- id: pump
+  startpwm: 0
+  minpwm: 0
+  sensor:
+    type: hwmon
+    chip: nct6687
+    name: Pump Fan
+  curve: pump_curve
+curves:
+- id: pump_curve
+  function:
+    type: static
+    value: 0
+- id: cpu_temp_max
+  function:
+    type: maximum
+    sensors:
+    - cpu_package_temp
+    - cpu_core_0_temp
+    - cpu_core_1_temp
+    - cpu_core_2_temp
+    - cpu_core_3_temp
+    - cpu_core_4_temp
+    - cpu_core_5_temp
+    - cpu_core_6_temp
+    - cpu_core_7_temp
+    - cpu_eff_0_temp
+    - cpu_eff_1_temp
+    - cpu_eff_2_temp
+    - cpu_eff_3_temp
+- id: cpu_temp_curve
+  function:
+    type: linear
+    sensor: cpu_temp_max
+    steps:
+      50: 0
+      70: 0
+      80: 50
+      90: 100
+- id: gpu_temp_curve
+  function:
+    type: linear
+    sensor: gpu_temp
+    steps:
+      50: 0
+      70: 0
+      80: 20
+      100: 40
+- id: pid_water_curve
+  function:
+    type: pid
+    sensor: water_temp
+    target: 32.0
+    p: 20.0
+    i: 0.1
+    d: 30.0
+- id: main_curve
+  function:
+    type: maximum
+    sensors:
+    - cpu_temp_curve
+    - pid_water_curve
+    - gpu_temp_curve
