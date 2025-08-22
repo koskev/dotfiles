@@ -11,6 +11,8 @@
 
       exec-once = [
         "waybar"
+        "swayautonames"
+        "rufaco"
       ];
 
       bindm = [
@@ -30,6 +32,15 @@
         gaps_out = 0;
         layout = "dwindle";
       };
+
+      # https://wiki.hypr.land/Configuring/Binds/
+      bindl = [
+        '', XF86AudioRaiseVolume, exec, pactl set-sink-volume "@DEFAULT_SINK@" "+5%"''
+        '', XF86AudioLowerVolume, exec, pactl set-sink-volume "@DEFAULT_SINK@" "-5%"''
+        ", XF86AudioPlay, exec, mpc toggle"
+        ", XF86AudioNext, exec, mpc next"
+        ", XF86AudioPrev, exec, mpc prev"
+      ];
 
       bind = [
         #   "$mod, T, exec, /tmp/test.py --enable-notify true"
