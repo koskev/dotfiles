@@ -27,6 +27,10 @@
     ];
   };
   programs = {
+    nh = {
+      enable = true;
+      flake = settings.system.flake or null;
+    };
     home-manager.enable = true;
     fzf = {
       enable = true;

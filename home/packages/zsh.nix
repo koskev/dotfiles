@@ -72,22 +72,14 @@
 
       '')
     ];
-    shellAliases =
-      let
-        flake_dir = builtins.getEnv "FLAKE_PATH";
-      in
-      {
-        hm = "home-manager --impure --flake ${flake_dir} -b backup";
-        k = "kubectl";
-        ls = "lsd";
-        dmesgj = "journalctl --dmesg -o short-monotonic --no-hostname --no-pager";
-        sway = "WRL_RENDERER=vulkan WLR_SCENE_DISABLE_DIRECT_SCANOUT=1 WLR_RENDER_NO_EXPLICIT_SYNC=1 sway > /tmp/sway.log 2>&1";
-        # Make aliases work with sudo
-        sudo = "sudo ";
-      }
-      // lib.optionalAttrs settings.system.nixos {
-        nr = "nixos-rebuild --flake ${flake_dir}";
-      };
+    shellAliases = {
+      k = "kubectl";
+      ls = "lsd";
+      dmesgj = "journalctl --dmesg -o short-monotonic --no-hostname --no-pager";
+      sway = "WRL_RENDERER=vulkan WLR_SCENE_DISABLE_DIRECT_SCANOUT=1 WLR_RENDER_NO_EXPLICIT_SYNC=1 sway > /tmp/sway.log 2>&1";
+      # Make aliases work with sudo
+      sudo = "sudo ";
+    };
 
     localVariables = {
     };
