@@ -23,6 +23,14 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rufaco = {
+      url = "github:koskev/rufaco";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    swayautonames = {
+      url = "github:koskev/swayautonames";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
   outputs =
