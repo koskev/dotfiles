@@ -18,7 +18,7 @@ _: {
       };
       users.kevin = {
         profile = "desktop";
-        defaultDesktop = "sway";
+        defaultDesktop = "hyprland";
       };
     };
     "liag0005" = {
