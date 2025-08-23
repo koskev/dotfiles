@@ -20,7 +20,9 @@
     wdisplays
     xorg.xrandr
     libnotify
-    dunst
+    swaynotificationcenter
+    influxdb2-cli
+    postgresql
 
     xterm
     unzip
