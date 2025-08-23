@@ -9,7 +9,7 @@
   home.packages =
     with pkgs;
     [
-      neofetch
+      fastfetch
       sqlite
       git
       curl
