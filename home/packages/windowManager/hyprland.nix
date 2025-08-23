@@ -49,7 +49,7 @@
         #   "$mod, T, exec, /tmp/test.py --enable-notify true"
         "$mod, Return, exec, alacritty"
         "$mod, w, togglegroup"
-        "$mod, f, fullscreen"
+        "$mod, f, fullscreen,1"
         "$mod, d, exec, rofi -show drun"
         "$mod, M, exit,"
         "$mod SHIFT, Q, killactive,"
