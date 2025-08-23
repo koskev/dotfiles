@@ -220,6 +220,11 @@
           "on-click" = "swaync-client -t -sw";
           "on-click-right" = "swaync-client -d -sw";
           "escape" = true;
+          "mpris" = {
+            "image-size" = 96;
+            "image-radius" = 12;
+            "blacklist" = [ "playerctld" ];
+          };
         };
       };
     };

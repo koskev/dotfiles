@@ -8,10 +8,12 @@
   home.packages = with pkgs; [
 
     # Music
-    mpd
     mpc
     cantata
+    playerctl
   ];
+  # RS version not in repo :/
+  services.mpdris2.enable = true;
 
   xdg.configFile.cantata = {
     source = ../../configs/cantata;
