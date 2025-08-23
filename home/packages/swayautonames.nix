@@ -29,6 +29,7 @@
 
         "teams-for-linux" = "󰊻";
       };
+      "fullscreen_color" = "orange";
     };
   };
 }
