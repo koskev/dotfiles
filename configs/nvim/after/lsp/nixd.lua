@@ -1,4 +1,4 @@
-local flakePath = "~/.local/share/chezmoi"
+local flakePath = "~/nix"
 return {
 	cmd = { "nixd", "--semantic-tokens=true" },
 	settings = {
@@ -11,10 +11,12 @@ return {
 			},
 			options = {
 				home_manager = {
-					expr = '(builtins.getFlake (builtins.toString ' .. flakePath .. ')).homeConfigurations."kevin@kevin-nix".options',
+					expr = '(builtins.getFlake (builtins.toString ' ..
+					flakePath .. ')).homeConfigurations."kevin@kevin-nix".options',
 				},
 				nixos = {
-					expr = '(builtins.getFlake (builtins.toString ' .. flakePath .. ')).nixosConfigurations."kevin".options',
+					expr = '(builtins.getFlake (builtins.toString ' ..
+					flakePath .. ')).nixosConfigurations."kevin".options',
 				},
 			},
 		},
