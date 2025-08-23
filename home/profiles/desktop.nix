@@ -79,6 +79,7 @@
   };
   imports = [
     ../packages/browser.nix
+    ../packages/rofi.nix
     ../packages/windowManager/sway.nix
     ../packages/windowManager/hyprland.nix
     ../packages/rufaco.nix

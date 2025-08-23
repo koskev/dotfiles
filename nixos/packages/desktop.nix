@@ -11,7 +11,6 @@
 
   environment.systemPackages = with pkgs; [
     sway
-    rofi
     waybar
     slurp
     grim
