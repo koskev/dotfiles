@@ -84,6 +84,7 @@
         "$mod SHIFT, right, movewindow, r"
         "$mod SHIFT, up, movewindow, u"
         "$mod SHIFT, down, movewindow, d"
+        "$mod, e, exec, ${./toggle_group.py} --enable-notify true"
 
       ];
     };
