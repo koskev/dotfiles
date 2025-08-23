@@ -17,12 +17,14 @@
     tflint
     yaml-language-server
     pyright
+    nodejs
 
     # Debugger
     delve
 
     # Formatter
     gofumpt
+    prettier
     # goimports
     gotools
     golangci-lint
