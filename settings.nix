@@ -11,7 +11,7 @@ _: {
     "kevin-nix" = {
       system = {
         nixos = true;
-        flake = "/home/kevin/.local/share/chezmoi";
+        flake = "/home/kevin/nix";
         sensors = {
           cpu = "/dev/internal_coretemp/temp1_input";
           water = "/dev/openfanhub/temp1_input";
