@@ -32,6 +32,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      window.opacity = 1.0;
       colors = {
         bright = {
           black = "0x555753";
@@ -80,8 +81,7 @@
   imports = [
     ../packages/browser.nix
     ../packages/rofi.nix
-    ../packages/windowManager/sway.nix
-    ../packages/windowManager/hyprland.nix
+    ../packages/windowManager/wm.nix
     ../packages/rufaco.nix
     ../packages/kanshi.nix
     ../packages/neovim.nix

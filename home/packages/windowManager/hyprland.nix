@@ -16,6 +16,7 @@
         "waybar"
         "swayautonames"
         "rufaco"
+        "clipse -listen"
       ];
 
       input = {
@@ -47,6 +48,14 @@
         movefocus_cycles_groupfirst = true;
       };
 
+      windowrulev2 = [
+        "opacity 1.0 override 0.95, class:.*"
+        # XXX: Negative lookahead does not seem to work :/
+        "opacity 1.0 override 1.0, class:^(zen-twilight)$"
+        "float,class:(clipse)" # ensure you have a floating window class set if you want this behavior
+        "size 622 652,class:(clipse)" # set the size of the window as necessary
+
+      ];
       bindm = [
         # mouse movements
         "$mod, mouse:272, movewindow"
@@ -64,6 +73,7 @@
       ];
 
       bind = [
+        "$mod, V, exec, alacritty --class clipse -e 'clipse'"
         #   "$mod, T, exec, /tmp/test.py --enable-notify true"
         "$mod, Return, exec, alacritty"
         "$mod, w, togglegroup"
