@@ -6,5 +6,6 @@
     xsane
     statix
     tokei
+    borgbackup
   ];
 }
