@@ -14,7 +14,6 @@
     waybar
     slurp
     grim
-    wl-clipboard-rs
     mate.caja
     syncthing
     wdisplays

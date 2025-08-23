@@ -1,10 +1,16 @@
 {
+  lib,
   ...
 
 }:
 {
   programs.hyprlock = {
     enable = true;
+  };
+  xdg.configFile."clipse/config.json".text = lib.generators.toJSON { } {
+    imageDisplay = {
+      type = "kitty";
+    };
   };
   wayland.windowManager.hyprland = {
     enable = true;
@@ -52,9 +58,10 @@
         "opacity 1.0 override 0.95, class:.*"
         # XXX: Negative lookahead does not seem to work :/
         "opacity 1.0 override 1.0, class:^(zen-twilight)$"
+
+        # Clipse window
         "float,class:(clipse)" # ensure you have a floating window class set if you want this behavior
         "size 622 652,class:(clipse)" # set the size of the window as necessary
-
       ];
       bindm = [
         # mouse movements
@@ -73,7 +80,7 @@
       ];
 
       bind = [
-        "$mod, V, exec, alacritty --class clipse -e 'clipse'"
+        "$mod, v, exec, kitty --class clipse -e clipse"
         #   "$mod, T, exec, /tmp/test.py --enable-notify true"
         "$mod, Return, exec, alacritty"
         "$mod, w, togglegroup"
