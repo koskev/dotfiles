@@ -11,15 +11,11 @@
 
   environment.systemPackages = with pkgs; [
     sway
-    waybar
-    slurp
-    grim
     mate.caja
     syncthing
     wdisplays
     xorg.xrandr
     libnotify
-    swaynotificationcenter
     influxdb2-cli
     postgresql
 
