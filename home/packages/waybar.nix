@@ -1,13 +1,16 @@
 {
   settings,
-  lib,
   ...
 }:
 {
 
+  xdg.configFile."waybar" = {
+    source = ../../configs/waybar/themes/${settings.userSettings.waybarTheme};
+    recursive = true;
+  };
+
   programs.waybar = {
     enable = true;
-    style = builtins.readFile ../../configs/waybar/waybar.css;
     settings = {
       mainBar = {
         # "layer"= "top" # Waybar at top layer

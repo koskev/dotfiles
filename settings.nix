@@ -20,6 +20,7 @@ _: {
       users.kevin = {
         profile = "desktop";
         defaultDesktop = "hyprland";
+        waybarTheme = "default";
       };
     };
     "liag0005" = {
