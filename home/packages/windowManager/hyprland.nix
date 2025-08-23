@@ -18,13 +18,6 @@
         "rufaco"
       ];
 
-      bindm = [
-        # mouse movements
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-        "$mod ALT, mouse:272, resizewindow"
-      ];
-
       input = {
         kb_layout = "de";
         kb_variant = "nodeadkeys";
@@ -35,6 +28,31 @@
         gaps_out = 0;
         layout = "dwindle";
       };
+
+      decoration = {
+        shadow = {
+          enabled = false;
+        };
+      };
+
+      misc = {
+        # Only for fullscreen
+        vrr = 2;
+      };
+
+      binds = {
+        # Switch back and forth between the current and last with e.g. mod + 1
+        workspace_back_and_forth = true;
+        # Move focus like sway
+        movefocus_cycles_groupfirst = true;
+      };
+
+      bindm = [
+        # mouse movements
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+        "$mod ALT, mouse:272, resizewindow"
+      ];
 
       # https://wiki.hypr.land/Configuring/Binds/
       bindl = [
