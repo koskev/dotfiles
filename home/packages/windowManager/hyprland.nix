@@ -64,6 +64,9 @@
         # Clipse window
         "float,class:(clipse)" # ensure you have a floating window class set if you want this behavior
         "size 622 652,class:(clipse)" # set the size of the window as necessary
+
+        # Keep the focus on rofi to not lose focus on mouse movement
+        "stayfocused, class:(Rofi)$"
       ];
       bindm = [
         # mouse movements
