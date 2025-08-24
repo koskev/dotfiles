@@ -3,8 +3,7 @@
 
 /* TODO: maybe use wallust? */
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Helvetica, "JetBrainsMono Nerd Font Propo";
+    font-family: "TeX Gyre Heros", "DejaVuSansM Nerd Font Propo";
     font-size: 13px;
 }
 
