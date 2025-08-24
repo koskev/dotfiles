@@ -89,5 +89,6 @@
     ../packages/music.nix
     ../packages/waybar.nix
     ../packages/swayautonames.nix
+    ../packages/pushtotalk.nix
   ];
 }

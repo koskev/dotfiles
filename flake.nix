@@ -31,6 +31,10 @@
       url = "github:koskev/swayautonames";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    pushtotalk = {
+      url = "github:koskev/PushToTalk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
   outputs =

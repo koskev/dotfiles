@@ -23,11 +23,13 @@
         "swayautonames"
         "rufaco"
         "clipse -listen"
+        "push_to_talk_rs"
       ];
 
       input = {
         kb_layout = "de";
         kb_variant = "nodeadkeys";
+        kb_options = "caps:none";
       };
 
       general = {
