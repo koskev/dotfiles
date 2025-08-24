@@ -23,11 +23,10 @@
           "hyprland/workspaces"
           "sway/workspaces"
           "sway/mode"
-          "custom/media"
         ];
         modules-center = [ ];
         modules-right = builtins.filter (x: x != null) [
-          "mpd"
+          "custom/media"
           "idle_inhibitor"
           "pulseaudio"
           "network"
@@ -56,6 +55,18 @@
           "interval" = 30;
           "format" = "storage: {free}";
           "path" = "/mnt/nvme_storage";
+        };
+        "custom/media" = {
+          "format" = "{icon}{}";
+          "return-type" = "json";
+          "format-icons" = {
+            "Playing" = " ";
+            "Paused" = " ";
+          };
+          "max-length" = 70;
+          "exec" =
+            "playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+          "on-click" = "playerctl play-pause";
         };
         "mpd" = {
           "format" = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title}";
