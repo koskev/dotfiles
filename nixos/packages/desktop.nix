@@ -36,12 +36,6 @@
     meld
     joplin-desktop
   ];
-  fonts.packages = with pkgs; [
-    nerd-fonts._0xproto
-    nerd-fonts.droid-sans-mono
-    font-awesome_6
-    siji
-  ];
 
   xdg.portal.wlr.enable = true;
   security.polkit.enable = true;

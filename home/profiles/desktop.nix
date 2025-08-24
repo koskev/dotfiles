@@ -79,6 +79,7 @@
     package = lib.mkForce (config.lib.nixGL.wrap pkgs.alacritty);
   };
   imports = [
+    ../packages/fonts.nix
     ../packages/browser.nix
     ../packages/rofi.nix
     ../packages/windowManager/wm.nix

@@ -37,12 +37,6 @@
     direnv
     python3
   ];
-  fonts.packages = with pkgs; [
-    nerd-fonts._0xproto
-    nerd-fonts.droid-sans-mono
-    font-awesome_6
-    siji
-  ];
 
   programs = {
     zsh.enable = true;
