@@ -17,7 +17,7 @@
         # "position"= "bottom" # Waybar position (top|bottom|left|right)
         height = 24; # Waybar height (to be removed for auto height)
         # "width"= 1280 # Waybar width
-        spacing = 2; # Gaps between modules (4px)
+        spacing = 0; # Gaps between modules (4px)
         # Choose the order of the modules
         modules-left = [
           "hyprland/workspaces"
@@ -110,7 +110,7 @@
           "tooltip" = false;
         };
         "memory" = {
-          "format" = " {}%";
+          "format" = " {}%";
         };
         "temperature#cpu" = {
           # "thermal-zone"= 2;
@@ -166,17 +166,20 @@
             ""
           ];
         };
-        "battery#bat2" = {
-          "bat" = "BAT2";
-        };
         "network" = {
           # "interface"= "wlp2*"; # (Optional) To force the use of this interface
-          "format-wifi" = "{essid} ({signalStrength}%) ";
-          "format-ethernet" = "{ipaddr}/{cidr} ";
-          "tooltip-format" = "{ifname} via {gwaddr} ";
-          "format-linked" = "{ifname} (No IP) ";
+          "format-ethernet" = "";
+          "tooltip-format" = "{ifname} via {gwaddr} ";
+          "format-linked" = "{ifname} (No IP) ";
           "format-disconnected" = "Disconnected ⚠";
           "format-alt" = "{ifname}: {ipaddr}/{cidr}";
+          "format-icons" = [
+            "󰤯"
+            "󰤟"
+            "󰤢"
+            "󰤥"
+            "󰤨"
+          ];
         };
         "pulseaudio" = {
           # "scroll-step"= 1; # %; can be a float

@@ -20,7 +20,7 @@ _: {
       users.kevin = {
         profile = "desktop";
         defaultDesktop = "hyprland";
-        waybarTheme = "default";
+        waybarTheme = "koskev";
       };
     };
     "liag0005" = {
