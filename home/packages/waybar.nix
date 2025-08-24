@@ -60,12 +60,20 @@
           "format" = "{icon}{}";
           "return-type" = "json";
           "format-icons" = {
-            "Playing" = " ";
-            "Paused" = " ";
+            "Paused" = " ";
+            "Playing" = " ";
           };
           "max-length" = 70;
           "exec" =
-            "playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+            let
+              format = builtins.toJSON {
+                text = "{{playerName}}: {{artist}} - {{markup_escape(title)}}";
+                tooltip = "{{playerName}} : {{markup_escape(title)}}";
+                alt = "{{status}}";
+                class = "{{status}}";
+              };
+            in
+            "playerctl -a metadata --format '${format}' -F";
           "on-click" = "playerctl play-pause";
         };
         "mpd" = {
