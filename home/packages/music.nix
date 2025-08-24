@@ -13,7 +13,7 @@
     playerctl
   ];
   # RS version not in repo :/
-  services.mpdris2.enable = true;
+  services.mpd-mpris.enable = true;
 
   xdg.configFile.cantata = {
     source = ../../configs/cantata;
