@@ -1,15 +1,48 @@
 {
   lib,
+  settings,
+  config,
+  pkgs,
   ...
 
 }:
 {
+  home.packages = with pkgs; [
+    hypridle
+  ];
   programs.hyprlock = {
     enable = true;
   };
-  xdg.configFile."clipse/config.json".text = lib.generators.toJSON { } {
-    imageDisplay = {
-      type = "kitty";
+  xdg.configFile = {
+    "clipse/config.json".text = lib.generators.toJSON { } {
+      imageDisplay = {
+        type = "kitty";
+      };
+    };
+    "hypr/hypridle.conf".text = lib.hm.generators.toHyprconf {
+      attrs = {
+        general = {
+          lock_cmd = "pidof hyprlock || hyprlock"; # avoid starting multiple hyprlock instances.
+          before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
+          after_sleep_cmd = "hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
+        };
+        listener = [
+          {
+            timeout = 150;
+            on-timeout = "brightnessctl -s set 10"; # set monitor backlight to minimum, avoid 0 on OLED monitor.
+            on-resume = "brightnessctl -r"; # monitor backlight restore.
+          }
+          {
+            timeout = 300;
+            on-timeout = "loginctl lock-session";
+          }
+          {
+            timeout = 600;
+            on-timeout = "hyprctl dispatch dpms off";
+            on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
+          }
+        ];
+      };
     };
   };
   wayland.windowManager.hyprland = {
@@ -24,6 +57,7 @@
         "rufaco"
         "clipse -listen"
         "push_to_talk_rs"
+        "hypridle"
       ];
 
       input = {
@@ -85,6 +119,7 @@
       ];
 
       bind = [
+        "$mod, escape, exec, hyprlock"
         "$mod, v, exec, kitty --class clipse -e clipse"
         #   "$mod, T, exec, /tmp/test.py --enable-notify true"
         "$mod, Return, exec, alacritty"
@@ -128,6 +163,9 @@
 
       ];
     };
+  }
+  // lib.optionalAttrs (!settings.system.nixos) {
+    package = lib.mkForce (config.lib.nixGL.wrap pkgs.hyprland);
   };
 
 }
