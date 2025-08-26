@@ -119,6 +119,7 @@
       ];
 
       bind = [
+        ''$mod SHIFT, s, exec, slurp | grim -g - "/tmp/screenshot.png"''
         "$mod, escape, exec, hyprlock"
         "$mod, v, exec, kitty --class clipse -e clipse"
         #   "$mod, T, exec, /tmp/test.py --enable-notify true"

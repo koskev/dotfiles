@@ -27,7 +27,8 @@
     gtk.enable = true;
     package = pkgs.adwaita-icon-theme;
     name = "Adwaita";
-    size = 0;
+    # XXX: 0 would set it to default but this breaks slurp 1.5 (master works). Setting it higher seems to only affect waybar widgets. By setting it to 24 the "desktop" and "waybar" cursors are the same size
+    size = 24;
   };
   programs.alacritty = {
     enable = true;
