@@ -33,7 +33,26 @@
       };
       kubernetes = {
         disabled = false;
-        format = ''\(($context)\)'';
+        format = ''[\($symbol$cluster\)]($style)'';
+        style = "cyan";
+        contexts = [
+          {
+            context_pattern = ".*(prod|live)";
+            style = "red bold";
+          }
+          {
+            context_pattern = ".*(uat|pre)";
+            style = "orange bold";
+          }
+          {
+            context_pattern = ".*sit";
+            style = "yellow";
+          }
+          {
+            context_pattern = ".*int";
+            style = "green";
+          }
+        ];
       };
       fill = {
         symbol = " ";
