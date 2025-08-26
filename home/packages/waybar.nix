@@ -188,6 +188,7 @@
         "network" = {
           # "interface"= "wlp2*"; # (Optional) To force the use of this interface
           "format-ethernet" = "";
+          "format-wifi" = "{icon}";
           "tooltip-format" = "{ifname} via {gwaddr} ";
           "format-linked" = "{ifname} (No IP) ";
           "format-disconnected" = "Disconnected ⚠";
