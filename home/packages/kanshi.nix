@@ -7,6 +7,7 @@ _: {
         profile.outputs = [
           {
             criteria = "eDP-1";
+            scale = 1.0;
             position = "1920,0";
           }
           {
