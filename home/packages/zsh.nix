@@ -5,17 +5,21 @@
   ...
 }:
 {
+  imports = [
+    ./starship.nix
+  ];
   programs.zsh = {
 
     enable = true;
     antidote = {
       enable = true;
       plugins = [
+        # For my usual keybinds
         "ohmyzsh/ohmyzsh path:lib"
-        "ohmyzsh/ohmyzsh path:plugins/git"
-        "ohmyzsh/ohmyzsh path:plugins/svn"
-        "qwelyt/endless-dog"
-        "superbrothers/zsh-kubectl-prompt kind:defer"
+        #"ohmyzsh/ohmyzsh path:plugins/git"
+        #"ohmyzsh/ohmyzsh path:plugins/svn"
+        #"qwelyt/endless-dog"
+        #"superbrothers/zsh-kubectl-prompt kind:defer"
 
         "zsh-users/zsh-autosuggestions kind:defer"
         "junegunn/fzf path:shell kind:defer"
@@ -51,7 +55,7 @@
         # Not compatible with append only histfile
         unsetopt HIST_FCNTL_LOCK
         # Kubernetes cluster on side
-        RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+        #RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
         export PATH=$PATH:~/bin:~/.local/bin:~/.cargo/bin
 
