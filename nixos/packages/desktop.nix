@@ -12,6 +12,9 @@
   environment.systemPackages = with pkgs; [
     sway
     mate.caja
+    mate.engrampa
+    unrar-free
+
     syncthing
     wdisplays
     xorg.xrandr
