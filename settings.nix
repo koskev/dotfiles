@@ -12,9 +12,6 @@ _: {
       system = {
         nixos = true;
         flake = "/home/kevin/nix";
-        services = {
-          wpaperd = true;
-        };
         sensors = {
           cpu = "/dev/internal_coretemp/temp1_input";
           water = "/dev/openfanhub/temp1_input";
