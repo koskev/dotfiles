@@ -22,6 +22,7 @@
 
         # Right
         "$fill"
+        "$time"
         "$kubernetes"
         "$line_break"
         # Command line
@@ -78,6 +79,10 @@
         disabled = false;
         # Alacritty starts at 2 (might be due to no login manager?)
         threshold = 3;
+      };
+
+      time = {
+        disabled = false;
       };
 
     };
