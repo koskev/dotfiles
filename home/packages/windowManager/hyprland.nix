@@ -13,7 +13,27 @@
   programs.hyprlock = {
     enable = true;
   };
+  services.wpaperd = {
+    enable = settings.system.services.wpaperd or false;
+    settings = {
+      default = {
+        duration = "10m";
+      };
+      any = {
+        path = "${config.xdg.configHome}/wpaperd/wallpaper";
+      };
+    };
+  };
   xdg.configFile = {
+    "wpaperd/wallpaper/default/wall0.png" = {
+      source = "${pkgs.hyprland}/share/hypr/wall0.png";
+    };
+    "wpaperd/wallpaper/default/wall1.png" = {
+      source = "${pkgs.hyprland}/share/hypr/wall1.png";
+    };
+    "wpaperd/wallpaper/default/wall2.png" = {
+      source = "${pkgs.hyprland}/share/hypr/wall2.png";
+    };
     "clipse/config.json".text = lib.generators.toJSON { } {
       imageDisplay = {
         type = "kitty";
