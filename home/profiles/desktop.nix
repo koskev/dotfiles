@@ -92,4 +92,8 @@
     ../packages/swayautonames.nix
     ../packages/pushtotalk.nix
   ];
+
+  home.packages = with pkgs; [
+    baobab
+  ];
 }
