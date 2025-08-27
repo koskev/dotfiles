@@ -7,5 +7,6 @@
     statix
     tokei
     borgbackup
+    podman
   ];
 }
