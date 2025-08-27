@@ -45,9 +45,6 @@ in
     extraModulePackages = with config.boot.kernelPackages; [
       # Required for fan control
       nct6687d
-
-      # FIXME: we need at least two modules here for nix to actually copy the modules ??
-      v4l2loopback
     ];
 
     kernelModules = [
