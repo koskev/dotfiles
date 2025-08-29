@@ -26,8 +26,13 @@ _: {
     "liag0005" = {
       system = {
         nixos = false;
+        flake = "/home/kko/nix";
       };
-      users.kko.profile = "work";
+      users.kko = {
+        profile = "work";
+        defaultDesktop = "hyprland";
+        waybarTheme = "koskev";
+      };
     };
   };
 }
