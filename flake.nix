@@ -2,7 +2,8 @@
   description = "My dotfile Nix";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +16,7 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    disko.url = "github:nix-community/disko";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,9 +42,11 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       nur,
       nixgl,
+      disko,
       ...
     }@inputs:
     let
@@ -81,12 +85,14 @@
                 ./nixos/hosts/${hostname}/configuration.nix
                 ./nixos/profiles/${userSettings.profile}.nix
                 ./nixos/common.nix
+                disko.nixosModules.disko
               ];
               specialArgs = {
+                inherit nixpkgs-unstable;
                 settings = settingsUser userSettings hostSettings username hostname;
               };
             };
-          }) hostSettings.users;
+          }) hostSettings.users or { };
         in
         userSettings
       ) nixOSHosts;
@@ -105,6 +111,7 @@
               extraSpecialArgs = {
                 inherit inputs;
                 inherit nixgl;
+                inherit nixpkgs-unstable;
                 settings = settingsUser userSettings hostSettings username hostname;
               };
             };
