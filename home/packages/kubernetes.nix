@@ -5,14 +5,17 @@
     krew
   ];
 
-  xdg.configFile."k9s/skins".source =
-    pkgs.fetchFromGitHub {
-      owner = "derailed";
-      repo = "k9s";
-      rev = "e99c7354307afa43d415c52cd32918c5efbe103b";
-      sha256 = "VyOie4ltWy/BJ6MJ9gdSxk1V1PxXpsIkRrhWgXoaUUc=";
-    }
-    + "/skins";
+  xdg.configFile."k9s/skins/" = {
+    recursive = true;
+    source =
+      pkgs.fetchFromGitHub {
+        owner = "derailed";
+        repo = "k9s";
+        rev = "e99c7354307afa43d415c52cd32918c5efbe103b";
+        sha256 = "VyOie4ltWy/BJ6MJ9gdSxk1V1PxXpsIkRrhWgXoaUUc=";
+      }
+      + "/skins";
+  };
 
   programs.k9s =
     let
