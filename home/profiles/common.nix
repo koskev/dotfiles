@@ -15,7 +15,7 @@
     ../packages/base.nix
     ../packages/kubernetes.nix
     ../packages/misc.nix
-    ../packages/zsh.nix
+    ../packages/shell/common.nix
     ../packages/lsp.nix
   ];
 
@@ -32,10 +32,6 @@
       flake = settings.system.flake or null;
     };
     home-manager.enable = true;
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
-    };
     lazygit = {
       enable = true;
       settings = {
