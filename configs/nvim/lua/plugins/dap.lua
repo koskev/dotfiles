@@ -38,7 +38,19 @@ return {
 	{
 		"leoluz/nvim-dap-go",
 		event = "VeryLazy",
-		opts = {}
+		config = function()
+			require("dap-go").setup({
+				dap_configurations = {
+					{
+						type = "go",
+						name = "Debug current (Arguments)",
+						request = "launch",
+						program = "${workspaceFolder}/main.go}",
+						args = require("dap-go").get_arguments,
+					},
+				}
+			})
+		end
 	},
 	{
 		"koskev/jsonnet-tools.nvim",
