@@ -34,7 +34,7 @@
       };
       kubernetes = {
         disabled = false;
-        format = ''[\($symbol$cluster\)]($style)'';
+        format = ''[\($symbol$user\)]($style)'';
         style = "cyan";
         contexts = [
           {
