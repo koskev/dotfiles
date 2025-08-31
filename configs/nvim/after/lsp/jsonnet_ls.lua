@@ -59,7 +59,7 @@ local go_settings = {
 
 return {
 	--cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "jsonnet-language-server" },
-	cmd = vim.lsp.rpc.connect("127.0.0.1", 4874),
+	-- cmd = vim.lsp.rpc.connect("127.0.0.1", 4874),
 	--cmd = { "/tmp/venv/bin/lsp-devtools", "agent", "--", "/home/kevin/Dokumente/Projekte/Github/koskev/koskev-rs-lsps/jsonnet-ls-rs/target/debug/grustonnet-bin" },
 	settings = go_settings,
 }
