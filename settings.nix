@@ -8,6 +8,28 @@ _: {
       };
       users.kevin.profile = "desktop";
     };
+    "rpi-drucker" = {
+      system = {
+        nixos = true;
+        flake = "/root/nix";
+        kubernetes = true;
+        useHomeManagerModule = true;
+      };
+      users.root = {
+        profile = "server";
+      };
+    };
+    "kokev" = {
+      system = {
+        nixos = true;
+        flake = "/root/nix";
+        useHomeManagerModule = true;
+      };
+      users.root = {
+        profile = "server";
+        home = "/root";
+      };
+    };
     "kevin-nix" = {
       system = {
         nixos = true;
