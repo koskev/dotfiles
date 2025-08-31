@@ -17,9 +17,11 @@
         "zen-twilight" = "";
         "Alacritty" = "";
         "element" = "";
+        "Element" = "";
         "cantata" = "";
         "org.keepassxc.KeePassXC" = "";
         "lutris" = "";
+        "net.lutris.Lutris" = "";
         "caja" = "";
         "thunderbird" = "";
         "mpv" = "";
