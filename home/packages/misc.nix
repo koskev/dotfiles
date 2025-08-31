@@ -8,5 +8,6 @@
     tokei
     borgbackup
     podman
+    sops
   ];
 }
