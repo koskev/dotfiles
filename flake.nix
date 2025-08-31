@@ -90,13 +90,29 @@
         hostname: hostSettings:
         let
           userSettings = nixpkgs.lib.concatMapAttrs (username: userSettings: {
+            # TODO: this does not support multiple users. The loop needs to be further down
             "${hostname}" = nixpkgs.lib.nixosSystem {
               modules = [
                 ./nixos/hosts/${hostname}/configuration.nix
                 ./nixos/profiles/${userSettings.profile}.nix
                 ./nixos/common.nix
                 disko.nixosModules.disko
-              ];
+                home-manager.nixosModules.home-manager
+              ]
+              ++ sopsModules
+              ++ lib.optional (hostSettings.system.useHomeManagerModule or false) {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.${username} = import ./home/profiles/${userSettings.profile}.nix;
+                  extraSpecialArgs = {
+                    inherit inputs;
+                    inherit nixgl;
+                    inherit nixpkgs-unstable;
+                    settings = settingsUser userSettings hostSettings username hostname;
+                  };
+                };
+              };
               specialArgs = {
                 inherit nixpkgs-unstable;
                 settings = settingsUser userSettings hostSettings username hostname;
