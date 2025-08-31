@@ -101,7 +101,17 @@
 
         # Keep the focus on rofi to not lose focus on mouse movement
         "stayfocused, class:(Rofi)$"
+
+        # Workspace selector: https://wiki.hypr.land/Configuring/Workspace-Rules/#workspace-selectors
+        "opacity 0.7, onworkspace:s[true]"
       ];
+
+      workspace = [
+        "special:scratchpad, on-created-empty:alacritty"
+        "s[true], gapsout:100"
+        "s[true], gapsin:10"
+      ];
+
       bindm = [
         # mouse movements
         "$mod, mouse:272, movewindow"
@@ -128,6 +138,7 @@
         "$mod, f, fullscreen,1"
         "$mod, d, exec, rofi -show drun"
         "$mod, M, exit,"
+        "$mod SHIFT, space, togglefloating,"
         "$mod SHIFT, Q, killactive,"
         "$mod SHIFT, y, movecurrentworkspacetomonitor, l"
         "$mod SHIFT, x, movecurrentworkspacetomonitor, r"
@@ -142,6 +153,15 @@
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
         "$mod, 0, workspace, 10"
+        "$mod, F1, workspace, 11"
+        "$mod, F2, workspace, 12"
+        "$mod, F3, workspace, 13"
+        "$mod, F4, workspace, 14"
+        "$mod, F5, workspace, 15"
+        "$mod, F6, workspace, 16"
+        "$mod, F7, workspace, 17"
+        "$mod, asciicircum, togglespecialworkspace, scratchpad" # asciicircum == ^
+        "$mod SHIFT, asciicircum, movetoworkspace, special:scratchpad" # asciicircum == ^
         "$mod SHIFT, 1, movetoworkspacesilent, 1"
         "$mod SHIFT, 2, movetoworkspacesilent, 2"
         "$mod SHIFT, 3, movetoworkspacesilent, 3"
