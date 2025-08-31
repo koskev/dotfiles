@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -31,6 +32,8 @@
     golangci-lint-langserver
     golines
     gomodifytags
+
+    inputs.grustonnet.defaultPackage.${pkgs.system}
 
   ];
 }

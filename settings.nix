@@ -1,4 +1,5 @@
 _: {
+  # TODO: Somehow add some kind of schema? mkOption?
   architecture = "x86_64-linux";
   stateVersion = "25.11"; # Did you read the comment?
   hosts = {
