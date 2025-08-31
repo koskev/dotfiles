@@ -74,7 +74,7 @@
           inherit (hostSettings) system;
           inherit hostname;
           inherit username;
-          homedir = "/home/${username}";
+          homedir = userSettings.home or "/home/${username}";
         };
     in
     {
