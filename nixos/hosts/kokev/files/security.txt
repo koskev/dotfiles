@@ -1,0 +1,13 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Contact: mailto:kevin+security@kokev.de
+Expires: 2024-12-31T23:00:00.000Z
+Encryption: https://kokev.de/pubkey.txt
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYIAB0WIQRvhRrY5HvoeMVWNc++RJt0IM08YAUCY783KwAKCRC+RJt0IM08
+YOnTAP9CIlKEQDgJ6oHtXXXrzmanwUlF/duzW4zxqZHI53bYSQEAgkQIQ5N0N3pl
+9kToGVCtIpztbuGyzkEBS2fW6GW+YQc=
+=0nm7
+-----END PGP SIGNATURE-----
