@@ -36,6 +36,7 @@
 
   programs = {
     zsh.enable = true;
+    fish.enable = true;
 
     nix-ld.enable = true;
 

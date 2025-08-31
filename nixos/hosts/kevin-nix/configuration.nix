@@ -84,7 +84,7 @@
       "plugdev"
       "input"
     ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   services.udev = {
