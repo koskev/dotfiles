@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   settings,
   ...
 }:
@@ -19,7 +20,7 @@
   ];
 
   nix = {
-    package = pkgs.nix;
+    package = lib.mkDefault pkgs.nix;
     settings.experimental-features = [
       "nix-command"
       "flakes"
