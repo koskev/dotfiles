@@ -69,7 +69,7 @@
 
 
         if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-        	${settings.userSettings.defaultDesktop}
+          ${settings.userSettings.defaultDesktop or "true"}
         fi
 
       '')
