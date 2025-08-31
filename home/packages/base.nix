@@ -21,6 +21,10 @@
       zsh
       iconv
       lsd
+      ripgrep
+      unzip
+      ncdu
+      compsize
     ]
     ++ lib.optional (!settings.system.nixos) pkgs.nixgl.auto.nixGLDefault;
 

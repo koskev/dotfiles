@@ -20,12 +20,8 @@
     "flakes"
   ];
   environment.systemPackages = with pkgs; [
-    ripgrep
-    unzip
     lm_sensors
     jq
-    ncdu
-    compsize
     # Killall etc.
     psmisc
     file
