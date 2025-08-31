@@ -1,0 +1,7 @@
+keys:
+  - &test age186ykrg3cm5umsla3yg8k5msjepd4ns3ll0ylkfp97cp5nezqpc3q3erwrh
+  - &host 7ED71373082E0FE0F90239710233D0893BBB9872
+creation_rules:
+  - path_regex: .*.(yaml|yml)
+    pgp: *host
+    age: *test

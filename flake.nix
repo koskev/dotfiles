@@ -19,6 +19,7 @@
       };
     };
     disko.url = "github:nix-community/disko";
+    sops-nix.url = "github:Mic92/sops-nix";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,6 +50,7 @@
       nur,
       nixgl,
       disko,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -76,6 +78,12 @@
           inherit username;
           homedir = userSettings.home or "/home/${username}";
         };
+      sopsModules = [
+        sops-nix.nixosModules.sops
+        {
+          sops.defaultSopsFile = ./secrets/secrets.yaml;
+        }
+      ];
     in
     {
       nixosConfigurations = nixpkgs.lib.concatMapAttrs (
