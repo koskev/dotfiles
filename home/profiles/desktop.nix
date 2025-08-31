@@ -91,6 +91,7 @@
     ../packages/waybar.nix
     ../packages/swayautonames.nix
     ../packages/pushtotalk.nix
+    ../packages/misc.nix
   ];
 
   home.packages = with pkgs; [

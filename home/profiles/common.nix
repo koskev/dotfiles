@@ -14,7 +14,6 @@
   imports = [
     ../packages/base.nix
     ../packages/kubernetes.nix
-    ../packages/misc.nix
     ../packages/shell/common.nix
     ../packages/lsp.nix
   ];
