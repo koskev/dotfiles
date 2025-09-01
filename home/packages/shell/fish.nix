@@ -1,5 +1,8 @@
 { aliases, shellIntegrations }:
-_:
+{
+  lib,
+  ...
+}:
 let
 
   programIntegrations = builtins.listToAttrs (
@@ -12,11 +15,16 @@ let
   );
 
 in
-{
-  programs = programIntegrations // {
-    fish = {
-      enable = true;
-      shellAliases = aliases;
+# XXX: We can't just do programs = pprogramIntegrations // [..] since this will break the LSPs :/
+lib.recursiveUpdate
+  {
+    programs = {
+      fish = {
+        enable = true;
+        shellAliases = aliases;
+      };
     };
-  };
-}
+  }
+  {
+    programs = programIntegrations;
+  }
