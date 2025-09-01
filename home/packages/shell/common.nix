@@ -13,23 +13,31 @@ _: {
         nh = ''LD_LIBRARY_PATH="" nh'';
         home-manager = ''LD_LIBRARY_PATH="" home-manager'';
       };
+
+      shellIntegrations = [
+        "zoxide"
+        "fzf"
+        "starship"
+      ];
     in
     [
-      (import ./zsh.nix { inherit aliases; })
-      (import ./fish.nix { inherit aliases; })
+      (import ./zsh.nix {
+        inherit aliases;
+        inherit shellIntegrations;
+      })
+      (import ./fish.nix {
+        inherit aliases;
+        inherit shellIntegrations;
+      })
       ./starship.nix
     ];
 
   programs = {
     zoxide = {
       enable = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
     };
     fzf = {
       enable = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
     };
   };
 }
