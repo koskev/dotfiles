@@ -14,7 +14,6 @@
       git
       curl
       wget
-      nixd
       nixfmt
       gawk
       gcc

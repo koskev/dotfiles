@@ -20,6 +20,10 @@
     pyright
     nodejs
 
+    # nix
+    nil
+    nixd
+
     # Debugger
     delve
 
