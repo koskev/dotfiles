@@ -1,10 +1,24 @@
 {
-  lib,
+  config,
+  settings,
   ...
 }:
 {
-  environment.etc."www/pubkey.txt".source = ./files/pubkey.txt;
-  environment.etc."www/.well-known/security.txt".source = ./files/security.txt;
+  environment.etc = {
+    "www/pubkey.txt".source = ./files/pubkey.txt;
+    "www/.well-known/security.txt".source = ./files/security.txt;
+  };
+  sops = {
+    secrets =
+      let
+        sopsFile = ../../../secrets/${settings.hostname}/nginx.yaml;
+      in
+      {
+        "prometheus" = {
+          inherit sopsFile;
+        };
+      };
+  };
   services.nginx = {
     enable = true;
     # This is the server section
@@ -12,8 +26,8 @@
       let
         addProxy = host: port: {
           ${host} = {
-            #forceSSL = true;
-            #enableACME = true;
+            forceSSL = true;
+            enableACME = true;
             locations."/" = {
               proxyPass = "http://localhost:${port}";
             };
@@ -45,13 +59,21 @@
                 extraConfig = txtConfig;
                 alias = "/etc/www/pubkey.txt";
               };
+              "/" = {
+                return = ''200 "Nothing to see"'';
+              };
+              "/metrics/" = {
+                proxyPass = "http://localhost:9100/metrics";
+                basicAuth = "Prometheus";
+                basicAuthFile = config.sops.secrets.prometheus.path;
+
+              };
             };
         };
       }
-      // addProxy "etesync.kokev.de" "3735"
+      // addProxy "etesync.kokev.de" "${toString config.services.etebase-server.port}"
       // addProxy "joplin.kokev.de" "22300"
-      // addProxy "ntfy.kokev.de" "8982"
-      // addProxy "bitwarden.kokev.de" "8792";
-
+      // addProxy "ntfy.kokev.de" "${toString (import ./ports.nix { }).ntfy}"
+      // addProxy "bitwarden.kokev.de" "${toString config.services.vaultwarden.config.ROCKET_PORT}";
   };
 }
