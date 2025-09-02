@@ -685,11 +685,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1755949586,
-        "narHash": "sha256-A6n5CqD/jLJprtzSmDSBDaoNHLWJFf7yPGo5yYAuR8c=",
+        "lastModified": 1756829383,
+        "narHash": "sha256-xv7zSq9dpaTkkQsC4ZrpPlptgFRHbZAktjcF7pDbV3k=",
         "owner": "koskev",
         "repo": "swayautonames",
-        "rev": "c3085cc00d907f185853e4b9632e32c05871baca",
+        "rev": "91dab62c3649b2dd0fc0de6c9bebb93bf2c3c4d3",
         "type": "github"
       },
       "original": {
