@@ -92,6 +92,7 @@
     ../packages/swayautonames.nix
     ../packages/pushtotalk.nix
     ../packages/misc.nix
+    ../packages/lsp.nix
   ];
 
   home.packages = with pkgs; [

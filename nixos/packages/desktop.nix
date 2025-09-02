@@ -38,6 +38,13 @@
     thunderbird
     meld
     joplin-desktop
+
+    go
+    cargo
+    rustc
+    clippy
+    direnv
+    python3
   ];
 
   xdg.portal.wlr.enable = true;

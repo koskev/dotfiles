@@ -25,13 +25,6 @@
     # Killall etc.
     psmisc
     file
-
-    go
-    cargo
-    rustc
-    clippy
-    direnv
-    python3
   ];
 
   programs = {
