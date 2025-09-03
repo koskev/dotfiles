@@ -93,62 +93,55 @@
     {
       nixosConfigurations = nixpkgs.lib.concatMapAttrs (
         hostname: hostSettings:
-        let
-          userSettings = nixpkgs.lib.concatMapAttrs (username: userSettings: {
-            # TODO: this does not support multiple users. The loop needs to be further down
-            "${hostname}" = nixpkgs.lib.nixosSystem {
-              modules = [
-                ./nixos/hosts/${hostname}/configuration.nix
-                ./nixos/profiles/${userSettings.profile}.nix
-                ./nixos/common.nix
-                disko.nixosModules.disko
-                home-manager.nixosModules.home-manager
-              ]
-              ++ sopsModules
-              ++ lib.optional (hostSettings.system.useHomeManagerModule or false) {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.${username} = import ./home/profiles/${userSettings.profile}.nix;
-                  extraSpecialArgs = {
-                    inherit inputs;
-                    inherit nixgl;
-                    inherit nixpkgs-unstable;
-                    settings = settingsUser userSettings hostSettings username hostname;
-                  };
+        nixpkgs.lib.concatMapAttrs (username: userSettings: {
+          # TODO: this does not support multiple users. The loop needs to be further down
+          "${hostname}" = nixpkgs.lib.nixosSystem {
+            modules = [
+              ./nixos/hosts/${hostname}/configuration.nix
+              ./nixos/profiles/${userSettings.profile}.nix
+              ./nixos/common.nix
+              disko.nixosModules.disko
+              home-manager.nixosModules.home-manager
+            ]
+            ++ sopsModules
+            ++ lib.optional (hostSettings.system.useHomeManagerModule or false) {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${username} = import ./home/profiles/${userSettings.profile}.nix;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  inherit nixgl;
+                  inherit nixpkgs-unstable;
+                  settings = settingsUser userSettings hostSettings username hostname;
                 };
               };
-              specialArgs = {
-                inherit nixpkgs-unstable;
-                settings = settingsUser userSettings hostSettings username hostname;
-              };
             };
-          }) hostSettings.users or { };
-        in
-        userSettings
+            specialArgs = {
+              inherit nixpkgs-unstable;
+              settings = settingsUser userSettings hostSettings username hostname;
+            };
+          };
+        }) hostSettings.users or { }
       ) nixOSHosts;
-      userSettings = nixpkgs.lib.concatMapAttrs (username: userSettings: {
-      }) nixOSHosts;
+
       homeConfigurations = nixpkgs.lib.concatMapAttrs (
         hostname: hostSettings:
-        let
-          userSettings = nixpkgs.lib.concatMapAttrs (username: userSettings: {
-            "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              modules = [
-                ./home/profiles/common.nix
-                ./home/profiles/${userSettings.profile}.nix
-              ];
-              extraSpecialArgs = {
-                inherit inputs;
-                inherit nixgl;
-                inherit nixpkgs-unstable;
-                settings = settingsUser userSettings hostSettings username hostname;
-              };
+        nixpkgs.lib.concatMapAttrs (username: userSettings: {
+          "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [
+              ./home/profiles/common.nix
+              ./home/profiles/${userSettings.profile}.nix
+            ];
+            extraSpecialArgs = {
+              inherit inputs;
+              inherit nixgl;
+              inherit nixpkgs-unstable;
+              settings = settingsUser userSettings hostSettings username hostname;
             };
-          }) hostSettings.users;
-        in
-        userSettings
+          };
+        }) hostSettings.users
       ) nonNixOSHosts;
     };
 }
