@@ -38,7 +38,6 @@
           (if settings.system.sensors.water or null != null then "temperature#water" else null)
           "backlight"
           "battery"
-          "battery#bat2"
           "clock"
           "custom/notification"
           "tray"
