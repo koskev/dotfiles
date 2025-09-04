@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  nixgl,
   ...
 }:
 
@@ -23,10 +22,5 @@
         source ${./fish/tcs.fish}
       '';
     };
-  };
-
-  nixGL = {
-    vulkan.enable = true;
-    inherit (nixgl) packages;
   };
 }
