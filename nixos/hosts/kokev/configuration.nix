@@ -14,6 +14,8 @@
     ./hardware-configuration.nix
     ./disk-config.nix
     ./nginx.nix
+    ./services.nix
+    ../../packages/docker.nix
   ];
   services = {
     snapper = {
@@ -38,8 +40,37 @@
       enable = true;
     };
   };
+  services.qemuGuest.enable = true;
 
-  networking.hostName = settings.hostname;
+  networking = {
+    nameservers = [
+      "46.38.225.230"
+      "46.38.252.230"
+    ];
+    interfaces.ens3 = {
+      ipv6.addresses = [
+        {
+          address = "2a03:4000:58:fcd::1";
+          prefixLength = 64;
+        }
+      ];
+      ipv4.addresses = [
+        {
+          address = "202.61.194.167";
+          prefixLength = 22;
+        }
+      ];
+    };
+    defaultGateway = {
+      address = "202.61.192.1";
+      interface = "ens3";
+    };
+    defaultGateway6 = {
+      address = "fe80::1";
+      interface = "ens3";
+    };
+    hostName = settings.hostname;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -64,18 +95,18 @@
     22
     25
     80
-    433
+    443
     465
     993
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
 
-  #security.acme = {
-  #  acceptTerms = true;
-  #  defaults = {
-  #    email = "letsencrypt@kokev.de";
-  #  };
-  #};
+  security.acme = {
+    acceptTerms = true;
+    defaults = {
+      email = "letsencrypt@kokev.de";
+    };
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -95,5 +126,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = settings.stateVersion; # Did you read the comment?
-
 }

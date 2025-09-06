@@ -16,6 +16,7 @@
       {
         "prometheus" = {
           inherit sopsFile;
+          owner = "nginx";
         };
       };
   };
@@ -36,6 +37,8 @@
       in
       {
         "kokev.de" = {
+          forceSSL = true;
+          enableACME = true;
           locations =
             let
               txtConfig = ''
@@ -51,6 +54,9 @@
               "/robots.txt" = {
                 return = ''200 "User-agent: *\nDisallow: /"'';
               };
+              "/ai.txt" = {
+                return = ''200 "User-agent: *\nDisallow: /\nDisallow: *"'';
+              };
               "= /.well-known/security.txt" = {
                 extraConfig = txtConfig;
                 alias = "/etc/www/.well-known/security.txt";
@@ -60,12 +66,19 @@
                 alias = "/etc/www/pubkey.txt";
               };
               "/" = {
+                extraConfig = ''
+                  add_header Content-Type text/plain;
+                '';
+
                 return = ''200 "Nothing to see"'';
               };
               "/metrics/" = {
                 proxyPass = "http://localhost:9100/metrics";
-                basicAuth = "Prometheus";
-                basicAuthFile = config.sops.secrets.prometheus.path;
+                # XXX: Nix does not offer a way to properly specify the realm
+                extraConfig = ''
+                  auth_basic "Prometheus";
+                  auth_basic_user_file ${config.sops.secrets.prometheus.path};
+                '';
 
               };
             };

@@ -14,7 +14,7 @@ in
 {
   disko.devices = {
     disk.disk1 = {
-      device = lib.mkForce "/dev/vda";
+      device = lib.mkForce "/dev/sda";
       type = "disk";
       content = {
         type = "gpt";
@@ -26,7 +26,7 @@ in
           };
           root = {
             name = "root";
-            size = "100%";
+            end = "-1G";
             content = {
               type = "btrfs";
               subvolumes = {
@@ -38,6 +38,13 @@ in
                   mountpoint = "/.snapshots";
                 };
               };
+            };
+          };
+          swap = {
+            size = "100%";
+            content = {
+              type = "swap";
+              discardPolicy = "both";
             };
           };
         };

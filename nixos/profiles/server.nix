@@ -4,5 +4,5 @@
   ...
 }:
 {
-  imports = lib.optional (settings.system.kubernetes or false) ../packages/kubernetes.nix;
+  imports = [ ] ++ lib.optional (settings.system.kubernetes or false) ../packages/kubernetes.nix;
 }
