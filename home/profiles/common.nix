@@ -2,6 +2,7 @@
   pkgs,
   lib,
   settings,
+  inputs,
   ...
 }:
 
@@ -10,10 +11,6 @@
     username = "${settings.username}";
     homeDirectory = "${settings.homedir}";
     inherit (settings) stateVersion;
-
-    packages = with pkgs; [
-      comma
-    ];
   };
 
   imports = [
@@ -21,6 +18,9 @@
     ../packages/kubernetes.nix
     ../packages/shell/common.nix
     ../packages/neovim.nix
+    inputs.nix-index-database.homeModules.nix-index
+    { programs.nix-index-database.comma.enable = true; }
+
   ];
 
   nix = {
