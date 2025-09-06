@@ -36,6 +36,11 @@
         };
       in
       {
+        # XXX: Using security.acme.certs results in a cert with Issuer: CN=minica root ca 056599
+        "mail.kokev.de" = {
+          forceSSL = true;
+          enableACME = true;
+        };
         "kokev.de" = {
           forceSSL = true;
           enableACME = true;
