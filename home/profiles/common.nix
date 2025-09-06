@@ -10,6 +10,10 @@
     username = "${settings.username}";
     homeDirectory = "${settings.homedir}";
     inherit (settings) stateVersion;
+
+    packages = with pkgs; [
+      comma
+    ];
   };
 
   imports = [
