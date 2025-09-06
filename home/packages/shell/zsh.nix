@@ -51,9 +51,6 @@ lib.recursiveUpdate
           (lib.mkOrder 500 "autoload -U compinit && compinit")
           # Before alias
           (lib.mkOrder 1000 ''
-            for file in ''${ZDOTDIR}/*.zsh; do
-                source "$file"
-            done
 
             eval "$(direnv hook zsh)"
 
