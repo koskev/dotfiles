@@ -16,6 +16,7 @@
     ../packages/base.nix
     ../packages/kubernetes.nix
     ../packages/shell/common.nix
+    ../packages/neovim.nix
   ];
 
   nix = {
