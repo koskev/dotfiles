@@ -1,0 +1,84 @@
+k9s:
+  body:
+    fgColor: orange
+    bgColor: black
+    logoColor: orange
+  prompt:
+    fgColor: orange
+    bgColor: black
+    suggestColor: orange
+  info:
+    fgColor: orange
+    sectionColor: orange
+  dialog:
+    fgColor: orange
+    bgColor: black
+    buttonFgColor: black
+    buttonBgColor: orange
+    buttonFocusFgColor: white
+    buttonFocusBgColor: orange
+    labelFgColor: orange
+    fieldFgColor: orange
+  frame:
+    border:
+      fgColor: orange
+      focusColor: orange
+    menu:
+      fgColor: white
+      keyColor: orange
+      numKeyColor: orange
+    crumbs:
+      fgColor: black
+      bgColor: orange
+      activeColor: orange
+    status:
+      newColor: orange
+      modifyColor: greenyellow
+      addColor: white
+      errorColor: red
+      pendingColor: red
+      highlightColor: orange
+      killColor: red
+      completedColor: gray
+    title:
+      fgColor: orange
+      highlightColor: orange
+      counterColor: orange
+      filterColor: orange
+  views:
+    charts:
+      bgColor: black
+      defaultDialColors:
+        - linegreen
+        - orangeorange
+      defaultChartColors:
+        - linegreen
+        - orangeorange
+    table:
+      fgColor: orange
+      bgColor: black
+      cursorFgColor: black
+      cursorBgColor: orange
+      markColor: darkgoldenrod
+      header:
+        fgColor: orange
+        bgColor: black
+        sorterColor: orange
+    xray:
+      fgColor: orange
+      bgColor: black
+      cursorColor: orange
+      graphicColor: darkgoldenrod
+      showIcons: false
+    yaml:
+      keyColor: orange
+      colonColor: white
+      valueColor: orange
+    logs:
+      fgColor: white
+      bgColor: black
+      indicator:
+        fgColor: orange
+        bgColor: black
+        toggleOnColor: orange
+        toggleOffColor: white

@@ -4,7 +4,7 @@ KUBERNETES_CONTEXT=$(kubectl config current-context)
 
 SIT_SKIN="${SIT_SKIN:-"rose-pine-moon"}"
 INT_SKIN="${INT_SKIN:-"default"}"
-PROD_SKIN="${PROD_SKIN:-"red"}"
+PROD_SKIN="${PROD_SKIN:-"orange"}"
 
 if [[ $KUBERNETES_CONTEXT == *"sit"* ]]; then
     K9S_SKIN="$SIT_SKIN"
