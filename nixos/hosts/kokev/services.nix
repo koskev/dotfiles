@@ -1,8 +1,23 @@
-_:
+{
+  config,
+  settings,
+  ...
+}:
 let
   ports = import ./ports.nix { };
 in
 {
+  sops = {
+    secrets =
+      let
+        sopsFile = ../../../secrets/${settings.hostname}/vaultwarden.yaml;
+      in
+      {
+        "vaultwarden.env" = {
+          inherit sopsFile;
+        };
+      };
+  };
   services = {
     nullmailer = {
       enable = true;
@@ -23,9 +38,11 @@ in
     };
     vaultwarden = {
       enable = true;
+      environmentFile = config.sops.secrets."vaultwarden.env".path;
       config = {
         DOMAIN = "https://bitwarden.kokev.de";
         ROCKET_PORT = ports.vaultwarden;
+        WEBSOCKET_ENABLED = true; # Enable WebSocket notifications
         SIGNUPS_ALLOWED = false;
 
         SMTP_HOST = "mail.kokev.de";
