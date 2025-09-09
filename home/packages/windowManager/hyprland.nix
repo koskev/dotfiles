@@ -81,6 +81,7 @@
       misc = {
         # Only for fullscreen
         vrr = 2;
+        enable_anr_dialog = false;
       };
 
       binds = {
