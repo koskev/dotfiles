@@ -16,10 +16,10 @@ in
     enable = true;
   };
 
-  # To fix neoclip
-  programs.zsh.initContent = ''
-    export LD_LIBRARY_PATH=${pkgs.sqlite.out}/lib:$LD_LIBRARY_PATH
-  '';
+  home.sessionVariables = {
+    # To fix neoclip
+    LD_LIBRARY_PATH = "${pkgs.sqlite.out}/lib:$LD_LIBRARY_PATH";
+  };
 
   # Link lockfile to flake dir to allow for easy updating by lazyvim
   # Link them one by one to actually link the correct file and not the store
