@@ -5,8 +5,16 @@
 
 {
   programs = {
-    gnupg.agent.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
     sway.enable = true;
+  };
+
+  security.pam.services = {
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -45,11 +53,16 @@
     clippy
     direnv
     python3
+
+    nitrokey-app2
   ];
 
   xdg.portal.wlr.enable = true;
   security.polkit.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-  services.udisks2.enable = true;
+  services = {
+    gnome.gnome-keyring.enable = true;
+    udisks2.enable = true;
+    udev.packages = [ pkgs.nitrokey-udev-rules ];
+  };
 
 }
