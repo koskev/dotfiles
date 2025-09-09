@@ -7,7 +7,19 @@
 
   users.groups.libvirtd.members = [ settings.username ];
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
 
-  virtualisation.spiceUSBRedirection.enable = true;
+    podman = {
+      enable = true;
+    };
+    containers.storage.settings = {
+      storage = {
+        driver = "btrfs";
+      };
+
+    };
+
+    spiceUSBRedirection.enable = true;
+  };
 }
