@@ -15,18 +15,26 @@
         "firefox" = "";
         "zen" = "";
         "zen-twilight" = "";
+
         "Alacritty" = "";
+
         "element" = "";
         "Element" = "";
+
         "cantata" = "";
         "org.keepassxc.KeePassXC" = "";
+
         "lutris" = "";
         "net.lutris.Lutris" = "";
+
         "caja" = "";
         "thunderbird" = "";
         "mpv" = "";
+
         "Steam" = "";
         "steamwebhelper" = "";
+        "steam" = "";
+
         "org.openscad.openscad" = "";
 
         "teams-for-linux" = "󰊻";
