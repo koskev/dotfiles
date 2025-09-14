@@ -137,7 +137,7 @@
         "$mod, Return, exec, alacritty"
         "$mod, w, togglegroup"
         "$mod, f, fullscreen,1"
-        "$mod, d, exec, rofi -show drun"
+        "$mod, d, exec, rofi -show drun -x11" # Use X11 for now to close on outside click
         "$mod, M, exit,"
         "$mod SHIFT, space, togglefloating,"
         "$mod SHIFT, Q, killactive,"
