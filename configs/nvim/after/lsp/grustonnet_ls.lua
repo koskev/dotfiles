@@ -9,8 +9,8 @@ end
 
 local grustonnet_settings = getJson("grustonnet.json");
 return {
-	cmd = vim.lsp.rpc.connect("127.0.0.1", 4874),
-	--cmd = { "grustonnet-lsab" },
+	-- cmd = vim.lsp.rpc.connect("127.0.0.1", 4874),
+	cmd = { "grustonnet-ls" },
 	filetypes = { 'jsonnet', 'libsonnet' },
 	root_markers = { 'jsonnetfile.json', '.git' },
 	settings = grustonnet_settings,
