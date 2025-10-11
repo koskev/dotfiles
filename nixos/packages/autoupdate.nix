@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
@@ -14,9 +15,11 @@
   systemd.services."auto-update" = {
     script = ''
       set -e
+      # Exporting the path since git needs the gpg binary in it
+      export PATH="$PATH:${pkgs.git}/bin:${config.system.build.nixos-rebuild}/bin:${pkgs.gnupg}/bin";
       DIR=$(mktemp -d)
       pushd $DIR
-      ${pkgs.git}/bin/git clone https://github.com/koskev/dotfiles
+      git clone https://github.com/koskev/dotfiles
       cd dotfiles
       git verify-commit HEAD
       nixos-rebuild --flake . switch
