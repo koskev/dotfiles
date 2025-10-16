@@ -7,6 +7,10 @@ return {
 		}
 	},
 	{
+		-- Inline annotations for embedded languages. e.g. in strings
+		"TheNoeTrevino/roids.nvim"
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()

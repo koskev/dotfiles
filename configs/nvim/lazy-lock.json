@@ -53,6 +53,7 @@
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "qmk.nvim": { "branch": "main", "commit": "348ab2cd4f319f7c9881ca8b1bc0241e9b4d6619" },
   "render-markdown.nvim": { "branch": "main", "commit": "39a330f5ef0a8a86c2c236a3c6f65191ec14028f" },
+  "roids.nvim": { "branch": "main", "commit": "bfa006ed0b62f83f49fcfc2353a0a7e3f03561b0" },
   "rose-pine": { "branch": "main", "commit": "72a04c4065345b51b56aed4859ea1d884f734097" },
   "schemastore.nvim": { "branch": "main", "commit": "05924b7383fa17f13f7a7e7ecc8ce83b3c340ce2" },
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
