@@ -17,7 +17,10 @@ return {
 		-- optional: provides snippets for the snippet source
 		dependencies = {
 			'rafamadriz/friendly-snippets',
+			-- feat etc. completion
 			'disrupted/blink-cmp-conventional-commits',
+			-- Complete scopes in conventional_commits
+			{ 'yus-works/csc.nvim', opts = {} },
 			"MahanRahmati/blink-nerdfont.nvim",
 		},
 
@@ -80,8 +83,8 @@ return {
 					'lsp',
 					'path',
 					'snippets',
-					'buffer',
 					'conventional_commits',
+					'buffer',
 					--"nerdfont",
 				},
 				providers = {

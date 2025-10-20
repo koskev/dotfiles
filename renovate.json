@@ -1,7 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "lockFileMaintenance": {
-    "enabled": false
+    "enabled": true,
+    "recreateWhen": "always",
+    "rebaseStalePrs": true,
+    "schedule": [
+      "* * * * *"
+    ]
   },
   "nix": {
     "managerFilePatterns": [
