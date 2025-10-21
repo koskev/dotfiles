@@ -30,6 +30,14 @@ _: {
         profile = "server";
         home = "/root";
       };
+      wireguard = {
+        address = "";
+        server_key = "";
+        server_ip = "";
+        server = {
+          enable = true;
+        };
+      };
     };
     "kevin-nix" = {
       system = {
