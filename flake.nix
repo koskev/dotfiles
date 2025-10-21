@@ -119,6 +119,8 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                backupFileExtension = "backup";
+                # TODO: this requires us to import the common file in the profile as well
                 users.${username} = import ./home/profiles/${userSettings.profile}.nix;
                 extraSpecialArgs = {
                   inherit inputs;
