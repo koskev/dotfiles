@@ -23,6 +23,7 @@
     #    ../../packages/virt.nix
     #    ../../packages/docker.nix
   ];
+
   boot.loader = {
     efi = {
       efiSysMountPoint = "/boot/efi";
@@ -53,6 +54,16 @@
 
   services = {
     desktopManager.plasma6.enable = true;
+  };
+  fileSystems."/mnt/sdcard" = {
+    device = "/dev/mmcblk0p1";
+    fsType = "btrfs";
+    options = [
+      # System will boot up if you don't have sd card inserted
+      "nofail"
+      # After booting up systemd will try mounting the sd card
+      "x-systemd.automount"
+    ];
   };
 
   jovian = {
@@ -95,6 +106,11 @@
     groups.plugdev = { };
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users = {
+      # Needed for remote deployment
+      root = {
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf kevin@kevin-arch"
+        ];
       kevin = {
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf kevin@kevin-arch"
