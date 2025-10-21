@@ -14,6 +14,10 @@ in
   imports = [
     inputs.zen-browser.homeModules.${zen_version}
   ];
+  home.packages = with pkgs; [
+    # For video download helper
+    vdhcoapp
+  ];
 
   xdg = {
     mimeApps = {
@@ -32,6 +36,11 @@ in
         };
     };
   };
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "video-downloadhelper"
+    ];
 
   programs.zen-browser = {
     enable = true;
@@ -59,6 +68,7 @@ in
           return-youtube-dislikes
           privacy-redirect
           offline-qr-code-generator
+          video-downloadhelper
         ];
       };
 
