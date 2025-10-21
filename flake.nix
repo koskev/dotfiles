@@ -51,6 +51,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # For steam deck
+    jovian = {
+      url = "github:jovian-experiments/jovian-nixos/development";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   outputs =
     {
@@ -123,6 +129,7 @@
               };
             };
             specialArgs = {
+              inherit inputs;
               inherit nixpkgs-unstable;
               settings = settingsUser userSettings hostSettings username hostname;
             };

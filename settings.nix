@@ -46,6 +46,17 @@ _: {
         waybarTheme = "koskev";
       };
     };
+    "kevin-deck" = {
+      system = {
+        nixos = true;
+        flake = "/home/kevin/nix";
+      };
+      users.kevin = {
+        profile = "desktop";
+        defaultDesktop = "hyprland";
+        waybarTheme = "koskev";
+      };
+    };
     "liag0005" = {
       system = {
         nixos = false;
