@@ -75,7 +75,6 @@ lib.recursiveUpdate
             # fix java stuff in wayland
             export _JAVA_AWT_WM_NONREPARENTING=1
             export GSETTINGS_SCHEMA_DIR=/usr/share/glib-2.0/schemas
-            export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
 
             if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
@@ -89,7 +88,6 @@ lib.recursiveUpdate
         localVariables = {
         };
         envExtra = ''
-          EDITOR=nvim
           RADV_PERFTEST=gpl
           # for docker buildx
           DOCKER_BUILD_KIT=1

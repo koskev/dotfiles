@@ -15,7 +15,7 @@ let
   );
 
 in
-# XXX: We can't just do programs = pprogramIntegrations // [..] since this will break the LSPs :/
+# XXX: We can't just do programs = programIntegrations // [..] since this will break the nix LSPs :/
 lib.recursiveUpdate
   {
     programs = {
