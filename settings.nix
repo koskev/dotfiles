@@ -58,9 +58,10 @@ _: {
       system = {
         nixos = true;
         flake = "/home/kevin/nix";
+        useHomeManagerModule = true;
       };
       users.kevin = {
-        profile = "desktop";
+        profile = "deck";
         defaultDesktop = "hyprland";
         waybarTheme = "koskev";
       };
