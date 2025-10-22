@@ -9,6 +9,7 @@
       enable = true;
       enableSSHSupport = true;
     };
+    sway.enable = true;
   };
 
   security.pam.services = {
@@ -17,6 +18,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    sway
     mate.caja
     mate.engrampa
     unrar-free
