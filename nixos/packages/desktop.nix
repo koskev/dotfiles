@@ -62,6 +62,8 @@
   services = {
     gnome.gnome-keyring.enable = true;
     udisks2.enable = true;
+    devmon.enable = true;
+    gvfs.enable = true;
     udev.packages = [ pkgs.nitrokey-udev-rules ];
   };
 
