@@ -25,12 +25,12 @@
     # This is the server section
     virtualHosts =
       let
-        addProxy = host: port: {
+        addProxy = proxyUrl: host: {
           ${host} = {
             forceSSL = true;
             enableACME = true;
             locations."/" = {
-              proxyPass = "http://localhost:${port}";
+              proxyPass = "${proxyUrl}";
               extraConfig = ''
                 # Upgrade for websockets. Sould be fine to do it on every connection
                 proxy_set_header Upgrade $http_upgrade;
@@ -45,6 +45,7 @@
             };
           };
         };
+        addLocalhostProxy = host: port: addProxy "http://localhost:${port}" host;
       in
       {
         # XXX: Using security.acme.certs results in a cert with Issuer: CN=minica root ca 056599
@@ -100,9 +101,9 @@
             };
         };
       }
-      // addProxy "etesync.kokev.de" "${toString config.services.etebase-server.port}"
-      // addProxy "joplin.kokev.de" "22300"
-      // addProxy "ntfy.kokev.de" "${toString (import ./ports.nix { }).ntfy}"
-      // addProxy "bitwarden.kokev.de" "${toString config.services.vaultwarden.config.ROCKET_PORT}";
+      // addProxy "http://unix:/var/lib/etebase-server/etebase-server.sock" "etesync.kokev.de"
+      // addLocalhostProxy "joplin.kokev.de" "22300"
+      // addLocalhostProxy "ntfy.kokev.de" "${toString (import ./ports.nix { }).ntfy}"
+      // addLocalhostProxy "bitwarden.kokev.de" "${toString config.services.vaultwarden.config.ROCKET_PORT}";
   };
 }

@@ -10,11 +10,16 @@ in
   sops = {
     secrets =
       let
-        sopsFile = ../../../secrets/${settings.hostname}/vaultwarden.yaml;
+        vaultwarden = ../../../secrets/${settings.hostname}/vaultwarden.yaml;
+        etebase = ../../../secrets/${settings.hostname}/etebase.yaml;
       in
       {
         "vaultwarden.env" = {
-          inherit sopsFile;
+          sopsFile = vaultwarden;
+        };
+        "etebase.secret" = {
+          sopsFile = etebase;
+          owner = "etebase-server";
         };
       };
   };
@@ -27,7 +32,13 @@ in
     };
     etebase-server = {
       enable = true;
-      port = ports.etebase;
+      #port = ports.etebase;
+      unixSocket = "/var/lib/etebase-server/etebase-server.sock";
+      settings = {
+        allowed_hosts.allowed_host1 = "etesync.kokev.de";
+        global.secret_file = config.sops.secrets."etebase.secret".path;
+        global.debug = false;
+      };
     };
     ntfy-sh = {
       enable = true;

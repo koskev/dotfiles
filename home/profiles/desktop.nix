@@ -82,6 +82,7 @@
   imports = [
     ../packages/fonts.nix
     ../packages/browser.nix
+    ../packages/mail.nix
     ../packages/rofi.nix
     ../packages/windowManager/wm.nix
     ../packages/rufaco.nix
