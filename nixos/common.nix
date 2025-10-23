@@ -4,6 +4,9 @@
 }:
 
 {
+  imports = [
+    ./packages/network/wireguard.nix
+  ];
 
   # Magic fuse filesystem basically replaces calls to "/bin/<program>" with "/usr/bin/env <program>"
   services.envfs.enable = true;

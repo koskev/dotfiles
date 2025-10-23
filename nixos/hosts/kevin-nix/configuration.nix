@@ -41,6 +41,8 @@
     };
   };
 
+  sops.gnupg.home = "/home/kevin/.gnupg";
+
   boot.loader = {
     efi = {
       efiSysMountPoint = "/boot/efi";

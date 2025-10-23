@@ -25,18 +25,23 @@ _: {
         nixos = true;
         flake = "/root/nix";
         useHomeManagerModule = true;
+        wireguard = {
+          addresses = [
+            "10.200.200.1/32"
+            "fd00::1/64"
+          ];
+          public_key = "YnBm0BIAJ8SD8bOve7OWWXjk72xBfabcpMljk/kI1Cg=";
+          server = {
+            enable = true;
+            host = "kokev.de";
+            listen_port = 51871;
+            interface = "ens3";
+          };
+        };
       };
       users.root = {
         profile = "server";
         home = "/root";
-      };
-      wireguard = {
-        address = "";
-        server_key = "";
-        server_ip = "";
-        server = {
-          enable = true;
-        };
       };
     };
     "kevin-nix" = {
@@ -46,6 +51,17 @@ _: {
         sensors = {
           cpu = "/dev/internal_coretemp/temp1_input";
           water = "/dev/openfanhub/temp1_input";
+        };
+        wireguard = {
+          addresses = [
+            "10.200.200.2/32"
+            "fd00::2/64"
+          ];
+          public_key = "7ZU/0Z040UhoL0+5nG51vBlNj22RocojWUq0UHqpZRo=";
+          client = {
+            enable = true;
+            server = "kokev";
+          };
         };
       };
       users.kevin = {

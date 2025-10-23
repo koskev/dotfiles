@@ -94,15 +94,19 @@
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [
-    22
-    25
-    80
-    443
-    465
-    993
-  ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall = {
+    allowedTCPPorts = [
+      22
+      25
+      80
+      443
+      465
+      993
+    ];
+    allowedUDPPorts = [
+      settings.system.wireguard.server.listen_port
+    ];
+  };
 
   security.acme = {
     acceptTerms = true;
