@@ -10,8 +10,9 @@ _: {
         # Make aliases work with sudo
         sudo = "sudo ";
         # Override library path to prevent weird linker error with enabled nixGL
-        nh = ''LD_LIBRARY_PATH="" nh'';
-        home-manager = ''LD_LIBRARY_PATH="" home-manager'';
+        # XXX: Hopefully this won't be a problem anymore due to pure?
+        #nh = ''LD_LIBRARY_PATH="" nh'';
+        #home-manager = ''LD_LIBRARY_PATH="" home-manager'';
         nix-size = "nix path-info --recursive --size /run/current-system | sort -k2 -n | numfmt --field=2 --to=iec-i --suffix=B";
         nix-csize = "nix path-info --recursive --closure-size /run/current-system | sort -k2 -n | numfmt --field=2 --to=iec-i --suffix=B";
       };
