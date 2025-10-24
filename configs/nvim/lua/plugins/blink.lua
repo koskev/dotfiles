@@ -20,7 +20,7 @@ return {
 			-- feat etc. completion
 			'disrupted/blink-cmp-conventional-commits',
 			-- Complete scopes in conventional_commits
-			{ 'yus-works/csc.nvim', opts = {} },
+			{ 'koskev/csc.nvim', opts = {} },
 			"MahanRahmati/blink-nerdfont.nvim",
 		},
 
@@ -84,6 +84,7 @@ return {
 					'path',
 					'snippets',
 					'conventional_commits',
+					'csc',
 					'buffer',
 					--"nerdfont",
 				},
@@ -106,11 +107,20 @@ return {
 						name = 'Conventional Commits',
 						module = 'blink-cmp-conventional-commits',
 						enabled = function()
-							return vim.bo.filetype == 'gitcommit'
+							return true
+							-- return vim.bo.filetype == 'gitcommit'
 						end,
 						---@module 'blink-cmp-conventional-commits'
 						---@type blink-cmp-conventional-commits.Options
 						opts = {}, -- none so far
+					},
+					csc = {
+						name = 'CSC',
+						module = 'csc.blink-cmp',
+						enabled = function()
+							return vim.bo.filetype == 'gitcommit'
+						end,
+						opts = {},
 					},
 					nerdfont = {
 						module = "blink-nerdfont",
