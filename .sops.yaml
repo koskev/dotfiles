@@ -2,6 +2,8 @@ keys:
   - &host 7ED71373082E0FE0F90239710233D0893BBB9872
   - &kokev age1g0xdesgjx73yjljvsuvwtpu6uftec0a2w2mgkj5r5uc6tpsnvswsn2yewg
 creation_rules:
-  - path_regex: .*.(yaml|yml)
+  - path_regex: secrets/kokev/.*.(yaml|yml)
     pgp: *host
     age: *kokev
+  - path_regex: secrets/kevin-nix/.*.(yaml|yml)
+    pgp: *host
