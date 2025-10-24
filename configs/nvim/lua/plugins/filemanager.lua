@@ -4,7 +4,11 @@ return {
   dependencies = { { "echasnovski/mini.icons", opts = {} } },
   -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
 
-  opts = {},
+  opts = {
+    float = {
+      border = "rounded"
+    }
+  },
   keys = {
     { "-", "<CMD>Oil --float<CR>", desc = "Open oil floating" }
   }
