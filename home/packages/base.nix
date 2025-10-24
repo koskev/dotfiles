@@ -28,6 +28,7 @@
   programs.gpg = {
     enable = true;
     publicKeys = [
+      # Personal Key
       {
         trust = 5;
         text = ''
@@ -44,9 +45,22 @@
           x2tAeGDdTwNp7boURyTZvgnR6OZy4CEB
           =OW4w
           -----END PGP PUBLIC KEY BLOCK-----
-        ''
+        '';
+      }
+      # Renovate key
+      {
+        trust = 5;
+        text = ''
+          -----BEGIN PGP PUBLIC KEY BLOCK-----
 
-        ;
+          mDMEZ8wQhBYJKwYBBAHaRw8BAQdAnzD8L+/b3vhc0N0ML8VaLOY108KA8+WATWhO
+          50g5VP20IXJlbm92YXRlIHNpZ24gPHJlbm92YXRlQGtva2V2LmRlPoiTBBMWCgA7
+          FiEEOxySjInSb6RFyzZFF4ZlISETgVwFAmfMEIQCGwMFCwkIBwICIgIGFQoJCAsC
+          BBYCAwECHgcCF4AACgkQF4ZlISETgVwYLwD/UQ9q7RqRbTq/otEyZ85mNwuM2zip
+          +A0HLLa4jyaYeo4BAMyxpGdrzsR3VE/+i+JkLUjCFITUVxr2pZBi4sauxVYE
+          =EogS
+          -----END PGP PUBLIC KEY BLOCK-----
+        '';
       }
     ];
   };
