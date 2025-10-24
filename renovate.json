@@ -5,7 +5,7 @@
     "recreateWhen": "always",
     "rebaseStalePrs": true,
     "schedule": [
-      "* * * * *"
+      "* 3 * * *"
     ],
     "automerge": true,
     "automergeType": "branch",
