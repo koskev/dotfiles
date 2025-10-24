@@ -6,7 +6,8 @@
     "rebaseStalePrs": true,
     "schedule": [
       "* * * * *"
-    ]
+    ],
+    "automerge": true
   },
   "nix": {
     "managerFilePatterns": [
