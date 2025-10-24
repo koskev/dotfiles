@@ -8,7 +8,6 @@
       "* * * * *"
     ],
     "automerge": true,
-    "//": "Use branch mode to preserve the signed git commit. Otherwise Github will/might mess up the top commit",
     "automergeType": "branch"
   },
   "nix": {
