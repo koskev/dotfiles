@@ -8,11 +8,14 @@ return {
 	},
 	{
 		-- Inline annotations for embedded languages. e.g. in strings
-		"TheNoeTrevino/roids.nvim"
+		-- Incompatible with the "master" branch of treesitter
+		-- "TheNoeTrevino/roids.nvim"
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		-- XXX: Textobjects plugin is not yet compatible with the main branch
+		branch = "master",
 		config = function()
 			local configs = require("nvim-treesitter.configs")
 
