@@ -55,10 +55,14 @@
     };
   };
 
-  networking.hostName = settings.hostname;
+  networking = {
+    hostName = settings.hostname;
 
-  # Configure network connections interactively with nmcli or nmtui.
-  networking.networkmanager.enable = true;
+    # Configure network connections interactively with nmcli or nmtui.
+    networkmanager.enable = true;
+    # To make waydroid work again
+    nftables.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
