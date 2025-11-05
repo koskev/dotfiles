@@ -12,6 +12,9 @@ let
   };
 in
 {
+  home.packages = with pkgs; [
+    teamtype
+  ];
   programs.neovim = {
     enable = true;
   };
