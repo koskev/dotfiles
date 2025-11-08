@@ -230,11 +230,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762470899,
-        "narHash": "sha256-ZTunvZk+CwuBC5gRoOM9dPxCEzYyjWVdWDy2CljgmbE=",
+        "lastModified": 1762504603,
+        "narHash": "sha256-kROy/KwmzQLeUDPeXlIOggD/s6fi/Fhhbad1cOVSTUk=",
         "ref": "refs/heads/main",
-        "rev": "31a184f2eb26ea805799f5bd844edcf2bc5fd98b",
-        "revCount": 241,
+        "rev": "38a12beaf8a559501fa44268a4967a489f5a8903",
+        "revCount": 243,
         "type": "git",
         "url": "https://forgejo.kokev.de/kevin/grustonnet-ls.git"
       },
@@ -581,11 +581,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762484203,
-        "narHash": "sha256-CuWPqX5miGJyF6tCINw2DSXBtEKQ/toL9GK/RFgPs7c=",
+        "lastModified": 1762568934,
+        "narHash": "sha256-SI/awJ5e+qaeNCiLLN1Sz3cdf/qQCCZV7mw/85Qsyvs=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "3bbe226aa4dd7e50fb12dacaa44bc53166dd5dff",
+        "rev": "e7b4921cad8b7492ab9c441bda269be625bd2acc",
         "type": "github"
       },
       "original": {
@@ -847,11 +847,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762482908,
-        "narHash": "sha256-/Bsw5brCo8gbV5rgK2+SVMrVFasnE5LgJLZertAxdsc=",
+        "lastModified": 1762540107,
+        "narHash": "sha256-PmXMNdrrNhv3jXVzNk6OGbuWj/gkfzzy4FwfRY6Erew=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "45b88a529bd410aeba3d28f8396901d57f8b32d4",
+        "rev": "40598467cab52d10f5b8ab4a5126ac9503ea9383",
         "type": "github"
       },
       "original": {
