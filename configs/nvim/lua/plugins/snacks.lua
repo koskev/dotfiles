@@ -1,6 +1,7 @@
 return {
 	{
 		"folke/snacks.nvim",
+		lazy = false,
 		---@type snacks.Config
 		opts = {
 			input = {
@@ -32,6 +33,9 @@ return {
 					{ section = "startup" },
 				},
 			}
+		},
+		keys = {
+			{ "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
 		}
 	}
 }
