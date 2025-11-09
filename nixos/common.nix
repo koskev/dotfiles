@@ -14,7 +14,13 @@
   ];
 
   # Magic fuse filesystem basically replaces calls to "/bin/<program>" with "/usr/bin/env <program>"
-  services.envfs.enable = true;
+  services = {
+    envfs.enable = true;
+    locate = {
+      enable = true;
+      package = pkgs.plocate;
+    };
+  };
   nix = {
     optimise.automatic = true;
     gc = {
