@@ -3,6 +3,10 @@ return {
 	event = "VeryLazy",
 	---@type Flash.Config
 	opts = {
+		label = {
+			before = true,
+			after = false
+		},
 		jump = {
 			autojump = false,
 		},
