@@ -12,6 +12,10 @@
     homeDirectory = "${settings.homedir}";
     inherit (settings) stateVersion;
   };
+  # Due to joplin an feishin
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-36.9.5"
+  ];
 
   imports = [
     ../packages/base.nix

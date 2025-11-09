@@ -8,6 +8,11 @@
     ./packages/network/wireguard.nix
   ];
 
+  # Due to joplin an feishin
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-36.9.5"
+  ];
+
   # Magic fuse filesystem basically replaces calls to "/bin/<program>" with "/usr/bin/env <program>"
   services.envfs.enable = true;
   nix = {
