@@ -72,42 +72,6 @@ return {
 			})
 
 
-			local util = require 'lspconfig.util'
-
-			local root_dirs = {}
-			require('lspconfig.configs').rjsonnet = {
-				default_config = {
-					cmd = { 'env', 'RUST_LOG=debug', 'rjsonnet' },
-					--cmd = vim.lsp.rpc.connect("127.0.0.1", "4874"),
-					filetypes = { 'jsonnet', 'libsonnet' },
-					single_file_support = false,
-					root_dir = function(fname)
-						return util.root_pattern 'jsonnetfile.json' (fname)
-							or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]) or "~"
-					end,
-					before_init = function(initialize_params)
-						initialize_params['initializationOptions'] = {
-							root_dirs = root_dirs
-						}
-					end,
-					on_new_config = function(_, root_dir)
-						local paths = {
-							root_dir .. '/lib',
-							root_dir .. '/vendor',
-						}
-						for _, path in ipairs(paths) do
-							table.insert(root_dirs, path)
-						end
-					end,
-				},
-				docs = {
-					description = [[
-						Cool new jsonnet ls server
-					]],
-				},
-			}
-			--lspconfig.rjsonnet.setup({})
-
 			require("mason-lspconfig").setup({
 				ensure_installed = {},
 				automatic_enable = {
