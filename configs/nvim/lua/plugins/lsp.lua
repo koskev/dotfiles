@@ -1,11 +1,3 @@
-local function setup_lsp(name, config)
-	if vim.version().minor >= 11 then
-		vim.lsp.enable(name)
-		vim.lsp.config(name, config)
-	else
-		require('lspconfig')[name].setup(config)
-	end
-end
 -- All lsp related config. mason-lspconfig initializes all lsps.
 -- See https://lsp-zero.netlify.app/docs/tutorial.html
 return {
@@ -14,37 +6,7 @@ return {
 		event = "VeryLazy",
 		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
 		config = function()
-			-- Add cmp_nvim_lsp capabilities settings to lspconfig
-			-- This should be executed before you configure any language server
-			local lspconfig_defaults = require('lspconfig').util.default_config
-			local status, blink_cmp = pcall(require, "blink.cmp")
-
-			if status then
-				lspconfig_defaults.capabilities = blink_cmp.get_lsp_capabilities(lspconfig_defaults
-					.capabilities)
-			end
 			require('mason').setup({})
-
-			local manual_ls_config = {}
-
-			vim.api.nvim_create_autocmd('LspAttach', {
-				desc = 'LSP actions',
-				callback = function(event)
-					local opts = { buffer = event.buf }
-
-					vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-					vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-					vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-					vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-					vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-					vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-					vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-					vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-					vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-					vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-				end,
-			})
-
 
 			-- Goimports on save
 			-- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-imports
@@ -74,16 +36,6 @@ return {
 
 			require("mason-lspconfig").setup({
 				ensure_installed = {},
-				automatic_enable = {
-					exclude = manual_ls_config
-				},
-				handlers = {
-					-- this first function is the "default handler"
-					-- it applies to every language server without a "custom handler"
-					function(server_name)
-						setup_lsp(server_name, {})
-					end
-				}
 			})
 		end,
 	},
