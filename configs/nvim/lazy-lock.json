@@ -1,6 +1,7 @@
 {
   "LuaSnip": { "branch": "master", "commit": "458560534a73f7f8d7a11a146c801db00b081df0" },
   "alpha-nvim": { "branch": "main", "commit": "a35468cd72645dbd52c0624ceead5f301c566dff" },
+  "barbar.nvim": { "branch": "master", "commit": "53b5a2f34b68875898f0531032fbf090e3952ad7" },
   "blink-cmp-conventional-commits": { "branch": "main", "commit": "c6eea4ecb755dffb7b57f42a1259447de7984974" },
   "blink-nerdfont.nvim": { "branch": "main", "commit": "2f3cedda78dcf4ef547128ce7f72f7b80e25501d" },
   "blink.cmp": { "branch": "main", "commit": "327fff91fe6af358e990be7be1ec8b78037d2138" },
@@ -14,6 +15,7 @@
   "git-blame.nvim": { "branch": "master", "commit": "54da04264ec5313d602aebea7c5dc90141696ad7" },
   "git-worktree.nvim": { "branch": "master", "commit": "f247308e68dab9f1133759b05d944569ad054546" },
   "gitlab.nvim": { "branch": "main", "commit": "e29909cd1064a7b53c3150bff49449a548dadf8d" },
+  "gitsigns.nvim": { "branch": "main", "commit": "cdafc320f03f2572c40ab93a4eecb733d4016d07" },
   "gopher.nvim": { "branch": "main", "commit": "295e21e637f9194a4d2bc34622d324a88b028141" },
   "goplements.nvim": { "branch": "main", "commit": "1750ace64d42efcbc1ce36eef848a3cea5f88c79" },
   "hardtime.nvim": { "branch": "main", "commit": "b4e431934af1fe224a3a801f632c008278cb7628" },
