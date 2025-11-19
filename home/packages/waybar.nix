@@ -56,7 +56,7 @@
           "path" = "/mnt/nvme_storage";
         };
         "custom/media" = {
-          "format" = "{icon}{}";
+          "format" = "{icon}{text}";
           "return-type" = "json";
           "format-icons" = {
             "Paused" = " ";
