@@ -54,17 +54,12 @@ return {
 	},
 	{
 		"koskev/jsonnet-tools.nvim",
+		dependencies = { 'mfussenegger/nvim-dap' },
 		config = function()
 			require("jsonnet-tools").setup({})
-		end
+		end,
+
 	},
-	--{
-	--	"koskev/dap-jsonnet.nvim",
-	--	opts = {
-	--		debugger_args = { "--dap", "-s" }
-	--	},
-	--	dependencies = { 'mfussenegger/nvim-dap' }
-	--},
 	{
 		-- Shows the current values of variables inside code
 		"theHamsta/nvim-dap-virtual-text",
