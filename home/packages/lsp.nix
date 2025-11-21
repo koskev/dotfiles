@@ -39,6 +39,7 @@
 
     inputs.grustonnet.defaultPackage.${pkgs.system}
     inputs.vrl-ls.defaultPackage.${pkgs.system}
+    inputs.jsonnet-debugger.defaultPackage.${pkgs.system}
 
   ];
 }
