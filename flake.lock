@@ -271,11 +271,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763675167,
-        "narHash": "sha256-A5D0tAIyuMLEmXm8HxTf9q9UMkUDjDhTzE8QbPNxsg0=",
+        "lastModified": 1763825755,
+        "narHash": "sha256-OFf+TGpdG4iql3tWzi43cjqiWGbmSRbGoJQLz8Wjxeg=",
         "ref": "refs/heads/main",
-        "rev": "ce0bb153ebbeb8bbf8917e2ed7b4b511e4bf87b3",
-        "revCount": 293,
+        "rev": "735085286fc29617da79a9e9c004281386cce3a0",
+        "revCount": 301,
         "type": "git",
         "url": "https://forgejo.kokev.de/kevin/grustonnet-ls.git"
       },
@@ -291,11 +291,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763416652,
-        "narHash": "sha256-8EBEEvtzQ11LCxpQHMNEBQAGtQiCu/pqP9zSovDSbNM=",
+        "lastModified": 1763845215,
+        "narHash": "sha256-8W4YByiS3zxwcdDR2sABm1nUCSOEXJwdY/XddRTVjWM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ea164b7c9ccdc2321379c2ff78fd4317b4c41312",
+        "rev": "9a5042a88caea9b729a1d3bc981069159de4fc49",
         "type": "github"
       },
       "original": {
@@ -333,11 +333,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763640802,
-        "narHash": "sha256-TAsO9p2cF/Wm6sYWPqvC/mBzMBzG119XLB6T0XwU2NU=",
+        "lastModified": 1763714684,
+        "narHash": "sha256-ZNJPAaeSYQTDgvwwE8XHhCz4HiHqYoUyoXdoBE2nxug=",
         "owner": "jovian-experiments",
         "repo": "jovian-nixos",
-        "rev": "4b1c28efe3b31e00c427e651b398d8251dd29812",
+        "rev": "6178d787ee61b8586fdb0ccb8644fbfd5317d0f3",
         "type": "github"
       },
       "original": {
@@ -657,11 +657,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763692990,
-        "narHash": "sha256-iplRFEEUn4JTukMXWo47HNHOou7Gar7wQiQ4vMomQ6M=",
+        "lastModified": 1763863948,
+        "narHash": "sha256-NQUlDVMLkpeSxBq74xdquKXP52TnshZhQ+O3Zobd8VU=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "7e2771bef8097a22c00e5e5e4ca32f58eb904a2e",
+        "rev": "c8d858697e39d74baad32db49d3931b5327aa65b",
         "type": "github"
       },
       "original": {
@@ -978,11 +978,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763663426,
-        "narHash": "sha256-txr1cH5j+b14jYGvE0BQE/6OgSyHQqGoeeEFlJz7Q8o=",
+        "lastModified": 1763780714,
+        "narHash": "sha256-n2T7r5HkxofkT3mIbb2bNkzacBdhP/bVeph/yGNnBek=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "34fd0de7cea96cab0307cf07aa5723b60fd775ef",
+        "rev": "ef951ed2d976bcd1f57a09f358fdda9fa9425018",
         "type": "github"
       },
       "original": {
