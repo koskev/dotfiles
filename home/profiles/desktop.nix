@@ -86,7 +86,6 @@
     ../packages/rofi.nix
     ../packages/windowManager/wm.nix
     ../packages/rufaco.nix
-    ../packages/kanshi.nix
     ../packages/music.nix
     ../packages/waybar.nix
     ../packages/swayautonames.nix
