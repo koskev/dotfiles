@@ -19,7 +19,11 @@ local function enable_all_lsps()
 
 	local lsp_configs = {}
 
-	for _, f in pairs(vim.api.nvim_get_runtime_file('lsp/*.lua', true)) do
+	-- XXX: Since the lsp config starts to get infested with AI bullshit, we can't just blindly enable all LSPs T_T FUCK YOU AI!!
+	-- for _, f in pairs(vim.api.nvim_get_runtime_file('lsp/*.lua', true)) do
+	local current_file = debug.getinfo(1, "S").source:sub(2)
+	local current_dir = vim.fn.fnamemodify(current_file, ":h")
+	for _, f in pairs(vim.split(vim.fn.glob(current_dir .. '/after/lsp/*.lua', true), '\n', {trimempty=true})) do
 		local server_name = vim.fn.fnamemodify(f, ':t:r')
 		table.insert(lsp_configs, server_name)
 	end
