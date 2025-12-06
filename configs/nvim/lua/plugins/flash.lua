@@ -12,8 +12,8 @@ return {
 		},
 		modes = {
 			search = {
-				-- Integrate with default vim search
-				enabled = true,
+				-- Don't integrate with default vim search
+				enabled = false,
 			}
 		}
 	},
