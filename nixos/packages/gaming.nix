@@ -9,6 +9,8 @@
   environment.systemPackages = with pkgs; [
     # Gaming
     lutris
+    mangohud
+    gamemode
   ];
 
   # Only allow specific unfree packages
@@ -46,6 +48,8 @@
 
       noblacklist ''${HOME}/Games
       whitelist ''${HOME}/Games
+      noblacklist ''${HOME}/Lutris
+      whitelist ''${HOME}/Lutris
       noblacklist /mnt/hdd/home/kevin/Games
       whitelist /mnt/hdd/home/kevin/Games
       noblacklist /mnt/nvme_storage/SteamLibrary
