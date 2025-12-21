@@ -25,6 +25,11 @@
       nixos-rebuild --flake . switch
       popd
       rm -r $DIR
+      DIFF_OUTPUT=$(diff <(readlink /run/booted-system/{initrd,kernel,kernel-modules}) <(readlink /run/current-system/{initrd,kernel,kernel-modules}))
+      if ! [ -z $DIFF_OUTPUT ]; then
+        echo "Kernel changed! Rebooting..."
+        reboot
+      fi
     '';
     serviceConfig = {
       Type = "oneshot";
