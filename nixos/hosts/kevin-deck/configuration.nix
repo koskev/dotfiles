@@ -67,7 +67,10 @@
   };
 
   jovian = {
-    decky-loader.enable = true;
+    decky-loader = {
+      # XXX: Run touch ~/.steam/steam/.cef-enable-remote-debugging or enable in developer settings
+      enable = true;
+    };
 
     devices.steamdeck = {
       enable = true;
