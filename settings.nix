@@ -12,12 +12,14 @@ _: {
     "rpi-drucker" = {
       system = {
         nixos = true;
+        rpi = true;
         flake = "/root/nix";
         kubernetes = true;
         useHomeManagerModule = true;
       };
       users.root = {
         profile = "server";
+        home = "/root";
       };
     };
     "kokev" = {
@@ -63,6 +65,17 @@ _: {
             server = "kokev";
           };
         };
+      };
+      users.kevin = {
+        profile = "desktop";
+        defaultDesktop = "hyprland";
+        waybarTheme = "koskev";
+      };
+    };
+    "kevin-laptop" = {
+      system = {
+        nixos = true;
+        flake = "/home/kevin/nix";
       };
       users.kevin = {
         profile = "desktop";
