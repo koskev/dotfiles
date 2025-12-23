@@ -77,19 +77,27 @@
 
   users.groups.plugdev = { };
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.kevin = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "plugdev"
-      "input"
-      "video"
-      "render"
-    ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf kevin@kevin-arch"
-    ];
+  users.users = {
+    kevin = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "plugdev"
+        "input"
+        "video"
+        "render"
+      ]; # Enable ‘sudo’ for the user.
+      shell = pkgs.fish;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf kevin@kevin-arch"
+      ];
+    };
+    root = {
+      shell = pkgs.fish;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf kevin@kevin-arch"
+      ];
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
