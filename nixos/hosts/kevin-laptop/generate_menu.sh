@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 INPUT_FILE="/boot/grub/grub.cfg"
 WORKDIR=$(mktemp -d)
@@ -19,7 +18,7 @@ function create_kexec_line() {
     initrd=$3
     init=$4
 
-    echo "$entry|elf|kernel $kernel|initrd $initrd|append init=$init root=/dev/mapper/ssd_arch-root"
+    echo "$entry|elf|kernel $kernel|initrd $initrd|append init=$init root=/dev/mapper/ssd_arch-root quiet"
 }
 
 function write_entries() {
@@ -31,7 +30,7 @@ function write_entries() {
 
     while IFS= read -r line
     do
-        if [[ $line =~ ^[[:space:]]*menuentry[[:space:]]+\"([^\"]+)\" ]]; then 
+        if [[ $line =~ ^[[:space:]]*menuentry[[:space:]]+\"([^\"]+)\" ]]; then
             (( i+=1 ))
             entries[i]="${BASH_REMATCH[1]}"
         fi
@@ -52,21 +51,35 @@ function write_entries() {
 
     output=""
     for i in "${!entries[@]}"; do
-        output="$output\n$(create_kexec_line "${entries[i]}" "${kernels[i]}" "${initrds[i]}" "${inits[i]}")"
+        new_line="$(create_kexec_line "${entries[i]}" "${kernels[i]}" "${initrds[i]}" "${inits[i]}")"
+        if [ -z "$output" ]; then
+            output=$new_line
+        else
+            output="$output\n$new_line"
+        fi
     done
-    echo "$output" | sudo dd of=kexec_menu.txt
+    echo -e "$output" | sudo dd of=kexec_menu.txt
 
-    create_kexec_line "${entries[i]}" "${kernels[i]}" "${initrds[i]}" "${inits[i]}" | sudo dd of=kexec_default.1.txt
-    sha256sum ".${kernels[0]}" ".${initrds[0]}" | sudo dd of=kexec_default_hashes.txt
+    create_kexec_line "${entries[0]}" "${kernels[0]}" "${initrds[0]}" "${inits[0]}" | sudo dd of=kexec_default.1.txt
+    pushd /boot || exit 1
+    sha256sum ".${kernels[0]}" ".${initrds[0]}" | sudo dd of="$WORKDIR/kexec_default_hashes.txt"
+    popd || exit 1
 }
 
 
 pushd "$WORKDIR" || exit 1
 write_entries
-sudo find ./ -type f ! -path './kexec*' -print0 | xargs -0 sudo sha256sum | sudo dd of=kexec_hashes.txt
-print_tree | sudo dd of=kexec_tree.txt
-param_files=$(find kexec*.txt)
+pushd /boot || exit 1
+print_tree | sudo dd of="$WORKDIR/kexec_tree.txt"
+popd || exit 1
+# TODO: Is this correct?
+cp /boot/kexec_rollback.txt "$WORKDIR/"
+pushd /boot || exit 1
+sudo find ./ -type f ! -path './kexec*' -print0 | xargs -0 sudo sha256sum | sudo dd of="$WORKDIR/kexec_hashes.txt"
+popd || exit 1
 # No quotes since we want splitting
-sha256sum $param_files | gpg --detach-sign -a | sudo dd of=kexec.sig
-# cp -r $WORKDIR/* /boot/
+sign_content="$(sha256sum $(find ./kexec*.txt) | sed "s/ \./ \/boot/g")"
+echo "Signing: ##$sign_content##  With hash $(echo "$sign_content" | sha256sum -)"
+echo "$sign_content" | gpg --detach-sign -a | sudo dd of=kexec.sig
+sudo cp "$WORKDIR"/* /boot/
 popd || exit 1
