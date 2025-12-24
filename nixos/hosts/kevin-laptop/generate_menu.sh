@@ -1,7 +1,8 @@
 #!/bin/bash
+set -e
 
 INPUT_FILE="/boot/grub/grub.cfg"
-
+WORKDIR=$(mktemp -d)
 
 function fix_path () {
     echo "$1" | sed "s/([^)]*)\///g" | cut -d\  -f2
@@ -9,55 +10,63 @@ function fix_path () {
 
 print_tree() {
     # XXX: GNU sort and busybox sort behave differently...
-	sudo find ./ ! -path './kexec*' -print0 | busybox sort -z
+    sudo find ./ ! -path './kexec*' -print0 | busybox sort -z
 }
 
-function get_entries() {
+function create_kexec_line() {
+    entry=$1
+    kernel=$2
+    initrd=$3
+    init=$4
 
-current_entry=""
-current_kernel=""
-current_initrd=""
-current_init=""
+    echo "$entry|elf|kernel $kernel|initrd $initrd|append init=$init root=/dev/mapper/ssd_arch-root"
+}
 
-while IFS= read -r line
-do
-    if [[ $line =~ ^[[:space:]]*menuentry[[:space:]]+\"([^\"]+)\" ]]; then 
-        current_entry="${BASH_REMATCH[1]}"
-        current_kernel=""
-        current_initrd=""
-        current_init=""
-    fi
+function write_entries() {
+    entries=()
+    kernels=()
+    initrds=()
+    inits=()
+    i=-1
 
-    if [[ $line =~ ^[[:space:]]*linux[[:space:]]+([^[:space:]]+) ]]; then
-        current_kernel=$(fix_path "${BASH_REMATCH[1]}")
-        if [[ $line =~ init=([^[:space:]]+) ]]; then
-            current_init="${BASH_REMATCH[1]}"
+    while IFS= read -r line
+    do
+        if [[ $line =~ ^[[:space:]]*menuentry[[:space:]]+\"([^\"]+)\" ]]; then 
+            (( i+=1 ))
+            entries[i]="${BASH_REMATCH[1]}"
         fi
-    fi
 
-    if [[ $line =~ ^[[:space:]]*initrd[[:space:]]+([^[:space:]]+) ]]; then
-        current_initrd=$(fix_path "${BASH_REMATCH[1]}")
-    fi
+        if [[ $line =~ ^[[:space:]]*linux[[:space:]]+([^[:space:]]+) ]]; then
+            kernels[i]=$(fix_path "${BASH_REMATCH[1]}")
+            if [[ $line =~ init=([^[:space:]]+) ]]; then
+                inits[i]="${BASH_REMATCH[1]}"
+            fi
+        fi
 
-    if [[ -n $current_entry ]] && [[ -n $current_kernel ]] && [[ -n $current_init ]] && [[ -n $current_initrd ]]; then
-        echo "$current_entry|elf|kernel $current_kernel|initrd $current_initrd|append init=$current_init root=/dev/mapper/ssd_arch-root"
-        current_entry=""
-        current_kernel=""
-        current_initrd=""
-        current_init=""
-    fi
+        if [[ $line =~ ^[[:space:]]*initrd[[:space:]]+([^[:space:]]+) ]]; then
+            initrds[i]=$(fix_path "${BASH_REMATCH[1]}")
+        fi
 
 
-done < "$INPUT_FILE"
+    done < "$INPUT_FILE"
+
+    output=""
+    for i in "${!entries[@]}"; do
+        output="$output\n$(create_kexec_line "${entries[i]}" "${kernels[i]}" "${initrds[i]}" "${inits[i]}")"
+    done
+    echo "$output" | sudo dd of=kexec_menu.txt
+
+    create_kexec_line "${entries[i]}" "${kernels[i]}" "${initrds[i]}" "${inits[i]}" | sudo dd of=kexec_default.1.txt
+    sha256sum ".${kernels[0]}" ".${initrds[0]}" | sudo dd of=kexec_default_hashes.txt
 }
 
 
-pushd /boot || exit 1
-get_entries | sudo dd of=/boot/kexec_menu.txt
-cat /boot/kexec_menu.txt | head -n 1 | sudo dd of=/boot/kexec_default.1.txt
-sudo find ./ -type f ! -path './kexec*' -print0 | xargs -0 sudo sha256sum | sudo dd of=/boot/kexec_hashes.txt
-print_tree | sudo dd of=/boot/kexec_tree.txt
-param_files=$(find /boot/kexec*.txt)
+pushd "$WORKDIR" || exit 1
+write_entries
+sudo find ./ -type f ! -path './kexec*' -print0 | xargs -0 sudo sha256sum | sudo dd of=kexec_hashes.txt
+print_tree | sudo dd of=kexec_tree.txt
+param_files=$(find kexec*.txt)
 # No quotes since we want splitting
-sha256sum $param_files | gpg --detach-sign -a | sudo dd of=/boot/kexec.sig
+sha256sum $param_files | gpg --detach-sign -a | sudo dd of=kexec.sig
+# cp -r $WORKDIR/* /boot/
 popd || exit 1
