@@ -16,16 +16,16 @@ function create_kexec_line() {
     entry=$1
     kernel=$2
     initrd=$3
-    init=$4
+    parameters=$4
 
-    echo "$entry|elf|kernel $kernel|initrd $initrd|append init=$init root=/dev/mapper/ssd_arch-root quiet"
+    echo "$entry|elf|kernel $kernel|initrd $initrd|append $parameters"
 }
 
 function write_entries() {
     entries=()
     kernels=()
     initrds=()
-    inits=()
+    parameters=()
     i=-1
 
     while IFS= read -r line
@@ -35,11 +35,9 @@ function write_entries() {
             entries[i]="${BASH_REMATCH[1]}"
         fi
 
-        if [[ $line =~ ^[[:space:]]*linux[[:space:]]+([^[:space:]]+) ]]; then
+        if [[ $line =~ ^[[:space:]]*linux[[:space:]]+([^[:space:]]+)[[:space:]](.*$) ]]; then
             kernels[i]=$(fix_path "${BASH_REMATCH[1]}")
-            if [[ $line =~ init=([^[:space:]]+) ]]; then
-                inits[i]="${BASH_REMATCH[1]}"
-            fi
+            parameters[i]="${BASH_REMATCH[2]}"
         fi
 
         if [[ $line =~ ^[[:space:]]*initrd[[:space:]]+([^[:space:]]+) ]]; then
@@ -51,7 +49,7 @@ function write_entries() {
 
     output=""
     for i in "${!entries[@]}"; do
-        new_line="$(create_kexec_line "${entries[i]}" "${kernels[i]}" "${initrds[i]}" "${inits[i]}")"
+        new_line="$(create_kexec_line "${entries[i]}" "${kernels[i]}" "${initrds[i]}" "${parameters[i]}")"
         if [ -z "$output" ]; then
             output=$new_line
         else
@@ -60,7 +58,7 @@ function write_entries() {
     done
     echo -e "$output" | sudo dd of=kexec_menu.txt
 
-    create_kexec_line "${entries[0]}" "${kernels[0]}" "${initrds[0]}" "${inits[0]}" | sudo dd of=kexec_default.1.txt
+    create_kexec_line "${entries[0]}" "${kernels[0]}" "${initrds[0]}" "${parameters[0]}" | sudo dd of=kexec_default.1.txt
     pushd /boot || exit 1
     sha256sum ".${kernels[0]}" ".${initrds[0]}" | sudo dd of="$WORKDIR/kexec_default_hashes.txt"
     popd || exit 1
