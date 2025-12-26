@@ -39,7 +39,7 @@
     };
   };
 
-  sops.gnupg.home = "/home/kevin/.gnupg";
+  #sops.gnupg.home = "/home/kevin/.gnupg";
 
   boot.loader = {
     grub = {

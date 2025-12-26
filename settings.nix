@@ -76,6 +76,17 @@ _: {
       system = {
         nixos = true;
         flake = "/home/kevin/nix";
+        wireguard = {
+          addresses = [
+            "10.200.200.3/32"
+            "fd00::3/64"
+          ];
+          public_key = "NBEu8T7lx8HVl4zKlRuBsV4un3lPkdh6w0IC+sF6iw0=";
+          client = {
+            enable = true;
+            server = "kokev";
+          };
+        };
       };
       users.kevin = {
         profile = "desktop";
