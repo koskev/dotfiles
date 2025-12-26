@@ -17,6 +17,7 @@
 
     ./hardware-configuration.nix
     ./disk-config.nix
+    ../../packages/39c3.nix
 
     #    ../../packages/gaming.nix
     #    ../../packages/waydroid.nix

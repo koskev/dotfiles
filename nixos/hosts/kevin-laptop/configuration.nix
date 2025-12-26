@@ -13,6 +13,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./heads.nix
+    ../../packages/39c3.nix
 
     ../../packages/docker.nix
   ];
