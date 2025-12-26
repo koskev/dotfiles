@@ -55,6 +55,7 @@
     python3
 
     nitrokey-app2
+    networkmanagerapplet
   ];
 
   xdg.portal.wlr.enable = true;
