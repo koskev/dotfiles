@@ -127,11 +127,19 @@
             ++ sopsModules
             ++ lib.optional (hostSettings.system.useHomeManagerModule or false) {
               home-manager = {
-                useGlobalPkgs = true;
+                useGlobalPkgs = false;
                 useUserPackages = true;
                 backupFileExtension = "backup";
-                # TODO: this requires us to import the common file in the profile as well
-                users.${username} = import ./home/profiles/${userSettings.profile}.nix;
+                users.${username} = {
+                  nixpkgs.overlays = [
+                    nur.overlays.default
+                    nixgl.overlay
+                  ];
+                  imports = [
+                    ./home/profiles/common.nix
+                    ./home/profiles/${userSettings.profile}.nix
+                  ];
+                };
                 extraSpecialArgs = {
                   inherit inputs;
                   inherit nixgl;
