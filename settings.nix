@@ -99,6 +99,17 @@ _: {
         nixos = true;
         flake = "/home/kevin/nix";
         useHomeManagerModule = true;
+        wireguard = {
+          addresses = [
+            "10.200.200.4/32"
+            "fd00::4/64"
+          ];
+          public_key = "HE6unv/YLKTN71Xyi/sEUZLRYwbZoluhXxVhP6sFNX8=";
+          client = {
+            enable = true;
+            server = "kokev";
+          };
+        };
       };
       users.kevin = {
         profile = "deck";
