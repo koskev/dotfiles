@@ -12,7 +12,7 @@ let
 in
 lib.mkIf (lib.pathExists configPath) {
   home.packages = [
-    inputs.rufaco.defaultPackage.${pkgs.system}
+    inputs.rufaco.defaultPackage.${pkgs.stdenv.hostPlatform.system}
   ];
   home.file = {
     "${config.xdg.configHome}/rufaco/config.yaml".text = builtins.readFile configPath;

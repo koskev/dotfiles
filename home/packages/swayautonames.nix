@@ -7,7 +7,7 @@
 }:
 {
   home.packages = [
-    inputs.swayautonames.defaultPackage.${pkgs.system}
+    inputs.swayautonames.defaultPackage.${pkgs.stdenv.hostPlatform.system}
   ];
   home.file = {
     "${config.xdg.configHome}/swayautonames/config.json".text = lib.generators.toJSON { } {

@@ -37,9 +37,9 @@
     golines
     gomodifytags
 
-    inputs.grustonnet.defaultPackage.${pkgs.system}
-    inputs.vrl-ls.defaultPackage.${pkgs.system}
-    inputs.jsonnet-debugger.defaultPackage.${pkgs.system}
+    inputs.grustonnet.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+    inputs.vrl-ls.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+    inputs.jsonnet-debugger.defaultPackage.${pkgs.stdenv.hostPlatform.system}
 
   ];
 }

@@ -68,7 +68,7 @@
 }
 
 // lib.optionalAttrs (!settings.system.nixos) {
-  nixGL = {
+  targets.genericLinux.nixGL = {
     inherit (nixgl) packages;
     vulkan.enable = false;
     defaultWrapper = "mesa";

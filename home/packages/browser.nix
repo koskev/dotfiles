@@ -8,7 +8,7 @@
 }:
 let
   zen_version = "twilight";
-  zen_package = inputs.zen-browser.packages."${pkgs.system}".${zen_version};
+  zen_package = inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".${zen_version};
 in
 {
   imports = [

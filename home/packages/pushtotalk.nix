@@ -5,6 +5,6 @@
 }:
 {
   home.packages = [
-    inputs.pushtotalk.defaultPackage.${pkgs.system}
+    inputs.pushtotalk.defaultPackage.${pkgs.stdenv.hostPlatform.system}
   ];
 }
