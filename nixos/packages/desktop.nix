@@ -66,6 +66,7 @@
     devmon.enable = true;
     gvfs.enable = true;
     udev.packages = [ pkgs.nitrokey-udev-rules ];
+    pcscd.enable = true;
   };
 
 }
