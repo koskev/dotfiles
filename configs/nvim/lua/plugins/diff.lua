@@ -1,6 +1,11 @@
 return {
-	"esmuellert/vscode-diff.nvim",
+	"koskev/difftastic.nvim",
 	dependencies = { "MunifTanjim/nui.nvim" },
-	cmd = "CodeDiff",
-}
+	config = function()
+		require("difftastic-nvim").setup({
+			vcs = "git",
+			highlight_mode = "treesitter",
 
+		})
+	end,
+}
