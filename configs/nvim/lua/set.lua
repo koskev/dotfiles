@@ -52,6 +52,12 @@ vim.filetype.add({
 	}
 })
 
+-- vim.keymap.set("", "Ü", "[") does not work with which-key
+vim.cmd("map ü {")
+vim.cmd("map Ü [")
+vim.cmd("map + }")
+vim.cmd("map * ]")
+
 -- vim.highlight.priorities.semantic_tokens = 95
 
 --local autocmd = vim.api.nvim_create_autocmd
