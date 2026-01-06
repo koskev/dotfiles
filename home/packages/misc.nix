@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    siril
+    # Dependency currently broken and there is `comma` anyways
+    #siril
     feishin
     xsane
     statix
