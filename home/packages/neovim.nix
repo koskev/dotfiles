@@ -7,7 +7,8 @@
 let
   linkNvim = name: {
     "nvim/${name}" = {
-      source = ../../configs/nvim/${name};
+      #source = ../../configs/nvim/${name};
+      source = config.lib.file.mkOutOfStoreSymlink "${settings.system.flake}/configs/nvim/${name}";
     };
   };
 in
