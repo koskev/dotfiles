@@ -67,6 +67,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    difftastic = {
+      url = "github:koskev/difftastic?ref=feature/jsonnet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mergiraf = {
+      url = "git+https://codeberg.org/kokev/mergiraf.git?ref=feature/jsonnet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   outputs =
     {

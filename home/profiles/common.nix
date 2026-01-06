@@ -47,5 +47,16 @@
         git.overrideGpg = true;
       };
     };
+    difftastic = {
+      enable = true;
+      package = inputs.difftastic.defaultPackage.${pkgs.stdenv.hostPlatform.system};
+      git = {
+        enable = true;
+      };
+    };
+    mergiraf = {
+      package = inputs.mergiraf.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      enable = true;
+    };
   };
 }
