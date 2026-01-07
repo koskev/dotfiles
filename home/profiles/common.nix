@@ -44,7 +44,14 @@
       enable = true;
       settings = {
         promptToReturnFromSubprocess = false;
-        git.overrideGpg = true;
+        git = {
+          overrideGpg = true;
+          pagers = [
+            {
+              useExternalDiffGitConfig = true;
+            }
+          ];
+        };
       };
     };
     difftastic = {
