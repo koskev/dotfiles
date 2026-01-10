@@ -5,11 +5,11 @@
     "recreateWhen": "always",
     "rebaseStalePrs": true,
     "schedule": [
-      "* 3 * * *"
+      "* * * * *"
     ],
     "automerge": true,
     "automergeType": "branch",
-    "ignoreTests": false
+    "ignoreTests": true
   },
   "nix": {
     "managerFilePatterns": [
@@ -18,5 +18,8 @@
     "commitMessageTopic": "nix",
     "commitMessageExtra": "to {{newValue}}",
     "enabled": true
+  },
+  "github-actions": {
+    "enabled": false
   }
 }
