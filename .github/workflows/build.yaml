@@ -4,6 +4,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform:
+          #- runs-on: ubuntu-24.04
+          #  hosts:
+          #    - kevin-nix
+          - runs-on: ubuntu-24.04-arm
+            hosts:
+              - rpi-drucker
     steps:
     - uses: actions/checkout@v5
     - uses: cachix/install-nix-action@v31
@@ -28,7 +37,9 @@ jobs:
         sudo df -TBG /
     # There has to be a better way with github?
     - run: |
-        configs=("kevin-nix") # "kevin-laptop" "kevin-deck" "kokev" "liag0005")
-        for config in "${configs[@]}"; do
+        # RLY Github? :O
+        configs=$(echo '${{ toJSON(matrix.platform.hosts) }}' | jq -r '.[]')
+        echo "Hosts: $configs"
+        for config in "${configs}"; do
           nix run nixpkgs#nixos-rebuild -- --flake .#${config} build
         done
