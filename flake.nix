@@ -6,6 +6,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # TODO: switch nixkpgs to 25.11 once it is released
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    # follow `main` branch of this repository, considered being stable
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -66,7 +68,6 @@
       url = "github:jovian-experiments/jovian-nixos/development";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     difftastic = {
       url = "github:koskev/difftastic?ref=feature/jsonnet";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -76,7 +77,6 @@
       url = "git+https://codeberg.org/kokev/mergiraf.git?ref=feature/jsonnet";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
   outputs =
     {
@@ -87,6 +87,7 @@
       nixgl,
       disko,
       sops-nix,
+      nixos-raspberrypi,
       ...
     }@inputs:
     let
@@ -120,13 +121,33 @@
           sops.defaultSopsFile = ./secrets/secrets.yaml;
         }
       ];
+      nix_system =
+        if settingsUser.system.rpi or false then
+          nixos-raspberrypi.lib.nixosSystem
+        else
+          nixpkgs.lib.nixosSystem;
+      extra_modules =
+        if settingsUser.system.rpi or true then
+          with nixos-raspberrypi.nixosModules;
+          [
+            raspberry-pi-3.base
+            usb-gadget-ethernet
+            {
+              nixpkgs.crossSystem = {
+                # target platform
+                system = "aarch64-linux";
+              };
+            }
+          ]
+        else
+          [ ];
     in
     {
       nixosConfigurations = nixpkgs.lib.concatMapAttrs (
         hostname: hostSettings:
         nixpkgs.lib.concatMapAttrs (username: userSettings: {
           # TODO: this does not support multiple users. The loop needs to be further down
-          "${hostname}" = nixpkgs.lib.nixosSystem {
+          "${hostname}" = nix_system {
             modules = [
               ./nixos/hosts/${hostname}/configuration.nix
               ./nixos/profiles/${userSettings.profile}.nix
@@ -134,6 +155,7 @@
               disko.nixosModules.disko
               home-manager.nixosModules.home-manager
             ]
+            ++ extra_modules
             ++ sopsModules
             ++ lib.optional (hostSettings.system.useHomeManagerModule or false) {
               home-manager = {
