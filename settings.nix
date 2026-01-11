@@ -15,7 +15,7 @@ _: {
         rpi = true;
         flake = "/root/nix";
         kubernetes = true;
-        useHomeManagerModule = true;
+        useHomeManagerModule = false;
       };
       users.root = {
         profile = "server";

@@ -3,7 +3,16 @@ on:
   push:
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform:
+          - runs-on: ubuntu-24.04
+            hosts:
+              - kevin-nix
+          - runs-on: ubuntu-24.04-arm
+            hosts:
+              - rpi-drucker
+    runs-on: ${{ matrix.platform.runs-on }}
     steps:
     - uses: actions/checkout@v5
     - uses: cachix/install-nix-action@v31
