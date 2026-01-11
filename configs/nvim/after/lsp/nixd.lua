@@ -12,11 +12,11 @@ return {
 			options = {
 				home_manager = {
 					expr = '(builtins.getFlake (builtins.toString ' ..
-					flakePath .. ')).homeConfigurations."kevin@kevin-nix".options',
+						flakePath .. ')).homeConfigurations."kevin@kevin-nix".options',
 				},
 				nixos = {
 					expr = '(builtins.getFlake (builtins.toString ' ..
-					flakePath .. ')).nixosConfigurations."kevin".options',
+						flakePath .. ')).nixosConfigurations."kevin-nix".options',
 				},
 			},
 		},
