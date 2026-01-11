@@ -53,7 +53,7 @@
 
       exec-once = [
         "waybar"
-        "swayautonames"
+        "swayautonames --window-manager hyprland"
         "rufaco"
         "clipse -listen"
         "push_to_talk_rs"
