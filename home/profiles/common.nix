@@ -61,6 +61,19 @@
         enable = true;
       };
     };
+    jujutsu = {
+      enable = true;
+      settings = {
+        ui = {
+          diff-formatter = [
+            "difft"
+            "--color=always"
+            "$left"
+            "$right"
+          ];
+        };
+      };
+    };
     mergiraf = {
       package = inputs.mergiraf.packages.${pkgs.stdenv.hostPlatform.system}.default;
       enable = true;
