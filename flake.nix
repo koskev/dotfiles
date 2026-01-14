@@ -42,7 +42,7 @@
     };
 
     grustonnet = {
-      url = "git+https://forgejo.kokev.de/kevin/grustonnet-ls.git";
+      url = "github:koskev/grustonnet-ls";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -402,17 +402,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1768167351,
-        "narHash": "sha256-yfP/4xCLfOOaS9xHPf/rOnY4qJm4/W3X2o8Zoxzhq/4=",
-        "ref": "refs/heads/main",
-        "rev": "89060b0c93de4567b67015ac6dd31ad4921ce4c9",
-        "revCount": 392,
-        "type": "git",
-        "url": "https://forgejo.kokev.de/kevin/grustonnet-ls.git"
+        "lastModified": 1768343120,
+        "narHash": "sha256-Q7Xv8qoulnHUybLhkvfIyoiOFl/+7bAjZ/UjvWvctZw=",
+        "owner": "koskev",
+        "repo": "grustonnet-ls",
+        "rev": "ee0024b9bcd6c6f9d17886c19bb024ebd88e54d2",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://forgejo.kokev.de/kevin/grustonnet-ls.git"
+        "owner": "koskev",
+        "repo": "grustonnet-ls",
+        "type": "github"
       }
     },
     "home-manager": {
