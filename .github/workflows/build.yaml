@@ -28,7 +28,14 @@ jobs:
         sudo df -TBG /
     # There has to be a better way with github?
     - run: |
-        configs=("kevin-nix") # "kevin-laptop" "kevin-deck" "kokev" "liag0005")
+        # Running this in multiple jobs does not save time
+        configs=("kevin-nix" "kevin-laptop" "kokev")
+        hm_configs=("kevin@kevin-nix" "kko@liag0005")
         for config in "${configs[@]}"; do
+          echo "Building NixOS for ${config}"
           nix run nixpkgs#nixos-rebuild -- --flake .#${config} build
+        done
+        for config in "${hm_configs[@]}"; do
+          echo "Building HomeManager for ${config}"
+          nix run nixpkgs#home-manager -- --flake .#${config} build
         done
