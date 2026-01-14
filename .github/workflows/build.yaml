@@ -2,14 +2,22 @@ name: Build
 on:
   push:
 jobs:
-  build:
+  build-nixos:
+    strategy:
+      matrix:
+        host:
+          - kevin-nix
+          - kevin-laptop
+          - kokev
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
-    - uses: cachix/install-nix-action@v31
+    - &install-nix
+      uses: cachix/install-nix-action@v31
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: debloat
+    - &debloat
+      name: debloat
       run: |
         sudo rm -rf /usr/share/dotnet
         sudo rm -rf "$AGENT_TOOLSDIRECTORY"
@@ -26,16 +34,15 @@ jobs:
           /usr/local/lib/android \
           /usr/local/lib/node_modules
         sudo df -TBG /
-    # There has to be a better way with github?
-    - run: |
-        # TODO: Extract from nix config
-        configs=("kevin-nix" "kevin-laptop" "kokev")
-        hm_configs=("kevin@kevin-nix" "kko@liag0005")
-        for config in "${configs[@]}"; do
-          echo "Building NixOS for ${config}"
-          nix run nixpkgs#nixos-rebuild -- --flake .#${config} build
-        done
-        for config in "${hm_configs[@]}"; do
-          echo "Building HomeManager for ${config}"
-          nix run nixpkgs#home-manager -- --flake .#${config} build
-        done
+    - run: nix run nixpkgs#nixos-rebuild -- --flake .#${{ matrix.host }} build
+  build-home-manager:
+    strategy:
+      matrix:
+        host:
+          - kevin@kevin-nix
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - *install-nix
+    - *debloat
+    - run: nix run nixpkgs#home-manager -- --flake .#${{ matrix.host }} build
