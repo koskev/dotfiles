@@ -1,6 +1,7 @@
 {
   config,
   settings,
+  pkgs-stable,
   ...
 }:
 let
@@ -32,6 +33,8 @@ in
     };
     etebase-server = {
       enable = true;
+      # Unstable is currently broken
+      package = pkgs-stable.etebase-server;
       #port = ports.etebase;
       unixSocket = "/var/lib/etebase-server/etebase-server.sock";
       settings = {

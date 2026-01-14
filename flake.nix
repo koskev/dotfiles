@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # TODO: switch nixkpgs to 25.11 once it is released
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -82,6 +83,7 @@
     {
       nixpkgs,
       nixpkgs-unstable,
+      nixpkgs-stable,
       home-manager,
       nur,
       nixgl,
@@ -93,6 +95,13 @@
       inherit (nixpkgs) lib;
       settings = import ./settings.nix { };
       pkgs = import nixpkgs {
+        system = settings.architecture;
+        overlays = [
+          nur.overlays.default
+          nixgl.overlay
+        ];
+      };
+      pkgs-stable = import nixpkgs-stable {
         system = settings.architecture;
         overlays = [
           nur.overlays.default
@@ -154,6 +163,7 @@
                   inherit inputs;
                   inherit nixgl;
                   inherit nixpkgs-unstable;
+                  inherit pkgs-stable;
                   settings = settingsUser userSettings hostSettings username hostname;
                 };
               };
@@ -161,6 +171,7 @@
             specialArgs = {
               inherit inputs;
               inherit nixpkgs-unstable;
+              inherit pkgs-stable;
               settings = settingsUser userSettings hostSettings username hostname;
             };
           };
@@ -180,6 +191,7 @@
               inherit inputs;
               inherit nixgl;
               inherit nixpkgs-unstable;
+              inherit pkgs-stable;
               settings = settingsUser userSettings hostSettings username hostname;
             };
           };
