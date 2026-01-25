@@ -5,6 +5,7 @@
 {
   pkgs,
   settings,
+  lib,
   ...
 }:
 
@@ -55,14 +56,43 @@
     };
   };
 
-  networking = {
-    hostName = settings.hostname;
+  networking =
+    let
+      hostsToBlock = map (entry: "127.0.0.1 ${entry}") [
+        # According to some reports this site is now full of AI child porn. Better be safe and block it completely on the system level.
+        # Long overdue anyways
+        "x.com"
+        "twitter.com"
+        "t.co"
+        "twimg.com"
+        "ads-twitter.com"
+        "pscp.tv"
+        "twtrdns.net"
+        "twttr.com"
+        "periscope.tv"
+        "tweetdeck.com"
+        "twitpic.com"
+        "twitter.co"
+        "twitterinc.com"
+        "twitteroauth.com"
+        "twitterstat.us"
 
-    # Configure network connections interactively with nmcli or nmtui.
-    networkmanager.enable = true;
-    # To make waydroid work again
-    nftables.enable = true;
-  };
+      ];
+      hostsToBlockString = lib.strings.join "\n" hostsToBlock;
+    in
+    {
+      hostName = settings.hostname;
+
+      # Configure network connections interactively with nmcli or nmtui.
+      networkmanager.enable = true;
+      # To make waydroid work again
+      nftables.enable = true;
+      extraHosts = ''
+        192.168.1.17 kubernetes.lan
+        ${hostsToBlockString}
+      '';
+      firewall.enable = false;
+    };
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
