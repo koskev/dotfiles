@@ -22,11 +22,6 @@ lib.recursiveUpdate
       fish = {
         enable = true;
         shellAliases = aliases;
-        interactiveShellInit = ''
-          function fish_command_not_found
-            , $argv
-          end
-        '';
       };
     };
   }
