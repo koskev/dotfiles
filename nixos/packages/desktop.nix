@@ -51,7 +51,6 @@
     cargo
     rustc
     clippy
-    direnv
     python3
 
     nitrokey-app2
