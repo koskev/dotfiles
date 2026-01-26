@@ -80,10 +80,10 @@
         ];
         scrolling.history = 100000;
       };
+    }
+    // lib.optionalAttrs (!settings.system.nixos) {
+      package = lib.mkForce (config.lib.nixGL.wrap pkgs.alacritty);
     };
-  }
-  // lib.optionalAttrs (!settings.system.nixos) {
-    package = lib.mkForce (config.lib.nixGL.wrap pkgs.alacritty);
   };
   imports = [
     ../packages/fonts.nix
