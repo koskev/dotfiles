@@ -91,20 +91,19 @@
         movefocus_cycles_groupfirst = true;
       };
 
-      windowrulev2 = [
-        "opacity 1.0 override 0.95, class:.*"
+      windowrule = [
+        "opacity 1.0 override 0.95, match:class .*"
         # XXX: Negative lookahead does not seem to work :/
-        "opacity 1.0 override 1.0, class:^(zen-twilight)$"
+        "opacity 1.0 override 1.0, match:class ^(zen-twilight)$"
 
         # Clipse window
-        "float,class:(clipse)" # ensure you have a floating window class set if you want this behavior
-        "size 622 652,class:(clipse)" # set the size of the window as necessary
+        "float on, size 622 652, match:class (clipse)" # set the size of the window as necessary
 
         # Keep the focus on rofi to not lose focus on mouse movement
-        "stayfocused, class:(Rofi)$"
+        "stay_focused on, match:class (Rofi)$"
 
         # Workspace selector: https://wiki.hypr.land/Configuring/Workspace-Rules/#workspace-selectors
-        "opacity 0.7, onworkspace:s[true]"
+        "opacity 0.7, match:workspace s[true]"
       ];
 
       workspace = [
