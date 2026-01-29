@@ -14,10 +14,6 @@ in
   imports = [
     inputs.zen-browser.homeModules.${zen_version}
   ];
-  home.packages = with pkgs; [
-    # For video download helper
-    vdhcoapp
-  ];
 
   xdg = {
     mimeApps = {
