@@ -9,6 +9,7 @@ with lib;
     };
     stateVersion = mkOption {
       type = types.str;
+      description = "DONT CHANGE THIS!!!";
       default = "25.11"; # Did you read the comment?
     };
 
