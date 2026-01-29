@@ -22,6 +22,7 @@
     unzip
     ncdu
     compsize
+    nix
   ];
 
   # https://nix-community.github.io/home-manager/index.xhtml#sec-usage-gpu-non-nixos
