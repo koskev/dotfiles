@@ -105,13 +105,6 @@
     let
       inherit (nixpkgs) lib;
       settings = import ./settings.nix { };
-      pkgs-stable = import nixpkgs-stable {
-        system = settings.architecture;
-        overlays = [
-          nur.overlays.default
-          nixgl.overlay
-        ];
-      };
       nixOSHosts = lib.filterAttrs (n: v: (v.system.nixos or false)) settings.hosts;
       #nonNixOSHosts = lib.filterAttrs(n: v: (!v.system.nixos or false)) settings.hosts;
       nonNixOSHosts = settings.hosts;
@@ -154,6 +147,13 @@
                 ]
               else
                 [ ];
+            pkgs-stable = import nixpkgs-stable {
+              system = hostSettings.system.architecture or "x86_64-linux";
+              overlays = [
+                nur.overlays.default
+                nixgl.overlay
+              ];
+            };
 
           in
           {
@@ -174,10 +174,6 @@
                   useUserPackages = true;
                   backupFileExtension = "backup";
                   users.${username} = {
-                    nixpkgs.overlays = [
-                      nur.overlays.default
-                      nixgl.overlay
-                    ];
                     imports = [
                       ./home/profiles/common.nix
                       ./home/profiles/${userSettings.profile}.nix
@@ -210,7 +206,14 @@
           username: userSettings:
           let
             pkgs = import nixpkgs {
-              system = settings.architecture;
+              system = hostSettings.system.architecture or "x86_64-linux";
+              overlays = [
+                nur.overlays.default
+                nixgl.overlay
+              ];
+            };
+            pkgs-stable = import nixpkgs-stable {
+              system = hostSettings.system.architecture or "x86_64-linux";
               overlays = [
                 nur.overlays.default
                 nixgl.overlay
