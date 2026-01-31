@@ -71,7 +71,7 @@ with lib;
           type = types.str;
           description = "Path to the cpu temperature";
         };
-        tater = mkOption {
+        water = mkOption {
           type = types.str;
           description = "Path to the water temperature";
         };
