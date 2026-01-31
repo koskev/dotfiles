@@ -17,7 +17,37 @@
     ../../packages/gaming.nix
     ../../packages/waydroid.nix
     ../../packages/virt.nix
+    ../../packages/docker.nix
+    ../../../settings_option.nix # To help the lsp
   ];
+
+  hostsettings = {
+    system = {
+      nixos = true;
+      flake = "/home/kevin/nix";
+      sensors = {
+        cpu = "/dev/internal_coretemp/temp1_input";
+        water = "/dev/openfanhub/temp1_input";
+      };
+      wireguard = {
+        addresses = [
+          "10.200.200.2/32"
+          "fd00::2/64"
+        ];
+        public_key = "7ZU/0Z040UhoL0+5nG51vBlNj22RocojWUq0UHqpZRo=";
+        client = {
+          enable = true;
+          server = "kokev";
+        };
+      };
+    };
+    users.kevin = {
+      profile = "desktop";
+      defaultDesktop = "hyprland";
+      waybarTheme = "koskev";
+    };
+  };
+
   services = {
     pipewire = {
       enable = true;
@@ -119,6 +149,8 @@
       "wheel"
       "plugdev"
       "input"
+      "video"
+      "render"
     ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
@@ -158,7 +190,6 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
