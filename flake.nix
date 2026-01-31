@@ -105,13 +105,6 @@
     let
       inherit (nixpkgs) lib;
       settings = import ./settings.nix { };
-      pkgs = import nixpkgs {
-        system = settings.architecture;
-        overlays = [
-          nur.overlays.default
-          nixgl.overlay
-        ];
-      };
       pkgs-stable = import nixpkgs-stable {
         system = settings.architecture;
         overlays = [
@@ -140,15 +133,6 @@
           sops.defaultSopsFile = ./secrets/secrets.yaml;
         }
       ];
-      extra_modules =
-        if settingsUser.system.rpi or true then
-          with nixos-raspberrypi.nixosModules;
-          [
-            raspberry-pi-3.base
-            usb-gadget-ethernet
-          ]
-        else
-          [ ];
     in
     {
       nixosConfigurations = nixpkgs.lib.concatMapAttrs (
@@ -161,6 +145,15 @@
                 nixos-raspberrypi.lib.nixosSystemFull
               else
                 nixpkgs.lib.nixosSystem;
+            extra_modules =
+              if hostSettings.system.rpi or false then
+                with nixos-raspberrypi.nixosModules;
+                [
+                  raspberry-pi-3.base
+                  usb-gadget-ethernet
+                ]
+              else
+                [ ];
 
           in
           {
@@ -213,22 +206,35 @@
 
       homeConfigurations = nixpkgs.lib.concatMapAttrs (
         hostname: hostSettings:
-        nixpkgs.lib.concatMapAttrs (username: userSettings: {
-          "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [
-              ./home/profiles/common.nix
-              ./home/profiles/${userSettings.profile}.nix
-            ];
-            extraSpecialArgs = {
-              inherit inputs;
-              inherit nixgl;
-              inherit nixpkgs-unstable;
-              inherit pkgs-stable;
-              settings = settingsUser userSettings hostSettings username hostname;
+        nixpkgs.lib.concatMapAttrs (
+          username: userSettings:
+          let
+            pkgs = import nixpkgs {
+              system = settings.architecture;
+              overlays = [
+                nur.overlays.default
+                nixgl.overlay
+              ];
             };
-          };
-        }) hostSettings.users
+
+          in
+          {
+            "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              modules = [
+                ./home/profiles/common.nix
+                ./home/profiles/${userSettings.profile}.nix
+              ];
+              extraSpecialArgs = {
+                inherit inputs;
+                inherit nixgl;
+                inherit nixpkgs-unstable;
+                inherit pkgs-stable;
+                settings = settingsUser userSettings hostSettings username hostname;
+              };
+            };
+          }
+        ) hostSettings.users
       ) nonNixOSHosts;
     };
 }
