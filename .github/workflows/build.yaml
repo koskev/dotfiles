@@ -9,9 +9,16 @@ jobs:
           - runs-on: ubuntu-24.04
             hosts:
               - kevin-nix
+              - kevin-laptop
+              - kokev
+            hm:
+              - kevin@kevin-nix
+              - kko@liag0005
           - runs-on: ubuntu-24.04-arm
             hosts:
               - rpi-drucker
+            hm:
+              - root@rpi-drucker
     runs-on: ${{ matrix.platform.runs-on }}
     steps:
     - uses: actions/checkout@v5
@@ -38,11 +45,11 @@ jobs:
     # There has to be a better way with github?
     - run: |
         # Running this in multiple jobs does not save time
-        configs=("kevin-nix" "kevin-laptop" "kokev")
-        hm_configs=("kevin@kevin-nix" "kko@liag0005")
+        configs=( ${{ join(matrix.platform.hosts, ' ') }} )
+        hm_configs=( ${{ join(matrix.platform.hm, ' ') }} )
         for config in "${configs[@]}"; do
           echo "Building NixOS for ${config}"
-          nix run nixpkgs#nixos-rebuild -- --flake .#${config} build
+          nix --accept-flake-config run nixpkgs#nixos-rebuild -- --accept-flake-config --flake .#${config} build
         done
         for config in "${hm_configs[@]}"; do
           echo "Building HomeManager for ${config}"

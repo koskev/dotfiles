@@ -14,8 +14,9 @@ _: {
         nixos = true;
         rpi = true;
         flake = "/root/nix";
-        kubernetes = true;
+        kubernetes = false;
         useHomeManagerModule = false;
+        architecture = "aarch64-linux";
       };
       users.root = {
         profile = "server";

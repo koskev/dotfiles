@@ -23,7 +23,10 @@ in
   hardware.raspberry-pi.config = {
     all = {
       options = {
-        gpu_mem = 16;
+        gpu_mem = {
+          enable = lib.mkDefault true;
+          value = lib.mkDefault 16;
+        };
       };
     };
   };
