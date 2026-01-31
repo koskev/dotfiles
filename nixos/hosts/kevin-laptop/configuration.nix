@@ -15,6 +15,7 @@
     ./heads.nix
     ../../packages/39c3.nix
 
+    ../../packages/gaming.nix
     ../../packages/docker.nix
   ];
   services = {
