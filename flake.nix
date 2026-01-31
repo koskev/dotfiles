@@ -140,15 +140,6 @@
           sops.defaultSopsFile = ./secrets/secrets.yaml;
         }
       ];
-      extra_modules =
-        if settingsUser.system.rpi or true then
-          with nixos-raspberrypi.nixosModules;
-          [
-            raspberry-pi-3.base
-            usb-gadget-ethernet
-          ]
-        else
-          [ ];
     in
     {
       nixosConfigurations = nixpkgs.lib.concatMapAttrs (
@@ -161,6 +152,15 @@
                 nixos-raspberrypi.lib.nixosSystemFull
               else
                 nixpkgs.lib.nixosSystem;
+            extra_modules =
+              if hostSettings.system.rpi or false then
+                with nixos-raspberrypi.nixosModules;
+                [
+                  raspberry-pi-3.base
+                  usb-gadget-ethernet
+                ]
+              else
+                [ ];
 
           in
           {
