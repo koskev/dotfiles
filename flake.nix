@@ -135,7 +135,7 @@
           let
             nix_system =
               if hostSettings.system.rpi or false then
-                nixos-raspberrypi.lib.nixosSystemFull
+                nixos-raspberrypi.lib.nixosSystem
               else
                 nixpkgs.lib.nixosSystem;
             extra_modules =

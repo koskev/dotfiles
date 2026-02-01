@@ -4,20 +4,8 @@
 {
   config,
   lib,
-  pkgs,
-  modulesPath,
-  settings,
   ...
 }:
-let
-  btrfsOptions = [
-    "noatime"
-    "compress-force=zstd:3"
-    "ssd"
-    "space_cache=v2"
-  ];
-in
-
 {
   boot.loader.raspberryPi.bootloader = "kernel";
   hardware.raspberry-pi.config = {
@@ -39,16 +27,6 @@ in
       cfg.bootloader
       config.boot.kernelPackages.kernel.version
     ];
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/mapper/nvme_crypt";
-      fsType = "btrfs";
-      options = [ "subvol=@root_nix" ] ++ btrfsOptions;
-    };
-  };
-
-  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }

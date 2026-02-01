@@ -13,12 +13,15 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./octoprint.nix
+    ./disko.nix
   ];
 
-  networking.hostName = settings.hostname;
+  zramSwap.enable = true;
 
-  # Configure network connections interactively with nmcli or nmtui.
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = settings.hostname;
+    networkmanager.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -34,19 +37,25 @@
     keyMap = "de";
   };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+    };
+  };
 
-  users.groups.plugdev = { };
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.kevin = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "plugdev"
-      "input"
-    ]; # Enable ‘sudo’ for the user.
+  users.users.root = {
     shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf kevin@kevin-arch"
+    ];
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      22
+    ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -59,14 +68,10 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
