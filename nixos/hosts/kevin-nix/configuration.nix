@@ -20,6 +20,8 @@
     ../../packages/docker.nix
     ../../../settings_option.nix # To help the lsp
   ];
+  # For Cross building flakes
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   hostsettings = {
     system = {
