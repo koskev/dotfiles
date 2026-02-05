@@ -29,6 +29,7 @@ in
       enable = true;
       config = {
         remotes = "127.0.0.1 smtp";
+        defaultdomain = "de";
       };
     };
     etebase-server = {
