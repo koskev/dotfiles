@@ -74,9 +74,5 @@
         };
       };
     };
-    mergiraf = {
-      package = inputs.mergiraf.packages.${pkgs.stdenv.hostPlatform.system}.default;
-      enable = true;
-    };
   };
 }

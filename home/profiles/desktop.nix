@@ -3,6 +3,7 @@
   pkgs,
   settings,
   lib,
+  inputs,
   ...
 }:
 {
@@ -34,6 +35,10 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+    mergiraf = {
+      package = inputs.mergiraf.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      enable = true;
     };
     alacritty = {
       enable = true;
@@ -103,5 +108,9 @@
 
   home.packages = with pkgs; [
     baobab
+
+    inputs.grustonnet.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+    inputs.vrl-ls.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+    inputs.jsonnet-debugger.defaultPackage.${pkgs.stdenv.hostPlatform.system}
   ];
 }
