@@ -8,6 +8,16 @@
 }:
 {
   boot.loader.raspberryPi.bootloader = "kernel";
+  fileSystems = {
+    "/boot" = {
+      device = "/dev/mmcblk0p1";
+      options = [ "noatime" ];
+    };
+    "/" = {
+      device = "/dev/mmcblk0p2";
+      options = [ "noatime" ];
+    };
+  };
   hardware.raspberry-pi.config = {
     all = {
       options = {
