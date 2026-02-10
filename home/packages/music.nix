@@ -23,6 +23,13 @@
       enable = true;
       playlistDirectory = "${config.home.homeDirectory}/.config/mpd/playlists";
       dataDir = "${config.home.homeDirectory}/.config/mpd";
+      extraConfig = ''
+        # Set output explicitly, otherwise seeking and playing the next song won't work
+        audio_output {
+          type "pipewire"
+          name "Local Music Player Daemon"
+        }
+      '';
     };
   };
 }
