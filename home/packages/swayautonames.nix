@@ -22,6 +22,7 @@
         "Element" = "";
 
         "cantata" = "";
+        "dog.unix.cantata.Cantata" = "";
         "org.keepassxc.KeePassXC" = "";
 
         "lutris" = "";
