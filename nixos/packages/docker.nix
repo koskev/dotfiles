@@ -9,5 +9,6 @@
   # The worlds most famous _virtualisation_ software....rly nixos?
   virtualisation.docker = {
     enable = true;
+    autoPrune.enable = true;
   };
 }
