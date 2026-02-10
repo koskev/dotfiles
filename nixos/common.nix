@@ -21,6 +21,10 @@
       package = pkgs.plocate;
     };
   };
+  systemd.tmpfiles.rules = [
+    # Delete old build files after 4 days
+    "e /nix/var/nix/builds/* - - - 4d"
+  ];
   nix = {
     optimise.automatic = true;
     gc = {
