@@ -422,11 +422,11 @@
         "recordings": "recordings"
       },
       "locked": {
-        "lastModified": 1771370184,
-        "narHash": "sha256-Jwv8ziAppt3JR2WiHg080oLUzyTvpjyb6PIUssYe5Bo=",
+        "lastModified": 1771430628,
+        "narHash": "sha256-qiUlD6f6ycIZIP48CJ/r8XiSpBv8qRZRFEKqYfX2Yao=",
         "owner": "koskev",
         "repo": "grustonnet-ls",
-        "rev": "26ba146909021cb0857d88eba68992de076664c4",
+        "rev": "d3e580875e04d8309a9ed9998a502580042e5688",
         "type": "github"
       },
       "original": {
@@ -956,11 +956,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771427434,
-        "narHash": "sha256-m43O5Sjp+g3MejI38CIM0bhsfUWOLLhLwlEa4gP+FMc=",
+        "lastModified": 1771428710,
+        "narHash": "sha256-g2boZGcKrDZtOKz8nXZKA4L20jm6tTZsIO0dVbIfLGo=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "54fbb0613b8c7509c5d1d2ee318dbd10e5ddc33d",
+        "rev": "646d24c5080c45e230346200c4df4f7276858049",
         "type": "github"
       },
       "original": {
