@@ -109,8 +109,7 @@
   home.packages = with pkgs; [
     baobab
 
-    inputs.grustonnet.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+    inputs.grustonnet.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.vrl-ls.defaultPackage.${pkgs.stdenv.hostPlatform.system}
-    inputs.jsonnet-debugger.defaultPackage.${pkgs.stdenv.hostPlatform.system}
   ];
 }
