@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
+  self,
   pkgs,
   settings,
   ...
@@ -15,7 +16,7 @@
     ./disk-config.nix
     ./nginx.nix
     ./services.nix
-    ../../packages/docker.nix
+    self.nixosModules.docker
   ];
   services = {
     snapper = {

@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
+  self,
   pkgs,
   settings,
   ...
@@ -13,10 +14,9 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./heads.nix
-    ../../packages/39c3.nix
 
-    ../../packages/gaming.nix
-    ../../packages/docker.nix
+    self.nixosModules.gaming
+    self.nixosModules.docker
   ];
   services = {
     pipewire = {

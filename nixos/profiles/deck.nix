@@ -1,11 +1,12 @@
 {
+  self,
   ...
 }:
 
 {
 
   imports = [
-    ../packages/desktop.nix
+    self.nixosModules.desktop
   ];
 
 }
