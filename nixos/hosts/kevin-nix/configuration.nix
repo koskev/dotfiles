@@ -17,39 +17,11 @@
 
     self.nixosModules.gaming
     self.nixosModules.waydroid
-    ../../packages/virt.nix
+    self.modules.nixos.virt
     self.nixosModules.docker
-    ../../../settings_option.nix # To help the lsp
   ];
   # For Cross building flakes
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-  hostsettings = {
-    system = {
-      nixos = true;
-      flake = "/home/kevin/nix";
-      sensors = {
-        cpu = "/dev/internal_coretemp/temp1_input";
-        water = "/dev/openfanhub/temp1_input";
-      };
-      wireguard = {
-        addresses = [
-          "10.200.200.2/32"
-          "fd00::2/64"
-        ];
-        public_key = "7ZU/0Z040UhoL0+5nG51vBlNj22RocojWUq0UHqpZRo=";
-        client = {
-          enable = true;
-          server = "kokev";
-        };
-      };
-    };
-    users.kevin = {
-      profile = "desktop";
-      defaultDesktop = "hyprland";
-      waybarTheme = "koskev";
-    };
-  };
 
   services = {
     pipewire = {
