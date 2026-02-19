@@ -494,6 +494,21 @@
         "type": "github"
       }
     },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1771045967,
+        "narHash": "sha256-oYO4poyw0Sb/db2PigqugMlDwsvwLg6CSpFrMUWxA3Q=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "c968d3b54d12cf5d9c13f16f7c545a06c9d1fde6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -1050,6 +1065,7 @@
         "flake-parts": "flake-parts",
         "grustonnet": "grustonnet",
         "home-manager": "home-manager",
+        "import-tree": "import-tree",
         "jovian": "jovian",
         "jsonnet-debugger": "jsonnet-debugger",
         "mergiraf": "mergiraf",

@@ -7,7 +7,7 @@ _: {
 
     {
       imports = [
-        ../nixos/packages/network/wireguard.nix
+        ../../nixos/packages/network/wireguard.nix
       ];
 
       # Due to joplin an feishin
