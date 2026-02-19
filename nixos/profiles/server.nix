@@ -1,11 +1,12 @@
 {
+  self,
   settings,
   lib,
   ...
 }:
 {
   imports = [
-    ../packages/autoupdate.nix
+    self.nixosModules.autoupdate
   ]
   ++ lib.optional (settings.system.kubernetes or false) ../packages/kubernetes.nix;
 }

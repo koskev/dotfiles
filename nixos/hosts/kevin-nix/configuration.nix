@@ -6,6 +6,7 @@
   pkgs,
   settings,
   lib,
+  self,
   ...
 }:
 
@@ -15,7 +16,7 @@
     ./hardware-configuration.nix
 
     ../../packages/gaming.nix
-    ../../packages/waydroid.nix
+    self.nixosModules.waydroid
     ../../packages/virt.nix
     ../../packages/docker.nix
     ../../../settings_option.nix # To help the lsp
