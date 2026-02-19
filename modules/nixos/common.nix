@@ -1,13 +1,14 @@
 _: {
   flake.nixosModules.common =
     {
+      self,
       pkgs,
       ...
     }:
 
     {
       imports = [
-        ../../nixos/packages/network/wireguard.nix
+        self.nixosModules.wireguard
       ];
 
       # Due to joplin an feishin
