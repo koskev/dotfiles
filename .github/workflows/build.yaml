@@ -6,27 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
+    - name: Most important Action!
+      uses: wimpysworld/nothing-but-nix@687c797a730352432950c707ab493fcc951818d7
+      with:
+        hatchet-protocol: 'rampage' # Why would I never need something else?!
     - uses: cachix/install-nix-action@v31
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: debloat
-      run: |
-        sudo rm -rf /usr/share/dotnet
-        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-        sudo rm -rf /opt/microsoft
-        sudo rm -rf /usr/lib/llvm-*
-        sudo rm -rf /usr/local/julia*
-        sudo rm -rf /usr/local/share/chromium
-        sudo rm -rf /usr/local/share/powershell
-        sudo rm -rf /usr/share/swift
-        sudo rm -rf /opt/ghc \
-          /opt/google/chrome \
-          /opt/pipx \
-          /usr/lib/mono \
-          /usr/local/lib/android \
-          /usr/local/lib/node_modules
-        sudo df -TBG /
-    # There has to be a better way with github?
     - run: |
         # Running this in multiple jobs does not save time
         configs=("kevin-nix" "kevin-laptop" "kokev")
