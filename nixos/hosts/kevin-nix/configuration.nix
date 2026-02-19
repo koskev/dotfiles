@@ -15,10 +15,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    ../../packages/gaming.nix
+    self.nixosModules.gaming
     self.nixosModules.waydroid
     ../../packages/virt.nix
-    ../../packages/docker.nix
+    self.nixosModules.docker
     ../../../settings_option.nix # To help the lsp
   ];
   # For Cross building flakes
