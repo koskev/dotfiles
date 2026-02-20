@@ -1,5 +1,5 @@
 _: {
-  flake.nixosModules.wireguard =
+  flake.modules.nixos.wireguard =
     {
       config,
       settings,

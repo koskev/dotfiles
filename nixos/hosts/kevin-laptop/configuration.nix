@@ -15,8 +15,8 @@
     ./hardware-configuration.nix
     ./heads.nix
 
-    self.nixosModules.gaming
-    self.nixosModules.docker
+    self.modules.nixos.gaming
+    self.modules.nixos.docker
   ];
   services = {
     pipewire = {

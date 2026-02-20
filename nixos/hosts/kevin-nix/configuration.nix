@@ -15,10 +15,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    self.nixosModules.gaming
-    self.nixosModules.waydroid
+    self.modules.nixos.gaming
+    self.modules.nixos.waydroid
     self.modules.nixos.virt
-    self.nixosModules.docker
+    self.modules.nixos.docker
   ];
   # For Cross building flakes
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

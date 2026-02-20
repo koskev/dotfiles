@@ -1,5 +1,5 @@
 _: {
-  flake.nixosModules.docker =
+  flake.modules.nixos.docker =
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [

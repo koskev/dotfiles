@@ -6,7 +6,7 @@
 {
 
   imports = [
-    self.nixosModules.desktop
+    self.modules.nixos.desktop
   ];
 
 }
