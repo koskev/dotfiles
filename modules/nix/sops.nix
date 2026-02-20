@@ -1,4 +1,4 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 {
 
   flake.modules.nixos.nixos = {
@@ -6,7 +6,7 @@
     imports = [
       inputs.sops-nix.nixosModules.sops
       {
-        sops.defaultSopsFile = "${self}/secrets/secrets.yaml";
+        sops.defaultSopsFile = ../../secrets/secrets.yaml;
       }
     ];
   };

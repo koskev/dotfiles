@@ -6,12 +6,11 @@ _: {
       lib,
       inputs,
       settings,
-      self,
       ...
     }:
     let
       userhost = "${settings.username}@${settings.hostname}";
-      configPath = "${self}/configs/users/${userhost}/rufaco.yaml";
+      configPath = ../../../configs/users/${userhost}/rufaco.yaml;
     in
     lib.mkIf (lib.pathExists configPath) {
       home.packages = [
