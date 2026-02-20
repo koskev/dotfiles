@@ -103,7 +103,7 @@
     ../packages/misc.nix
     self.modules.homeManager.desktop
     self.modules.homeManager.lsp
-    ../packages/kubernetes.nix
+    self.modules.homeManager.kubernetes
   ];
 
   home.packages = with pkgs; [
