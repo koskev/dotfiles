@@ -95,7 +95,6 @@
     ../packages/fonts.nix
     ../packages/browser.nix
     ../packages/mail.nix
-    ../packages/rofi.nix
     ../packages/rufaco.nix
     ../packages/kanshi.nix
     ../packages/music.nix
