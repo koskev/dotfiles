@@ -20,7 +20,7 @@
 
   imports = [
     ../packages/base.nix
-    self.nixosModules.kubernetes
+    #self.nixosModules.kubernetes
     ../packages/shell/common.nix
     ../packages/neovim.nix
     inputs.nix-index-database.homeModules.nix-index
