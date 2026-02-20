@@ -178,6 +178,7 @@
                       inherit nixgl;
                       inherit nixpkgs-unstable;
                       inherit pkgs-stable;
+                      inherit self;
                       settings = settingsUser userSettings hostSettings username hostname;
                     };
                   };
