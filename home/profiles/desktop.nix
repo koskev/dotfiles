@@ -92,14 +92,8 @@
     };
   };
   imports = [
-    ../packages/fonts.nix
-    ../packages/browser.nix
-    ../packages/mail.nix
-    ../packages/rufaco.nix
-    ../packages/kanshi.nix
-    ../packages/music.nix
-    ../packages/pushtotalk.nix
-    ../packages/misc.nix
+    self.modules.homeManager.misc
+    self.modules.homeManager.rufaco
     self.modules.homeManager.desktop
     self.modules.homeManager.lsp
     self.modules.homeManager.kubernetes

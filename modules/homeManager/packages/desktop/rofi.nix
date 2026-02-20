@@ -1,7 +1,6 @@
 _: {
   flake.modules.homeManager.desktop =
     {
-      self,
       ...
     }:
     {
@@ -15,7 +14,7 @@ _: {
       };
 
       xdg.configFile."rofi/themes" = {
-        source = "${self}/configs/rofi/themes";
+        source = ../../../../configs/rofi/themes;
       };
     };
 }
