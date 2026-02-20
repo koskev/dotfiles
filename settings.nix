@@ -9,19 +9,19 @@ _: {
       };
       users.kevin.profile = "desktop";
     };
-    "rpi-drucker" = {
-      system = {
-        nixos = true;
-        rpi = true;
-        flake = "/root/nix";
-        kubernetes = true;
-        useHomeManagerModule = true;
-      };
-      users.root = {
-        profile = "server";
-        home = "/root";
-      };
-    };
+    #"rpi-drucker" = {
+    #  system = {
+    #    nixos = true;
+    #    rpi = true;
+    #    flake = "/root/nix";
+    #    kubernetes = true;
+    #    useHomeManagerModule = true;
+    #  };
+    #  users.root = {
+    #    profile = "server";
+    #    home = "/root";
+    #  };
+    #};
     "kokev" = {
       system = {
         nixos = true;
