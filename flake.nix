@@ -127,12 +127,6 @@
           inherit username;
           homedir = userSettings.home or "/home/${username}";
         };
-      sopsModules = [
-        sops-nix.nixosModules.sops
-        {
-          sops.defaultSopsFile = ./secrets/secrets.yaml;
-        }
-      ];
     in
     flake-parts.lib.mkFlake { inherit inputs; } (
       { config, ... }:
@@ -157,8 +151,8 @@
                   self.modules.nixos.common
                   disko.nixosModules.disko
                   home-manager.nixosModules.home-manager
+                  self.modules.nixos.nixos
                 ]
-                ++ sopsModules
                 ++ lib.optional (hostSettings.system.useHomeManagerModule or false) {
                   home-manager = {
                     useGlobalPkgs = false;
