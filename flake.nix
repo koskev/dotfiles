@@ -98,13 +98,6 @@
     let
       inherit (nixpkgs) lib;
       settings = import ./settings.nix { };
-      pkgs = import nixpkgs {
-        system = settings.architecture;
-        overlays = [
-          nur.overlays.default
-          nixgl.overlay
-        ];
-      };
       pkgs-stable = import nixpkgs-stable {
         system = settings.architecture;
         overlays = [
@@ -193,7 +186,13 @@
             hostname: hostSettings:
             nixpkgs.lib.concatMapAttrs (username: userSettings: {
               "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
-                inherit pkgs;
+                pkgs = import nixpkgs {
+                  system = settings.architecture;
+                  overlays = [
+                    nur.overlays.default
+                    nixgl.overlay
+                  ];
+                };
                 modules = [
                   ./home/profiles/common.nix
                   ./home/profiles/${userSettings.profile}.nix
