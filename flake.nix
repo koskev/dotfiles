@@ -157,7 +157,7 @@
                         nixgl.overlay
                       ];
                       imports = [
-                        ./home/profiles/common.nix
+                        self.modules.homeManager.common
                         ./home/profiles/${userSettings.profile}.nix
                       ];
                     };
@@ -194,7 +194,7 @@
                   ];
                 };
                 modules = [
-                  ./home/profiles/common.nix
+                  self.modules.homeManager.common
                   ./home/profiles/${userSettings.profile}.nix
                 ];
                 extraSpecialArgs = {
