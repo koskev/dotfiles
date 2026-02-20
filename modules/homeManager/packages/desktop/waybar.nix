@@ -1,3 +1,5 @@
+_: {
+  flake.modules.homeManager.desktop =
 {
   settings,
   ...
@@ -5,7 +7,7 @@
 {
 
   xdg.configFile."waybar" = {
-    source = ../../configs/waybar/themes/${settings.userSettings.waybarTheme};
+    source = ../../../../configs/waybar/themes/${settings.userSettings.waybarTheme};
     recursive = true;
   };
 
@@ -251,4 +253,5 @@
       };
     };
   };
+};
 }

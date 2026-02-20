@@ -100,10 +100,9 @@
     ../packages/rufaco.nix
     ../packages/kanshi.nix
     ../packages/music.nix
-    ../packages/waybar.nix
-    ../packages/swayautonames.nix
     ../packages/pushtotalk.nix
     ../packages/misc.nix
+    self.modules.homeManager.desktop
     self.modules.homeManager.lsp
     ../packages/kubernetes.nix
   ];
