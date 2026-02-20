@@ -4,6 +4,7 @@
   settings,
   lib,
   inputs,
+  self,
   ...
 }:
 {
@@ -103,7 +104,7 @@
     ../packages/swayautonames.nix
     ../packages/pushtotalk.nix
     ../packages/misc.nix
-    ../packages/lsp.nix
+    self.modules.homeManager.lsp
     ../packages/kubernetes.nix
   ];
 
