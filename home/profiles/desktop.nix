@@ -104,6 +104,7 @@
     ../packages/pushtotalk.nix
     ../packages/misc.nix
     ../packages/lsp.nix
+    ../packages/kubernetes.nix
   ];
 
   home.packages = with pkgs; [
