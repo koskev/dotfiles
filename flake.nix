@@ -139,6 +139,7 @@
       {
         debug = true;
         imports = [
+          inputs.flake-parts.flakeModules.modules
           (inputs.import-tree ./modules)
         ];
         systems = [
@@ -153,7 +154,7 @@
                 modules = [
                   ./nixos/hosts/${hostname}/configuration.nix
                   ./nixos/profiles/${userSettings.profile}.nix
-                  self.nixosModules.common
+                  self.modules.nixos.common
                   disko.nixosModules.disko
                   home-manager.nixosModules.home-manager
                 ]

@@ -1,5 +1,5 @@
 _: {
-  flake.nixosModules.kubernetes =
+  flake.modules.nixos.kubernetes =
     {
       self,
       pkgs,
@@ -7,7 +7,7 @@ _: {
     }:
     {
       imports = [
-        self.nixosModules.glusterfs
+        self.modules.nixos.glusterfs
       ];
 
       environment.systemPackages = with pkgs; [

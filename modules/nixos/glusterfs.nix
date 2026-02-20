@@ -1,5 +1,5 @@
 _: {
-  flake.nixosModules.glusterfs =
+  flake.modules.nixos.glusterfs =
     {
       self,
       pkgs,

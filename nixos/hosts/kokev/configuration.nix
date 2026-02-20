@@ -16,7 +16,7 @@
     ./disk-config.nix
     ./nginx.nix
     ./services.nix
-    self.nixosModules.docker
+    self.modules.nixos.docker
   ];
   services = {
     snapper = {

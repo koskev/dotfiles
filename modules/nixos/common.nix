@@ -1,5 +1,5 @@
 _: {
-  flake.nixosModules.common =
+  flake.modules.nixos.common =
     {
       self,
       pkgs,
@@ -8,7 +8,7 @@ _: {
 
     {
       imports = [
-        self.nixosModules.wireguard
+        self.modules.nixos.wireguard
       ];
 
       # Due to joplin an feishin
