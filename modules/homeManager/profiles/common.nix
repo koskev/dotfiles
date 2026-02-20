@@ -5,6 +5,7 @@ _: {
       lib,
       settings,
       inputs,
+      self,
       ...
     }:
     {
@@ -22,7 +23,7 @@ _: {
         #self.nixosModules.kubernetes
         ../../../home/packages/base.nix
         ../../../home/packages/shell/common.nix
-        ../../../home/packages/neovim.nix
+        self.modules.homeManager.neovim
         inputs.nix-index-database.homeModules.nix-index
         { programs.nix-index-database.comma.enable = true; }
 
