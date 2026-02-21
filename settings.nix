@@ -3,12 +3,6 @@ _: {
   architecture = "x86_64-linux";
   stateVersion = "25.11"; # Did you read the comment?
   hosts = {
-    "kevin-arch" = {
-      system = {
-        nixos = false;
-      };
-      users.kevin.profile = "desktop";
-    };
     #"rpi-drucker" = {
     #  system = {
     #    nixos = true;
