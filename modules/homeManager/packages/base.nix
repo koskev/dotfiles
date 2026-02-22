@@ -1,10 +1,10 @@
-_: {
+{ inputs, ... }:
+{
   flake.modules.homeManager.base =
     {
       pkgs,
       lib,
-      settings,
-      nixgl,
+      config,
       ...
     }:
     {
@@ -71,16 +71,6 @@ _: {
         ];
       };
 
-    }
-
-    // lib.optionalAttrs (!settings.system.nixos) {
-      targets.genericLinux.nixGL = {
-        inherit (nixgl) packages;
-        vulkan.enable = false;
-        defaultWrapper = "mesa";
-        installScripts = [
-          "mesa"
-        ];
-      };
     };
+
 }

@@ -1,13 +1,13 @@
 _: {
   flake.modules.nixos.virt =
     {
-      settings,
+      config,
       ...
     }:
     {
       programs.virt-manager.enable = true;
 
-      users.groups.libvirtd.members = [ settings.username ];
+      users.groups.libvirtd.members = [ config.userSettings.userName ];
 
       virtualisation = {
         libvirtd.enable = true;

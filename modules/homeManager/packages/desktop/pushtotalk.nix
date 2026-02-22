@@ -1,8 +1,8 @@
-_: {
+{ inputs, ... }:
+{
   flake.modules.homeManager.desktop =
     {
       pkgs,
-      inputs,
       ...
     }:
     {

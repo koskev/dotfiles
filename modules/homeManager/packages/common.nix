@@ -1,33 +1,23 @@
-_: {
+{ inputs, ... }:
+{
   flake.modules.homeManager.common =
     {
       pkgs,
       lib,
-      settings,
-      inputs,
-      self,
+      config,
       ...
     }:
     {
-      home = {
-        username = "${settings.username}";
-        homeDirectory = "${settings.homedir}";
-        inherit (settings) stateVersion;
-      };
       # Due to joplin an feishin
       nixpkgs.config.permittedInsecurePackages = [
         "electron-36.9.5"
       ];
 
       imports = [
-        #self.nixosModules.kubernetes
-        self.modules.homeManager.base
-        self.modules.homeManager.neovim
         inputs.nix-index-database.homeModules.nix-index
-        { programs.nix-index-database.comma.enable = true; }
-
       ];
 
+      programs.nix-index-database.comma.enable = true;
       nix = {
         package = lib.mkDefault pkgs.nix;
         settings.experimental-features = [
@@ -38,7 +28,7 @@ _: {
       programs = {
         nh = {
           enable = true;
-          flake = settings.system.flake or null;
+          flake = config.userSettings.flakeLocation or null;
         };
         home-manager.enable = true;
         lazygit = {

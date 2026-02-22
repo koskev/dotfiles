@@ -1,7 +1,6 @@
 _: {
-  flake.modules.homeManager.base =
+  flake.modules.homeManager.shell =
     {
-      settings,
       lib,
       config,
       ...
@@ -47,7 +46,7 @@ _: {
               export MOZ_LEGACY_PROFILES=1
 
               # Use the old histfile for now
-              export HISTFILE=${settings.homedir}/.zsh_history
+              export HISTFILE=${config.home.homeDirectory}/.zsh_history
 
               # Not compatible with append only histfile
               unsetopt HIST_FCNTL_LOCK
@@ -67,7 +66,7 @@ _: {
 
 
               if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-                ${settings.userSettings.defaultDesktop or "true"}
+                ${config.userSettings.defaultDesktop or "true"}
               fi
 
             '')

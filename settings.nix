@@ -40,32 +40,32 @@ _: {
         home = "/root";
       };
     };
-    "kevin-nix" = {
-      system = {
-        nixos = true;
-        flake = "/home/kevin/nix";
-        sensors = {
-          cpu = "/dev/internal_coretemp/temp1_input";
-          water = "/dev/openfanhub/temp1_input";
-        };
-        wireguard = {
-          addresses = [
-            "10.200.200.2/32"
-            "fd00::2/64"
-          ];
-          public_key = "7ZU/0Z040UhoL0+5nG51vBlNj22RocojWUq0UHqpZRo=";
-          client = {
-            enable = true;
-            server = "kokev";
-          };
-        };
-      };
-      users.kevin = {
-        profile = "desktop";
-        defaultDesktop = "hyprland";
-        waybarTheme = "koskev";
-      };
-    };
+    #"kevin-nix" = {
+    #  system = {
+    #    nixos = true;
+    #    flake = "/home/kevin/nix";
+    #    sensors = {
+    #      cpu = "/dev/internal_coretemp/temp1_input";
+    #      water = "/dev/openfanhub/temp1_input";
+    #    };
+    #    wireguard = {
+    #      addresses = [
+    #        "10.200.200.2/32"
+    #        "fd00::2/64"
+    #      ];
+    #      public_key = "7ZU/0Z040UhoL0+5nG51vBlNj22RocojWUq0UHqpZRo=";
+    #      client = {
+    #        enable = true;
+    #        server = "kokev";
+    #      };
+    #    };
+    #  };
+    #  users.kevin = {
+    #    profile = "desktop";
+    #    defaultDesktop = "hyprland";
+    #    waybarTheme = "koskev";
+    #  };
+    #};
     "kevin-laptop" = {
       system = {
         nixos = true;

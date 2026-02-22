@@ -3,12 +3,13 @@ _: {
     {
       self,
       pkgs,
+      config,
       ...
     }:
-
     {
+      networking.hostName = config.hostSettings.hostName;
       imports = [
-        self.modules.nixos.wireguard
+        #self.modules.nixos.wireguard
       ];
 
       # Due to joplin an feishin

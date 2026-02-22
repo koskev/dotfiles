@@ -4,21 +4,17 @@
 
 {
   pkgs,
-  settings,
   lib,
-  self,
+  config,
   ...
 }:
 
 {
+  programs.fish.enable = true;
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    self.modules.nixos.gaming
-    self.modules.nixos.waydroid
-    self.modules.nixos.virt
-    self.modules.nixos.docker
   ];
   # For Cross building flakes
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -86,7 +82,6 @@
       hostsToBlockString = lib.strings.join "\n" hostsToBlock;
     in
     {
-      hostName = settings.hostname;
 
       # Configure network connections interactively with nmcli or nmtui.
       networkmanager.enable = true;
@@ -188,6 +183,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = settings.stateVersion; # Did you read the comment?
+  system.stateVersion = config.hostSettings.stateVersion; # Did you read the comment?
 
 }

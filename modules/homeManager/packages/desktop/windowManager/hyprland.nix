@@ -2,7 +2,6 @@ _: {
   flake.modules.homeManager.desktop =
     {
       lib,
-      settings,
       config,
       pkgs,
       ...
@@ -194,7 +193,7 @@ _: {
           ];
         };
       }
-      // lib.optionalAttrs (!settings.system.nixos) {
+      // lib.optionalAttrs config.hostSettings.system.nonNixos {
         package = lib.mkForce (config.lib.nixGL.wrap pkgs.hyprland);
       };
 

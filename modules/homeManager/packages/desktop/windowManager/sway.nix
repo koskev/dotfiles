@@ -1,7 +1,7 @@
 _: {
   flake.modules.homeManager.desktop =
     {
-      settings,
+      config,
       lib,
       ...
     }:
@@ -11,7 +11,7 @@ _: {
         extraConfig = builtins.readFile ./sway.conf;
         config = null;
       }
-      // lib.optionalAttrs (!settings.system.nixos) {
+      // lib.optionalAttrs config.hostSettings.system.nonNixos {
         # Don't use the package on non nix os for now
         package = null;
       };

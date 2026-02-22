@@ -1,10 +1,9 @@
-_: {
+{ inputs, ... }:
+{
   flake.modules.homeManager.desktop =
     {
       pkgs,
-      inputs,
       lib,
-      settings,
       config,
       ...
     }:
@@ -136,7 +135,7 @@ _: {
           };
         };
       }
-      // lib.optionalAttrs (!settings.system.nixos) {
+      // lib.optionalAttrs config.hostSettings.system.nonNixos {
         package = lib.mkForce (config.lib.nixGL.wrap zen_package);
       };
     };

@@ -3,14 +3,13 @@ _: {
     {
       pkgs,
       config,
-      settings,
       ...
     }:
     let
       linkNvim = name: {
         "nvim/${name}" = {
           #source = ../../configs/nvim/${name};
-          source = config.lib.file.mkOutOfStoreSymlink "${settings.system.flake}/configs/nvim/${name}";
+          source = config.lib.file.mkOutOfStoreSymlink "${config.hostSettings.system.flake}/configs/nvim/${name}";
         };
       };
     in
@@ -31,7 +30,7 @@ _: {
       # Link them one by one to actually link the correct file and not the store
       xdg.configFile = {
         "nvim/lazy-lock.json".source =
-          config.lib.file.mkOutOfStoreSymlink "${settings.system.flake}/configs/nvim/lazy-lock.json";
+          config.lib.file.mkOutOfStoreSymlink "${config.hostSettings.system.flake}/configs/nvim/lazy-lock.json";
       }
       // linkNvim "lua"
       // linkNvim "after"

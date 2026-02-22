@@ -91,7 +91,6 @@
       nur,
       nixgl,
       disko,
-      sops-nix,
       flake-parts,
       ...
     }@inputs:
@@ -132,83 +131,86 @@
         systems = [
           "x86_64-linux"
         ];
-        flake = {
-          nixosConfigurations = nixpkgs.lib.concatMapAttrs (
-            hostname: hostSettings:
-            nixpkgs.lib.concatMapAttrs (username: userSettings: {
-              # TODO: this does not support multiple users. The loop needs to be further down
-              "${hostname}" = nixpkgs.lib.nixosSystem {
-                modules = [
-                  ./nixos/hosts/${hostname}/configuration.nix
-                  ./nixos/profiles/${userSettings.profile}.nix
-                  self.modules.nixos.common
-                  disko.nixosModules.disko
-                  home-manager.nixosModules.home-manager
-                  self.modules.nixos.nixos
-                ]
-                ++ lib.optional (hostSettings.system.useHomeManagerModule or false) {
-                  home-manager = {
-                    useGlobalPkgs = false;
-                    useUserPackages = true;
-                    backupFileExtension = "backup";
-                    users.${username} = {
-                      nixpkgs.overlays = [
-                        nur.overlays.default
-                        nixgl.overlay
-                      ];
-                      imports = [
-                        self.modules.homeManager.common
-                        ./home/profiles/${userSettings.profile}.nix
-                      ];
-                    };
-                    extraSpecialArgs = {
-                      inherit inputs;
-                      inherit nixgl;
-                      inherit nixpkgs-unstable;
-                      inherit pkgs-stable;
-                      inherit self;
-                      settings = settingsUser userSettings hostSettings username hostname;
-                    };
-                  };
-                };
-                specialArgs = {
-                  inherit inputs;
-                  inherit nixpkgs-unstable;
-                  inherit pkgs-stable;
-                  inherit self;
-                  settings = settingsUser userSettings hostSettings username hostname;
-                };
-              };
-            }) hostSettings.users or { }
-          ) nixOSHosts;
+        #flake = {
+        #  nixosConfigurations = nixpkgs.lib.concatMapAttrs (
+        #    hostname: hostSettings:
+        #    nixpkgs.lib.concatMapAttrs (username: userSettings: {
+        #      # TODO: this does not support multiple users. The loop needs to be further down
+        #      "${hostname}" = nixpkgs.lib.nixosSystem {
+        #        modules = [
+        #          ./nixos/hosts/${hostname}/configuration.nix
+        #          ./nixos/profiles/${userSettings.profile}.nix
+        #          self.modules.nixos.common
+        #          disko.nixosModules.disko
+        #          home-manager.nixosModules.home-manager
+        #          self.modules.nixos.nixos
+        #          self.modules.generic.settings
+        #        ]
+        #        ++ lib.optional (hostSettings.system.useHomeManagerModule or false) {
+        #          home-manager = {
+        #            useGlobalPkgs = false;
+        #            useUserPackages = true;
+        #            backupFileExtension = "backup";
+        #            users.${username} = {
+        #              nixpkgs.overlays = [
+        #                nur.overlays.default
+        #                nixgl.overlay
+        #              ];
+        #              imports = [
+        #                self.modules.homeManager.common
+        #                ./home/profiles/${userSettings.profile}.nix
+        #                self.modules.generic.settings
+        #              ];
+        #            };
+        #            extraSpecialArgs = {
+        #              inherit inputs;
+        #              inherit nixgl;
+        #              inherit nixpkgs-unstable;
+        #              inherit pkgs-stable;
+        #              inherit self;
+        #              settings = settingsUser userSettings hostSettings username hostname;
+        #            };
+        #          };
+        #        };
+        #        specialArgs = {
+        #          inherit inputs;
+        #          inherit nixpkgs-unstable;
+        #          inherit pkgs-stable;
+        #          inherit self;
+        #          settings = settingsUser userSettings hostSettings username hostname;
+        #        };
+        #      };
+        #    }) hostSettings.users or { }
+        #  ) nixOSHosts;
 
-          homeConfigurations = nixpkgs.lib.concatMapAttrs (
-            hostname: hostSettings:
-            nixpkgs.lib.concatMapAttrs (username: userSettings: {
-              "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
-                pkgs = import nixpkgs {
-                  system = settings.architecture;
-                  overlays = [
-                    nur.overlays.default
-                    nixgl.overlay
-                  ];
-                };
-                modules = [
-                  self.modules.homeManager.common
-                  ./home/profiles/${userSettings.profile}.nix
-                ];
-                extraSpecialArgs = {
-                  inherit inputs;
-                  inherit nixgl;
-                  inherit nixpkgs-unstable;
-                  inherit pkgs-stable;
-                  inherit self;
-                  settings = settingsUser userSettings hostSettings username hostname;
-                };
-              };
-            }) hostSettings.users
-          ) nonNixOSHosts;
-        };
+        #  homeConfigurations = nixpkgs.lib.concatMapAttrs (
+        #    hostname: hostSettings:
+        #    nixpkgs.lib.concatMapAttrs (username: userSettings: {
+        #      "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
+        #        pkgs = import nixpkgs {
+        #          system = settings.architecture;
+        #          overlays = [
+        #            nur.overlays.default
+        #            nixgl.overlay
+        #          ];
+        #        };
+        #        modules = [
+        #          self.modules.homeManager.common
+        #          ./home/profiles/${userSettings.profile}.nix
+        #          self.modules.generic.settings
+        #        ];
+        #        extraSpecialArgs = {
+        #          inherit inputs;
+        #          inherit nixgl;
+        #          inherit nixpkgs-unstable;
+        #          inherit pkgs-stable;
+        #          inherit self;
+        #          settings = settingsUser userSettings hostSettings username hostname;
+        #        };
+        #      };
+        #    }) hostSettings.users
+        #  ) nonNixOSHosts;
+        #};
       }
     );
 }

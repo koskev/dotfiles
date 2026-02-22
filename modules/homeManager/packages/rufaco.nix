@@ -1,15 +1,14 @@
-_: {
+{ inputs, ... }:
+{
   flake.modules.homeManager.rufaco =
     {
       config,
       pkgs,
       lib,
-      inputs,
-      settings,
       ...
     }:
     let
-      userhost = "${settings.username}@${settings.hostname}";
+      userhost = "${config.userSettings.userName}@${config.hostSettings.hostName}";
       configPath = ../../../configs/users/${userhost}/rufaco.yaml;
     in
     lib.mkIf (lib.pathExists configPath) {
