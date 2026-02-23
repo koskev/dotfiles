@@ -21,6 +21,9 @@ in
 
       imports = with inputs.self.modules.homeManager; [
         lsp
+        neovim
+        shell
+        base
       ];
     };
     nixosConfigurations = inputs.self.lib.mkNixos "x86_64-linux" hostname;
