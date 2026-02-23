@@ -145,6 +145,9 @@ _: {
             externalInterface = "${cfg.server.interface}";
             internalInterfaces = [ "wg0" ];
           };
+          firewall.allowedUDPPorts = [
+            cfg.server.listen_port
+          ];
         };
       };
     };
