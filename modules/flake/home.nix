@@ -2,7 +2,7 @@ _: {
   flake.modules.nixos.homeManager = {
     home-manager = {
       backupFileExtension = "backup";
-      useGlobalPkgs = true;
+      #useGlobalPkgs = true;
       useUserPackages = true;
     };
   };

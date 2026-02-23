@@ -27,12 +27,16 @@
       };
     };
 
-    mkHomeManagerModule = username: modules: {
+    mkHomeManagerModule = username: hostname: modules: {
       imports = [
         inputs.home-manager.nixosModules.home-manager
         inputs.self.modules.nixos.homeManager
       ];
-      inputs.home-manager.users.${username}.imports = modules;
+      home-manager.users.${username}.imports = [
+        inputs.self.modules.homeManager."${username}@${hostname}"
+        inputs.self.modules.generic.settings
+        inputs.self.modules.homeManager.common
+      ];
     };
   };
 }

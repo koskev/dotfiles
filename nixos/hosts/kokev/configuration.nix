@@ -3,9 +3,8 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  self,
+  config,
   pkgs,
-  settings,
   ...
 }:
 
@@ -14,9 +13,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./disk-config.nix
-    ./nginx.nix
-    ./services.nix
-    self.modules.nixos.docker
+    #./nginx.nix
+    #./services.nix
   ];
   services = {
     snapper = {
@@ -70,7 +68,6 @@
       address = "fe80::1";
       interface = "ens3";
     };
-    hostName = settings.hostname;
   };
 
   # Set your time zone.
@@ -107,9 +104,6 @@
       465
       993
     ];
-    allowedUDPPorts = [
-      settings.system.wireguard.server.listen_port
-    ];
   };
 
   security.acme = {
@@ -136,5 +130,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = settings.stateVersion; # Did you read the comment?
+  system.stateVersion = config.hostSettings.stateVersion; # Did you read the comment?
 }

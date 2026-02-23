@@ -12,15 +12,15 @@
         inputs.nur.overlays.default
         inputs.nixgl.overlay
       ];
+      # Due to joplin an feishin
+      nixpkgs.config.permittedInsecurePackages = [
+        "electron-36.9.5"
+      ];
       home = {
         stateVersion = "25.11";
         username = lib.mkDefault config.userSettings.userName;
         homeDirectory = lib.mkDefault config.userSettings.home;
       };
-      # Due to joplin an feishin
-      nixpkgs.config.permittedInsecurePackages = [
-        "electron-36.9.5"
-      ];
 
       imports = [
         inputs.nix-index-database.homeModules.nix-index
