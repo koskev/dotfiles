@@ -11,6 +11,9 @@
           {
             nixpkgs.hostPlatform = lib.mkDefault system;
             hostSettings.hostName = lib.mkDefault name;
+            _module.args.pkgs-stable = import inputs.nixpkgs-stable {
+              inherit system;
+            };
           }
         ];
 

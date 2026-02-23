@@ -10,10 +10,10 @@ in
   flake = {
     modules.nixos."${hostname}" = {
       imports = with inputs.self.modules.nixos; [
-        ../../nixos/hosts/${hostname}/configuration.nix
         common
         docker
         wireguard
+        autoupdate
         (inputs.self.lib.mkHomeManagerModule username hostname)
       ];
     };
