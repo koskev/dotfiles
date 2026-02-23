@@ -20,7 +20,6 @@ in
     modules.homeManager."${username}@${hostname}" = {
 
       imports = with inputs.self.modules.homeManager; [
-        lsp
         neovim
         shell
         base

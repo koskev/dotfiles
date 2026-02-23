@@ -16,6 +16,7 @@ _: {
           };
         };
         kokev = {
+          enable = true;
           addresses = [
             "10.200.200.1/32"
             "fd00::1/64"
@@ -29,6 +30,7 @@ _: {
           };
         };
         kevin-laptop = {
+          enable = true;
           addresses = [
             "10.200.200.3/32"
             "fd00::3/64"
@@ -41,6 +43,7 @@ _: {
         };
 
         kevin-deck = {
+          enable = true;
           addresses = [
             "10.200.200.4/32"
             "fd00::4/64"
