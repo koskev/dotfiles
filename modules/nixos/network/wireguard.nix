@@ -1,21 +1,75 @@
 _: {
   flake.modules.nixos.wireguard =
     {
-      config,
-      settings,
       lib,
       pkgs,
+      config,
       ...
     }:
-    lib.optionalAttrs
-      (
-        settings.system.wireguard.client.enable or false || settings.system.wireguard.server.enable or false
-      )
-      {
+    with lib;
+    let
+      cfg = config.wireguardSettings.${config.hostSettings.hostName};
+      wireguardOptions =
+        { ... }:
+        {
+          options = {
+            enable = mkOption {
+              type = types.bool;
+              default = false;
+              description = "enable wireguard";
+            };
+            addresses = mkOption {
+              type = types.listOf types.str;
+              description = "Addresses for the wireguard interface";
+            };
+            public_key = mkOption {
+              type = types.str;
+              description = "Public key of this instance";
+            };
+            client = {
+              enable = mkOption {
+                type = types.bool;
+                default = false;
+                description = "enable wireguard client mode";
+              };
+              server = mkOption {
+                description = "Name of the server to use";
+              };
+            };
+            server = {
+              enable = mkOption {
+                type = types.bool;
+                default = false;
+                description = "enable wireguard server mode";
+              };
+              host = mkOption {
+                type = types.str;
+                description = "hostname of the server";
+              };
+              listen_port = mkOption {
+                type = types.port;
+                default = 51871;
+                description = "port to listen to";
+              };
+              interface = mkOption {
+                type = types.str;
+                description = "name of the interface to bind to";
+              };
+            };
+          };
+        };
+    in
+    {
+      options.wireguardSettings = mkOption {
+        description = "List of all wireguard options";
+        default = { };
+        type = with lib.types; attrsOf (submodule wireguardOptions);
+      };
+      config = mkIf cfg.enable {
         sops = {
           secrets =
             let
-              sopsFile = ../../../secrets/${settings.hostname}/wireguard.yaml;
+              sopsFile = ../../../secrets/${config.hostSettings.hostName}/wireguard.yaml;
             in
             {
               "key" = {
@@ -30,13 +84,13 @@ _: {
           wg-quick.interfaces = {
             wg0 = {
               privateKeyFile = config.sops.secrets."key".path;
-              address = settings.system.wireguard.addresses;
+              address = cfg.addresses;
             }
-            // lib.optionalAttrs settings.system.wireguard.client.enable or false {
+            // lib.optionalAttrs cfg.client.enable or false {
               autostart = false;
               peers =
                 let
-                  serverConfig = settings.hosts.${settings.system.wireguard.client.server}.system.wireguard;
+                  serverConfig = config.wireguardSettings.${cfg.client.server};
                 in
                 [
                   {
@@ -51,8 +105,8 @@ _: {
                 ];
             }
 
-            // lib.optionalAttrs settings.system.wireguard.server.enable or false {
-              listenPort = settings.system.wireguard.server.listen_port or 51820;
+            // lib.optionalAttrs cfg.server.enable or false {
+              listenPort = cfg.system.wireguard.server.listen_port or 51820;
               peers =
                 let
                   wireguardClients = lib.filterAttrs (
@@ -68,29 +122,30 @@ _: {
               # This allows the wireguard server to route your traffic to the internet and hence be like a VPN
               postUp = ''
                 ${pkgs.iptables}/bin/iptables -A FORWARD -i wg0 -j ACCEPT
-                ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -o ${settings.system.wireguard.server.interface} -j MASQUERADE
+                ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -o ${cfg.server.interface} -j MASQUERADE
 
                 ${pkgs.iptables}/bin/ip6tables -A FORWARD -i wg0 -j ACCEPT
-                ${pkgs.iptables}/bin/ip6tables -t nat -A POSTROUTING -o ${settings.system.wireguard.server.interface} -j MASQUERADE
+                ${pkgs.iptables}/bin/ip6tables -t nat -A POSTROUTING -o ${cfg.server.interface} -j MASQUERADE
               '';
 
               postDown = ''
                 ${pkgs.iptables}/bin/iptables -D FORWARD -i wg0 -j ACCEPT
-                ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -o ${settings.system.wireguard.server.interface} -j MASQUERADE
+                ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -o ${cfg.server.interface} -j MASQUERADE
 
                 ${pkgs.iptables}/bin/ip6tables -D FORWARD -i wg0 -j ACCEPT
-                ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING -o ${settings.system.wireguard.server.interface} -j MASQUERADE
+                ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING -o ${cfg.server.interface} -j MASQUERADE
               '';
             };
           };
         }
-        // lib.optionalAttrs settings.system.wireguard.server.enable or false {
+        // lib.optionalAttrs cfg.server.enable or false {
           nat = {
             enable = true;
             enableIPv6 = true;
-            externalInterface = "${settings.system.wireguard.server.interface}";
+            externalInterface = "${cfg.server.interface}";
             internalInterfaces = [ "wg0" ];
           };
         };
       };
+    };
 }

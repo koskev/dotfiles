@@ -18,6 +18,7 @@ in
         waydroid
         virt
         docker
+        wireguard
       ];
     };
     modules.homeManager."${username}@${hostname}" = {
