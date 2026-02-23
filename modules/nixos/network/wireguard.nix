@@ -111,7 +111,7 @@ _: {
                 let
                   wireguardClients = lib.filterAttrs (
                     n: v: (v.system.wireguard.client.enable or false)
-                  ) settings.hosts;
+                  ) config.wireguardSettings;
 
                 in
 
