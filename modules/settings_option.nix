@@ -1,6 +1,6 @@
 _: {
   flake.modules.generic.settings =
-    { lib, ... }:
+    { config, lib, ... }:
     with lib;
     {
       options = {
@@ -34,8 +34,8 @@ _: {
             default = "koskev";
           };
           home = mkOption {
-            types = types.str;
-            default = "/home/${name}";
+            type = types.str;
+            default = "/home/${config.userSettings.userName}";
             description = "Home dir";
           };
         };
@@ -119,27 +119,6 @@ _: {
                 description = "Path to the water temperature";
               };
             };
-          };
-          users = mkOption {
-            description = "List of users";
-            default = { };
-            type = types.attrsOf (
-              types.submodule (
-                { name, ... }:
-                {
-                  options = {
-                    profile = mkOption {
-                      description = "Name of the profile";
-                      type = types.enum [
-                        "desktop"
-                        "server"
-                        "laptop"
-                      ];
-                    };
-                  };
-                }
-              )
-            );
           };
         };
       };

@@ -6,7 +6,6 @@
         modules = [
           inputs.self.modules.nixos.${name}
           inputs.disko.nixosModules.disko
-          inputs.home-manager.nixosModules.home-manager
           inputs.self.modules.nixos.nixos
           inputs.self.modules.generic.settings
           {
@@ -24,19 +23,16 @@
           inputs.self.modules.homeManager."${name}@${hostname}"
           inputs.self.modules.generic.settings
           inputs.self.modules.homeManager.common
-          {
-            nixpkgs.overlays = [
-              inputs.nur.overlays.default
-              inputs.nixgl.overlay
-            ];
-            home = {
-              stateVersion = "25.11";
-              username = lib.mkDefault name;
-              homeDirectory = lib.mkDefault "/home/${name}";
-            };
-          }
         ];
       };
+    };
+
+    mkHomeManagerModule = username: modules: {
+      imports = [
+        inputs.home-manager.nixosModules.home-manager
+        inputs.self.modules.nixos.homeManager
+      ];
+      inputs.home-manager.users.${username}.imports = modules;
     };
   };
 }

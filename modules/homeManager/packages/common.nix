@@ -8,6 +8,15 @@
       ...
     }:
     {
+      nixpkgs.overlays = [
+        inputs.nur.overlays.default
+        inputs.nixgl.overlay
+      ];
+      home = {
+        stateVersion = "25.11";
+        username = lib.mkDefault config.userSettings.userName;
+        homeDirectory = lib.mkDefault config.userSettings.home;
+      };
       # Due to joplin an feishin
       nixpkgs.config.permittedInsecurePackages = [
         "electron-36.9.5"
