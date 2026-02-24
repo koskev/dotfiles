@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   ...
 }:
 let
@@ -11,7 +10,7 @@ in
   nixConfigs.${hostname} = {
     system = "x86_64-linux";
     modules = with inputs.self.modules.nixos; [
-      ../../nixos/hosts/${hostname}/configuration.nix
+      kevin-nix
       common
       desktop
       gaming
@@ -23,7 +22,6 @@ in
     users.${username} = {
       modules = with inputs.self.modules.homeManager; [
         {
-          hostSettings.hostName = lib.mkDefault hostname;
           hostSettings.system.sensors = {
             cpu = "/dev/internal_coretemp/temp1_input";
             water = "/dev/openfanhub/temp1_input";
