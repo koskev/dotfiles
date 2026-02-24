@@ -5,7 +5,7 @@
 {
   self,
   pkgs,
-  settings,
+  config,
   ...
 }:
 
@@ -15,8 +15,8 @@
     ./hardware-configuration.nix
     ./heads.nix
 
-    self.modules.nixos.gaming
-    self.modules.nixos.docker
+    #self.modules.nixos.gaming
+    #self.modules.nixos.docker
   ];
   services = {
     pipewire = {
@@ -52,7 +52,6 @@
   };
 
   networking = {
-    hostName = settings.hostname;
 
     # Configure network connections interactively with nmcli or nmtui.
     networkmanager.enable = true;
@@ -148,6 +147,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = settings.stateVersion; # Did you read the comment?
+  system.stateVersion = config.hostSettings.stateVersion; # Did you read the comment?
 
 }

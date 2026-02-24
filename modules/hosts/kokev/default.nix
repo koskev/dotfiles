@@ -7,24 +7,22 @@ let
   username = "root";
 in
 {
-  flake = {
-    modules.nixos."${hostname}" = {
-      imports = with inputs.self.modules.nixos; [
-        common
-        docker
-        wireguard
-        autoupdate
-        (inputs.self.lib.mkHomeManagerModule username hostname)
-      ];
-    };
-    modules.homeManager."${username}@${hostname}" = {
-
-      imports = with inputs.self.modules.homeManager; [
+  nixConfigs.${hostname} = {
+    system = "x86_64-linux";
+    useHomeManagerModule = true;
+    modules = with inputs.self.modules.nixos; [
+      inputs.self.modules.nixos.kokev
+      common
+      docker
+      wireguard
+      autoupdate
+    ];
+    users.${username} = {
+      modules = with inputs.self.modules.homeManager; [
         neovim
         shell
         base
       ];
     };
-    nixosConfigurations = inputs.self.lib.mkNixos "x86_64-linux" hostname;
   };
 }

@@ -4,7 +4,7 @@
   ...
 }:
 let
-  hostname = "kevin-nix";
+  hostname = "kevin-laptop";
   username = "kevin";
 in
 {
