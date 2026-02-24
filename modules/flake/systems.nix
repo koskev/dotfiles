@@ -11,6 +11,7 @@ let
       modules = mkOption {
         type = types.listOf types.deferredModule;
         description = "List of the modules";
+        default = [ ];
       };
     };
   };
@@ -26,9 +27,15 @@ let
         default = false;
         description = "Use home manager as a module";
       };
+      nonNixos = mkOption {
+        type = types.bool;
+        default = false;
+        description = "This system is not using nixos";
+      };
       modules = mkOption {
         type = types.listOf types.deferredModule;
         description = "List of the modules";
+        default = [ ];
       };
       users = mkOption {
         default = { };
@@ -74,11 +81,9 @@ in
               ]
               ++ userSettings.modules;
             }) hostSettings.users;
-
           };
-
         };
-      }) config.nixConfigs;
+      }) (lib.filterAttrs (n: v: !v.nonNixos) config.nixConfigs);
       homeConfigurations = lib.concatMapAttrs (
         hostname: hostSettings:
         lib.concatMapAttrs (username: userSettings: {
@@ -87,8 +92,14 @@ in
             modules = [
               inputs.self.modules.generic.settings
               inputs.self.modules.homeManager.common
+              {
+                hostSettings.hostName = lib.mkDefault hostname;
+              }
             ]
-            ++ userSettings.modules;
+            ++ userSettings.modules
+            ++ lib.optional hostSettings.nonNixos {
+              hostSettings.system.nonNixos = true;
+            };
           };
         }) hostSettings.users
       ) config.nixConfigs;

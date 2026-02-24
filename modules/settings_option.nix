@@ -113,10 +113,12 @@ _: {
               cpu = mkOption {
                 type = types.str;
                 description = "Path to the cpu temperature";
+                default = "";
               };
               water = mkOption {
                 type = types.str;
                 description = "Path to the water temperature";
+                default = "";
               };
             };
           };

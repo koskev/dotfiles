@@ -36,8 +36,8 @@ _: {
               "disk#storage"
               "memory"
               "cpu"
-              (if config.hostSettings.system.sensors.cpu or null != null then "temperature#cpu" else null)
-              (if config.hostSettings.system.sensors.water or null != null then "temperature#water" else null)
+              (if config.hostSettings.system.sensors.cpu or "" != "" then "temperature#cpu" else null)
+              (if config.hostSettings.system.sensors.water or "" != "" then "temperature#water" else null)
               "backlight"
               "battery"
               "clock"
