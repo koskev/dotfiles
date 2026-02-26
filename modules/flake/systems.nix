@@ -54,7 +54,7 @@ in
   config = {
     flake =
       let
-        commonHomeManagerModules = [
+        commonHomeManagerModules = hostname: [
           inputs.self.modules.generic.settings
           inputs.self.modules.homeManager.common
           {
@@ -86,7 +86,7 @@ in
                 inputs.self.modules.nixos.homeManager
               ];
               home-manager.users = lib.concatMapAttrs (username: userSettings: {
-                ${username}.imports = commonHomeManagerModules ++ userSettings.modules;
+                ${username}.imports = commonHomeManagerModules hostname ++ userSettings.modules;
               }) hostSettings.users;
             };
           };
@@ -97,7 +97,7 @@ in
             "${username}@${hostname}" = inputs.home-manager.lib.homeManagerConfiguration {
               pkgs = inputs.nixpkgs.legacyPackages.${hostSettings.system};
               modules =
-                commonHomeManagerModules
+                commonHomeManagerModules hostname
                 ++ userSettings.modules
                 ++ lib.optional hostSettings.nonNixos {
                   hostSettings.system.nonNixos = true;
