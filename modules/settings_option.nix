@@ -64,7 +64,7 @@ _: {
             nonNixos = mkEnableOption "sets if this is a not a NixOS installation";
             rpi = mkEnableOption "sets if this is a RasperryPI";
             flake = mkOption {
-              default = "~/nix";
+              default = "${config.userSettings.home}/nix";
               description = "Location of the nix flake";
             };
             kubernetes = mkEnableOption "enable kubernetes node";
