@@ -15,11 +15,6 @@ _: {
             description = "DONT CHANGE THIS!!!";
             default = "25.11"; # Did you read the comment?
           };
-          flakeLocation = mkOption {
-            type = types.str;
-            description = "Location of the flake for nh";
-            default = "~/nix";
-          };
           defaultDesktop = mkOption {
             description = "name of the default desktop";
             type = types.enum [

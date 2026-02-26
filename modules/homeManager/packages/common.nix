@@ -37,7 +37,7 @@
       programs = {
         nh = {
           enable = true;
-          flake = config.userSettings.flakeLocation or null;
+          inherit (config.hostSettings.system) flake;
         };
         home-manager.enable = true;
         lazygit = {
