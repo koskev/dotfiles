@@ -5,6 +5,7 @@
 let
   hostname = "kokev";
   username = "root";
+
 in
 {
   nixConfigs.${hostname} = {
@@ -16,12 +17,18 @@ in
       docker
       wireguard
       autoupdate
+      {
+        userSettings.home = "/root";
+      }
     ];
     users.${username} = {
       modules = with inputs.self.modules.homeManager; [
         neovim
         shell
         base
+        {
+          userSettings.home = "/root";
+        }
       ];
     };
   };

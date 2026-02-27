@@ -6,6 +6,7 @@
 }:
 with lib;
 let
+  # TODO: Merge this with settings_options
   userOptions = _: {
     options = {
       modules = mkOption {
