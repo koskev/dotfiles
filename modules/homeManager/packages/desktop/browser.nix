@@ -8,7 +8,7 @@
       ...
     }:
     let
-      zen_version = "twilight";
+      zen_version = "beta";
       zen_package = inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".${zen_version};
     in
     {
