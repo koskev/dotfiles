@@ -19,7 +19,12 @@ return {
 		config = function()
 			-- local treesitter = require('nvim-treesitter')
 			-- treesitter.install { "vimdoc", "javascript", "typescript", "c", "lua", "rust", "go" }
-			vim.treesitter.start()
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function()
+					-- pcall to just ignore all errors on unsupported files
+					pcall(vim.treesitter.start)
+				end,
+			})
 		end
 
 	},
