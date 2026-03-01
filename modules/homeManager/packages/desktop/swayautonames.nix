@@ -17,6 +17,7 @@
             "firefox" = "";
             "zen" = "";
             "zen-twilight" = "";
+            "zen-beta" = "";
 
             "Alacritty" = "";
 

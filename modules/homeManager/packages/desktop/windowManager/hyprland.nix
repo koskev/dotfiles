@@ -95,7 +95,7 @@ _: {
           windowrule = [
             "opacity 1.0 override 0.95, match:class .*"
             # XXX: Negative lookahead does not seem to work :/
-            "opacity 1.0 override 1.0, match:class ^(zen-twilight)$"
+            "opacity 1.0 override 1.0, match:class ^(zen-twilight|zen-beta)$"
 
             # Clipse window
             "float on, size 622 652, match:class (clipse)" # set the size of the window as necessary
