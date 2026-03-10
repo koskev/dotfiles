@@ -40,7 +40,7 @@ _: {
         tmux
         htop
 
-        helvum
+        crosspipe
         pavucontrol
 
         gnupg
