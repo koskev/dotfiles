@@ -54,6 +54,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    machtnix = {
+      url = "github:koskev/machtnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     jsonnet-debugger = {
       url = "github:koskev/jsonnet-debugger";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -97,6 +97,7 @@
 
         inputs.grustonnet.packages.${pkgs.stdenv.hostPlatform.system}.default
         inputs.vrl-ls.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+        inputs.machtnix.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
     };
 }
