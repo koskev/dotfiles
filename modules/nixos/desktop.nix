@@ -24,13 +24,13 @@ _: {
 
       environment.systemPackages = with pkgs; [
         sway
-        mate.caja
-        mate.engrampa
+        caja
+        engrampa
         unrar-free
 
         syncthing
         wdisplays
-        xorg.xrandr
+        xrandr
         libnotify
         influxdb2-cli
         postgresql
