@@ -13,6 +13,7 @@ in
     nonNixos = true;
     users.${username} = {
       modules = with inputs.self.modules.homeManager; [
+        nixgl
         liag0005
         misc
         desktop
