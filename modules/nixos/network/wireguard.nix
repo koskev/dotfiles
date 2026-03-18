@@ -106,7 +106,7 @@ _: {
             }
 
             // lib.optionalAttrs cfg.server.enable or false {
-              listenPort = cfg.system.wireguard.server.listen_port or 51820;
+              listenPort = cfg.server.listen_port;
               peers =
                 let
                   wireguardClients = lib.filterAttrs (
