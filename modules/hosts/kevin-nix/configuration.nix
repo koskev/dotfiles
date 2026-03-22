@@ -16,7 +16,11 @@ _: {
       # For Cross building flakes
       boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+      hardware.bluetooth = {
+        enable = true;
+      };
       services = {
+        blueman.enable = true;
         pipewire = {
           enable = true;
           pulse.enable = true;
