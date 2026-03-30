@@ -16,18 +16,23 @@ jobs:
       uses: cachix/install-nix-action@v31
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: cachix/cachix-action@v14
+      with:
+        name: koskev
     - name: Check flake
       run: nix flake check
     - name: Build NixOS for kevin-nix
-      run: nix run nixpkgs#nixos-rebuild -- --flake .#kevin-nix build
+      run: nix run nixpkgs#nixos-rebuild -- --flake .#kevin-nix build --accept-flake-config
     - name: Build NixOS for kevin-laptop
-      run: nix run nixpkgs#nixos-rebuild -- --flake .#kevin-laptop build
+      run: nix run nixpkgs#nixos-rebuild -- --flake .#kevin-laptop build --accept-flake-config
     - name: Build NixOS for kokev
-      run: nix run nixpkgs#nixos-rebuild -- --flake .#kokev build
+      run: nix run nixpkgs#nixos-rebuild -- --flake .#kokev build --accept-flake-config
     - name: Build HomeManager for kevin@kevin-nix
-      run: nix run nixpkgs#home-manager -- --flake  .#kevin@kevin-nix build --debug
+      run: NIX_CONFIG="accept-flake-config = true" nix run nixpkgs#home-manager --
+        --flake  .#kevin@kevin-nix build
     - name: Build HomeManager for kko@liag0005
-      run: nix run nixpkgs#home-manager -- --flake  .#kko@liag0005 build --debug
+      run: NIX_CONFIG="accept-flake-config = true" nix run nixpkgs#home-manager --
+        --flake  .#kko@liag0005 build
 name: Build Nix Configurations
 'on':
   push: {}

@@ -4,6 +4,7 @@ let
     checkout = "actions/checkout@v5";
     nothing-but-nix = "wimpysworld/nothing-but-nix@687c797a730352432950c707ab493fcc951818d7";
     cachix-installer = "cachix/install-nix-action@v31";
+    cachix = "cachix/cachix-action@v14";
   };
   configs = [
     "kevin-nix"
@@ -51,18 +52,22 @@ in
                 "with".github_access_token = "\${{ secrets.GITHUB_TOKEN }}";
               }
               {
+                uses = actions.cachix;
+                "with".name = "koskev";
+              }
+              {
                 name = "Check flake";
                 run = "nix flake check";
               }
             ]
             ++ map (value: {
               name = "Build NixOS for ${value}";
-              run = "nix run nixpkgs#nixos-rebuild -- --flake .#${value} build";
+              run = "nix run nixpkgs#nixos-rebuild -- --flake .#${value} build --accept-flake-config";
             }) configs
 
             ++ map (value: {
               name = "Build HomeManager for ${value}";
-              run = "nix run nixpkgs#home-manager -- --flake  .#${value} build --debug";
+              run = ''NIX_CONFIG="accept-flake-config = true" nix run nixpkgs#home-manager -- --flake  .#${value} build'';
             }) hm_configs;
           };
         };
