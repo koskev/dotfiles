@@ -4,6 +4,7 @@ let
     checkout = "actions/checkout@v5";
     nothing-but-nix = "wimpysworld/nothing-but-nix@687c797a730352432950c707ab493fcc951818d7";
     cachix-installer = "cachix/install-nix-action@v31";
+    cachix = "cachix/cachix-action@v14";
   };
   configs = [
     "kevin-nix"
@@ -49,6 +50,10 @@ in
                 name = "Install nix";
                 uses = actions.cachix-installer;
                 "with".github_access_token = "\${{ secrets.GITHUB_TOKEN }}";
+              }
+              {
+                uses = actions.cachix;
+                "with".name = "koskev";
               }
               {
                 name = "Check flake";
