@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   ...
 }:
 let
@@ -24,6 +25,7 @@ in
         neovim
         shell
         base
+        deck-emulation
       ];
     };
   };
