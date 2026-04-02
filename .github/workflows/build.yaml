@@ -25,9 +25,9 @@ jobs:
     - name: Build NixOS for kokev
       run: nix run nixpkgs#nixos-rebuild -- --flake .#kokev build
     - name: Build HomeManager for kevin@kevin-nix
-      run: nix run nixpkgs#home-manager -- --flake .#kevin@kevin-nix build
+      run: nix run nixpkgs#home-manager -- --flake  .#kevin@kevin-nix build --debug
     - name: Build HomeManager for kko@liag0005
-      run: nix run nixpkgs#home-manager -- --flake .#kko@liag0005 build
+      run: nix run nixpkgs#home-manager -- --flake  .#kko@liag0005 build --debug
 name: Build Nix Configurations
 'on':
   push: {}

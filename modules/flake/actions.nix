@@ -62,7 +62,7 @@ in
 
             ++ map (value: {
               name = "Build HomeManager for ${value}";
-              run = "nix run nixpkgs#home-manager -- --flake .#${value} build";
+              run = "nix run nixpkgs#home-manager -- --flake  .#${value} build --debug";
             }) hm_configs;
           };
         };
