@@ -56,7 +56,7 @@
         };
         difftastic = {
           enable = true;
-          package = inputs.difftastic.defaultPackage.${pkgs.stdenv.hostPlatform.system};
+          package = inputs.difftastic.packages.${pkgs.stdenv.hostPlatform.system}.default;
           git = {
             enable = true;
           };

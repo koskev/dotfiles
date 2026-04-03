@@ -9,7 +9,10 @@
     }:
     {
 
-      gtk.enable = true;
+      gtk = {
+        enable = true;
+        gtk4.theme = config.gtk.theme;
+      };
       xdg = {
         userDirs = {
           enable = true;
@@ -40,6 +43,8 @@
         mergiraf = {
           package = inputs.mergiraf.packages.${pkgs.stdenv.hostPlatform.system}.default;
           enable = true;
+          enableGitIntegration = true;
+          enableJujutsuIntegration = true;
         };
         alacritty = {
           enable = true;
