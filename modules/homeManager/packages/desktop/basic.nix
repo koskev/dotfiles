@@ -96,7 +96,7 @@
         baobab
 
         inputs.grustonnet.packages.${pkgs.stdenv.hostPlatform.system}.default
-        inputs.vrl-ls.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+        inputs.vrl-ls.packages.${pkgs.stdenv.hostPlatform.system}.default
         inputs.machtnix.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
     };
