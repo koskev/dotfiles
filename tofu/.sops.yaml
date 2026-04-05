@@ -1,0 +1,4 @@
+creation_rules:
+  - path_regex: .*
+    encrypted_regex: ^(.*)$
+    pgp: 7ED71373082E0FE0F90239710233D0893BBB9872
