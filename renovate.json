@@ -21,5 +21,20 @@
   },
   "github-actions": {
     "enabled": false
-  }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.nix$"
+      ],
+      "matchStrings": [
+        // See https://docs.renovatebot.com/modules/manager/regex/#regular-expression-capture-groups
+        // Matches: 
+        // # renovate: datasource=docker
+        // image = "myImage:1.234@sha256:abc";
+        "#\\s*renovate:\\s*datasource=(?<datasource>[a-z-]+)\\s*image\\s*=\\s*\"(?<depName>[^:]+):(?<currentValue>[^@\"]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\";"
+      ]
+    }
+  ]
 }

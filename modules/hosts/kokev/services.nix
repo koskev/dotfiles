@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+_: {
   flake.modules.nixos.kokev =
     {
       config,
@@ -75,6 +74,25 @@
           node = {
             enable = true;
           };
+        };
+      };
+      virtualisation.oci-containers.containers = {
+        "joplin" = {
+          # renovate: datasource=docker
+          image = "docker.io/joplin/server:3.5.1@sha256:9f8666fb10abe385b3e674470557cfa072f4be1d4bcf069b10fb04cd844c1b0b";
+          environment = {
+            APP_BASE_URL = "https://joplin.kokev.de";
+            APP_PORT = "22300";
+            DB_CLIENT = "sqlite3";
+            SQLITE_DATABASE = "/db/joplin.db";
+          };
+          ports = [
+            "22300:22300/tcp"
+          ];
+          log-driver = "journald";
+          volumes = [
+            "/root/docker-container/joplin/data/sqlite:/db/:rw"
+          ];
         };
       };
     };
