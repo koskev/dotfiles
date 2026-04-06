@@ -36,5 +36,16 @@
         "#\\s*renovate:\\s*datasource=(?<datasource>[a-z-]+)\\s*image\\s*=\\s*\"(?<depName>[^:]+):(?<currentValue>[^@\"]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\";"
       ]
     }
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "terraform-provider",
+        "terraform-module"
+      ],
+      "registryUrls": [
+        "https://registry.opentofu.org"
+      ]
+    }
   ]
 }
