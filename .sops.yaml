@@ -3,6 +3,7 @@ keys:
   - &kokev age1g0xdesgjx73yjljvsuvwtpu6uftec0a2w2mgkj5r5uc6tpsnvswsn2yewg
   - &laptop age15ueqpwexzkjwg43kc9kjjxg5s32668ehldj3e94l4r6ggsf74vgsmffjg3
   - &deck age1vty7me2f6lv8apczsv2pdzmzplu76xd50t7866swr92qwc84r9hqsg6kd7
+  - &rpi-drucker age1p7fn2cfja3wpjwap2xx0nxh4juy09fw8ldl7utllltj8g7tejfgs0ew07y
 creation_rules:
   - path_regex: secrets/kokev/.*.(yaml|yml)
     pgp: *host
@@ -15,3 +16,6 @@ creation_rules:
     age: *deck
   - path_regex: secrets/*/.*.(yaml|yml)
     pgp: *host
+  - path_regex: secrets/rpi-drucker/.*
+    pgp: *host
+    age: *rpi-drucker
