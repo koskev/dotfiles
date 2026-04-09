@@ -86,6 +86,7 @@ _: {
         };
 
         "/boot/efi" = {
+          fsType = "vfat";
           device = "/dev/disk/by-uuid/A7C9-5013";
         };
 
@@ -101,22 +102,27 @@ _: {
         };
 
         "/home/kevin/Bilder" = {
+          fsType = "none";
           device = "/mnt/nvme_storage/home/Bilder";
           options = [ "bind" ];
         };
         "/home/kevin/syncthing" = {
+          fsType = "none";
           device = "/mnt/nvme_storage/home/syncthing";
           options = [ "bind" ];
         };
         "/home/kevin/Videos" = {
+          fsType = "none";
           device = "/mnt/nvme_storage/home/Videos";
           options = [ "bind" ];
         };
         "/home/kevin/Dokumente" = {
+          fsType = "none";
           device = "/mnt/nvme_storage/home/Dokumente";
           options = [ "bind" ];
         };
         "/home/kevin/Games" = {
+          fsType = "none";
           device = "/mnt/nvme_storage/home/Games";
           options = [ "bind" ];
         };
