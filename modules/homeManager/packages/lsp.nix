@@ -15,7 +15,7 @@ _: {
         openscad-lsp
         rustup
         bacon
-        terraform-ls
+        tofu-ls
         tflint
         yaml-language-server
         pyright
