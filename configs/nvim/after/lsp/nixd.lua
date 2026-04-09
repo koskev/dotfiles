@@ -1,4 +1,13 @@
-local flakePath = "~/nix"
+local function nixd_options_expr(flake_attr)
+	return string.format([[
+	let
+		flake = builtins.getFlake (toString ./.);
+		configs = flake.%s or {invalid="";};
+		firstName = builtins.head (builtins.attrNames configs);
+	in
+		configs.${firstName}.options or {}
+  ]], flake_attr)
+end
 return {
 	cmd = { "nixd", "--semantic-tokens=true" },
 	settings = {
@@ -11,12 +20,10 @@ return {
 			},
 			options = {
 				home_manager = {
-					expr = '(builtins.getFlake (builtins.toString ' ..
-						flakePath .. ')).homeConfigurations."kevin@kevin-nix".options',
+					expr = nixd_options_expr("homeConfigurations"),
 				},
 				nixos = {
-					expr = '(builtins.getFlake (builtins.toString ' ..
-						flakePath .. ')).nixosConfigurations."kevin-nix".options',
+					expr = nixd_options_expr("nixosConfigurations"),
 				},
 			},
 		},
