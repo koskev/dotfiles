@@ -16,7 +16,6 @@ in
       gaming
       waydroid
       virt
-      docker
       wireguard
     ];
     users.${username} = {
