@@ -1,16 +1,12 @@
 _: {
   flake.modules.nixos.common =
     {
-      self,
       pkgs,
       config,
       ...
     }:
     {
       networking.hostName = config.hostSettings.hostName;
-      imports = [
-        #self.modules.nixos.wireguard
-      ];
 
       # Due to joplin an feishin
       nixpkgs.config.permittedInsecurePackages = [
@@ -29,14 +25,6 @@ _: {
         # Delete old build files after 4 days
         "e /nix/var/nix/builds/* - - - 4d"
       ];
-      nix = {
-        optimise.automatic = true;
-        gc = {
-          automatic = true;
-          dates = "weekly";
-          options = "--delete-older-than 30d";
-        };
-      };
       nix.settings.experimental-features = [
         "nix-command"
         "flakes"
@@ -49,7 +37,21 @@ _: {
         file
       ];
 
+      nix = {
+        optimise = {
+          automatic = true;
+          dates = "daily";
+        };
+      };
       programs = {
+        nh = {
+          enable = true;
+          clean = {
+            enable = true;
+            dates = "daily";
+            extraArgs = "--keep 5 --keep-since 3d";
+          };
+        };
         zsh.enable = true;
         fish.enable = true;
 
