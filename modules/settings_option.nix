@@ -33,6 +33,8 @@ _: {
             default = "/home/${config.userSettings.userName}";
             description = "Home dir";
           };
+
+          copyNeovimConfig = mkEnableOption "copies the neovim config instead of linking it";
         };
         hostSettings = {
           hostName = mkOption {

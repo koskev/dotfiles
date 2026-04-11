@@ -8,8 +8,11 @@ _: {
     let
       linkNvim = name: {
         "nvim/${name}" = {
-          #source = ../../../configs/nvim/${name};
-          source = config.lib.file.mkOutOfStoreSymlink "${config.hostSettings.system.flake}/configs/nvim/${name}";
+          source =
+            if config.userSettings.copyNeovimConfig then
+              ../../../configs/nvim/${name}
+            else
+              config.lib.file.mkOutOfStoreSymlink "${config.hostSettings.system.flake}/configs/nvim/${name}";
         };
       };
     in
@@ -31,9 +34,8 @@ _: {
       # Link lockfile to flake dir to allow for easy updating by lazyvim
       # Link them one by one to actually link the correct file and not the store
       xdg.configFile = {
-        "nvim/lazy-lock.json".source =
-          config.lib.file.mkOutOfStoreSymlink "${config.hostSettings.system.flake}/configs/nvim/lazy-lock.json";
       }
+      // linkNvim "lazy-lock.json"
       // linkNvim "lua"
       // linkNvim "after"
       // linkNvim "init.lua";
