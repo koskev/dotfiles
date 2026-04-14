@@ -9,6 +9,9 @@ _: {
           fsType = "ext4";
         };
       };
+      virtualisation.vmVariant = {
+        virtualisation.memorySize = 10000;
+      };
 
       services.qemuGuest.enable = true;
       userSettings.home = "/home/admin";
