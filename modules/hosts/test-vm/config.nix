@@ -2,6 +2,14 @@ _: {
   flake.modules.nixos.test-vm =
     { pkgs, ... }:
     {
+      boot.loader.grub.device = "nodev";
+      fileSystems = {
+        "/" = {
+          device = "/dev/vda";
+          fsType = "ext4";
+        };
+      };
+
       services.qemuGuest.enable = true;
       userSettings.home = "/home/admin";
       time.timeZone = "Europe/Amsterdam";
