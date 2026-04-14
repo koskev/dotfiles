@@ -109,15 +109,13 @@ _: {
               listenPort = cfg.server.listen_port;
               peers =
                 let
-                  wireguardClients = lib.filterAttrs (
-                    n: v: (v.system.wireguard.client.enable or false)
-                  ) config.wireguardSettings;
+                  wireguardClients = lib.filterAttrs (n: v: (v.client.enable or false)) config.wireguardSettings;
 
                 in
 
                 lib.mapAttrsToList (name: val: {
-                  publicKey = val.system.wireguard.public_key;
-                  allowedIPs = val.system.wireguard.addresses;
+                  publicKey = val.public_key;
+                  allowedIPs = val.addresses;
                 }) wireguardClients;
               # This allows the wireguard server to route your traffic to the internet and hence be like a VPN
               postUp = ''
