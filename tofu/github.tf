@@ -26,6 +26,7 @@ variable "repositories" {
     "grustonnet-ls",
     "pushtotalk",
     "swayautonames",
+    "hms-mqtt-publisher",
   ]
 }
 
