@@ -23,7 +23,7 @@ in
         shell
         base
         {
-          hostSettings.professional = true;
+          userSettings.professional = true;
         }
       ];
     };
