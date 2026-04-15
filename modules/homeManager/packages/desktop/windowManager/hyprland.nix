@@ -83,6 +83,8 @@ _: {
             # Only for fullscreen
             vrr = 2;
             enable_anr_dialog = false;
+            # No anime wallpaper for "professional". Force it otherwise to have a balance
+            force_default_wallpaper = if config.userSettings.professional then 0 else 2;
           };
 
           binds = {

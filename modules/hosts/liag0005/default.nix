@@ -22,6 +22,9 @@ in
         neovim
         shell
         base
+        {
+          hostSettings.professional = true;
+        }
       ];
     };
   };

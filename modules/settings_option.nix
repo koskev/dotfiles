@@ -35,6 +35,12 @@ _: {
           };
 
           copyNeovimConfig = mkEnableOption "copies the neovim config instead of linking it";
+          professional = mkOption {
+            type = types.bool;
+            default = false;
+            description = "Try to be somewhat professional and disable stuff like anime pictures :(";
+          };
+
         };
         hostSettings = {
           hostName = mkOption {
