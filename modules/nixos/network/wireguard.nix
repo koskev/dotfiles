@@ -9,55 +9,53 @@ _: {
     with lib;
     let
       cfg = config.wireguardSettings.${config.hostSettings.hostName};
-      wireguardOptions =
-        { ... }:
-        {
-          options = {
+      wireguardOptions = _: {
+        options = {
+          enable = mkOption {
+            type = types.bool;
+            default = false;
+            description = "enable wireguard";
+          };
+          addresses = mkOption {
+            type = types.listOf types.str;
+            description = "Addresses for the wireguard interface";
+          };
+          public_key = mkOption {
+            type = types.str;
+            description = "Public key of this instance";
+          };
+          client = {
             enable = mkOption {
               type = types.bool;
               default = false;
-              description = "enable wireguard";
+              description = "enable wireguard client mode";
             };
-            addresses = mkOption {
-              type = types.listOf types.str;
-              description = "Addresses for the wireguard interface";
+            server = mkOption {
+              description = "Name of the server to use";
             };
-            public_key = mkOption {
+          };
+          server = {
+            enable = mkOption {
+              type = types.bool;
+              default = false;
+              description = "enable wireguard server mode";
+            };
+            host = mkOption {
               type = types.str;
-              description = "Public key of this instance";
+              description = "hostname of the server";
             };
-            client = {
-              enable = mkOption {
-                type = types.bool;
-                default = false;
-                description = "enable wireguard client mode";
-              };
-              server = mkOption {
-                description = "Name of the server to use";
-              };
+            listen_port = mkOption {
+              type = types.port;
+              default = 51871;
+              description = "port to listen to";
             };
-            server = {
-              enable = mkOption {
-                type = types.bool;
-                default = false;
-                description = "enable wireguard server mode";
-              };
-              host = mkOption {
-                type = types.str;
-                description = "hostname of the server";
-              };
-              listen_port = mkOption {
-                type = types.port;
-                default = 51871;
-                description = "port to listen to";
-              };
-              interface = mkOption {
-                type = types.str;
-                description = "name of the interface to bind to";
-              };
+            interface = mkOption {
+              type = types.str;
+              description = "name of the interface to bind to";
             };
           };
         };
+      };
     in
     {
       options.wireguardSettings = mkOption {

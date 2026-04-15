@@ -1,20 +1,16 @@
 _: {
-  flake.modules.homeManager.desktop =
-    {
-      ...
-    }:
-    {
+  flake.modules.homeManager.desktop = _: {
 
-      programs.rofi = {
-        enable = true;
-        theme = "rounded-nord-dark";
-        extraConfig = {
-          show-icons = true;
-        };
-      };
-
-      xdg.configFile."rofi/themes" = {
-        source = ../../../../configs/rofi/themes;
+    programs.rofi = {
+      enable = true;
+      theme = "rounded-nord-dark";
+      extraConfig = {
+        show-icons = true;
       };
     };
+
+    xdg.configFile."rofi/themes" = {
+      source = ../../../../configs/rofi/themes;
+    };
+  };
 }
