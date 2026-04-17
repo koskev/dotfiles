@@ -36,7 +36,6 @@ _: {
 
             in
             {
-              root = defaultConfig "/";
               home = defaultConfig "/home";
               nvme_storage = defaultConfig "/mnt/nvme_storage";
             };
