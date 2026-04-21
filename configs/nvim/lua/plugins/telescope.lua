@@ -22,8 +22,18 @@ return {
 		vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = "Commands" })
 		vim.keymap.set('n', '<leader>fm', builtin.marks, { desc = "Marks" })
 
-		vim.keymap.set('n', '<leader>lr', builtin.lsp_references, { desc = "LSP references" })
-		vim.keymap.set('n', '<leader>li', builtin.lsp_implementations, { desc = "LSP implementations" })
+		vim.keymap.set('n', '<leader>lr', function()
+			builtin.lsp_references({
+				include_declaration = true,
+				jump_type = "never",
+				include_current_line = true,
+			})
+		end, { desc = "LSP references" })
+		vim.keymap.set('n', '<leader>li', function()
+			builtin.lsp_implementations({
+				jump_type = "never",
+			})
+		end, { desc = "LSP implementations" })
 
 		vim.keymap.set('n', '<leader>ss', builtin.spell_suggest, { desc = "Spelling suggestions" })
 	end
