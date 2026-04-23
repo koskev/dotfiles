@@ -1,8 +1,5 @@
 return {
 	'jmbuhr/otter.nvim',
-	dependencies = {
-		'nvim-treesitter/nvim-treesitter',
-	},
 	config = function()
 		-- TODO: take a look at https://github.com/atusy/kakehashi
 		-- TODO: Rust is not working :/
