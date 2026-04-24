@@ -18,6 +18,7 @@
           enable = true;
           music = "${config.home.homeDirectory}/Musik";
           pictures = "${config.home.homeDirectory}/Bilder";
+          setSessionVariables = true;
         };
       };
       services = {
