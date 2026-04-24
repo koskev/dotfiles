@@ -19,6 +19,8 @@ _: {
     {
       home.packages = with pkgs; [
         teamtype
+
+        tree-sitter
       ];
       programs.neovim = {
         enable = true;
