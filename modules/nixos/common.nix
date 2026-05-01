@@ -25,10 +25,18 @@ _: {
         # Delete old build files after 4 days
         "e /nix/var/nix/builds/* - - - 4d"
       ];
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      nix.settings = {
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+        substituters = [
+          "https://koskev.cachix.org"
+        ];
+        trusted-public-keys = [
+          "koskev.cachix.org-1:1EexePRC9DgMPKI01zWTxM9YRIWHBbev15hTUE6h50I="
+        ];
+      };
       environment.systemPackages = with pkgs; [
         lm_sensors
         jq
