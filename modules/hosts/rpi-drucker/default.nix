@@ -15,7 +15,6 @@ in
       inputs.self.modules.nixos.rpi-drucker
       common
       docker
-      autoupdate
       octoprint
       {
         userSettings.home = "/root";
@@ -23,6 +22,7 @@ in
     ];
     users.${username} = {
       modules = with inputs.self.modules.homeManager; [
+        neovim
         shell
         base
         {
