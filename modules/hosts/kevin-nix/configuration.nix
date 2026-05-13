@@ -140,7 +140,7 @@ _: {
         VDPAU_DRIVER = "radeonsi";
         LIBVA_DRIVER_NAME = "radeonsi";
         # Some games were selecting the wrong GPU. This forces DXVK to use the correct one
-        DXVK_FILTER_DEVICE_NAME = "AMD Radeon RX 6700 XT (RADV NAVI22)";
+        DXVK_FILTER_DEVICE_NAME = "AMD Radeon";
       };
 
       # Some programs need SUID wrappers, can be configured further or are
