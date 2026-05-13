@@ -46,6 +46,7 @@ _: {
           "steam-unwrapped"
         ];
 
+      hardware.steam-hardware.enable = true;
       programs = {
         gamescope.enable = true;
         steam.enable = true;
@@ -69,6 +70,7 @@ _: {
           #seccomp !mount,!name_to_handle_at,!pivot_root,!ptrace,!umount2
           ignore seccomp
           ignore private-tmp
+          ignore private-dev
           ignore noroot
 
           noblacklist ''${HOME}/Games
