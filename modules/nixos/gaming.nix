@@ -3,6 +3,7 @@ _: {
     {
       pkgs,
       lib,
+      config,
       ...
     }:
 
@@ -36,6 +37,7 @@ _: {
         })
         mangohud
         gamemode
+
       ];
 
       # Only allow specific unfree packages
@@ -49,19 +51,28 @@ _: {
       hardware.steam-hardware.enable = true;
       programs = {
         gamescope.enable = true;
-        steam.enable = true;
+        steam = {
+          package = pkgs.steam.override {
+            # for the steam controller update to work
+            # Somehow hidapi is not in the default LD_LIBRARY_PATH and the updater fails with an error due to that
+            extraProfile = ''
+              export LD_LIBRARY_PATH="${pkgs.hidapi}/lib:$LD_LIBRARY_PATH"
+            '';
+          };
+          enable = true;
+        };
         firejail = {
           enable = true;
           wrappedBinaries =
             let
-              addBinary = name: {
+              addBinary = package: name: {
                 ${name} = {
-                  executable = "${lib.getBin pkgs.${name}}/bin/${name}";
+                  executable = "${package}/bin/${name}";
                   profile = "${pkgs.firejail}/etc/firejail/${name}.profile";
                 };
               };
             in
-            addBinary "steam"; # // addBinary "lutris";
+            addBinary config.programs.steam.package "steam"; # // addBinary "lutris";
         };
       };
 
