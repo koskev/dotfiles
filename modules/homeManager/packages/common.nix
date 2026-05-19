@@ -74,6 +74,9 @@
             };
           };
         };
+        podman = {
+          enable = true;
+        };
       };
     };
 }

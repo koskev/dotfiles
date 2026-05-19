@@ -12,9 +12,6 @@ _: {
       virtualisation = {
         libvirtd.enable = true;
 
-        podman = {
-          enable = true;
-        };
         containers.storage.settings = {
           storage = {
             driver = "btrfs";
