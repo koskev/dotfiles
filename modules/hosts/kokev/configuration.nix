@@ -23,7 +23,7 @@ _: {
 
             in
             {
-              root = defaultConfig "/";
+              #root = defaultConfig "/";
             };
 
         };
