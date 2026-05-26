@@ -74,9 +74,9 @@
             };
           };
         };
-        podman = {
-          enable = true;
-        };
+      };
+      services.podman = {
+        enable = true;
       };
     };
 }
