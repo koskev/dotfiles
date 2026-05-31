@@ -3307,11 +3307,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780141321,
-        "narHash": "sha256-/3vb9T3rdMAQy3Vvcmy1XJ+Sh5Tb2SIppcHm/57TUgI=",
+        "lastModified": 1780190416,
+        "narHash": "sha256-2qGXOvq1Jmaau9CdsmTFP9bSPX1hIzyNxxyCD2cqMPw=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "7f8c385f2da5211ddab1fccc3daf854431ea5452",
+        "rev": "87eef2d829309b1bb9a6787ade701330d840157d",
         "type": "github"
       },
       "original": {
