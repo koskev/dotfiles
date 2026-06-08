@@ -139,6 +139,7 @@ _: {
             "$mod, Return, exec, alacritty"
             "$mod, w, togglegroup"
             "$mod, f, fullscreen,1"
+            "$mod SHIFT, f, fullscreen,0" # "Real" Fullscreen
             "$mod, d, exec, rofi -show drun -x11" # Use X11 for now to close on outside click
             "$mod, M, exit,"
             "$mod SHIFT, space, togglefloating,"
