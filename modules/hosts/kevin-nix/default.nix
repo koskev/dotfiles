@@ -17,6 +17,7 @@ in
       waydroid
       virt
       wireguard
+      docker
     ];
     users.${username} = {
       modules = with inputs.self.modules.homeManager; [
