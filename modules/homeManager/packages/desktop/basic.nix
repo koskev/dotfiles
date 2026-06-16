@@ -8,7 +8,6 @@
       ...
     }:
     {
-
       gtk = {
         enable = true;
         gtk4.theme = config.gtk.theme;
@@ -100,6 +99,7 @@
 
       home.packages = with pkgs; [
         baobab
+        mpv
 
         inputs.grustonnet.packages.${pkgs.stdenv.hostPlatform.system}.default
         inputs.vrl-ls.packages.${pkgs.stdenv.hostPlatform.system}.default
