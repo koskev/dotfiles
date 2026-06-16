@@ -122,7 +122,7 @@ _: {
           "video"
           "render"
         ]; # Enable ‘sudo’ for the user.
-        shell = pkgs.fish;
+        shell = pkgs.zsh;
       };
 
       services.udev = {
