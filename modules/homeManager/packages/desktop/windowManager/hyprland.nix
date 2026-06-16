@@ -64,6 +64,9 @@ _: {
           ]
           ++ lib.optional (config.userSettings.desktopBar == "noctalia") [
             "noctalia-shell"
+          ]
+          ++ lib.optional (config.userSettings.desktopBar == "noctalia5") [
+            "noctalia"
           ];
 
           input = {
