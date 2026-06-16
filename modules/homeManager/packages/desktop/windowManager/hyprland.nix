@@ -53,12 +53,17 @@ _: {
           "$mod" = "SUPER";
 
           exec-once = [
-            "waybar"
-            "swayautonames --window-manager hyprland"
             "rufaco"
             "clipse -listen"
             "push_to_talk_rs"
             "hypridle"
+          ]
+          ++ lib.optional (config.userSettings.desktopBar == "waybar") [
+            "swayautonames --window-manager hyprland"
+            "waybar"
+          ]
+          ++ lib.optional (config.userSettings.desktopBar == "noctalia") [
+            "noctalia-shell"
           ];
 
           input = {

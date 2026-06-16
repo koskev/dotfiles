@@ -41,8 +41,6 @@ _: {
 
       home.packages = with pkgs; [
         wl-clipboard
-        swaynotificationcenter
-        waybar
         slurp
         grim
         clipse

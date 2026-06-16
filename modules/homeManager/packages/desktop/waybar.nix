@@ -1,15 +1,21 @@
 _: {
   flake.modules.homeManager.desktop =
     {
+      pkgs,
       config,
+      lib,
       ...
     }:
-    {
+    lib.mkIf (config.userSettings.desktopBar == "waybar") {
 
       xdg.configFile."waybar" = {
         source = ../../../../configs/waybar/themes/${config.userSettings.waybarTheme};
         recursive = true;
       };
+      home.packages = with pkgs; [
+        swaynotificationcenter
+        waybar
+      ];
 
       programs.waybar = {
         enable = true;

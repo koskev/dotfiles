@@ -7,7 +7,7 @@
       pkgs,
       ...
     }:
-    {
+    lib.mkIf (config.userSettings.desktopBar == "waybar") {
       home.packages = [
         inputs.swayautonames.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];

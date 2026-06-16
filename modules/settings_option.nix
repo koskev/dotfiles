@@ -23,6 +23,14 @@ _: {
             ];
             default = "hyprland";
           };
+          desktopBar = mkOption {
+            description = "which bar to use";
+            type = types.enum [
+              "waybar"
+              "noctalia"
+            ];
+            default = "noctalia";
+          };
           waybarTheme = mkOption {
             description = "Name of the used waybar theme";
             type = types.str;
