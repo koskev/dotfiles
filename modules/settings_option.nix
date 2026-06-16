@@ -28,8 +28,9 @@ _: {
             type = types.enum [
               "waybar"
               "noctalia"
+              "noctalia5"
             ];
-            default = "noctalia";
+            default = "waybar";
           };
           waybarTheme = mkOption {
             description = "Name of the used waybar theme";

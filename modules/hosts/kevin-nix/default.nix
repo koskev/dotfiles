@@ -26,7 +26,7 @@ in
             cpu = "/dev/internal_coretemp/temp1_input";
             water = "/dev/openfanhub/temp1_input";
           };
-          userSettings.desktopBar = "noctalia";
+          userSettings.desktopBar = "noctalia5";
         }
         misc
         rufaco
