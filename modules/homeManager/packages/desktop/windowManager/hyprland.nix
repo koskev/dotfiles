@@ -54,16 +54,17 @@ _: {
 
           exec-once = [
             "rufaco"
-            "clipse -listen"
             "push_to_talk_rs"
             "hypridle"
           ]
           ++ lib.optional (config.userSettings.desktopBar == "waybar") [
             "swayautonames --window-manager hyprland"
             "waybar"
+            "clipse -listen"
           ]
           ++ lib.optional (config.userSettings.desktopBar == "noctalia") [
             "noctalia-shell"
+            "clipse -listen"
           ]
           ++ lib.optional (config.userSettings.desktopBar == "noctalia5") [
             "noctalia"
@@ -140,15 +141,12 @@ _: {
           ];
 
           bind = [
-            ''$mod SHIFT, s, exec, slurp | grim -g - "/tmp/screenshot.png"''
             "$mod, escape, exec, hyprlock"
-            "$mod, v, exec, kitty --class clipse -e clipse"
             #   "$mod, T, exec, /tmp/test.py --enable-notify true"
             "$mod, Return, exec, alacritty"
             "$mod, w, togglegroup"
             "$mod, f, fullscreen,1"
             "$mod SHIFT, f, fullscreen,0" # "Real" Fullscreen
-            "$mod, d, exec, rofi -show drun -x11" # Use X11 for now to close on outside click
             "$mod, M, exit,"
             "$mod SHIFT, space, togglefloating,"
             "$mod SHIFT, Q, killactive,"
@@ -176,7 +174,21 @@ _: {
           ++ builtins.concatMap (val: [
             "$mod, F${toString val}, workspace, ${toString (10 + val)}"
             "$mod SHIFT, F${toString val}, movetoworkspacesilent, ${toString (10 + val)}"
-          ]) (lib.lists.range 1 12);
+          ]) (lib.lists.range 1 12)
+          ++ (
+            if config.userSettings.desktopBar == "noctalia5" then
+              [
+                "$mod, v, exec, noctalia msg panel-open clipboard"
+                "$mod, d, exec, noctalia msg panel-open launcher"
+                "$mod SHIFT, s, exec, noctalia msg screenshot-region"
+              ]
+            else
+              [
+                "$mod, v, exec, kitty --class clipse -e clipse"
+                "$mod, d, exec, rofi -show drun -x11" # Use X11 for now to close on outside click
+                ''$mod SHIFT, s, exec, slurp | grim -g - "/tmp/screenshot.png"''
+              ]
+          );
         };
       }
       // lib.optionalAttrs config.hostSettings.system.nonNixos {
