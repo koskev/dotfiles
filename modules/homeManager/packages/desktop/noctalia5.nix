@@ -23,22 +23,52 @@
             bar = {
               default = {
                 start = [
-                  "clock"
+                  "group:date"
                   "active_window"
-                  "ram"
-                  "sysmon"
+                  "group:resources"
                 ];
                 end = [
                   "media"
                   "tray"
-                  "notifications"
-                  "clipboard"
-                  "network"
-                  "bluetooth"
-                  "volume"
-                  "brightness"
-                  "battery"
+                  "group:misc"
                   "session"
+                ];
+                capsule_group = [
+                  {
+                    id = "date";
+                    fill = "surface_variant";
+                    opacity = 1.0;
+                    padding = 6.0;
+                    members = [
+                      "clock"
+                      "date"
+                    ];
+                  }
+                  {
+                    id = "resources";
+                    members = [
+                      "ram"
+                      "sysmon"
+                    ];
+                    fill = "surface_variant";
+                    opacity = 1.0;
+                    padding = 6.0;
+                  }
+                  {
+                    id = "misc";
+                    members = [
+                      "notifications"
+                      "clipboard"
+                      "network"
+                      "bluetooth"
+                      "volume"
+                      "brightness"
+                      "battery"
+                    ];
+                    fill = "surface_variant";
+                    opacity = 1.0;
+                    padding = 6.0;
+                  }
                 ];
 
                 center = [ "taskbar" ];
@@ -56,9 +86,15 @@
               media.capsule = true;
               ram.show_label = false;
               sysmon.show_label = false;
+              tray = {
+                capsule = true;
+                drawer = true;
+              };
+              session.capsule = true;
             };
             location.auto_locate = true;
             wallpaper.enabled = false;
+            brightness.enable_ddcutil = true;
           };
         };
       };
