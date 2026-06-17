@@ -121,6 +121,7 @@ _: {
           "input"
           "video"
           "render"
+          "i2c"
         ]; # Enable ‘sudo’ for the user.
         shell = pkgs.zsh;
       };

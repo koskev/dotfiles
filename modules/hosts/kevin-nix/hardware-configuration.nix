@@ -140,6 +140,7 @@ _: {
 
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       hardware = {
+        i2c.enable = true;
         cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
         graphics = {
           enable = true;
