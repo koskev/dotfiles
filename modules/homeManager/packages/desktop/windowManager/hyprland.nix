@@ -162,7 +162,6 @@ _: {
             "$mod SHIFT, right, movewindow, r"
             "$mod SHIFT, up, movewindow, u"
             "$mod SHIFT, down, movewindow, d"
-            "$mod, e, exec, ${./toggle_group.py} --enable-notify true"
 
             "$mod, 0, workspace, 10"
             "$mod SHIFT, 0, movetoworkspacesilent, 10"
