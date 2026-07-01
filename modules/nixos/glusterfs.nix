@@ -2,7 +2,6 @@ _: {
   flake.modules.nixos.glusterfs =
     {
       pkgs,
-      settings,
       config,
       ...
     }:
@@ -13,7 +12,7 @@ _: {
       sops = {
         secrets =
           let
-            sopsFile = ../../secrets/${settings.hostname}/glusterfs.yaml;
+            sopsFile = ../../secrets/${config.hostSettings.hostName}/glusterfs.yaml;
           in
           {
             "glusterpem" = {
