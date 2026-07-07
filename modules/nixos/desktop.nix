@@ -69,9 +69,9 @@ _: {
         udisks2.enable = true;
         devmon.enable = true;
         gvfs.enable = true;
-        udev.packages = [ pkgs.nitrokey-udev-rules ];
         pcscd.enable = true;
       };
+      hardware.nitrokey.enable = true;
 
     };
 }
