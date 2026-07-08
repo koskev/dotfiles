@@ -19,6 +19,12 @@ in
       desktop
       common
       wireguard
+      {
+        # Due to deck loader
+        nixpkgs.config.permittedInsecurePackages = [
+          "pnpm-9.15.9"
+        ];
+      }
     ];
     users.${username} = {
       modules = with inputs.self.modules.homeManager; [
