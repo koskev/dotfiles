@@ -58,8 +58,38 @@ _: {
             extraProfile = ''
               export LD_LIBRARY_PATH="${pkgs.hidapi}/lib:$LD_LIBRARY_PATH"
             '';
+            extraPkgs =
+              pkgs': with pkgs'; [
+                mangohud
+                gamescope
+              ];
+            # Add a patched bwrap for the FHS-env that allows setting capabilities. Then add SYS_NICE only to allow steam to use a priority queue in the amd driver
+            # https://wiki.nixos.org/wiki/VR
+            # Does not work anymore :/
+            #buildFHSEnv =
+            #  let
+            #    patchedBwrap = pkgs.bubblewrap.overrideAttrs (o: {
+            #      patches = (o.patches or [ ]) ++ [
+            #        ./patches/bubblewrap.patch
+            #      ];
+            #    });
+            #  in
+            #  args:
+            #  (
+            #    (pkgs.buildFHSEnv.override {
+            #      bubblewrap = patchedBwrap;
+            #    })
+            #    (
+            #      args
+            #      // {
+            #        extraBwrapArgs = (args.extraBwrapArgs or [ ]) ++ [ "--cap-add CAP_SYS_NICE" ];
+            #      }
+            #    )
+            #  );
           };
           enable = true;
+          # For the steam controller cursor (does not work though :/. Probably due to missing support in hyprland)
+          extest.enable = true;
         };
         firejail = {
           enable = true;

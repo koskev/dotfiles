@@ -17,6 +17,7 @@ _: {
         "ssd"
         "space_cache=v2"
       ];
+      kernel = pkgs.linuxPackages_zen;
     in
 
     {
@@ -43,11 +44,31 @@ _: {
           kernelModules = [ ];
           luks.devices."nvme_crypt".device = "/dev/disk/by-uuid/20fa87a6-78c0-4aea-b2a6-8e70f3238a60";
         };
-        kernelPackages = pkgs.linuxPackages_zen;
-        extraModulePackages = with config.boot.kernelPackages; [
-          # Required for fan control
-          nct6687d
-        ];
+        kernelPackages = kernel;
+
+        extraModulePackages =
+          let
+            # Allow anyone to use priority queue.
+            # TODO: remove once I can use the userland fix again
+            amdPatch = pkgs.fetchpatch {
+              name = "cap_sys_nice_begone.patch";
+              url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+              hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+            };
+            amdgpu-kernel-module = pkgs.callPackage ./_kernel_patch.nix {
+              # Make sure the module targets the same kernel as your system is using.
+              kernel = config.boot.kernelPackages.kernel;
+            };
+
+          in
+          with config.boot.kernelPackages;
+          [
+            # Required for fan control
+            nct6687d
+            (amdgpu-kernel-module.overrideAttrs (_: {
+              patches = [ amdPatch ];
+            }))
+          ];
 
         kernelModules = [
           "kvm-intel"

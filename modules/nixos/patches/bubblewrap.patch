@@ -1,0 +1,20 @@
+diff --git a/bubblewrap.c b/bubblewrap.c
+index 9039ddf..b3683eb 100644
+--- a/bubblewrap.c
++++ b/bubblewrap.c
+@@ -886,13 +886,6 @@ acquire_privs (void)
+       die ("setuid use of bubblewrap is not supported in this build");
+ #endif
+     }
+-  else if (real_uid != 0 && has_caps ())
+-    {
+-      /* We have some capabilities in the non-setuid case, which should not happen.
+-         Probably caused by the binary being setcap instead of setuid which we
+-         don't support anymore */
+-      die ("Unexpected capabilities but not setuid, old file caps config?");
+-    }
+   else if (real_uid == 0)
+     {
+       /* If our uid is 0, default to inheriting all caps; the caller
+--
+2.54.0
