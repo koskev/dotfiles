@@ -49,6 +49,11 @@ _: {
         ];
 
       hardware.steam-hardware.enable = true;
+      services.udev.extraRules = ''
+        # OpenHMD udev rules
+        # Oculus Rift CV1
+          SUBSYSTEM=="usb", ATTR{idVendor}=="2833", MODE="0666", GROUP="plugdev"
+      '';
       programs = {
         gamescope.enable = true;
         steam = {
@@ -88,7 +93,8 @@ _: {
             #  );
           };
           enable = true;
-          # For the steam controller cursor (does not work though :/. Probably due to missing support in hyprland)
+          # For the steam controller cursor
+          # 32 Bit
           extest.enable = true;
         };
         firejail = {
@@ -113,6 +119,21 @@ _: {
           ignore private-tmp
           ignore private-dev
           ignore noroot
+
+          # For VR
+          ignore novideo
+          noblacklist ''${HOME}/Dokumente/Projekte/Github/koskev/vr/SteamVR-OpenHMD
+          whitelist ''${HOME}/Dokumente/Projekte/Github/koskev/vr/SteamVR-OpenHMD
+          noblacklist ''${HOME}/.config/openhmd/
+          whitelist ''${HOME}/.config/openhmd/
+          noblacklist ''${HOME}/.config/openxr/
+          whitelist ''${HOME}/.config/openxr/
+          noblacklist ''${HOME}/.config/openvr/
+          whitelist ''${HOME}/.config/openvr/
+          noblacklist ''${HOME}/.config/Valve
+          whitelist ''${HOME}/.config/Valve/
+          noblacklist ''${HOME}/.config/vulkan
+          whitelist ''${HOME}/.config/vulkan/
 
           noblacklist ''${HOME}/Games
           whitelist ''${HOME}/Games
