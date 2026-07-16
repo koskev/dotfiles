@@ -14,7 +14,7 @@ _: {
       #home-manager = ''LD_LIBRARY_PATH="" home-manager'';
       nix-size = "nix path-info --recursive --size /run/current-system | sort -k2 -n | numfmt --field=2 --to=iec-i --suffix=B";
       nix-csize = "nix path-info --recursive --closure-size /run/current-system | sort -k2 -n | numfmt --field=2 --to=iec-i --suffix=B";
-      cat = ''${lib.getExe pkgs.bat} -P --style="-grid,-numbers,-header"'';
+      cat = ''${lib.getExe pkgs.bat} -P --style="-grid,-numbers,-header" --wrap=never'';
     };
     home.sessionVariables = {
       SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
