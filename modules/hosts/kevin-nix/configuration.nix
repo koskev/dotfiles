@@ -12,6 +12,27 @@ _: {
     }:
 
     {
+
+      programs.gamemode = {
+        enable = true;
+        settings = {
+          general = {
+            renice = 10;
+          };
+
+          # Warning: GPU optimisations have the potential to damage hardware
+          gpu = {
+            apply_gpu_optimisations = "accept-responsibility";
+            gpu_device = 2;
+            amd_performance_level = "high";
+          };
+
+          custom = {
+            start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+            end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+          };
+        };
+      };
       programs.fish.enable = true;
       # For Cross building flakes
       boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -122,6 +143,7 @@ _: {
           "video"
           "render"
           "i2c"
+          "gamemode"
         ]; # Enable ‘sudo’ for the user.
         shell = pkgs.zsh;
       };
