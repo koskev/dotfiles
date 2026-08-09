@@ -99,6 +99,9 @@ _: {
             "twitteroauth.com"
             "twitterstat.us"
 
+            # Cheap shitty AI "copy" of Wikipedia with a nazi bias
+            "grokipedia.com"
+
           ];
           hostsToBlockString = lib.strings.join "\n" hostsToBlock;
         in
