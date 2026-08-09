@@ -37,6 +37,7 @@ _: {
         })
         mangohud
         gamemode
+        wayvr
 
       ];
 
