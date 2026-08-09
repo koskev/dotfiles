@@ -38,7 +38,25 @@ _: {
         mangohud
         gamemode
         wayvr
+        (pkgs.writeShellScriptBin "bs-manager-steam" ''
+          /run/wrappers/bin/firejail --join="steam" ${lib.getExe pkgs.bs-manager} "$@"
+        '')
+        (pkgs.makeDesktopItem {
+          name = "bs-manager";
+          desktopName = "BS-Manager";
+          genericName = "BS-Manager";
 
+          exec = lib.getExe pkgs.bs-manager;
+
+          icon = "bs-manager";
+
+          categories = [
+            "Game"
+            "Utility"
+          ];
+          terminal = false;
+          type = "Application";
+        })
       ];
 
       # Only allow specific unfree packages
@@ -104,8 +122,9 @@ _: {
             let
               addBinary = package: name: {
                 ${name} = {
-                  executable = "${package}/bin/${name}";
+                  executable = lib.getExe package;
                   profile = "${pkgs.firejail}/etc/firejail/${name}.profile";
+                  extraArgs = [ "--name=${name}" ];
                 };
               };
             in
