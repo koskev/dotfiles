@@ -14,6 +14,7 @@ in
       common
       desktop
       gaming
+      vr
       waydroid
       virt
       wireguard

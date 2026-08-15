@@ -37,26 +37,6 @@ _: {
         })
         mangohud
         gamemode
-        wayvr
-        (pkgs.writeShellScriptBin "bs-manager-steam" ''
-          /run/wrappers/bin/firejail --join="steam" ${lib.getExe pkgs.bs-manager} "$@"
-        '')
-        (pkgs.makeDesktopItem {
-          name = "bs-manager";
-          desktopName = "BS-Manager";
-          genericName = "BS-Manager";
-
-          exec = lib.getExe pkgs.bs-manager;
-
-          icon = "bs-manager";
-
-          categories = [
-            "Game"
-            "Utility"
-          ];
-          terminal = false;
-          type = "Application";
-        })
       ];
 
       # Only allow specific unfree packages
@@ -68,11 +48,6 @@ _: {
         ];
 
       hardware.steam-hardware.enable = true;
-      services.udev.extraRules = ''
-        # OpenHMD udev rules
-        # Oculus Rift CV1
-          SUBSYSTEM=="usb", ATTR{idVendor}=="2833", MODE="0666", GROUP="plugdev"
-      '';
       programs = {
         gamescope.enable = true;
         steam = {
