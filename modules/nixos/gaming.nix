@@ -40,12 +40,10 @@ _: {
       ];
 
       # Only allow specific unfree packages
-      nixpkgs.config.allowUnfreePredicate =
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "steam"
-          "steam-unwrapped"
-        ];
+      nixpkgs.config.allowUnfreePackages = [
+        "steam"
+        "steam-unwrapped"
+      ];
 
       hardware.steam-hardware.enable = true;
       programs = {
