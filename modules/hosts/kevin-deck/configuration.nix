@@ -30,14 +30,12 @@ _: {
         networkmanager.enable = true;
         firewall.enable = false;
       };
-      nixpkgs.config.allowUnfreePredicate =
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "steam"
-          "steam-unwrapped"
-          "steamdeck-hw-theme"
-          "steam-jupiter-unwrapped"
-        ];
+      nixpkgs.config.allowUnfreePackages = [
+        "steam"
+        "steam-unwrapped"
+        "steamdeck-hw-theme"
+        "steam-jupiter-unwrapped"
+      ];
 
       services = {
         desktopManager.plasma6.enable = true;

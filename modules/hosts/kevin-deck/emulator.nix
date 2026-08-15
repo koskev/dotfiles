@@ -2,16 +2,13 @@ _: {
   flake.modules.homeManager.deck-emulation =
     {
       pkgs,
-      lib,
       ...
     }:
     {
-      nixpkgs.config.allowUnfreePredicate =
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "shipwright"
-          "2ship2harkinian"
-        ];
+      nixpkgs.config.allowUnfreePackages = [
+        "shipwright"
+        "2ship2harkinian"
+      ];
 
       home.packages = with pkgs; [
         shipwright

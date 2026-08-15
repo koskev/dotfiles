@@ -33,11 +33,9 @@
             };
         };
       };
-      nixpkgs.config.allowUnfreePredicate =
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "video-downloadhelper"
-        ];
+      nixpkgs.config.allowUnfreePackages = [
+        "video-downloadhelper"
+      ];
 
       programs.zen-browser = {
         enable = true;
