@@ -46,9 +46,9 @@
             promptToReturnFromSubprocess = false;
             git = {
               overrideGpg = true;
-              pagers = [
+              diffRenderers = [
                 {
-                  useExternalDiffGitConfig = true;
+                  type = "extDiff";
                 }
               ];
             };
