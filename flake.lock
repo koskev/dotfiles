@@ -975,6 +975,24 @@
         "type": "github"
       }
     },
+    "flake-parts_17": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_16"
+      },
+      "locked": {
+        "lastModified": 1775087534,
+        "narHash": "sha256-91qqW8lhL7TLwgQWijoGBbiD4t7/q75KTi8NxjVmSmA=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "3107b77cd68437b9a76194f0f7f9c55f2329ca5b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib_2"
@@ -1109,11 +1127,11 @@
         "nixpkgs-lib": "nixpkgs-lib_8"
       },
       "locked": {
-        "lastModified": 1775087534,
-        "narHash": "sha256-91qqW8lhL7TLwgQWijoGBbiD4t7/q75KTi8NxjVmSmA=",
+        "lastModified": 1782949081,
+        "narHash": "sha256-vp6Y/Grm98ESt6ceOkWiHWyZRDV3J1RID4w+6NWK9yA=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "3107b77cd68437b9a76194f0f7f9c55f2329ca5b",
+        "rev": "17c9d6cdfc60c64f4ee8d306f9bc0b4ccb51481e",
         "type": "github"
       },
       "original": {
@@ -2156,6 +2174,21 @@
         "type": "github"
       }
     },
+    "import-tree_16": {
+      "locked": {
+        "lastModified": 1773693634,
+        "narHash": "sha256-BtZ2dtkBdSUnFPPFc+n0kcMbgaTxzFNPv2iaO326Ffg=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "c41e7d58045f9057880b0d85e1152d6a4430dbf1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
     "import-tree_2": {
       "locked": {
         "lastModified": 1773693634,
@@ -2248,11 +2281,11 @@
     },
     "import-tree_8": {
       "locked": {
-        "lastModified": 1773693634,
-        "narHash": "sha256-BtZ2dtkBdSUnFPPFc+n0kcMbgaTxzFNPv2iaO326Ffg=",
+        "lastModified": 1778781969,
+        "narHash": "sha256-Jjuz5CmSkur8KvLDoGa+vylEp+RkQtv4mt/qcMznpH0=",
         "owner": "vic",
         "repo": "import-tree",
-        "rev": "c41e7d58045f9057880b0d85e1152d6a4430dbf1",
+        "rev": "d321337efd0f23a9eb14a42adb7b2c29313ab274",
         "type": "github"
       },
       "original": {
@@ -2460,8 +2493,8 @@
     "nix-actions_4": {
       "inputs": {
         "actions-nix": "actions-nix_9",
-        "flake-parts": "flake-parts_10",
-        "import-tree": "import-tree_9",
+        "flake-parts": "flake-parts_11",
+        "import-tree": "import-tree_10",
         "nixpkgs": "nixpkgs_11"
       },
       "locked": {
@@ -2481,8 +2514,8 @@
     "nix-actions_5": {
       "inputs": {
         "actions-nix": "actions-nix_11",
-        "flake-parts": "flake-parts_12",
-        "import-tree": "import-tree_11",
+        "flake-parts": "flake-parts_13",
+        "import-tree": "import-tree_12",
         "nixpkgs": "nixpkgs_14"
       },
       "locked": {
@@ -2502,8 +2535,8 @@
     "nix-actions_6": {
       "inputs": {
         "actions-nix": "actions-nix_13",
-        "flake-parts": "flake-parts_14",
-        "import-tree": "import-tree_13",
+        "flake-parts": "flake-parts_15",
+        "import-tree": "import-tree_14",
         "nixpkgs": "nixpkgs_18"
       },
       "locked": {
@@ -2523,8 +2556,8 @@
     "nix-actions_7": {
       "inputs": {
         "actions-nix": "actions-nix_15",
-        "flake-parts": "flake-parts_16",
-        "import-tree": "import-tree_15",
+        "flake-parts": "flake-parts_17",
+        "import-tree": "import-tree_16",
         "nixpkgs": "nixpkgs_20"
       },
       "locked": {
@@ -2833,6 +2866,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib_16": {
+      "locked": {
+        "lastModified": 1774748309,
+        "narHash": "sha256-+U7gF3qxzwD5TZuANzZPeJTZRHS29OFQgkQ2kiTJBIQ=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "333c4e0545a6da976206c74db8773a1645b5870a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib_2": {
       "locked": {
         "lastModified": 1774748309,
@@ -2925,11 +2973,11 @@
     },
     "nixpkgs-lib_8": {
       "locked": {
-        "lastModified": 1774748309,
-        "narHash": "sha256-+U7gF3qxzwD5TZuANzZPeJTZRHS29OFQgkQ2kiTJBIQ=",
+        "lastModified": 1782614948,
+        "narHash": "sha256-ePjCwr1sNm9NYUqywL7QfK3JnlS015msC+eBu2zKlp8=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "333c4e0545a6da976206c74db8773a1645b5870a",
+        "rev": "db3f255737b94216eb71cce308e2912cf6bc2d7c",
         "type": "github"
       },
       "original": {
@@ -2955,16 +3003,16 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1782847189,
-        "narHash": "sha256-twXPFqFsrrY5r28Zh7Homgcp2gUMBgQ6WDS98Q/3xFI=",
+        "lastModified": 1787204541,
+        "narHash": "sha256-OURZPknrTjQrlNyxPdqzyqmU/81Wes1CUP/Ft1Rv/YI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b6018f87da91d19d0ab4cf979885689b469cdd41",
+        "rev": "5880666fd9eb563038431edb35c2d0aa595884e6",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-25.11",
+        "ref": "nixos-26.05",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -3340,12 +3388,36 @@
         "type": "github"
       }
     },
+    "openhmd": {
+      "inputs": {
+        "flake-parts": "flake-parts_9",
+        "import-tree": "import-tree_8",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787413690,
+        "narHash": "sha256-CMxoYN3d0E0I6NPxNFD+zXESXj4bYaQ1MQq5ofhaG88=",
+        "ref": "refs/heads/main",
+        "rev": "2ae28eadd09c4559bee07c5167341763ed5e50ba",
+        "revCount": 103,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/koskev/SteamVR-OpenHMD"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/koskev/SteamVR-OpenHMD"
+      }
+    },
     "pushtotalk": {
       "inputs": {
         "actions-nix": "actions-nix_8",
         "crane": "crane_4",
-        "flake-parts": "flake-parts_9",
-        "import-tree": "import-tree_8",
+        "flake-parts": "flake-parts_10",
+        "import-tree": "import-tree_9",
         "nix-actions": "nix-actions_4",
         "nix2container": "nix2container_4",
         "nixpkgs": [
@@ -3482,6 +3554,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
         "nur": "nur",
+        "openhmd": "openhmd",
         "pushtotalk": "pushtotalk",
         "rufaco": "rufaco",
         "sops-nix": "sops-nix",
@@ -3494,8 +3567,8 @@
       "inputs": {
         "actions-nix": "actions-nix_10",
         "crane": "crane_5",
-        "flake-parts": "flake-parts_11",
-        "import-tree": "import-tree_10",
+        "flake-parts": "flake-parts_12",
+        "import-tree": "import-tree_11",
         "nix-actions": "nix-actions_5",
         "nix2container": "nix2container_5",
         "nixpkgs": [
@@ -3577,8 +3650,8 @@
       "inputs": {
         "actions-nix": "actions-nix_12",
         "crane": "crane_6",
-        "flake-parts": "flake-parts_13",
-        "import-tree": "import-tree_12",
+        "flake-parts": "flake-parts_14",
+        "import-tree": "import-tree_13",
         "nix-actions": "nix-actions_6",
         "nix2container": "nix2container_6",
         "nixpkgs": [
@@ -3723,8 +3796,8 @@
       "inputs": {
         "actions-nix": "actions-nix_14",
         "crane": "crane_7",
-        "flake-parts": "flake-parts_15",
-        "import-tree": "import-tree_14",
+        "flake-parts": "flake-parts_16",
+        "import-tree": "import-tree_15",
         "nix-actions": "nix-actions_7",
         "nixpkgs": [
           "nixpkgs"
