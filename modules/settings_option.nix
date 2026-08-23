@@ -81,6 +81,32 @@ _: {
             };
             kubernetes = mkEnableOption "enable kubernetes node";
             useHomeManagerModule = mkEnableOption "use home manager as a NixOS module";
+            monitors = mkOption {
+              type = types.listOf (
+                types.submodule {
+                  options = {
+                    output = mkOption {
+                      type = types.str;
+                      description = "Port of the monitor e.g. DP-1";
+                    };
+                    mode = mkOption {
+                      type = types.str;
+                      description = "Resolution and refresh rate. e.g. 1920x1080@144";
+                    };
+                    position = mkOption {
+                      type = types.str;
+                      description = "Position of the monitor. e.g. 0x0";
+                      default = "0x0";
+                    };
+                    scale = mkOption {
+                      type = types.number;
+                      description = "Scale of the monitor. e.g. 0.5";
+                      default = 1.0;
+                    };
+                  };
+                }
+              );
+            };
             wireguard = {
               addresses = mkOption {
                 type = types.listOf types.str;

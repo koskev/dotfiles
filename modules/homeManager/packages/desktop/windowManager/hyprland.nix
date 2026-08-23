@@ -193,6 +193,13 @@ _: {
               }
             ];
 
+            monitor = map (m: {
+              inherit (m) output;
+              inherit (m) mode;
+              inherit (m) position;
+              inherit (m) scale;
+            }) config.hostSettings.system.monitors;
+
             bind = [
               (bind "${mod} + mouse:272" (lua "hl.dsp.window.drag()"))
               (bind "${mod} + mouse:273" (lua "hl.dsp.window.resize()"))

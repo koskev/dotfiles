@@ -23,9 +23,17 @@ in
     users.${username} = {
       modules = with inputs.self.modules.homeManager; [
         {
-          hostSettings.system.sensors = {
-            cpu = "/dev/internal_coretemp/temp1_input";
-            water = "/dev/openfanhub/temp1_input";
+          hostSettings.system = {
+            monitors = [
+              {
+                output = "DP-5";
+                mode = "1920x1080@144";
+              }
+            ];
+            sensors = {
+              cpu = "/dev/internal_coretemp/temp1_input";
+              water = "/dev/openfanhub/temp1_input";
+            };
           };
           userSettings.desktopBar = "noctalia5";
         }
