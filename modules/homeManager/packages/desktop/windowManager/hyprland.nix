@@ -211,6 +211,7 @@ _: {
               (bind "${mod} + f" (dsp.fullscreen "maximized"))
               (bind "${mod} + SHIFT + f" (dsp.fullscreen "fullscreen"))
               (bind "${mod} + M" (lua "hl.dsp.exit()"))
+              (bind "${mod} + SHIFT + P" (lua "hl.dsp.window.pin()"))
               (bind "${mod} + SHIFT + space" (lua "hl.dsp.window.float()"))
               (bind "${mod} + SHIFT + Q" dsp.window.close)
               (bind "${mod} + SHIFT + y" (lua ''hl.dsp.window.move({monitor = "l"})''))
