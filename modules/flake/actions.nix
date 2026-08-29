@@ -1,11 +1,6 @@
 { inputs, ... }:
 let
-  actions = {
-    checkout = "actions/checkout@v5";
-    nothing-but-nix = "wimpysworld/nothing-but-nix@687c797a730352432950c707ab493fcc951818d7";
-    cachix-installer = "cachix/install-nix-action@v31";
-    cachix = "cachix/cachix-action@v14";
-  };
+  inherit (inputs.nix-actions.lib) actions;
   configs = [
     "kevin-nix"
     "kevin-laptop"
@@ -68,7 +63,14 @@ in
             ++ map (value: {
               name = "Build HomeManager for ${value}";
               run = ''NIX_CONFIG="accept-flake-config = true" nix run nixpkgs#home-manager -- --flake  .#${value} build'';
-            }) hm_configs;
+            }) hm_configs
+            ++ inputs.nix-actions.lib.mkCachixSteps {
+              branches = [
+                "main"
+                "renovate/lock-file-maintenance"
+              ];
+              target = ".#push";
+            };
           };
         };
       };
