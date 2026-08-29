@@ -7,16 +7,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
     - name: Most important Action!
       uses: wimpysworld/nothing-but-nix@687c797a730352432950c707ab493fcc951818d7
       with:
         hatchet-protocol: rampage
     - name: Install nix
-      uses: cachix/install-nix-action@v31
+      uses: cachix/install-nix-action@4e002c8ec80594ecd40e759629461e26c8abed15
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
-    - uses: cachix/cachix-action@v14
+    - uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc
       with:
         name: koskev
     - name: Check flake
@@ -33,6 +33,18 @@ jobs:
     - name: Build HomeManager for kko@liag0005
       run: NIX_CONFIG="accept-flake-config = true" nix run nixpkgs#home-manager --
         --flake  .#kko@liag0005 build
+    - if: github.ref == 'refs/heads/ci/cachix-push'
+      uses: cachix/cachix-action@ad2ddac53f961de1989924296a1f236fcfbaa4fc
+      with:
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        name: koskev
+        signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+        skipPush: true
+    - if: github.ref == 'refs/heads/ci/cachix-push'
+      run: nix build .#push
+    - if: github.ref == 'refs/heads/ci/cachix-push'
+      name: Push to cachix
+      run: nix path-info .#push | cachix push koskev
 name: Build Nix Configurations
 'on':
   push: {}

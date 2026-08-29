@@ -99,6 +99,7 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    nix-actions.url = "github:koskev/nix-actions";
     noctalia = {
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
