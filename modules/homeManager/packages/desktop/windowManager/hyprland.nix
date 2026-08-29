@@ -78,10 +78,6 @@ _: {
             "waybar"
             "clipse -listen"
           ]
-          ++ lib.optionals (config.userSettings.desktopBar == "noctalia") [
-            "noctalia-shell"
-            "clipse -listen"
-          ]
           ++ lib.optionals (config.userSettings.desktopBar == "noctalia5") [
             "noctalia"
           ];

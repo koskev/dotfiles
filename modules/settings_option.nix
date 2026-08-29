@@ -27,7 +27,6 @@ _: {
             description = "which bar to use";
             type = types.enum [
               "waybar"
-              "noctalia"
               "noctalia5"
             ];
             default = "waybar";
