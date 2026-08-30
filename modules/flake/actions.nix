@@ -1,19 +1,30 @@
 { inputs, ... }:
 let
   inherit (inputs.nix-actions.lib) actions;
-  configs = [
-    "kevin-nix"
-    "kevin-laptop"
-    "kokev"
-  ];
-  hm_configs = [
-    "kevin@kevin-nix"
-    "kko@liag0005"
-  ];
+  ubuntu_image = "ubuntu-24.04";
+  systems = {
+    x86_64-linux = {
+      image = ubuntu_image;
+      configs = [
+        "kevin-nix"
+        "kevin-laptop"
+        "kokev"
+      ];
+      hm_configs = [
+        "kevin@kevin-nix"
+        "kko@liag0005"
+      ];
+    };
+    aarch64-linux = {
+      image = "${ubuntu_image}-arm";
+      configs = [ "rpi-drucker" ];
+      hm_configs = [ ];
+    };
+  };
 in
 {
   imports = [ inputs.actions-nix.flakeModules.default ];
-  flake.actions-nix = {
+  flake.actions-nix = { lib, ... }: {
     pre-commit.enable = true;
     # defaults was renamed to defaultValues to avoid conflict
     # with GitHub option
@@ -30,8 +41,9 @@ in
         on = {
           push = { };
         };
-        jobs = {
-          build = {
+        jobs = lib.concatMapAttrs (name: value: {
+          "build_${name}" = {
+            runs-on = value.image;
             steps = [
               {
                 uses = actions.checkout;
@@ -58,12 +70,12 @@ in
             ++ map (value: {
               name = "Build NixOS for ${value}";
               run = "nix run nixpkgs#nixos-rebuild -- --flake .#${value} build --accept-flake-config";
-            }) configs
+            }) value.configs
 
             ++ map (value: {
               name = "Build HomeManager for ${value}";
               run = ''NIX_CONFIG="accept-flake-config = true" nix run nixpkgs#home-manager -- --flake  .#${value} build'';
-            }) hm_configs
+            }) value.hm_configs
             ++ inputs.nix-actions.lib.mkCachixSteps {
               branches = [
                 "main"
@@ -72,7 +84,7 @@ in
               target = ".#push";
             };
           };
-        };
+        }) systems;
       };
     };
   };
