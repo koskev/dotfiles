@@ -21,7 +21,6 @@ _: {
               #"superbrothers/zsh-kubectl-prompt kind:defer"
 
               "zsh-users/zsh-autosuggestions kind:defer"
-              "junegunn/fzf path:shell kind:defer"
               "zsh-users/zsh-completions kind:defer"
 
               # Syntax highlighting bundle. Should be the last plugin
