@@ -19,6 +19,7 @@ variable "repositories" {
   description = "GitHub repository names"
   type        = list(string)
   default = [ 
+    "dotfiles",
     "machtnix",
     "rufaco",
     "vrl-ls",
