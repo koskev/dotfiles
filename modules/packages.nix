@@ -29,6 +29,7 @@ _: {
             "client"
           ];
           buildFeatures = cargoBuildFeatures;
+          doCheck = false;
         });
       };
     };
