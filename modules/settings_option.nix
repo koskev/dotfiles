@@ -1,6 +1,11 @@
 _: {
   flake.modules.generic.settings =
-    { config, lib, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     with lib;
     {
       options = {
@@ -70,6 +75,19 @@ _: {
           name = mkOption {
             type = types.str;
             description = "Name of the host";
+          };
+          root = {
+            shell = mkOption {
+              default = pkgs.zsh;
+              description = "Default shell for the root user";
+            };
+            keys = mkOption {
+              type = types.listOf types.str;
+              default = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf kevin@kevin-arch"
+              ];
+              description = "Known ssh keys with access to the root user";
+            };
           };
           system = {
             nonNixos = mkEnableOption "sets if this is a not a NixOS installation";

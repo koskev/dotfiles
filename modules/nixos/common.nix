@@ -70,5 +70,20 @@ _: {
           # here, NOT in environment.systemPackages
         ];
       };
+
+      # Configuration.nix common
+      time.timeZone = "Europe/Amsterdam";
+      i18n.defaultLocale = "en_DK.UTF-8";
+      console = {
+        font = "Lat2-Terminus16";
+        keyMap = "de";
+      };
+      users.users.root = {
+        shell = config.hostSettings.root.shell;
+        openssh.authorizedKeys.keys = config.hostSettings.root.keys;
+      };
+      services.openssh.settings.PasswordAuthentication = false;
+
+      system.stateVersion = config.hostSettings.stateVersion; # Did you read the comment?
     };
 }
