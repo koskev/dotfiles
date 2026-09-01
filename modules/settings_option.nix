@@ -61,11 +61,6 @@ _: {
             description = "The hostname";
           };
 
-          # TODO: Somehow add some kind of schema? mkOption?
-          architecture = mkOption {
-            type = types.str;
-            default = "x86_64-linux";
-          };
           stateVersion = mkOption {
             type = types.str;
             description = "DONT CHANGE THIS!!!";
@@ -91,13 +86,11 @@ _: {
           };
           system = {
             nonNixos = mkEnableOption "sets if this is a not a NixOS installation";
-            rpi = mkEnableOption "sets if this is a RasperryPI";
             flake = mkOption {
               default = "${config.userSettings.home}/nix";
               description = "Location of the nix flake";
             };
             kubernetes = mkEnableOption "enable kubernetes node";
-            useHomeManagerModule = mkEnableOption "use home manager as a NixOS module";
             monitors = mkOption {
               type = types.listOf (
                 types.submodule {
