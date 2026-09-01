@@ -14,14 +14,6 @@ _: {
         sway.enable = true;
       };
 
-      security.pam = {
-        u2f.enable = true;
-        services = {
-          login.u2fAuth = true;
-          sudo.u2fAuth = true;
-        };
-      };
-
       environment.systemPackages = with pkgs; [
         sway
         caja
