@@ -77,6 +77,9 @@
       };
       services.podman = {
         enable = true;
+        settings.containers.containers = {
+          pids_limit = 65536;
+        };
       };
     };
 }
