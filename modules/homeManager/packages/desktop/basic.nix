@@ -42,7 +42,7 @@
           nix-direnv.enable = true;
         };
         mergiraf = {
-          package = inputs.mergiraf.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          #package = inputs.mergiraf.packages.${pkgs.stdenv.hostPlatform.system}.default;
           enable = true;
           enableGitIntegration = true;
           enableJujutsuIntegration = true;

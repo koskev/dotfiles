@@ -88,10 +88,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    mergiraf = {
-      url = "git+https://codeberg.org/kokev/mergiraf.git?ref=feature/jsonnet";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #mergiraf = {
+    #  url = "git+https://codeberg.org/kokev/mergiraf.git?ref=feature/jsonnet";
+    #  #inputs.nixpkgs.follows = "nixpkgs";
+    #};
     actions-nix = {
       url = "github:nialov/actions.nix";
       inputs = {
