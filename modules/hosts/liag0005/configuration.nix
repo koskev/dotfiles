@@ -1,4 +1,4 @@
-_: {
+{ inputs, ... }: {
   flake.modules.homeManager.liag0005 =
     {
       pkgs,
@@ -10,7 +10,7 @@ _: {
         (config.lib.nixGL.wrap teams-for-linux)
         gotestsum
 
-        teleport_17
+        inputs.nixpkgs-teleport.legacyPackages.${pkgs.stdenv.hostPlatform.system}.teleport_17
       ];
       programs = {
         fish = {

@@ -3101,6 +3101,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-teleport": {
+      "locked": {
+        "lastModified": 1790981744,
+        "narHash": "sha256-sm6DclXJudZfP/pcDBQQsRqyMxBcQsuw+7yQr4rBBLE=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "55ba7f49ef2962b42cbd126522b7df5f95037679",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "55ba7f49ef2962b42cbd126522b7df5f95037679",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1791966044,
@@ -3651,6 +3667,7 @@
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_11",
         "nixpkgs-stable": "nixpkgs-stable",
+        "nixpkgs-teleport": "nixpkgs-teleport",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
         "nur": "nur",
