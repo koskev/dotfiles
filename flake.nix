@@ -13,6 +13,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-teleport.url = "github:nixos/nixpkgs/55ba7f49ef2962b42cbd126522b7df5f95037679";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     # TODO: switch nixkpgs to 25.11 once it is released
