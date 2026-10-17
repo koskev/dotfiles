@@ -3103,17 +3103,17 @@
     },
     "nixpkgs-teleport": {
       "locked": {
-        "lastModified": 1790981744,
-        "narHash": "sha256-sm6DclXJudZfP/pcDBQQsRqyMxBcQsuw+7yQr4rBBLE=",
+        "lastModified": 1792261432,
+        "narHash": "sha256-ylK6etgo81QaPguY8jpFUCu4Ig5HOJ8KkczVtWFfG8Y=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "55ba7f49ef2962b42cbd126522b7df5f95037679",
+        "rev": "8e1eaba1dbd6595380d0cf78d0ff93c1ce1871d8",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "55ba7f49ef2962b42cbd126522b7df5f95037679",
+        "rev": "8e1eaba1dbd6595380d0cf78d0ff93c1ce1871d8",
         "type": "github"
       }
     },
