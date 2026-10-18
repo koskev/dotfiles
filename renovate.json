@@ -47,6 +47,15 @@
       "registryUrls": [
         "https://registry.opentofu.org"
       ]
+    },
+    {
+      "matchManagers": [
+        "nix"
+      ],
+      "matchDepNames": [
+        "nixpkgs-teleport"
+      ],
+      "enabled": false
     }
   ]
 }
