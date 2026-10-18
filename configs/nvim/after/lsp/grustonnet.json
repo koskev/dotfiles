@@ -4,7 +4,10 @@
     "enable_global": true,
     "enable_keywords": true,
     "enable_local": true,
-    "hide_docsonnet_members": true
+    "hide_docsonnet_members": true,
+    "object_ref": {
+      "enabled": true
+    }
   },
   "diagnostics": {
     "enable_eval": true,

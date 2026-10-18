@@ -2073,11 +2073,11 @@
         "recordings": "recordings"
       },
       "locked": {
-        "lastModified": 1788506335,
-        "narHash": "sha256-KX4xwqLSRszc/vN3I6BgXrrZ97YR6mJ4qDinba7t5ew=",
+        "lastModified": 1792360725,
+        "narHash": "sha256-6ugRv7KLdQEss8pNpMgwGVcnE9sz8ugExFePKIWJPTE=",
         "owner": "koskev",
         "repo": "grustonnet-ls",
-        "rev": "46bfe93bad6c1d6235cc065b15b04633f9f3f777",
+        "rev": "f88adb9a36957bf3e09b150fee1e46f2429cb53f",
         "type": "github"
       },
       "original": {

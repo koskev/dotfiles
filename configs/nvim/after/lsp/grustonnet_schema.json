@@ -1,69 +1,15 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Configuration",
   "type": "object",
   "properties": {
     "completion": {
-      "$ref": "#/$defs/CompletionConfig",
-      "default": {
-        "enable_global": true,
-        "enable_keywords": true,
-        "enable_local": true,
-        "hide_docsonnet_members": true
-      }
-    },
-    "diagnostics": {
-      "$ref": "#/$defs/DiagnosticConfig",
-      "default": {
-        "enable_eval": true,
-        "enable_go_lint": false,
-        "enable_lint": true
-      }
-    },
-    "format": {
-      "$ref": "#/$defs/FormatOptions",
-      "default": {
-        "comment_style": 1,
-        "indent": 2,
-        "max_blank_lines": 2,
-        "pad_arrays": false,
-        "pad_objects": true,
-        "pretty_field_names": true,
-        "sort_imports": true,
-        "string_style": 1,
-        "strip_all_but_comments": false,
-        "strip_comments": false,
-        "strip_everything": false,
-        "use_implicit_plus": true
-      }
-    },
-    "inlay": {
-      "$ref": "#/$defs/InlayConfig",
-      "default": {
-        "enable_debug": true,
-        "enable_function_parameters": true
-      }
-    },
-    "jsonnet": {
-      "$ref": "#/$defs/JsonnetConfig",
-      "default": {
-        "default_root_jpaths": [
-          "lib",
-          "vendor",
-          "."
-        ],
-        "ext_code": {},
-        "ext_vars": {},
-        "find_upwards": true,
-        "jpaths": [],
-        "preload_files": true
-      }
-    }
-  },
-  "$defs": {
-    "CompletionConfig": {
       "type": "object",
       "properties": {
+        "enable_arguments": {
+          "description": "Enable completion of missing parameter names in function calls",
+          "type": "boolean",
+          "default": true
+        },
         "enable_global": {
           "description": "Enable global completion. E.g. variables etc.",
           "type": "boolean",
@@ -83,12 +29,111 @@
           "description": "Hides the docsonnet member in objects",
           "type": "boolean",
           "default": true
+        },
+        "max_depth": {
+          "description": "How many extra nested object fields should be completed. Apply is currently not supported as\nit leads to some weird/unwanted completions",
+          "type": "integer",
+          "format": "uint",
+          "default": 1,
+          "minimum": 0
+        },
+        "object_ref": {
+          "description": "Enables competing an object by providing a `_grustonnetParentObject` field. This is\nexperimental and will change to a comment in the future\nCan be used to complete helm values (in the future) or some config objects\nFIXME: Does currently only work on a fresh document where the lines did not change",
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "max_download_size": {
+              "type": "integer",
+              "format": "uint64",
+              "default": 10485760,
+              "minimum": 0
+            }
+          },
+          "default": {
+            "enabled": false,
+            "max_download_size": 10485760
+          }
+        },
+        "snippets": {
+          "description": "Configures the completion of various snippets",
+          "type": "object",
+          "properties": {
+            "docsonnet": {
+              "description": "Enable docsonnet snippets for new values, functions, arguments etc.",
+              "type": "boolean",
+              "default": true
+            }
+          },
+          "default": {
+            "docsonnet": true
+          }
+        },
+        "target_version": {
+          "description": "Determines the current targeted jsonnet version. e.g. 21 for 0.21\nThis will hide functions that are not yet supported for the current version",
+          "type": "integer",
+          "format": "uint32",
+          "default": 22,
+          "minimum": 0
         }
+      },
+      "default": {
+        "enable_arguments": true,
+        "enable_global": true,
+        "enable_keywords": true,
+        "enable_local": true,
+        "hide_docsonnet_members": true,
+        "max_depth": 1,
+        "object_ref": {
+          "enabled": false,
+          "max_download_size": 10485760
+        },
+        "snippets": {
+          "docsonnet": true
+        },
+        "target_version": 22
       }
     },
-    "DiagnosticConfig": {
+    "diagnostics": {
+      "description": "Configuration for all diagnostic settings",
       "type": "object",
       "properties": {
+        "conditional_parenthesis": {
+          "description": "Enable linting suggesting surrounding conditional in parenthesis if they contain a binary\noperation",
+          "type": "boolean",
+          "default": true
+        },
+        "docsonnet_default": {
+          "description": "Warns if the docsonnet documentation has the wrong default variable",
+          "type": "boolean",
+          "default": true
+        },
+        "duplicate_detection": {
+          "description": "Warns if a literal value is used multiple times (currently limited to a single file and\nliteral strings)",
+          "type": "object",
+          "properties": {
+            "min_len": {
+              "description": "The minimal length for a string to be considered",
+              "type": "integer",
+              "format": "uint",
+              "default": 5,
+              "minimum": 0
+            },
+            "min_occurrences": {
+              "description": "The minimum number of occurrences for it to be considered a duplicate. Set to 0 to disable",
+              "type": "integer",
+              "format": "uint",
+              "default": 5,
+              "minimum": 0
+            }
+          },
+          "default": {
+            "min_len": 5,
+            "min_occurrences": 5
+          }
+        },
         "enable_eval": {
           "description": "Enable diagnostics by evaluating the jsonnet file",
           "type": "boolean",
@@ -99,14 +144,113 @@
           "type": "boolean",
           "default": false
         },
-        "enable_lint": {
-          "description": "Enable linting checks (currently limited to unused variables)",
+        "fmt_performance_hint": {
+          "description": "Adds hint to fmt expressions if they be written more efficient",
+          "type": "boolean",
+          "default": false
+        },
+        "local_function": {
+          "description": "Enable linting for correcting \"local myFunc = function()\" to \"local myFunc()\"",
           "type": "boolean",
           "default": true
+        },
+        "number_rounding": {
+          "description": "Warns if a number will be rounded due to being out of bounds",
+          "type": "boolean",
+          "default": true
+        },
+        "object_function": {
+          "description": "CURRENTLY BROKEN Throws an error if the body of an object field is a function but is not hidden",
+          "type": "boolean",
+          "default": false
+        },
+        "prevent_dollar": {
+          "description": "Check for $ and display a hint to not use it. Yes I just hate it this much",
+          "type": "boolean",
+          "default": true
+        },
+        "recursive_arguments": {
+          "description": "Checks the default arguments of functions for recursions",
+          "type": "boolean",
+          "default": true
+        },
+        "shadow_variable": {
+          "description": "Warns if a variable gets shadowed by another variable\nStill has some issues",
+          "type": "boolean",
+          "default": false
+        },
+        "top_level_function_args": {
+          "description": "Throws an error if a top level function is missing a default argument",
+          "type": "boolean",
+          "default": true
+        },
+        "unknown_variable": {
+          "description": "Warns if a variable could not be found\nStill has problems if an object has multiple asserts or inside for loops",
+          "type": "boolean",
+          "default": false
+        },
+        "unused_file": {
+          "description": "Shows a warning if a libsonnet file is not imported anywhere.\nCurrently disabled by default due to performance reasons",
+          "type": "boolean",
+          "default": false
+        },
+        "unused_variables": {
+          "description": "Enable linting for unused variables",
+          "type": "object",
+          "properties": {
+            "function_parameters": {
+              "description": "Enable linting for unused function parameters",
+              "type": "boolean",
+              "default": true
+            },
+            "locals": {
+              "description": "Enable linting for unused local variables",
+              "type": "boolean",
+              "default": true
+            }
+          },
+          "default": {
+            "function_parameters": true,
+            "locals": true
+          }
+        },
+        "variable_naming": {
+          "description": "Determines which type of variable naming diagnostics should be used",
+          "type": "string",
+          "default": "None",
+          "enum": [
+            "None",
+            "SnakeCase"
+          ]
         }
+      },
+      "default": {
+        "conditional_parenthesis": true,
+        "docsonnet_default": true,
+        "duplicate_detection": {
+          "min_len": 5,
+          "min_occurrences": 5
+        },
+        "enable_eval": true,
+        "enable_go_lint": false,
+        "fmt_performance_hint": false,
+        "local_function": true,
+        "number_rounding": true,
+        "object_function": false,
+        "prevent_dollar": true,
+        "recursive_arguments": true,
+        "shadow_variable": false,
+        "top_level_function_args": true,
+        "unknown_variable": false,
+        "unused_file": false,
+        "unused_variables": {
+          "function_parameters": true,
+          "locals": true
+        },
+        "variable_naming": "None"
       }
     },
-    "FormatOptions": {
+    "format": {
       "type": "object",
       "properties": {
         "comment_style": {
@@ -150,6 +294,20 @@
           "type": "boolean"
         }
       },
+      "default": {
+        "comment_style": 1,
+        "indent": 2,
+        "max_blank_lines": 2,
+        "pad_arrays": false,
+        "pad_objects": true,
+        "pretty_field_names": true,
+        "sort_imports": true,
+        "string_style": 1,
+        "strip_all_but_comments": false,
+        "strip_comments": false,
+        "strip_everything": false,
+        "use_implicit_plus": true
+      },
       "required": [
         "indent",
         "max_blank_lines",
@@ -165,22 +323,75 @@
         "strip_all_but_comments"
       ]
     },
-    "InlayConfig": {
+    "inlay": {
       "type": "object",
       "properties": {
         "enable_debug": {
           "description": "Enable debug inlay hints to show the ast types",
           "type": "boolean",
-          "default": true
+          "default": false
         },
         "enable_function_parameters": {
           "description": "Enable function parameter inlay hints (might cause some delays)",
           "type": "boolean",
           "default": true
+        },
+        "index_values": {
+          "description": "Enable inlay hints for the last indices and simple variables",
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "max_length": {
+              "description": "Limits the maximum length of the inlay hints",
+              "type": "integer",
+              "format": "uint",
+              "default": 120,
+              "minimum": 0
+            }
+          },
+          "default": {
+            "enabled": false,
+            "max_length": 120
+          }
+        },
+        "name_hints": {
+          "description": "Enable inlay hints at the ends of long objects etc.",
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "line_threshold": {
+              "description": "Sets the number of lines after which the object name is added",
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          "default": {
+            "enabled": true,
+            "line_threshold": 10
+          }
+        }
+      },
+      "default": {
+        "enable_debug": false,
+        "enable_function_parameters": true,
+        "index_values": {
+          "enabled": false,
+          "max_length": 120
+        },
+        "name_hints": {
+          "enabled": true,
+          "line_threshold": 10
         }
       }
     },
-    "JsonnetConfig": {
+    "jsonnet": {
       "type": "object",
       "properties": {
         "default_root_jpaths": {
@@ -224,8 +435,45 @@
         "preload_files": {
           "description": "Preload all jsonnet files in all jpaths to allow for faster cross file search",
           "type": "boolean",
+          "default": false
+        },
+        "rename_imports": {
+          "description": "Update imports if a file is moved",
+          "type": "boolean",
           "default": true
         }
+      },
+      "default": {
+        "default_root_jpaths": [
+          "lib",
+          "vendor",
+          "."
+        ],
+        "ext_code": {},
+        "ext_vars": {},
+        "find_upwards": true,
+        "jpaths": [],
+        "preload_files": false,
+        "rename_imports": true
+      }
+    },
+    "semantic_tokens": {
+      "type": "object",
+      "properties": {
+        "semantic_tokens": {
+          "description": "Enable semantic tokens like extra hints for imports, self, parameters etc.",
+          "type": "boolean",
+          "default": true
+        },
+        "treesitter_tokens": {
+          "description": "You should not use this option. This is only for editors that lack essential features. This\nmaps treesitter tokens to semantic tokens",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "default": {
+        "semantic_tokens": true,
+        "treesitter_tokens": false
       }
     }
   }
