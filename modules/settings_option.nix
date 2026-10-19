@@ -86,6 +86,7 @@ _: {
           };
           system = {
             nonNixos = mkEnableOption "sets if this is a not a NixOS installation";
+            noGamingJail = mkEnableOption "disable firejail for gaming stuff";
             flake = mkOption {
               default = "${config.userSettings.home}/nix";
               description = "Location of the nix flake";

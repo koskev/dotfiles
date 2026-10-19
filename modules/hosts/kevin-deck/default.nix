@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs,
   ...
 }:
 let
@@ -24,6 +23,7 @@ in
         nixpkgs.config.permittedInsecurePackages = [
           "pnpm-9.15.9"
         ];
+        hostSettings.system.noGamingJail = true;
       }
     ];
     users.${username} = {

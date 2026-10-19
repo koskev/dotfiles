@@ -37,12 +37,14 @@ _: {
         })
         mangohud
         gamemode
+        wowup-cf
       ];
 
       # Only allow specific unfree packages
       nixpkgs.config.allowUnfreePackages = [
         "steam"
         "steam-unwrapped"
+        "wowup-cf"
       ];
 
       hardware.steam-hardware.enable = true;
@@ -93,15 +95,35 @@ _: {
           enable = true;
           wrappedBinaries =
             let
-              addBinary = package: name: {
-                ${name} = {
-                  executable = lib.getExe package;
-                  profile = "${pkgs.firejail}/etc/firejail/${name}.profile";
-                  extraArgs = [ "--name=${name}" ];
+              addBinary =
+                {
+                  package,
+                  name,
+                  profile ? "${pkgs.firejail}/etc/firejail/${name}.profile",
+                }:
+                {
+                  ${name} = {
+                    executable = lib.getExe package;
+                    inherit profile;
+                    extraArgs = [ "--name=${name}" ];
+                  };
                 };
-              };
             in
-            addBinary config.programs.steam.package "steam"; # // addBinary "lutris";
+            lib.optionalAttrs (!config.hostSettings.system.noGamingJail) (
+              addBinary {
+                package = config.programs.steam.package;
+                name = "steam";
+              }
+              // addBinary {
+                package = pkgs.wowup-cf;
+                name = "wowup-cf";
+                profile = "/etc/firejail/wowup-cf.profile";
+              }
+              // addBinary {
+                package = pkgs.lutris;
+                name = "lutris";
+              }
+            );
         };
       };
 
@@ -150,6 +172,7 @@ _: {
           ignore seccomp
           ignore noroot
           ignore private-tmp
+          ignore restrict-namespaces
 
           noblacklist ''${HOME}/.config/MangoHud
           whitelist ''${HOME}/.config/MangoHud
@@ -167,6 +190,23 @@ _: {
           #seccomp !mount,!name_to_handle_at,!pivot_root,!ptrace,!umount2
 
           dbus-user.talk org.mozilla.*
+        '';
+        "firejail/wowup-cf.profile".text = ''
+          # Breaks namespaces
+          #include ${pkgs.firejail}/etc/firejail/default.profile
+
+          noblacklist /nix/store
+          noblacklist ${pkgs.bubblewrap}/bin/bwrap
+
+          ignore restrict-namespaces
+          ignore seccomp
+          ignore noroot
+
+
+
+          whitelist ''${HOME}/.config/WowUpCf
+          whitelist ''${HOME}/.config/WowUp
+          whitelist ''${HOME}/Games/lutris/battlenet
         '';
       };
     };
