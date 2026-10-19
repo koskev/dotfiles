@@ -4,7 +4,7 @@
   "lockFileMaintenance": {
     "enabled": true,
     "recreateWhen": "always",
-    "rebaseStalePrs": true,
+    "rebaseWhen": "behind-base-branch",
     "schedule": [
       "* 3 * * *"
     ],
@@ -26,8 +26,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "\\.nix$"
+      "managerFilePatterns": [
+        "/\\.nix$/"
       ],
       "matchStrings": [
         // See https://docs.renovatebot.com/modules/manager/regex/#regular-expression-capture-groups
