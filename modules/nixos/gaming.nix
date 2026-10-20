@@ -6,7 +6,28 @@ _: {
       config,
       ...
     }:
+    let
+      wowUpBeta = pkgs.wowup-cf.overrideAttrs (oldAttrs: rec {
+        version = "2.24.1-beta.4";
 
+        src = pkgs.fetchurl {
+          url = "https://github.com/WowUp/WowUp.CF/releases/download/v${version}/WowUp-CF-${version}.AppImage";
+          hash = "sha256-IDhntY3EGTMGomXYi441LRLsnoWjQ4kdXdqz660CU5o=";
+        };
+
+        appimageContents = pkgs.appimageTools.extract {
+          inherit (oldAttrs) pname;
+          inherit version src;
+        };
+
+        extraInstallCommands = ''
+          install -m 444 -D ${appimageContents}/${oldAttrs.pname}.desktop -t $out/share/applications
+          substituteInPlace $out/share/applications/${oldAttrs.pname}.desktop \
+            --replace 'Exec=AppRun' 'Exec=${oldAttrs.pname}'
+          cp -r ${appimageContents}/usr/share/icons $out/share
+        '';
+      });
+    in
     {
 
       environment.systemPackages = with pkgs; [
@@ -37,7 +58,7 @@ _: {
         })
         mangohud
         gamemode
-        wowup-cf
+        wowUpBeta
       ];
 
       # Only allow specific unfree packages
@@ -115,7 +136,7 @@ _: {
                 name = "steam";
               }
               // addBinary {
-                package = pkgs.wowup-cf;
+                package = wowUpBeta;
                 name = "wowup-cf";
                 profile = "/etc/firejail/wowup-cf.profile";
               }
