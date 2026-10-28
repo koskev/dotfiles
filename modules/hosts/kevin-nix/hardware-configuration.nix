@@ -55,7 +55,7 @@ _: {
               url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
               hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
             };
-            amdgpu-kernel-module = pkgs.callPackage ./_kernel_patch.nix {
+            amdgpu-kernel-module = config.boot.kernelPackages.callPackage ./_kernel_patch.nix {
               # Make sure the module targets the same kernel as your system is using.
               kernel = config.boot.kernelPackages.kernel;
             };
@@ -65,6 +65,7 @@ _: {
           [
             # Required for fan control
             nct6687d
+            # FIXME: The module is not used and not in updates
             (amdgpu-kernel-module.overrideAttrs (_: {
               patches = [ amdPatch ];
             }))

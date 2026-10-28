@@ -1,8 +1,12 @@
 {
   pkgs,
   lib,
+  kernelModuleMakeFlags,
   kernel ? pkgs.linuxPackages_latest.kernel,
 }:
+let
+  KDIR = "${kernel.dev}/lib/modules/${kernel.modDirVersion}/build";
+in
 
 pkgs.stdenv.mkDerivation {
   pname = "amdgpu-kernel-module";
@@ -18,6 +22,13 @@ pkgs.stdenv.mkDerivation {
 
   modulePath = "drivers/gpu/drm/amd/amdgpu";
 
+  makeFlags = kernelModuleMakeFlags ++ [
+    "KVER=${kernel.modDirVersion}"
+    "KDIR=${KDIR}"
+    "INSTALL_MOD_PATH=${placeholder "out"}"
+    "INSTALL_MOD_DIR=updates"
+  ];
+
   buildPhase = ''
     BUILT_KERNEL=$kernel_dev/lib/modules/$kernelVersion/build
 
@@ -29,13 +40,12 @@ pkgs.stdenv.mkDerivation {
     make "-j$NIX_BUILD_CORES" M=$modulePath modules
   '';
 
-  installPhase = ''
-    make \
-      INSTALL_MOD_PATH="$out" \
-      XZ="xz -T$NIX_BUILD_CORES" \
-      M="$modulePath" \
-      modules_install
-  '';
+  installTargets = [ "modules_install" ];
+  installFlags = [
+    "-C"
+    "${KDIR}"
+    "M=$(PWD)"
+  ];
 
   meta = {
     description = "AMD GPU kernel module";
