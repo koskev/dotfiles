@@ -123,6 +123,7 @@ _: {
       };
 
       environment.etc = {
+        # fixme: Move to the actual location
         "firejail/steam.local".text = ''
           #seccomp !mount,!name_to_handle_at,!pivot_root,!ptrace,!umount2
           ignore seccomp
@@ -130,21 +131,14 @@ _: {
           ignore private-dev
           ignore noroot
 
-          # For VR
-          ignore novideo
-          noblacklist ''${HOME}/Dokumente/Projekte/Github/koskev/vr/SteamVR-OpenHMD
-          whitelist ''${HOME}/Dokumente/Projekte/Github/koskev/vr/SteamVR-OpenHMD
-          noblacklist ''${HOME}/.config/openhmd/
-          whitelist ''${HOME}/.config/openhmd/
-          noblacklist ''${HOME}/.config/openxr/
-          whitelist ''${HOME}/.config/openxr/
-          noblacklist ''${HOME}/.config/openvr/
-          whitelist ''${HOME}/.config/openvr/
-          noblacklist ''${HOME}/.config/Valve
-          whitelist ''${HOME}/.config/Valve/
-          noblacklist ''${HOME}/.config/vulkan
-          whitelist ''${HOME}/.config/vulkan/
+          # For bsmanager
+          noblacklist ''${HOME}/Videos/SD/
+          whitelist ''${HOME}/Videos/SD/
 
+          noblacklist ''${HOME}/.local/share/TwilitRealm
+          whitelist ''${HOME}/.local/share/TwilitRealm
+          noblacklist ''${HOME}/.cache/appimage-run
+          whitelist ''${HOME}/.cache/appimage-run
           noblacklist ''${HOME}/Games
           whitelist ''${HOME}/Games
           noblacklist ''${HOME}/Lutris
@@ -162,6 +156,46 @@ _: {
 
           noblacklist ''${HOME}/.factorio
           whitelist ''${HOME}/.factorio
+
+          noblacklist ''${HOME}/legendary/
+          whitelist ''${HOME}/legendary/
+
+          # For VR
+          noblacklist ''${HOME}/.config/wayvr/
+          whitelist ''${HOME}/.config/wayvr/
+          noblacklist ''${HOME}/Dokumente/Projekte/Github/koskev/vr
+          whitelist ''${HOME}/Dokumente/Projekte/Github/koskev/vr
+          noblacklist ''${HOME}/.config/openhmd/
+          whitelist ''${HOME}/.config/openhmd/
+
+          noblacklist ''${HOME}/.config/openxr/
+          whitelist ''${HOME}/.config/openxr/
+
+          noblacklist ''${HOME}/.config/openvr/
+          whitelist ''${HOME}/.config/openvr/
+
+          noblacklist ''${HOME}/.config/Valve
+          whitelist ''${HOME}/.config/Valve/
+
+          noblacklist ''${HOME}/.config/vulkan
+          whitelist ''${HOME}/.config/vulkan/
+
+          noblacklist ''${HOME}/.config/bs-manager
+          whitelist ''${HOME}/.config/bs-manager/
+
+          noblacklist ''${HOME}/.local/share/BSManager/
+          whitelist ''${HOME}/.local/share/BSManager/
+
+
+          # Fix steam zoneinfo
+          noblacklist /etc/static
+          whitelist /etc/static
+
+          noblacklist /etc/zoneinfo
+          whitelist /etc/zoneinfo
+
+          private-etc zoneinfo,static,localtime
+
         '';
         "firejail/lutris.local".text = ''
           ignore seccomp
