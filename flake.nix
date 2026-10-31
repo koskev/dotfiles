@@ -38,7 +38,8 @@
     };
     nixgl = {
       url = "github:nix-community/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # Follow stable due to pcre
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     rufaco = {
       url = "github:koskev/rufaco";
