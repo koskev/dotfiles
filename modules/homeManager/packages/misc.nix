@@ -6,7 +6,6 @@ _: {
         # Dependency currently broken and there is `comma` anyways
         #siril
         feishin
-        xsane
         statix
         tokei
         borgbackup
