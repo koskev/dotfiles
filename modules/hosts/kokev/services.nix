@@ -79,7 +79,7 @@ _: {
       virtualisation.oci-containers.containers = {
         "joplin" = {
           # renovate: datasource=docker
-          image = "docker.io/joplin/server:3.7.5@sha256:2bf372c0eac43a3bd47440b7b3044feefe3423eb33649a836eb8d9499934b3b3";
+          image = "docker.io/joplin/server:3.7.6@sha256:1cd9097ec3f788ba9813b7907dd8d525c834b93c725da1add189bfd08f746cf0";
           environment = {
             APP_BASE_URL = "https://joplin.kokev.de";
             APP_PORT = "22300";
