@@ -96,7 +96,7 @@ _: {
         };
         "mailserver" = {
           # renovate: datasource=docker
-          image = "docker.io/mailserver/docker-mailserver:17.0.0@sha256:6cd2d4dbfb41ce3b8108968d266fb41b950ad27220979c67bda8a31bd1f6611d";
+          image = "docker.io/mailserver/docker-mailserver:17.0.0@sha256:cb6a732753d6db4a0e77c9621cb8e0d440762f41bc8c179497b4b2756621663c";
           environment = {
             "ACCOUNT_PROVISIONER" = "";
             "AMAVIS_LOGLEVEL" = "0";
